@@ -1,9 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@500;700&family=Rajdhani:wght@700&display=swap");
+
 .container {
     padding: 0.5% 15%;
 }
 
-.grid-transparent {
+/* Header */
+
+header {
+    height: 75px;
+    position: fixed;
+    transition: 0.15s ease;
     z-index: 1;
+}
+
+.grid-transparent {
     background: transparent;
     display: grid;
     grid-template-columns: 40% 20% 40%;
@@ -11,13 +21,13 @@
 }
 
 .grid-non-transparent {
-    z-index: 1;
-    position: sticky;
-    top: 0;
     background: white;
     display: grid;
     grid-template-columns: 40% 20% 40%;
     place-items: center;
+    opacity: 0.95;
+    border-bottom: solid rgb(173, 173, 173);
+    border-width: 2px;
 }
 
 .flex {
@@ -28,25 +38,40 @@
 }
 
 .flex li {
-    width: 44%;
-    padding: 3%;
+    width: 100%;
 }
 
 ul {
-    padding: 0%;
+    margin: 0;
+    padding: 0;
     display: inline-block;
     list-style-type: none;
-    height: 100%;
 }
 
 .grid-transparent a {
     text-decoration: none;
     color: white;
+    font-weight: 700;
+    font-family: "Marck Script", cursive;
+    transition: 0.15s ease;
+    padding: 6px;
 }
 
 .grid-non-transparent a {
     text-decoration: none;
-    color: green;
+    color: black;
+    font-weight: 700;
+    font-family: "Marck Script", cursive;
+    transition: 0.15s ease;
+    padding: 6px;
+}
+
+header a:hover {
+    color: rgb(255, 123, 0);
+}
+
+header .border:hover {
+    border-color: rgb(255, 123, 0);
 }
 
 .grid-transparent .border {
@@ -58,7 +83,7 @@ ul {
 
 .grid-non-transparent .border {
     border-style: solid;
-    border-color: green;
+    border-color: black;
     border-width: 2px;
     border-radius: 5px;
 }
@@ -68,16 +93,21 @@ ul {
     place-items: center;
 }
 
-.block-70 {
+.block-65 {
     display: inline-block;
-    width: 70%;
+    width: 65%;
     position: relative;
     text-align: center;
 }
 
-.block-30 {
+.block-65 li {
     display: inline-block;
-    width: 30%;
+    width: 50%;
+}
+
+.block-35 {
+    display: inline-block;
+    width: 35%;
     position: relative;
     text-align: center;
 }
@@ -90,6 +120,8 @@ ul {
     padding-top: 2%;
     width: 90%;
     height: 90%;
+    display: flex;
+    justify-content: center;
 }
 
 .searchContainer {
@@ -99,27 +131,27 @@ ul {
     border-radius: 5px;
     overflow: hidden;
     height: 40%;
-    width: 80%;
-    right: 10%;
+    width: 90%;
+    right: 5%;
 }
 
 .grid-non-transparent .searchContainer {
     display: inline-flex;
     flex: 1 1 300px;
-    position: relative;
     border-radius: 5px;
     overflow: hidden;
     height: 40%;
-    width: 80%;
-    right: 10%;
-    border: 2px green;
+    width: 90%;
+    right: 5%;
+    border: 2px black;
     border-style: solid;
 }
 
 .searchContainer div {
     background: white;
     padding: 3px;
-    align-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .searchContainer div img {
@@ -129,7 +161,6 @@ ul {
 
 .searchContainer input {
     border: none;
-    border-radius: 0;
     width: 100%;
     border-radius: 0 5px 5px 0;
 }
@@ -139,7 +170,7 @@ ul {
 }
 
 .bg {
-    position: absolute;
+    position: relative;
     z-index: -1;
     display: block; /*Not necessary, but we do want it this way*/
     box-sizing: border-box; /*Not necessary in this situation*/
@@ -147,19 +178,24 @@ ul {
     height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
     padding: 0; /* No padding */
     margin: 0; /* No margins */
-    background: url("https://images6.alphacoders.com/405/405948.jpg") no-repeat
-        center center;
+    background: linear-gradient(
+        to bottom right,
+        rgb(255, 192, 76),
+        rgb(255, 214, 139)
+    );
     /* Shorthand: image, repeat, X align, Y align. */
     background-size: cover; /* Cover all available space*/
 }
 
 .test {
+    position: relative;
     color: chartreuse;
     width: 100%;
-    height: 81vh;
-    padding-top: 9vh;
+    height: 100vh;
 }
 
 .test2 {
+    background-color: blue;
+    position: relative;
     padding: 3px;
 }

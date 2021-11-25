@@ -9,7 +9,6 @@ const Header = () => {
     document.addEventListener("scroll", () => {
         const show = window.scrollY;
         if (show !== 0) {
-            console.log("hi");
             setBackground("grid-non-transparent container");
         } else {
             setBackground("grid-transparent container");

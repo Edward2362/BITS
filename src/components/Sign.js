@@ -4,8 +4,10 @@ const Sign = () => {
             <li>
                 <a href="">Sign in</a>
             </li>
-            <li className="border">
-                <a href="">Sign up</a>
+            <li>
+                <a className="border" href="">
+                    Sign up
+                </a>
             </li>
         </ul>
     );
