@@ -1,16 +1,97 @@
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@500;700&family=Rajdhani:wght@700&display=swap");
 
+html {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    margin: 0;
+    font-family: "Marck Script", cursive;
+}
+
+p {
+    margin: 0;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    padding: 5% 0;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #ff7b00;
+}
+
+.sn-header-body {
+    text-align: center;
+}
+
+.sn-header-body svg {
+    height: 50px;
+    width: 50px;
+}
+
+.section-body {
+    display: flex;
+    padding-top: 2%;
+    height: 100%;
+    align-items: center;
+}
+
+.sn-body-equal-half {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    /* text-align: center; */
+}
+
+.img-holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .container {
-    padding: 0.5% 15%;
+    padding: 0 15%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+}
+
+.flex-center li {
+    width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style-type: none;
 }
 
 /* Header */
 
 header {
-    height: 75px;
+    height: 80px;
     position: fixed;
     transition: 0.15s ease;
     z-index: 1;
+    font-size: 18px;
 }
 
 .grid-transparent {
@@ -25,27 +106,8 @@ header {
     display: grid;
     grid-template-columns: 40% 20% 40%;
     place-items: center;
-    opacity: 0.95;
-    border-bottom: solid rgb(173, 173, 173);
-    border-width: 2px;
-}
-
-.flex {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    height: 100%;
-}
-
-.flex li {
-    width: 100%;
-}
-
-ul {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    list-style-type: none;
+    /* opacity: 0.95; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .grid-transparent a {
@@ -54,7 +116,7 @@ ul {
     font-weight: 700;
     font-family: "Marck Script", cursive;
     transition: 0.15s ease;
-    padding: 6px;
+    padding: 5px;
 }
 
 .grid-non-transparent a {
@@ -63,7 +125,7 @@ ul {
     font-weight: 700;
     font-family: "Marck Script", cursive;
     transition: 0.15s ease;
-    padding: 6px;
+    padding: 5px;
 }
 
 header a:hover {
@@ -112,25 +174,27 @@ header .border:hover {
     text-align: center;
 }
 
-.block-30 ul {
-    margin: 0%;
-}
-
 .logo-holder {
-    padding-top: 2%;
-    width: 90%;
+    padding-top: 10%;
+    width: 100%;
     height: 90%;
     display: flex;
     justify-content: center;
+}
+
+#logo {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
 }
 
 .searchContainer {
     display: inline-flex;
     flex: 1 1 300px;
     position: relative;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
-    height: 40%;
+    height: 35%;
     width: 90%;
     right: 5%;
 }
@@ -138,9 +202,9 @@ header .border:hover {
 .grid-non-transparent .searchContainer {
     display: inline-flex;
     flex: 1 1 300px;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
-    height: 40%;
+    height: 35%;
     width: 90%;
     right: 5%;
     border: 2px black;
@@ -154,12 +218,17 @@ header .border:hover {
     align-items: center;
 }
 
+.searchContainer div svg {
+    color: rgb(255, 123, 0);
+}
+
 .searchContainer div img {
     height: 20px;
     width: 20px;
 }
 
 .searchContainer input {
+    color: #ff7b00;
     border: none;
     width: 100%;
     border-radius: 0 5px 5px 0;
@@ -168,6 +237,10 @@ header .border:hover {
 .searchContainer input:focus {
     outline: none;
 }
+
+/* Header end */
+
+/* Ad */
 
 .bg {
     position: relative;
@@ -178,24 +251,85 @@ header .border:hover {
     height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
     padding: 0; /* No padding */
     margin: 0; /* No margins */
-    background: linear-gradient(
-        to bottom right,
-        rgb(255, 192, 76),
-        rgb(255, 214, 139)
-    );
+    background: linear-gradient(to bottom right, #ff8f00, #ffd8a6);
     /* Shorthand: image, repeat, X align, Y align. */
     background-size: cover; /* Cover all available space*/
+    background-image: url(./img/ad-bg.png);
+    mix-blend-mode: overlay;
 }
 
-.test {
-    position: relative;
-    color: chartreuse;
-    width: 100%;
+.overlay {
+    background: linear-gradient(to bottom right, #ff910052, #ffd8a6);
+    mix-blend-mode: overlay;
+}
+
+.ad-body {
     height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
-.test2 {
-    background-color: blue;
+.ad-body h1 {
+    font-family: "Marck Script", cursive;
+    font-size: 100px;
+}
+
+.ad-text {
+    opacity: 0.8;
+}
+
+/* Ad end */
+
+/* Homepage */
+
+.reveal {
     position: relative;
-    padding: 3px;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.feature-body {
+    display: flex;
+    margin: 8% 10%;
+}
+
+.feature-icon {
+    display: inline-block;
+    width: 20%;
+}
+
+.feature-content {
+    display: inline-block;
+    width: 80%;
+}
+
+.feature-body svg {
+    height: 50px;
+    width: 50px;
+}
+
+.feature-body svg:hover {
+    color: red;
+}
+
+/* Homepage end */
+
+.hexagon {
+    top: 30vh;
+    left: 40%;
+    position: absolute;
+    margin: 0 auto;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    width: 100px;
+    height: 63px;
+    box-sizing: border-box;
+    transition: all 1s;
+    border: 0.4vh solid transparent;
 }

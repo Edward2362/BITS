@@ -1,61 +1,19 @@
 import "./App.css";
 import Header from "./components/Header";
-import Carousel from "react-bootstrap/Carousel";
+// import Carousel from "react-bootstrap/Carousel";
 import img1 from "./img/bg.jpg";
 import img2 from "./img/searchIcon.svg";
 import img3 from "./img/logormit.png";
+import HomepageBody from "./components/HomepageBody";
+import Ad from "./components/Ad";
 
 function App() {
     return (
         <>
             <Header />
-            <div className="bg"></div>
-            <div className="container">
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-            </div>
-            <div className="test2">
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-            </div>
+            <Ad />
+            <HomepageBody />
+
             {/* <Carousel>
                 <Carousel.Item>
                     <img
