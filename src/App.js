@@ -1,62 +1,25 @@
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import img1 from "./img/bg.jpg";
 import img2 from "./img/searchIcon.svg";
 import img3 from "./img/logormit.png";
+import Copyrights from "./components/Copyrights";
+import Privacy from "./components/Privacy";
+import TermsOfService from "./components/Tos";
+import FAQ from "./components/FAQ";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
 function App() {
     return (
-        <>
-            <Header />
-            <div className="bg"></div>
-            <div className="container">
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-            </div>
-            <div className="test2">
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-            </div>
-            {/* <Carousel>
+        <Router>
+            <>
+                <Header />
+
+                {/* <Carousel>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
@@ -102,7 +65,32 @@ function App() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel> */}
-        </>
+                <Routes>
+                    <Route
+                        path="/"
+                        exact
+                        element={
+                            <>
+                                <div className="bg"></div>
+                                <div className="container">
+                                    <p>Text holder for homepage</p>
+                                </div>
+                            </>
+                        }
+                    />
+                    <Route path="/Signin" element={<Signin />} />
+                    <Route path="/Signup" element={<Signup />} />
+                    <Route path="/Copyrights" element={<Copyrights />} />
+                    <Route path="/PrivacyPolicy" element={<Privacy />} />
+                    <Route
+                        path="/TermsOfService"
+                        element={<TermsOfService />}
+                    />
+                    <Route path="/FAQ" element={<FAQ />} />
+                </Routes>
+                <Footer />
+            </>
+        </Router>
     );
 }
 

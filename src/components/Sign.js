@@ -2,10 +2,10 @@ const Sign = () => {
     return (
         <ul className="flex">
             <li>
-                <a href="">Sign in</a>
+                <a href="/Signin">Sign in</a>
             </li>
             <li>
-                <a className="border" href="">
+                <a className="border" href="/Signup">
                     Sign up
                 </a>
             </li>
