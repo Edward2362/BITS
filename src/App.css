@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@100;500;700&family=Rajdhani:wght@700&display=swap");
 
-
 * {
     font-family: "Montserrat", sans-serif;
 }
@@ -14,9 +13,14 @@ h2 {
 p {
     margin: 0;
 }
-
+/* 
 section {
     padding-bottom: 60px;
+} */
+
+.section-content {
+    padding-top: 5%;
+    padding-bottom: 10%;
 }
 
 .section-header {
@@ -288,7 +292,6 @@ header .border:hover {
     background: #e9b789;
 }
 
-
 .login-border {
     border: 1px solid white;
     border-radius: 10px;
@@ -395,6 +398,7 @@ header .border:hover {
     width: inherit;
     height: inherit;
     float: center;
+}
 
 /* Sign in - up end */
 
@@ -437,6 +441,7 @@ header .border:hover {
 .homepage {
     background-image: url(./img/backgroundBody.png);
     background-size: cover;
+    height: 100%;
 }
 
 .hooker {
@@ -447,23 +452,24 @@ header .border:hover {
     align-items: center;
 }
 
-.hooker-body {
+.hooker-content {
     width: 60%;
     height: 60%;
 }
 
-.hooker-content {
+.hooker-body {
     display: inline-block;
     width: 100%;
     text-align: center;
     height: 30%;
     font-size: 70px;
     color: white;
-    font-weight: 100;
 }
 
 .hooker h1 {
     color: white;
+    font-family: "Marck Script", cursive;
+    font-weight: 100;
 }
 
 .counter {
@@ -510,9 +516,13 @@ header .border:hover {
     box-sizing: border-box;
     transition: all 1s;
     border: 0.4vh solid transparent;
-  
-    
+}
+
 /* Footer Starts */
+
+.footer-custom {
+    border-top: solid gray 3px;
+}
 
 .grid-footer {
     z-index: 1;
@@ -520,7 +530,10 @@ header .border:hover {
     /* background-image: linear-gradient(to bottom right, rgb(255, 136, 0), rgb(211, 248, 1)); */
     display: grid;
     grid-template-columns: 35% 65%;
-    border-top: 1px solid black;
+}
+
+.footer-content {
+    margin: 2% 0;
 }
 
 .block-35-footer {
@@ -533,7 +546,6 @@ header .border:hover {
     grid-area: auto;
     height: inherit;
     font-family: "Rajdhani", sans-serif;
-    font-size: larger;
     font-weight: 600;
 }
 
@@ -553,7 +565,6 @@ header .border:hover {
     float: right;
     justify-content: center;
     font-family: "Rajdhani", sans-serif;
-    font-size: larger;
     font-weight: 600;
 }
 
@@ -571,13 +582,14 @@ header .border:hover {
     height: 2.5px;
     left: 50%;
     position: absolute;
-    background: rgb(7, 7, 7);
+    background: #ff7b00;
     transition: width 0.5s ease 0s, left 0.5s ease 0s;
     width: 0;
 }
 .block-65-footer li a:hover:after {
     width: 100%;
     left: 0;
+    color: #ff7b00;
 }
 
 /* Footer Ends */

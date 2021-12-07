@@ -63,7 +63,7 @@ const HomepageBody = () => {
                     counter.innerText = count_converter(count + inc);
                     setTimeout(updateCount, 10);
                 } else {
-                    counter.innerText = count_converter(data) + "+";
+                    counter.innerText = count_converter(data);
                 }
             };
 
@@ -84,94 +84,108 @@ const HomepageBody = () => {
         <>
             <div className="homepage">
                 <section className="container hooker">
-                    <div className="hooker-body">
-                        <div className="hooker-content">UP TO</div>
-                        <div className="counter" data="2300000">
-                            0
-                        </div>
-                    </div>
-                </section>
-                <section className="container reveal">
-                    <div className="section-header">
-                        <div className="sn-header-body">
-                            <BiDish />
-                            <h1>Core Features</h1>
-                            <hr />
-                        </div>
-                    </div>
-                    <div className="section-body">
-                        <div className="sn-body-equal-half">
-                            <div className="img-holder">
-                                <img src={img1}></img>
-                            </div>
-                        </div>
-                        <div className="sn-body-equal-half">
-                            <div className="feature-body">
-                                <div className="feature-icon">
-                                    <FiHexagon />
-                                </div>
-                                <div className="feature-content">
-                                    <p>content</p>
-                                    <p>
-                                        hello my Name Is Nguyen Vinh Quang hello
-                                        my Name Is Nguyen Vinh Quang hello my
-                                        Name Is Nguyen Vinh Quang hello my Name
-                                        Is Nguyen Vinh Quang
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="feature-body">
-                                <div className="feature-icon">
-                                    <FiHexagon />
-                                </div>
-                                <div className="feature-content">
-                                    <p>content</p>
-                                    <p>hello my Name Is Nguyen Vinh Quang</p>
-                                </div>
-                            </div>
-                            <div className="feature-body">
-                                <div className="feature-icon">
-                                    <FiHexagon />
-                                </div>
-                                <div className="feature-content">
-                                    <p>content</p>
-                                    <p>hello my Name Is Nguyen Vinh Quang</p>
-                                </div>
+                    <div className="hooker-content">
+                        <div className="hooker-body">
+                            <h1>UP TO</h1>
+                            <div className="counter" data="2300000">
+                                0
                             </div>
                         </div>
                     </div>
                 </section>
                 <section className="container reveal">
-                    <div className="section-header">
-                        <div className="sn-header-body">
-                            <BiDish />
-                            <h1>Restcipe</h1>
-                            <hr />
+                    <div className="section-content">
+                        <div className="section-header">
+                            <div className="sn-header-body">
+                                <BiDish />
+                                <h1>Core Features</h1>
+                                <hr />
+                            </div>
+                        </div>
+                        <div className="section-body">
+                            <div className="sn-body-equal-half">
+                                <div className="img-holder">
+                                    <img src={img1}></img>
+                                </div>
+                            </div>
+                            <div className="sn-body-equal-half">
+                                <div className="feature-body">
+                                    <div className="feature-icon">
+                                        <FiHexagon />
+                                    </div>
+                                    <div className="feature-content">
+                                        <p>content</p>
+                                        <p>
+                                            hello my Name Is Nguyen Vinh Quang
+                                            hello my Name Is Nguyen Vinh Quang
+                                            hello my Name Is Nguyen Vinh Quang
+                                            hello my Name Is Nguyen Vinh Quang
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="feature-body">
+                                    <div className="feature-icon">
+                                        <FiHexagon />
+                                    </div>
+                                    <div className="feature-content">
+                                        <p>content</p>
+                                        <p>
+                                            hello my Name Is Nguyen Vinh Quang
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="feature-body">
+                                    <div className="feature-icon">
+                                        <FiHexagon />
+                                    </div>
+                                    <div className="feature-content">
+                                        <p>content</p>
+                                        <p>
+                                            hello my Name Is Nguyen Vinh Quang
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="section-body">
-                        <div className="sn-body-equal-half">
-                            <div className="img-holder">
-                                <img src={img1}></img>
+                </section>
+                <section className="container reveal">
+                    <div className="section-content">
+                        <div className="section-header">
+                            <div className="sn-header-body">
+                                <BiDish />
+                                <h1>Restcipe</h1>
+                                <hr />
                             </div>
                         </div>
-                        <div className="sn-body-equal-half">
-                            <div className="feature-body">
-                                <div className="feature-icon">
-                                    <FiHexagon />
-                                </div>
-                                <div className="feature-content">
-                                    <p>content</p>
-                                    <p>hello my Name Is Nguyen Vinh Quang</p>
+                        <div className="section-body">
+                            <div className="sn-body-equal-half">
+                                <div className="img-holder">
+                                    <img src={img1}></img>
                                 </div>
                             </div>
-                            <div className="feature-body">
-                                <div className="feature-icon">
-                                    <FiHexagon />
+                            <div className="sn-body-equal-half">
+                                <div className="feature-body">
+                                    <div className="feature-icon">
+                                        <FiHexagon />
+                                    </div>
+                                    <div className="feature-content">
+                                        <p>content</p>
+                                        <p>
+                                            hello my Name Is Nguyen Vinh Quang
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="feature-content">
-                                    <p>content</p>
-                                    <p>hello my Name Is Nguyen Vinh Quang</p>
+                                <div className="feature-body">
+                                    <div className="feature-icon">
+                                        <FiHexagon />
+                                    </div>
+                                    <div className="feature-content">
+                                        <p>content</p>
+                                        <p>
+                                            hello my Name Is Nguyen Vinh Quang
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
