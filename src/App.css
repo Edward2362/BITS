@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@100;500;700&family=Rajdhani:wght@700&display=swap");
 
+
 * {
     font-family: "Montserrat", sans-serif;
 }
@@ -273,6 +274,130 @@ header .border:hover {
     background-image: url(./img/ad-bg.png);
 }
 
+/* Sign in - up */
+
+.body {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10vh;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.body-background {
+    background: #e9b789;
+}
+
+
+.login-border {
+    border: 1px solid white;
+    border-radius: 10px;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.grid-login {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    width: 100%;
+    height: 40vh;
+}
+
+.block-65-login {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: inherit;
+    align-self: center;
+    text-decoration: none;
+    grid-area: 1;
+}
+
+.block-35-login {
+    display: inline-block;
+    width: inherit;
+    position: relative;
+    grid-area: auto;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-align: center;
+    height: 310px;
+    align-self: center;
+    background-color: white;
+    box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
+}
+
+.block-35-login p {
+    font-size: larger;
+}
+
+.form-control {
+    margin: 10px 0;
+    font-size: larger;
+}
+
+.form-control label {
+    position: relative;
+    display: block;
+    width: inherit;
+}
+
+.btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    width: 50%;
+}
+
+#content {
+    background-image: url(https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-size: cover;
+}
+
+.inputZone {
+    font-family: "Rajdhani", sans-serif;
+    height: 30px;
+    width: 75%;
+}
+
+.signup-form {
+    display: inline-block;
+    grid-area: auto;
+}
+
+.block-35-signup {
+    display: inline-block;
+    width: inherit;
+    position: relative;
+    grid-area: auto;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-align: center;
+    height: 400px;
+    align-self: center;
+    background-color: white;
+    box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
+}
+
+.block-35-signup p {
+    font-size: larger;
+}
+
+.sign-img {
+    display: flex;
+    width: inherit;
+    height: inherit;
+    float: center;
+
+/* Sign in - up end */
+
 .overlay {
     background: linear-gradient(to bottom right, #ff910052, #ffd8a6);
     mix-blend-mode: overlay;
@@ -385,4 +510,74 @@ header .border:hover {
     box-sizing: border-box;
     transition: all 1s;
     border: 0.4vh solid transparent;
+  
+    
+/* Footer Starts */
+
+.grid-footer {
+    z-index: 1;
+    bottom: 0;
+    /* background-image: linear-gradient(to bottom right, rgb(255, 136, 0), rgb(211, 248, 1)); */
+    display: grid;
+    grid-template-columns: 35% 65%;
+    border-top: 1px solid black;
 }
+
+.block-35-footer {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: inherit;
+    text-decoration: none;
+    /* color: rgb(211, 248, 1); */
+    grid-area: auto;
+    height: inherit;
+    font-family: "Rajdhani", sans-serif;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.block-65-footer {
+    display: inline-block;
+    width: inherit;
+    position: relative;
+    text-align: right;
+    grid-area: auto;
+    height: inherit;
+}
+
+.block-65-footer li {
+    display: table-cell;
+    position: relative;
+    padding: 0px 25px 5px 25px;
+    float: right;
+    justify-content: center;
+    font-family: "Rajdhani", sans-serif;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.block-65-footer li a {
+    text-decoration: none;
+    /* color: rgb(255, 136, 0); */
+    color: black;
+}
+
+.block-65-footer li a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: flex;
+    height: 2.5px;
+    left: 50%;
+    position: absolute;
+    background: rgb(7, 7, 7);
+    transition: width 0.5s ease 0s, left 0.5s ease 0s;
+    width: 0;
+}
+.block-65-footer li a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+/* Footer Ends */
