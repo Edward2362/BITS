@@ -1,6 +1,6 @@
 const Sign = () => {
     return (
-        <ul className="flex">
+        <ul className="flex-center">
             <li>
                 <a href="/Signin">Sign in</a>
             </li>
