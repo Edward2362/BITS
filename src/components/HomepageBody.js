@@ -83,16 +83,6 @@ const HomepageBody = () => {
     return (
         <>
             <div className="homepage">
-                <section className="container hooker">
-                    <div className="hooker-content">
-                        <div className="hooker-body">
-                            <h1>UP TO</h1>
-                            <div className="counter" data="2300000">
-                                0
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <section className="container reveal">
                     <div className="section-content">
                         <div className="section-header">
@@ -144,6 +134,18 @@ const HomepageBody = () => {
                                             hello my Name Is Nguyen Vinh Quang
                                         </p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section className="hooker">
+                    <div className="container hooker-overlay">
+                        <div className="hooker-body">
+                            <div>
+                                <h1>UP TO</h1>
+                                <div className="counter" data="2300000">
+                                    0
                                 </div>
                             </div>
                         </div>

@@ -135,53 +135,50 @@ app.get("/customers", function (req, res) {
     });
 });
 
-app.get(
-    "/customer/signin/:customerUsername/:customerPassword",
-    function (req, response) {
-        Customer.find(
-            { customerEmail: req.params.customerUsername },
-            async function (err, customer) {
-                if (0 == customer.length) {
+app.post("/customer/signin", function (req, response) {
+    Customer.find(
+        { customerEmail: req.body.customerUsername },
+        async function (err, customer) {
+            if (0 == customer.length) {
+                var result = [{ invalid: "invalid" }];
+                response.send(result);
+            } else {
+                const email = customer[0].customerEmail;
+                if (
+                    !(await bcrypt.compare(
+                        req.body.customerPassword,
+                        customer[0].customerPassword
+                    ))
+                ) {
                     var result = [{ invalid: "invalid" }];
                     response.send(result);
                 } else {
-                    const email = customer[0].customerEmail;
-                    if (
-                        !(await bcrypt.compare(
-                            req.params.customerPassword,
-                            customer[0].customerPassword
-                        ))
-                    ) {
-                        var result = [{ invalid: "invalid" }];
-                        response.send(result);
-                    } else {
-                        const token = jwt.sign(
-                            { user_id: customer[0].customerId, email },
-                            process.env.TOKEN_KEY,
-                            {
-                                expiresIn: "2h",
-                            }
-                        );
-                        Customer.findOneAndUpdate(
-                            { customerId: customer[0].customerId },
-                            { $set: { token: token } },
-                            { new: true },
-                            function (error, customerCustomer) {
-                                var result = [
-                                    {
-                                        customerId: customer[0].customerId,
-                                        token: token,
-                                    },
-                                ];
-                                response.send(result);
-                            }
-                        );
-                    }
+                    const token = jwt.sign(
+                        { user_id: customer[0].customerId, email },
+                        process.env.TOKEN_KEY,
+                        {
+                            expiresIn: "2h",
+                        }
+                    );
+                    Customer.findOneAndUpdate(
+                        { customerId: customer[0].customerId },
+                        { $set: { token: token } },
+                        { new: true },
+                        function (error, customerCustomer) {
+                            var result = [
+                                {
+                                    customerId: customer[0].customerId,
+                                    token: token,
+                                },
+                            ];
+                            response.send(result);
+                        }
+                    );
                 }
             }
-        );
-    }
-);
+        }
+    );
+});
 
 app.post("/customer/register", function (req, response) {
     Customer.find(

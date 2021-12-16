@@ -1,4 +1,4 @@
-import logo from "../img/logormit.png";
+import logo from "../img/Restcipe.svg";
 import searchIcon from "../img/searchIcon.svg";
 import NavBar from "./NavBar";
 import { useState } from "react";
@@ -9,7 +9,7 @@ const Header = () => {
 
     document.addEventListener("scroll", () => {
         const show = window.scrollY;
-        if (show > 250) {
+        if (show > 120) {
             setBackground("grid-non-transparent container");
         } else {
             setBackground("grid-transparent container");
@@ -22,10 +22,16 @@ const Header = () => {
                 <div>
                     <FiSearch />
                 </div>
-                <input type="text" placeholder="Search" />
+                <div className="input-holder">
+                    <form>
+                        <input type="text" placeholder="Search" />
+                    </form>
+                </div>
             </div>
             <div className="logo-holder">
-                <img id="logo" src={logo} alt="hello" />
+                <a href="/">
+                    <img id="logo" src={logo} alt="hello" />
+                </a>
             </div>
             <NavBar />
         </header>
