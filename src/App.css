@@ -241,15 +241,50 @@ header .border:hover {
 
 .searchContainer .input-holder {
     width: 100%;
+    padding: 0;
 }
 
 .input-holder form {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.input-holder label {
+    /* border: solid; */
+    /* border-width: 2px 0; */
+    border-radius: 10px;
+    margin-right: 2px;
+    border-color: #ff8f00;
+    color: gray;
+    width: 70%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.input-holder label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.input-holder input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.input-holder .vl {
+    margin: 0 1px;
+    border-left: 2px solid #ff8f00;
+    height: 15px;
 }
 
 .searchContainer div svg {
-    color: rgb(255, 123, 0);
+    color: #ff8f00;
 }
 
 .searchContainer div img {

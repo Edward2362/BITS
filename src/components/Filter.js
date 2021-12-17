@@ -1,22 +1,20 @@
 import React from "react";
+import { choose } from "../functionsJS/checkbox";
 
 export const Filter = () => {
-    const choose = () => {
-        var checkboxs = document.querySelectorAll("input[type=checkbox]");
-        var labels = document.querySelectorAll(".checkbox-label");
-        console.log(checkboxs);
-        for (let i = 0; i < checkboxs.length; i++) {
-            if (checkboxs[i].checked == true) {
-                labels[i].classList.add("checked");
-            } else {
-                labels[i].classList.remove("checked");
-            }
-        }
-    };
+    // const choose = () => {
+    //     var checkboxs = document.querySelectorAll("input[type=checkbox]");
+    //     var labels = document.querySelectorAll(".checkbox-label");
+    //     console.log(checkboxs);
+    //     for (let i = 0; i < checkboxs.length; i++) {
+    //         if (checkboxs[i].checked == true) {
+    //             labels[i].classList.add("checked");
+    //         } else {
+    //             labels[i].classList.remove("checked");
+    //         }
+    //     }
+    // };
 
-    // React.useEffect(() => {
-    //     document.addEventListener("change", test);
-    // }, []);
     return (
         <div className="filter">
             <h2>Filter</h2>
