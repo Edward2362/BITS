@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 
-const Signin = () => {
+const Signin = (prop) => {
     let navigate = useNavigate();
     const [customerUsername, setCustomerUsername] = useState("");
     const [customerPassword, setCustomerPassword] = useState("");
@@ -20,7 +20,12 @@ const Signin = () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                
+                window.sessionStorage.setItem("userID", data[0].customerId);
+                window.sessionStorage.setItem("userToken", data[0].token);
                 navigate("/");
+                prop.refresh();
+                
             });
     };
 

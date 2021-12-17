@@ -14,8 +14,18 @@ import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
+    const [value, setValue] = useState(0);
+
+    const load = () => {
+        if (value) {
+            setValue(0);
+        } else {
+            setValue(1);
+        }
+    };
     return (
         <Router>
             <>
@@ -31,7 +41,7 @@ function App() {
                             </>
                         }
                     />
-                    <Route path="/Signin" element={<Signin />} />
+                    <Route path="/Signin" element={<Signin refresh={() => {load()}}/>} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/Test" element={<Restcipes />} />
                     <Route path="/Copyrights" element={<Copyrights />} />

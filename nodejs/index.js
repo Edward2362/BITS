@@ -135,6 +135,16 @@ app.get("/customers", function (req, res) {
     });
 });
 
+
+
+
+
+app.get("/customer/:id", function(req, response) {
+    Customer.find({customerId: req.params.id}, function(err, customers) {
+        response.send([customers[0]]);
+    });
+});
+
 app.post("/customer/signin", function (req, response) {
     Customer.find(
         { customerEmail: req.body.customerUsername },
