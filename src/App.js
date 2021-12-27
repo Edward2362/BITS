@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Ad from "./components/Ad";
-import Restcipes from "./components/Recipes";
+import Results from "./components/Results";
 import HomepageBody from "./components/HomepageBody";
 import Copyrights from "./components/Copyrights";
 import Privacy from "./components/Privacy";
@@ -33,7 +33,7 @@ function App() {
                     />
                     <Route path="/Signin" element={<Signin />} />
                     <Route path="/Signup" element={<Signup />} />
-                    <Route path="/Test" element={<Restcipes />} />
+                    <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />
                     <Route

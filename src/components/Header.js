@@ -24,7 +24,7 @@ const Header = () => {
                     <FiSearch />
                 </div>
                 <div className="input-holder">
-                    <form onChange={choose}>
+                    <form onChange={choose} method="get">
                         <div>
                             <input type="text" placeholder="Search" />
                         </div>

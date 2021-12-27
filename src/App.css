@@ -10,6 +10,10 @@ h2 {
     font-family: "Marck Script", cursive;
 }
 
+a {
+    text-decoration: none;
+}
+
 p {
     margin: 0;
 }
@@ -108,7 +112,7 @@ header {
     height: 80px;
     position: fixed;
     transition: 0.15s ease;
-    z-index: 1;
+    z-index: 999;
     font-size: 18px;
 }
 
@@ -256,15 +260,19 @@ header .border:hover {
     /* border-width: 2px 0; */
     border-radius: 10px;
     margin-right: 2px;
-    border-color: #ff8f00;
     color: gray;
-    width: 70%;
+    width: 60%;
     text-align: center;
     padding: 1%;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
+
+/* .input-holder label:hover {
+    background-color: #ff8f00;
+    color: white;
+} */
 
 .input-holder label::selection {
     color: none;
@@ -280,7 +288,7 @@ header .border:hover {
 .input-holder .vl {
     margin: 0 1px;
     border-left: 2px solid #ff8f00;
-    height: 15px;
+    height: 14px;
 }
 
 .searchContainer div svg {
@@ -622,12 +630,20 @@ header .border:hover {
 
 /* Restcipes */
 
+.recipes-section {
+    padding: 1% 5%;
+}
+
 /* Restcipes end */
 
 /* Filter */
 
 .filter {
     padding: 2% 5%;
+}
+
+.filter h2 {
+    color: #ff7b00;
 }
 
 .filter-section {
@@ -662,20 +678,23 @@ header .border:hover {
     color: white;
 }
 
+.filter-section-body input:focus::placeholder {
+    color: white;
+}
+
 .diet-choice {
     width: 100%;
 }
 
 .filter-section-grid {
     margin: 2% 0;
-    background: transparent;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-row-gap: 10%;
     place-items: center;
 }
 
 .filter-section-grid label {
+    margin: 2%;
     border: solid;
     border-radius: 10px;
     border-color: rgb(255, 242, 235);
@@ -734,6 +753,89 @@ label.checked {
 
 /* Filter end */
 
+/* Rescipe */
+
+.recipe-href {
+    margin: 10%;
+}
+
+.recipe-card {
+    position: relative;
+    width: 190px;
+    height: 220px;
+    border: hidden;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    top: 0;
+    transition: top 0.2s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.recipe-card:hover {
+    top: -15px;
+    box-shadow: 0 20px 8px 5px rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card-body {
+    position: relative;
+    background-image: url(./img/card.png);
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    width: 100%;
+    z-index: 1;
+}
+
+.recipe-img {
+    position: absolute;
+    z-index: 0;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.recipe-information {
+    padding: 0 20px;
+    position: relative;
+    bottom: -145px;
+}
+
+.recipe-information p {
+    font-size: 14px;
+    color: white;
+    font-family: "Marck Script", cursive;
+}
+
+.recipe-holder {
+    position: absolute;
+    display: inline-block;
+    width: 190px;
+}
+
+/* Rescipe end */
+
+/* Course */
+
+.course {
+    width: 190px;
+    height: 220px;
+    /* margin: 10% 0; */
+}
+
+.course-content {
+    position: relative;
+    /* display: flex;
+    justify-content: center; */
+    height: 220px;
+}
+
+/* Course end */
 .hexagon {
     top: 30vh;
     left: 40%;
