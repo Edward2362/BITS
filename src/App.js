@@ -13,6 +13,7 @@ import FAQ from "./components/FAQ";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Footer from "./components/Footer";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
     return (
@@ -25,15 +26,20 @@ function App() {
                         exact
                         element={
                             <>
-                              <Ad />
-                              <HomepageBody />
+                                <Ad />
+                                <HomepageBody />
                             </>
                         }
                     />
+
                     <Route path="/Signin" element={<Signin />} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />
+                    <Route
+                        path="/ForgotPassword"
+                        element={<ForgotPassword />}
+                    />
                     <Route
                         path="/TermsOfService"
                         element={<TermsOfService />}
