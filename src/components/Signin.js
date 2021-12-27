@@ -76,7 +76,6 @@ const Signin = () => {
                             <a className="btn" href="/ForgotPassword">
                                 Forgot Password
                             </a>
-
                             <div>
                                 <GoogleLogin
                                     clientId={

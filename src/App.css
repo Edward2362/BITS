@@ -10,9 +10,26 @@ h2 {
     font-family: "Marck Script", cursive;
 }
 
+a {
+    text-decoration: none;
+}
+
 p {
     margin: 0;
 }
+
+hr {
+    width: 100px;
+    height: 2px;
+    border-width: 0;
+    color: rgb(223, 223, 223);
+    background-color: rgb(223, 223, 223);
+}
+
+input:focus {
+    outline: none;
+}
+
 /* 
 section {
     padding-bottom: 60px;
@@ -29,14 +46,6 @@ section {
     justify-content: center;
     font-size: 30px;
     color: #ff7b00;
-}
-
-.section-header hr {
-    width: 100px;
-    height: 1px;
-    border-width: 0;
-    color: rgb(223, 223, 223);
-    background-color: rgb(223, 223, 223);
 }
 
 .sn-header-body {
@@ -103,7 +112,7 @@ header {
     height: 80px;
     position: fixed;
     transition: 0.15s ease;
-    z-index: 1;
+    z-index: 999;
     font-size: 18px;
 }
 
@@ -188,17 +197,21 @@ header .border:hover {
 }
 
 .logo-holder {
-    padding-top: 10%;
     width: 100%;
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.logo-holder a {
+    padding: 0;
+    height: 80%;
 }
 
 #logo {
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .searchContainer {
@@ -230,8 +243,56 @@ header .border:hover {
     background-color: rgb(255, 242, 235);
 }
 
+.searchContainer .input-holder {
+    width: 100%;
+    padding: 0;
+}
+
+.input-holder form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.input-holder label {
+    /* border: solid; */
+    /* border-width: 2px 0; */
+    border-radius: 10px;
+    margin-right: 2px;
+    color: gray;
+    width: 60%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+/* .input-holder label:hover {
+    background-color: #ff8f00;
+    color: white;
+} */
+
+.input-holder label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.input-holder input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.input-holder .vl {
+    margin: 0 1px;
+    border-left: 2px solid #ff8f00;
+    height: 14px;
+}
+
 .searchContainer div svg {
-    color: rgb(255, 123, 0);
+    color: #ff8f00;
 }
 
 .searchContainer div img {
@@ -247,10 +308,6 @@ header .border:hover {
     background-color: rgb(255, 242, 235);
 }
 
-.searchContainer input:focus {
-    outline: none;
-}
-
 .grid-transparent .searchContainer input {
     background-color: white;
 }
@@ -260,23 +317,6 @@ header .border:hover {
 }
 
 /* Header end */
-
-/* Ad */
-
-.bg {
-    position: relative;
-    z-index: -1;
-    display: block; /*Not necessary, but we do want it this way*/
-    box-sizing: border-box; /*Not necessary in this situation*/
-    width: 100%; /*Not necessary, but we do want it this way*/
-    height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
-    padding: 0; /* No padding */
-    margin: 0; /* No margins */
-    background: linear-gradient(to bottom right, #ff8f00, #ffd8a6);
-    /* Shorthand: image, repeat, X align, Y align. */
-    background-size: cover; /* Cover all available space*/
-    background-image: url(./img/ad-bg.png);
-}
 
 /* Sign in - up */
 
@@ -402,9 +442,25 @@ header .border:hover {
 
 /* Sign in - up end */
 
+/* Ad */
+
+.bg {
+    position: relative;
+    z-index: -1;
+    display: block; /*Not necessary, but we do want it this way*/
+    box-sizing: border-box; /*Not necessary in this situation*/
+    width: 100%; /*Not necessary, but we do want it this way*/
+    height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
+    padding: 0; /* No padding */
+    margin: 0; /* No margins */
+    background: linear-gradient(to bottom right, #ff8f00, #ffdaaa00);
+    /* Shorthand: image, repeat, X align, Y align. */
+    background-size: cover; /* Cover all available space*/
+    background-image: url(./img/ad-bg2.png);
+}
+
 .overlay {
-    background: linear-gradient(to bottom right, #ff910052, #ffd8a6);
-    mix-blend-mode: overlay;
+    background: linear-gradient(to bottom right, #ff9100d8, #ffd8a600);
 }
 
 .ad-body {
@@ -416,6 +472,7 @@ header .border:hover {
 .ad-body h1 {
     font-family: "Marck Script", cursive;
     font-size: 100px;
+    color: white;
 }
 
 .ad-text {
@@ -445,25 +502,36 @@ header .border:hover {
 }
 
 .hooker {
-    background-color: #00000069;
-    height: 90vh;
+    background-image: url(./img/counter.jfif);
+    background-size: cover;
+    height: 65vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.hooker-overlay {
+    width: 100%;
+    height: 100%;
+    background: #703f005b;
+}
+
 .hooker-content {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
 }
 
 .hooker-body {
     display: inline-block;
     width: 100%;
-    text-align: center;
-    height: 30%;
+    text-align: right;
+    height: 100%;
     font-size: 70px;
     color: white;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 .hooker h1 {
@@ -473,7 +541,7 @@ header .border:hover {
 }
 
 .counter {
-    text-align: center;
+    text-align: right;
     font-size: 100px;
 }
 
@@ -504,6 +572,270 @@ header .border:hover {
 
 /* Homepage end */
 
+/* Other pages form */
+
+.white-bg {
+    background-color: white;
+    border: solid white;
+    border-radius: 10px;
+}
+
+.page-header {
+    position: relative;
+    z-index: -1;
+    display: block; /*Not necessary, but we do want it this way*/
+    box-sizing: border-box; /*Not necessary in this situation*/
+    width: 100%; /*Not necessary, but we do want it this way*/
+    height: 50vh; /*Necessary.  100vh = 100% of the viewport height*/
+    padding: 0; /* No padding */
+    margin: 0; /* No margins */
+    /* Shorthand: image, repeat, X align, Y align. */
+    background-size: cover; /* Cover all available space*/
+    background-image: url(./img/header-page-bg.jpeg);
+}
+
+.page-header-overlay {
+    background: linear-gradient(#ffc06e36, #ff910069);
+}
+
+.page-header-body {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-header-body h1 {
+    font-size: 100px;
+    color: white;
+}
+
+.page-content {
+    position: relative;
+    background-color: #ff8f00;
+}
+
+.page-body {
+    position: relative;
+    top: -10vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.white-bg hr {
+    width: 70%;
+}
+
+/* Other pages form end */
+
+/* Restcipes */
+
+.recipes-section {
+    padding: 1% 5%;
+}
+
+/* Restcipes end */
+
+/* Filter */
+
+.filter {
+    padding: 2% 5%;
+}
+
+.filter h2 {
+    color: #ff7b00;
+}
+
+.filter-section {
+    margin: 2% 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-section-body {
+    width: 50%;
+}
+
+.filter-section-body input {
+    margin-left: 2%;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(255, 242, 235);
+    transition: background-color 0.25s;
+}
+
+.filter-section-body input:focus {
+    margin-left: 2%;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #ff8f00;
+    color: white;
+}
+
+.filter-section-body input:focus::placeholder {
+    color: white;
+}
+
+.diet-choice {
+    width: 100%;
+}
+
+.filter-section-grid {
+    margin: 2% 0;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    place-items: center;
+}
+
+.filter-section-grid label {
+    margin: 2%;
+    border: solid;
+    border-radius: 10px;
+    border-color: rgb(255, 242, 235);
+    color: gray;
+    width: 70%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.filter-section-grid label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.filter-section-grid input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+label.checked {
+    background-color: #ff8f00;
+    border-color: #ff8f00;
+    color: white;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #ff8f00;
+    width: 10%;
+    height: 40px;
+    background-color: #ff8f00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #ff7b00;
+    border-color: #ff7b00;
+}
+
+.submit input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+/* Filter end */
+
+/* Rescipe */
+
+.recipe-href {
+    margin: 10%;
+}
+
+.recipe-card {
+    position: relative;
+    width: 190px;
+    height: 220px;
+    border: hidden;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    top: 0;
+    transition: top 0.2s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.recipe-card:hover {
+    top: -15px;
+    box-shadow: 0 20px 8px 5px rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card-body {
+    position: relative;
+    background-image: url(./img/card.png);
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    width: 100%;
+    z-index: 1;
+}
+
+.recipe-img {
+    position: absolute;
+    z-index: 0;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.recipe-information {
+    padding: 0 20px;
+    position: relative;
+    bottom: -145px;
+}
+
+.recipe-information p {
+    font-size: 14px;
+    color: white;
+    font-family: "Marck Script", cursive;
+}
+
+.recipe-holder {
+    position: absolute;
+    display: inline-block;
+    width: 190px;
+}
+
+/* Rescipe end */
+
+/* Course */
+
+.course {
+    width: 190px;
+    height: 220px;
+    /* margin: 10% 0; */
+}
+
+.course-content {
+    position: relative;
+    /* display: flex;
+    justify-content: center; */
+    height: 220px;
+}
+
+/* Course end */
 .hexagon {
     top: 30vh;
     left: 40%;
