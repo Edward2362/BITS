@@ -2,16 +2,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 
-const Signin = () => {
+const Signin = (prop) => {
     let navigate = useNavigate();
     const [customerUsername, setCustomerUsername] = useState("");
     const [customerPassword, setCustomerPassword] = useState("");
     var endPoint = "http://localhost:9000/customer/signin";
     const signin = () => {
-        fetch(endPoint + "/" + customerUsername + "/" + customerPassword)
+        fetch(endPoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                customerUsername: customerUsername,
+                customerPassword: customerPassword,
+            }),
+        })
             .then((response) => response.json())
             .then((data) => {
-                navigate("/");
+                if (undefined !== data[0].invalid) {
+                } else {
+                    window.sessionStorage.setItem("userID", data[0].customerId);
+                    window.sessionStorage.setItem("userToken", data[0].token);
+                    navigate("/");
+                    prop.renew();
+                }
             });
     };
 

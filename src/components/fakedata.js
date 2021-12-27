@@ -1,8 +1,8 @@
-export const courses = [{
-    {
-        
-    }
-}];
+// export const courses = [{
+//     {
+
+//     }
+// }];
 
 export const recipes = [
     {
