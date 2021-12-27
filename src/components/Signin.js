@@ -21,10 +21,15 @@ const Signin = (prop) => {
             .then((response) => response.json())
             .then((data) => {
                 
-                window.sessionStorage.setItem("userID", data[0].customerId);
-                window.sessionStorage.setItem("userToken", data[0].token);
-                navigate("/");
-                prop.refresh();
+               
+                if (undefined !== data[0].invalid) {
+
+                } else {
+                    window.sessionStorage.setItem("userID", data[0].customerId);
+                    window.sessionStorage.setItem("userToken", data[0].token);
+                    navigate("/");
+                    prop.renew();
+                }
                 
             });
     };

@@ -14,6 +14,7 @@ import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import Food from "./components/Food";
 import { useState } from "react";
 
 function App() {
@@ -41,9 +42,15 @@ function App() {
                             </>
                         }
                     />
-                    <Route path="/Signin" element={<Signin refresh={() => {load()}}/>} />
+                    <Route path="/Signin" element={<Signin renew={() => {load()}}/>} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/Test" element={<Restcipes />} />
+                    
+
+
+
+
+                    <Route path="/PlaceTest" element={<Food renew={() => {load()}} />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />
                     <Route

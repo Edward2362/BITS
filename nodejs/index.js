@@ -42,6 +42,20 @@ var CustomerSchema = new mongoose.Schema({
 //Teacher => teachers , Course => courses
 var Customer = mongoose.model("Customer", CustomerSchema);
 
+var FoodSchema = new mongoose.Schema({
+    foodId: String,
+    foodName: String,
+    foodSteps: [{stepNum: String, stepDetail: String}],
+    foodIngredients: [{ingredientName: String, ingredientNum: String, ingredientLast: String}],
+    foodCalories: String,
+    customerId: String
+
+});
+
+var Food = mongoose.model("Food", FoodSchema);
+
+
+
 function signInGoogle(passport) {
     passport.use(
         new GoogleStrategy(
@@ -128,6 +142,35 @@ app.use("/auth", require("./routes/auth"));
 mongoose.connect(
     "mongodb+srv://testuser001:123asd@cluster0.23h33.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+const tokenVerified = (req, response, next) => {
+    const token = req.body.token||req.query.token||req.headers[x-access-token];
+    if ("" == token) {
+        
+        return response.send([{invalid: "Invalid"}]);
+    } else {
+        try {
+            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+            req.user = decoded;
+        } catch(err) {
+            return response.send({invalid: "Invalid"});
+        }
+
+        return next();
+    }
+};
 
 app.get("/customers", function (req, res) {
     Customer.find({}, function (err, customers) {
@@ -272,6 +315,82 @@ app.post("/api/v1/auth/google", async (req, response) => {
     };
     Customer.create(result, function (errors, placeResult) {
         response.send(placeResult);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/food", function(req, response) {
+    Food.find({}, function(err, food) {
+        response.send(food);
+    });
+});
+
+app.get("/foodPlace/:id", function(req, response) {
+
+    Food.find({foodId: req.params.id}, function(err, food) {
+        response.send([{result: food[0]}]);
+    });
+});
+
+
+app.post("/food", tokenVerified, function(req, response) {
+    Food.find({}, function(err, food) {
+        var count = 0;
+        for (let i = 0; i< food.length; ++i) {
+            if (count < parseInt(food[i].foodId.split("-")[1])) {
+                count = parseInt(food[i].foodId.split("-")[1]);
+            }
+        }
+        count = count + 1;
+        var foodId = "FOOD-";
+        foodId= foodId + count;
+
+        var result = {foodId: foodId, foodName: req.body.foodName, foodSteps: req.body.foodSteps, foodIngredients: req.body.foodIngredients, foodCalories: req.body.foodCalories, customerId: req.body.customerId};
+
+        Food.create(result, function(error, placeFood) {
+            
+            response.send([{result: "Food"}]);
+        });
+    });
+});
+
+
+
+
+
+
+app.post("/updateFood", tokenVerified, function(req, response) {
+    var foodId = req.body.foodId;
+    var result = req.body;
+
+    delete result.foodId;
+
+    app.findOneAndUpdate({foodId: foodId}, {$set: result}, {new: true}, function(err, food) {
+        response.send({result: "Food"});
+    });
+
+});
+
+
+app.delete("/food/:id", function(req, response) {
+    Food.deleteOne({foodId: req.params.id}, function(err, food) {
+        response.send(food);
     });
 });
 

@@ -1,8 +1,25 @@
 const Signed = (prop) => {
+    
+
+
+    const load = () => {
+        window.sessionStorage.removeItem("userID");
+
+
+
+
+
+
+
+
+
+        window.sessionStorage.removeItem("userToken");
+    };
+
     return (
         <ul className="flex-center">
             <li>
-                <a href="/Signin">Sign out</a>
+                <a href="/Signin" onClick={load}>Sign out</a>
             </li>
             <li>
                 <a href="/Signup">
