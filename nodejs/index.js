@@ -1,19 +1,15 @@
 var app = require("express")();
-
 var mongoose = require("mongoose");
-
 var bodyParser = require("body-parser");
-
 var cors = require("cors");
-
 const bcrypt = require("bcryptjs");
-
 const jwt = require("jsonwebtoken");
-
 const express = require("express");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 require("dotenv").config();
 
 // import all the things we need
@@ -264,5 +260,94 @@ app.post("/api/v1/auth/google", async (req, response) => {
         response.send(placeResult);
     });
 });
+
+app.engine('html', require('jade').renderFile);
+app.set('view engine', 'html');
+
+app.post('/customers/reset/email', function(req, response) {
+    Customer.find({customerEmail: req.body.customerEmail}, function(err, customers){
+        if (customers.length == 0) {
+            response.send('The email is invalid')
+        } else {
+            var randomToken = "";
+            Customer.find({}, function(fls, list){
+                while(true){
+                    var checktoken = false;
+                    randomToken = crypto.randomBytes(20).toString('hex');
+                for(let i=0;i<list.length;++i){
+                    if(randomToken == list[i].resetPasswordToken){
+                        checktoken = true;
+                    }
+                }
+                if(checktoken){
+                } else {
+                    break;
+                }
+                }
+                var sendTime = Date.now();
+            Customer.findOneAndUpdate({customerEmail: req.body.customerEmail}, {$set: {resetPasswordToken: randomToken, resetPasswordExpires: sendTime + 300000}}, {new: true}, async function(ok, customerReplace){
+                let link = "http://localhost:9000" + "/api/auth/validate/form/" + randomToken;
+                try {
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        port: 587,
+                        secure: true,
+                        auth: {
+                            user: 'cooky.comp@gmail.com',
+                            pass: '2631988dd',
+                        },
+                    });
+            
+                    await transporter.sendMail({
+                        from: 'cooky.comp@gmail.com',
+                        to: req.body.customerEmail,
+                        subject: "Password change request",
+                        text: ` 
+                        Please click on the following link ${link} to reset your password. \n\n 
+                        If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+                    });
+                    console.log("email sent sucessfully");
+                    response.send({test: "A reset email has been sent to" + req.body.customerEmail});
+                } catch (error) {
+                    console.log(error, "email not sent");
+                    response.send("A reset email can not be sent");
+                }
+            })
+            })
+            
+        }
+    })
+})
+app.get('/customer/something', function(req, response){
+    response.render('test.jade')
+})
+app.get('/api/auth/validate/form/:getToken', function(req, response){
+    Customer.find({resetPasswordToken: req.params.getToken}, function(err, customers){
+        if (customers.length == 0) {
+            response.render('aware.jade');
+        } else {
+            response.render('reset.jade', {result: customers[0].resetPasswordToken});
+        }
+    })
+})
+
+app.post('/api/auth/reset/:getToken', function(req, response){
+    Customer.find({resetPasswordToken: req.params.getToken}, async function(err, customers){
+        if (customers.length == 0) {
+            response.render('aware.jade')
+        } else {
+            var getDate = Date.now();
+            if(customers[0].resetPasswordExpires < getDate){
+                response.render('aware.jade')
+            } else {
+                var encryptedPassword = await bcrypt.hash(req.body.password, 10);
+            Customer.findOneAndUpdate({resetPasswordToken: customers[0].resetPasswordToken}, {$set: {resetPasswordToken: undefined, resetPasswordExpires: undefined, customerPassword: encryptedPassword}}, {new: true}, function(ok, customerReplace){
+                response.redirect("http://localhost:3000/signin")
+            })
+            }
+        }
+    })
+})
+
 
 app.listen(9000);

@@ -14,6 +14,7 @@ import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
     return (
@@ -31,11 +32,16 @@ function App() {
                             </>
                         }
                     />
+
                     <Route path="/Signin" element={<Signin />} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />
+                    <Route
+                        path="/ForgotPassword"
+                        element={<ForgotPassword />}
+                    />
                     <Route
                         path="/TermsOfService"
                         element={<TermsOfService />}

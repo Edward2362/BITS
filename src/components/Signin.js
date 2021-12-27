@@ -8,16 +8,7 @@ const Signin = () => {
     const [customerPassword, setCustomerPassword] = useState("");
     var endPoint = "http://localhost:9000/customer/signin";
     const signin = () => {
-        fetch(endPoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                customerUsername: customerUsername,
-                customerPassword: customerPassword,
-            }),
-        })
+        fetch(endPoint + "/" + customerUsername + "/" + customerPassword)
             .then((response) => response.json())
             .then((data) => {
                 navigate("/");
@@ -82,11 +73,9 @@ const Signin = () => {
                                 className="btn"
                                 onClick={signin}
                             />
-                            <input
-                                type="submit"
-                                value="Forgot Password"
-                                className="btn"
-                            />
+                            <a className="btn" href="/ForgotPassword">
+                                Forgot Password
+                            </a>
                             <div>
                                 <GoogleLogin
                                     clientId={

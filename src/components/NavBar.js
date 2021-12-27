@@ -5,7 +5,7 @@ const NavBar = () => {
         <nav className="full-width">
             <ul className="block-65">
                 <li>
-                    <a href="#">Create Recipe</a>
+                    <a href="/CreateRecipe">Create Recipe</a>
                 </li>
                 <li>
                     <a href="#">About</a>

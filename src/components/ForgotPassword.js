@@ -1,0 +1,53 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const ForgotPassword = () => {
+    let navigate = useNavigate();
+    const [customerEmail, setCustomerEmail] = useState("");
+    var endPoint = "http://localhost:9000/customers/reset/email";
+    const resetpw = () => {
+        fetch(endPoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ customerEmail: customerEmail }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                navigate("/signin");
+            });
+    };
+
+    return (
+        <div id="content" className="container">
+            <div className="body-forgot">
+                <div className="ForgotZone">
+                    <h1>Forgot Password</h1>
+                    <div className="test1">
+                        <div>
+                            <input
+                                className="forgotInput"
+                                type="text"
+                                placeholder="Enter your email"
+                                value={customerEmail}
+                                onChange={(e) => {
+                                    setCustomerEmail(e.target.value);
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <input
+                        type="submit"
+                        value="Reset"
+                        className="forgotBtn"
+                        onClick={resetpw}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ForgotPassword;
