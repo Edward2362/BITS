@@ -636,11 +636,11 @@ header .border:hover {
     justify-content: space-between;
 }
 
-.filter-section-body {
+.new-res-body {
     width: 50%;
 }
 
-.filter-section-body input {
+.new-res-body input {
     margin-left: 2%;
     border: none;
     width: 100px;
@@ -651,7 +651,7 @@ header .border:hover {
     transition: background-color 0.25s;
 }
 
-.filter-section-body input:focus {
+.new-res-body input:focus {
     margin-left: 2%;
     border: none;
     width: 100px;
@@ -823,3 +823,176 @@ label.checked {
 }
 
 /* Footer Ends */
+
+/* Create new recipe */
+
+.new-res {
+    padding: 2% 5%;
+}
+
+.new-res-section {
+    margin: 2% 10%;
+    display: inline;
+    justify-content: space-between;
+}
+
+.new-res-body {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#from,
+#to {
+    display: inline-flex;
+    width: 3vw;
+}
+
+.ingre-label,
+.step-label {
+    display: block;
+}
+
+#ingredient-name,
+#step-desc {
+    margin-left: 0;
+}
+
+#ingredient-amount {
+    width: 5vw;
+}
+
+#ingredient-name,
+#ingredient-amount,
+#step-desc {
+    margin-top: 5px;
+}
+
+#step-desc {
+    resize: none;
+    border: none;
+    width: 30vw;
+    height: 8vh;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(255, 242, 235);
+    transition: background-color 0.25s;
+}
+
+.new-res-body input {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(255, 242, 235);
+    transition: background-color 0.25s;
+}
+
+.new-res-body input:focus {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #ff8f00;
+    color: white;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #ff8f00;
+    width: 10%;
+    height: 40px;
+    background-color: #ff8f00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #ff7b00;
+    border-color: #ff7b00;
+}
+
+.submit input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+.btn-box {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.btn-remove,
+.btn-add {
+    margin-right: 10px;
+    border: solid 2px transparent;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-remove {
+    background: rgba(177, 69, 69, 0.897);
+}
+
+.btn-add {
+    background: rgb(8, 158, 3);
+}
+
+.step {
+    display: flex;
+}
+
+.btn-box-step {
+    display: inline-block;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.new-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-submit {
+    display: flex;
+    float: center;
+    bottom: 0;
+    justify-content: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #ff8f00;
+    width: 10%;
+    height: 40px;
+    background-color: #ff8f00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+    cursor: pointer;
+    background-color: #ff7b00;
+    border-color: #ff7b00;
+}
+
+.btn-submit input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+/* Create new recipe end */

@@ -14,6 +14,7 @@ import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import CreateRecipe from "./components/CreateRecipe";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                             </>
                         }
                     />
+                    <Route path="/CreateRecipe" element={<CreateRecipe />} />
                     <Route path="/Signin" element={<Signin />} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/Test" element={<Restcipes />} />
