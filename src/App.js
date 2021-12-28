@@ -9,13 +9,14 @@ import Signup from "./components/Signup";
 import Ad from "./components/Ad";
 import Results from "./components/Results";
 import HomepageBody from "./components/HomepageBody";
+import ForgotPassword from "./components/ForgotPassword";
+import { useState } from "react";
+import CreateRecipe from "./components/CreateRecipe";
 import Copyrights from "./components/Copyrights";
 import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
-import ForgotPassword from "./components/ForgotPassword";
-import { useState } from "react";
 
 function App() {
     const [value, setValue] = useState(0);
@@ -53,6 +54,16 @@ function App() {
                         }
                     />
                     <Route path="/Signup" element={<Signup />} />
+                    <Route
+                        path="/CreateRecipe"
+                        element={
+                            <CreateRecipe
+                                renew={() => {
+                                    load();
+                                }}
+                            />
+                        }
+                    />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />

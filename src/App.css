@@ -652,11 +652,11 @@ header .border:hover {
     justify-content: space-between;
 }
 
-.filter-section-body {
+.new-res-body {
     width: 50%;
 }
 
-.filter-section-body input {
+.new-res-body input {
     margin-left: 2%;
     border: none;
     width: 100px;
@@ -667,7 +667,7 @@ header .border:hover {
     transition: background-color 0.25s;
 }
 
-.filter-section-body input:focus {
+.new-res-body input:focus {
     margin-left: 2%;
     border: none;
     width: 100px;
@@ -850,6 +850,216 @@ label.checked {
     border: 0.4vh solid transparent;
 }
 
+/* Forgot Password */
+
+.body-forgot {
+    height: 63vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.ForgotZone {
+    display: flex;
+    height: 225px;
+    width: 40%;
+    font-size: larger;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid white;
+    z-index: 1;
+    background-color: white;
+}
+
+.ForgotZone h1 {
+    margin-bottom: 10px;
+}
+
+.test1 {
+    display: flex;
+    width: 350px;
+    height: 3vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.test1 p {
+    width: inherit;
+    padding-left: 25px;
+}
+
+.test1 .forgotInput {
+    width: 220px;
+    height: 30px;
+}
+
+.forgotBtn {
+    width: 25%;
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    justify-content: center;
+}
+
+/* Create new recipe */
+
+.new-res {
+    padding: 2% 5%;
+}
+
+.new-res-section {
+    margin: 2% 10%;
+    display: inline;
+    justify-content: space-between;
+}
+
+.new-res-body {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#from,
+#to {
+    display: inline-flex;
+    width: 3vw;
+}
+
+.ingre-label,
+.step-label {
+    display: block;
+}
+
+#ingredient-name,
+#step-desc {
+    margin-left: 0;
+}
+
+#ingredient-amount {
+    width: 5vw;
+}
+
+#ingredient-name,
+#ingredient-amount,
+#step-desc {
+    margin-top: 5px;
+}
+
+#step-desc {
+    resize: none;
+    border: none;
+    width: 30vw;
+    height: 8vh;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(255, 242, 235);
+    transition: background-color 0.25s;
+}
+
+.new-res-body input {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(255, 242, 235);
+    transition: background-color 0.25s;
+}
+
+.new-res-body input:focus {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #ff8f00;
+    color: white;
+}
+
+.btn-box {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.btn-remove,
+.btn-add {
+    margin-right: 10px;
+    border: solid 2px transparent;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-remove {
+    background: rgba(177, 69, 69, 0.897);
+}
+
+.btn-add {
+    background: rgb(8, 158, 3);
+}
+
+.step {
+    display: flex;
+}
+
+.btn-box-step {
+    display: inline-block;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.new-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-submit {
+    display: flex;
+    float: center;
+    bottom: 0;
+    justify-content: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #ff8f00;
+    width: 10%;
+    height: 40px;
+    background-color: #ff8f00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+    cursor: pointer;
+    background-color: #ff7b00;
+    border-color: #ff7b00;
+}
+
+.btn-submit input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+/* Create new recipe end */
+
 /* Footer Starts */
 
 .footer-custom {
@@ -926,110 +1136,4 @@ label.checked {
 
 /* Footer Ends */
 
-.body-forgot {
-    height: 63vh;
-    display: flex;
-    justify-content: center;
-    padding-top: 20vh;
-    font-family: "Rajdhani", sans-serif;
-}
 
-.ForgotZone {
-    display: flex;
-    height: 225px;
-    width: 40%;
-    font-size: larger;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid white;
-    z-index: 1;
-    background-color: white;
-}
-
-.ForgotZone h1 {
-    margin-bottom: 10px;
-}
-
-.test1 {
-    display: flex;
-    width: 350px;
-    height: 3vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    padding: 5px;
-}
-
-.test1 p {
-    width: inherit;
-    padding-left: 25px;
-}
-
-.test1 .forgotInput {
-    width: 220px;
-    height: 30px;
-}
-
-.forgotBtn {
-    width: 25%;
-    display: inline-block;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 15px;
-    font-family: inherit;
-    justify-content: center;
-}
-
-.page-header {
-    position: relative;
-    z-index: -1;
-    display: block; /*Not necessary, but we do want it this way*/
-    box-sizing: border-box; /*Not necessary in this situation*/
-    width: 100%; /*Not necessary, but we do want it this way*/
-    height: 50vh; /*Necessary.  100vh = 100% of the viewport height*/
-    padding: 0; /* No padding */
-    margin: 0; /* No margins */
-    /* Shorthand: image, repeat, X align, Y align. */
-    background-size: cover; /* Cover all available space*/
-    background-image: url(./img/header-page-bg.jpeg);
-}
-
-.page-header-overlay {
-    background: linear-gradient(#ffc06e36, #ff910069);
-}
-
-.page-header-body {
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.page-header-body h1 {
-    font-size: 100px;
-    color: white;
-}
-
-.page-content {
-    position: relative;
-    background-color: #ff8f00;
-}
-
-.page-body {
-    position: relative;
-    top: -10vh;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-.white-bg hr {
-    width: 70%;
-}
