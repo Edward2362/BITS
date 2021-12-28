@@ -1,12 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 
-export const NewRecipe = () => {
+export const NewRecipe = (prop) => {
+    
+
+
+    let navigate = useNavigate();
+    var endPoint = "";
+    var endPoint2 = "";
     const [ingredientList, setIngredientList] = useState([
         { ingredientName: "", ingredientAmount: "" },
     ]);
 
+
+
+    
+
+
+
+
+
+
+
+
+    
+    const [calories, setCalories] = useState("");
+    const [name, setName] = useState("");
     const [stepList, setStepList] = useState([{  stepDescription: "" }]);
+
+
+
+
+
+
+    const [foodId, setFoodId] = useState("");
+    const [customerId, setCustomerId] = useState("");
+    
+    
+
+
+
+
+
+
+
+
+    if (null !== window.sessionStorage.getItem("userID")) {
+
+    } else {
+        navigate('/signin');
+        prop.renew();
+    }
+
 
     const handleIngredientChange = (e, index) => {
         const { name, value } = e.target;
@@ -45,6 +91,159 @@ export const NewRecipe = () => {
         setStepList([...stepList, {  stepDescription: "" }]);
     };
 
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    const placeRecipe = () => {
+        fetch(endPoint, {
+            method: "POST",
+            headers: {
+                "x-access-token": window.sessionStorage.getItem("userToken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({foodCalories: calories, foodName: name, foodSteps: stepList, foodIngredients: ingredientList, customerId: window.sessionStorage.getItem("userID")})
+        }).then(response=>response.json())
+        .then(data => {
+            if (undefined !== data[0].invalid) {
+
+            } else {
+
+            }
+        });
+        
+
+
+
+
+        
+
+        
+
+
+
+
+        if (null === window.sessionStorage.getItem("")) {
+
+        } else {
+            
+
+            
+
+
+
+
+            
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            fetch(endPoint2, {
+                method: "POST",
+                headers: {
+                    "x-access-token": window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({foodId: foodId, foodCalories: calories, foodName: name, foodSteps: stepList, foodIngredients: ingredientList, customerId: customerId})
+            }).then(response=> response.json())
+            .then(data => {
+                
+
+
+
+                if (undefined !== data[0].invalid) {
+
+                } else {
+                    
+                }
+            });
+        }
+    }; 
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+    
+    const load = () => {
+        if (null === window.sessionStorage.getItem("")) {
+
+        } else {
+            fetch(endPoint2)
+            .then(response=>response.json())
+            .then(data => {
+                
+                setFoodId(data[0].result.foodId);
+                
+
+
+                setCalories(data[0].result.foodCalories);
+                setName(data[0].result.foodName);
+                
+                setStepList(data[0].result.foodSteps);
+                
+                
+
+                
+
+
+
+
+
+
+
+
+                setIngredientList(data[0].result.foodIngredients);
+                setCustomerId(data[0].result.customerId);
+            });
+        }
+    };
+
+    useEffect(
+        load
+    , []);
+
     return (
         <div className="new-res">
             <h2>Information</h2>
@@ -54,12 +253,15 @@ export const NewRecipe = () => {
                     <input
                         className="new-res-name"
                         placeholder="Name of your recipe"
+                        
+                        value={name}
+                        onChange={(e) => {setName(e.target.value)}}
                     ></input>
                 </div>
                 <div className="new-res-body">
                     <label>Calories</label>
-                    <input id="from" placeholder="From"></input>
-                    <input id="to" placeholder="To"></input>
+                    <input id="Calories" placeholder="Calories" value={calories} onChange={(e) => {setCalories(e.target.value)}}></input>
+                    
                 </div>
 
                 <div className="new-res-body">
