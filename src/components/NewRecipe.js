@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 export const NewRecipe = (prop) => {
     let navigate = useNavigate();
-    var endPoint = "";
-    var endPoint2 = "";
+    var endPoint = "http://localhost:9000/food";
+    var endPoint2 = "http://localhost:9000/foodUpdate";
     const [ingredientList, setIngredientList] = useState([
         { ingredientName: "", ingredientAmount: "" },
     ]);
@@ -247,7 +247,7 @@ export const NewRecipe = (prop) => {
                         {JSON.stringify(stepList)}
                     </div> */}
                 </div>
-            </div>
+            </div>  
 
             <div className="btn-submit">
                 <input

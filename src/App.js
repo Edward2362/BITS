@@ -12,6 +12,7 @@ import HomepageBody from "./components/HomepageBody";
 import ForgotPassword from "./components/ForgotPassword";
 import { useState } from "react";
 import CreateRecipe from "./components/CreateRecipe";
+import Profile from "./components/Profile";
 import Copyrights from "./components/Copyrights";
 import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
@@ -64,6 +65,7 @@ function App() {
                             />
                         }
                     />
+                    <Route path="/Profile" element={<Profile />} />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />

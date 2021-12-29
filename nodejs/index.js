@@ -436,6 +436,12 @@ app.get("/foodPlace/:id", function (req, response) {
     });
 });
 
+app.get("/customerFood/:customerId", tokenVerified, function (req, response) {
+    Food.find({ customerId: req.params.customerId }, function (err, food) {
+        response.send([{ result: food }]);
+    });
+});
+
 app.post("/food", tokenVerified, function (req, response) {
     var count = 0;
     Food.find({}, function (err, food) {
@@ -479,7 +485,7 @@ app.post("/foodUpdate", tokenVerified, function (req, response) {
     );
 });
 
-app.delete("/food/:id", function (req, response) {
+app.delete("/food/:id", tokenVerified, function (req, response) {
     Food.deleteOne({ foodId: req.params.id }, function (err, food) {
         response.send([{ result: "Food" }]);
     });

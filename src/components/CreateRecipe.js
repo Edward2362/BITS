@@ -1,7 +1,9 @@
 import React from "react";
 import { NewRecipe } from "./NewRecipe";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const CreateRecipe = () => {
+const CreateRecipe = (prop) => {
     return (
         <>
             <div className="page-header">
@@ -15,7 +17,11 @@ const CreateRecipe = () => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <NewRecipe />
+                        <NewRecipe
+                                renew={() => {
+                                    prop.renew();
+                                }}
+                            />
                             <hr></hr>
                         </div>
                     </div>
