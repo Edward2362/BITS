@@ -1,8 +1,33 @@
-export const courses = [{
+export const courses = [
     {
-        
-    }
-}];
+        recipes: [
+            { name: "Chicken Roti" },
+            { name: "Tam Rice" },
+            { name: "BBQ" },
+        ],
+    },
+    {
+        recipes: [
+            { name: "Chicken Nugget" },
+            { name: "Korean Rice" },
+            { name: "Pho" },
+        ],
+    },
+    {
+        recipes: [
+            { name: "Chicken Roti" },
+            { name: "Tam Rice" },
+            { name: "BBQ" },
+        ],
+    },
+    {
+        recipes: [
+            { name: "Chicken Nugget" },
+            { name: "Korean Rice" },
+            { name: "Pho" },
+        ],
+    },
+];
 
 export const recipes = [
     {

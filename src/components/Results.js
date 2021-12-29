@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Filter } from "./Filter";
 import Recipe from "./Recipe";
 import Course from "./Course";
-import { recipes } from "./fakedata";
+import { recipes, courses } from "./fakedata";
 
 const Results = () => {
+    const [findByCourse, setFindByCourse] = useState(false);
+
+    const findCourses = () => {
+        setFindByCourse(!findByCourse ? true : false);
+    };
+
     return (
         <>
             <div className="page-header">
@@ -18,35 +24,28 @@ const Results = () => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <Filter />
+                            <Filter findByCourse={findCourses} />
                             <hr></hr>
-                            <div className="recipes-section">
-                                {/* <Course key={1} data="first" />
-                                <Course key={2} data="second" /> */}
-                                {/* 
-
-                                <div className="" data-carousel="second">
-                                    <button
-                                        id="prev"
-                                        className="carousel-button prev"
-                                        data-carousel-button="prev"
-                                        onClick={() => handleClick("prev")}
-                                    ></button>
-                                    <button
-                                        id="next"
-                                        className="carousel-button next"
-                                        data-carousel-button="next"
-                                        onClick={() => handleClick("next")}
-                                    ></button>
-                                </div> */}
-                                <div className="filter-section-grid">
-                                    {recipes.map((recipe) => (
-                                        <Recipe
-                                            key={recipe.id}
-                                            recipe={recipe}
-                                        />
-                                    ))}
-                                </div>
+                            <div className="results-section">
+                                {findByCourse === true ? (
+                                    <div className="results-section-course">
+                                        {courses.map((course, index) => (
+                                            <Course
+                                                key={index}
+                                                recipes={course.recipes}
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="results-section-recipe">
+                                        {recipes.map((recipe) => (
+                                            <Recipe
+                                                key={recipe.id}
+                                                recipe={recipe}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
