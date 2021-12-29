@@ -11,7 +11,7 @@ import Results from "./components/Results";
 import HomepageBody from "./components/HomepageBody";
 import ForgotPassword from "./components/ForgotPassword";
 import { useState } from "react";
-import CreateRecipe from "./components/CreateRecipe";
+import RecipeCRUD from "./components/RecipeCRUD";
 import Profile from "./components/Profile";
 import Copyrights from "./components/Copyrights";
 import Privacy from "./components/Privacy";
@@ -20,69 +20,78 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 
 function App() {
-    const [value, setValue] = useState(0);
+	const [value, setValue] = useState(0);
 
-    const load = () => {
-        if (value) {
-            setValue(0);
-        } else {
-            setValue(1);
-        }
-    };
-    return (
-        <Router>
-            <>
-                <Header />
-                <Routes>
-                    <Route
-                        path="/"
-                        exact
-                        element={
-                            <>
-                                <Ad />
-                                <HomepageBody />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/Signin"
-                        element={
-                            <Signin
-                                renew={() => {
-                                    load();
-                                }}
-                            />
-                        }
-                    />
-                    <Route path="/Signup" element={<Signup />} />
-                    <Route
-                        path="/CreateRecipe"
-                        element={
-                            <CreateRecipe
-                                renew={() => {
-                                    load();
-                                }}
-                            />
-                        }
-                    />
-                    <Route path="/Profile" element={<Profile />} />
-                    <Route path="/Test" element={<Results />} />
-                    <Route path="/Copyrights" element={<Copyrights />} />
-                    <Route path="/PrivacyPolicy" element={<Privacy />} />
-                    <Route
-                        path="/ForgotPassword"
-                        element={<ForgotPassword />}
-                    />
-                    <Route
-                        path="/TermsOfService"
-                        element={<TermsOfService />}
-                    />
-                    <Route path="/FAQ" element={<FAQ />} />
-                </Routes>
-                <Footer />
-            </>
-        </Router>
-    );
+	const load = () => {
+		if (value) {
+			setValue(0);
+		} else {
+			setValue(1);
+		}
+	};
+	return (
+		<Router>
+			<>
+				<Header />
+				<Routes>
+					<Route
+						path="/"
+						exact
+						element={
+							<>
+								<Ad />
+								<HomepageBody />
+							</>
+						}
+					/>
+					<Route
+						path="/Signin"
+						element={
+							<Signin
+								renew={() => {
+									load();
+								}}
+							/>
+						}
+					/>
+					<Route path="/Signup" element={<Signup />} />
+					<Route
+						path="/AlterRecipe"
+						element={
+							<RecipeCRUD
+								renew={() => {
+									load();
+								}}
+							/>
+						}
+					/>
+					<Route
+						path="/Profile"
+						element={
+							<Profile
+								renew={() => {
+									load();
+								}}
+							/>
+						}
+					/>
+					<Route path="/Test" element={<Results />} />
+					<Route path="/Copyrights" element={<Copyrights />} />
+					<Route path="/PrivacyPolicy" element={<Privacy />} />
+					<Route
+						path="/ForgotPassword"
+						element={<ForgotPassword />}
+					/>
+					<Route
+						path="/TermsOfService"
+						element={<TermsOfService />}
+					/>
+					<Route path="/FAQ" element={<FAQ />} />
+				</Routes>
+				<Footer />
+			</>
+		</Router>
+	);
 }
 
 export default App;

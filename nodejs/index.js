@@ -485,8 +485,8 @@ app.post("/foodUpdate", tokenVerified, function (req, response) {
     );
 });
 
-app.delete("/food/:id", tokenVerified, function (req, response) {
-    Food.deleteOne({ foodId: req.params.id }, function (err, food) {
+app.delete("/food", tokenVerified, function (req, response) {
+    Food.deleteOne({ foodId: req.body.foodId }, function (err, food) {
         response.send([{ result: "Food" }]);
     });
 });
