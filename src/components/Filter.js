@@ -1,23 +1,20 @@
 import React from "react";
 import { choose } from "../functionsJS/checkbox";
 
-export const Filter = () => {
-    // const choose = () => {
-    //     var checkboxs = document.querySelectorAll("input[type=checkbox]");
-    //     var labels = document.querySelectorAll(".checkbox-label");
-    //     console.log(checkboxs);
-    //     for (let i = 0; i < checkboxs.length; i++) {
-    //         if (checkboxs[i].checked == true) {
-    //             labels[i].classList.add("checked");
-    //         } else {
-    //             labels[i].classList.remove("checked");
-    //         }
-    //     }
-    // };
-
+export const Filter = ({ findByCourse }) => {
     return (
         <div className="filter">
-            <h2>Filter</h2>
+            <div className="filter-header">
+                <h2>Filter</h2>
+                <label className="checkbox-label" onChange={choose}>
+                    By Courses
+                    <input
+                        type="checkbox"
+                        id="vegetarian"
+                        onClick={findByCourse}
+                    ></input>
+                </label>
+            </div>
             <form>
                 <div className="filter-section">
                     <div id="calories" className="filter-section-body">

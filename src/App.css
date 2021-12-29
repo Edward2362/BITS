@@ -255,9 +255,7 @@ header .border:hover {
     justify-content: space-between;
 }
 
-.input-holder label {
-    /* border: solid; */
-    /* border-width: 2px 0; */
+.input-holder .checkbox-label {
     border-radius: 10px;
     margin-right: 2px;
     color: gray;
@@ -269,12 +267,7 @@ header .border:hover {
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
-/* .input-holder label:hover {
-    background-color: #FFF3B0;
-    color: white;
-} */
-
-.input-holder label::selection {
+.input-holder .checkbox-label::selection {
     color: none;
     background: none;
     user-select: none;
@@ -628,13 +621,27 @@ header .border:hover {
 
 /* Other pages form end */
 
-/* Restcipes */
+/* Results */
 
-.recipes-section {
+.results-section {
     padding: 1% 5%;
 }
 
-/* Restcipes end */
+.results-section-course {
+    margin: 2% 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    place-items: center;
+}
+
+.results-section-recipe {
+    margin: 2% 0;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    place-items: center;
+}
+
+/* Results end */
 
 /* Filter */
 
@@ -693,7 +700,7 @@ header .border:hover {
     place-items: center;
 }
 
-.filter-section-grid label {
+.filter .checkbox-label {
     margin: 2%;
     border: solid;
     border-radius: 10px;
@@ -707,18 +714,35 @@ header .border:hover {
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
-.filter-section-grid label::selection {
+.filter .checkbox-label::selection {
     color: none;
     background: none;
     user-select: none;
 }
 
-.filter-section-grid input[type="checkbox"] {
+.filter-header {
+    display: flex;
+    align-items: center;
+}
+
+.filter-header .checkbox-label {
+    display: flex;
+    margin: 0;
+    padding: 1% 1%;
+    margin: 0 1%;
+    width: 10%;
+    height: 15px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter input[type="checkbox"] {
     display: none;
     visibility: hidden;
 }
 
-label.checked {
+.checkbox-label.checked {
     background-color: #9e2a2b;
     border-color: #9e2a2b;
     color: white;
@@ -763,7 +787,6 @@ label.checked {
     position: relative;
     width: 190px;
     height: 220px;
-    border: hidden;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
@@ -792,6 +815,8 @@ label.checked {
 .recipe-img {
     position: absolute;
     z-index: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .recipe-card img {
@@ -799,6 +824,7 @@ label.checked {
     height: 140px;
     object-fit: cover;
     object-position: center;
+    border: none;
 }
 
 .recipe-information {
@@ -814,9 +840,14 @@ label.checked {
 }
 
 .recipe-holder {
-    position: absolute;
-    display: inline-block;
     width: 190px;
+    position: absolute;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.recipe-holder .recipe-href {
+    margin: 0;
 }
 
 /* Rescipe end */
@@ -824,19 +855,96 @@ label.checked {
 /* Course */
 
 .course {
-    width: 190px;
-    height: 220px;
-    /* margin: 10% 0; */
+    position: relative;
+    width: 90%;
+    height: 250px;
+    margin: 10% 0;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 242, 235);
+}
+
+.carousel-button {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9e2a2b;
+    font-size: 2rem;
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.carousel-button:hover {
+    background-color: #9e2a2b;
+    color: white;
+}
+
+.next {
+    right: 32px;
+}
+
+.prev {
+    left: 32px;
 }
 
 .course-content {
+    visibility: visible;
     position: relative;
-    /* display: flex;
-    justify-content: center; */
+    display: flex;
+    justify-content: center;
     height: 220px;
 }
 
+.course .recipe-card:hover {
+    top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.current-recipe {
+    opacity: 1;
+    z-index: 3;
+    transform: translateX(0) scale(1);
+}
+
+.prev-recipe {
+    transform: translateX(-40%) scale(0.7);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.next-recipe {
+    transform: translateX(40%) scale(0.7);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.recipe-holder.current-recipe {
+    transition: box-shadow 0.2s ease-in-out, opacity 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
+}
+
+.recipe-holder.current-recipe:hover {
+    transform: scale(1.03);
+}
+
+.recipe-holder.prev-recipe .recipe-card,
+.recipe-holder.next-recipe .recipe-card {
+    cursor: default;
+}
+
 /* Course end */
+
 .hexagon {
     top: 30vh;
     left: 40%;
