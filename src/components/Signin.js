@@ -7,6 +7,12 @@ const Signin = (prop) => {
     const [customerUsername, setCustomerUsername] = useState("");
     const [customerPassword, setCustomerPassword] = useState("");
     var endPoint = "http://localhost:9000/customer/signin";
+
+    if (sessionStorage.getItem("userID")) {
+        navigate("/Profile");
+        prop.renew();
+    }
+
     const signin = () => {
         fetch(endPoint, {
             method: "POST",

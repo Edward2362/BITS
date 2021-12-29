@@ -1,17 +1,6 @@
 const Signed = (prop) => {
-    
-
-
     const load = () => {
         window.sessionStorage.removeItem("userID");
-
-
-
-
-
-
-
-
 
         window.sessionStorage.removeItem("userToken");
     };
@@ -19,12 +8,12 @@ const Signed = (prop) => {
     return (
         <ul className="flex-center">
             <li>
-                <a href="/Signin" onClick={load}>Sign out</a>
+                <a href="/Signin" onClick={load}>
+                    Sign out
+                </a>
             </li>
             <li>
-                <a href="/Signup">
-                    {prop.userName}
-                </a>
+                <a href="/Profile">{prop.userName}</a>
             </li>
         </ul>
     );
