@@ -61,7 +61,7 @@ const HomepageBody = () => {
 
                 if (count < data) {
                     counter.innerText = count_converter(count + inc);
-                    setTimeout(updateCount, 10);
+                    setTimeout(updateCount, 5);
                 } else {
                     counter.innerText = count_converter(data);
                 }
@@ -73,7 +73,7 @@ const HomepageBody = () => {
 
             if (
                 elementTop < windowHeight - elementVisible &&
-                elementTop > windowHeight - elementVisible - 30
+                elementTop > windowHeight - elementVisible - 40
             ) {
                 updateCount();
             }
@@ -107,8 +107,8 @@ const HomepageBody = () => {
                                     <h2>2</h2>
                                     <div className="feature-content">
                                         <p>
-                                            Provide diversity of choices for
-                                            eat-clean
+                                            Provide diversity of choices for eat
+                                            clean and healthy
                                         </p>
                                     </div>
                                 </div>

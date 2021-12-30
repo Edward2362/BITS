@@ -52,19 +52,6 @@ const Profile = (prop) => {
                     <div className="page-body">
                         <div className="white-bg">
                             <div className="profile-body">
-                                {/* <div className="profile-bio">
-                                    <textarea
-                                        id="bio-desc"
-                                        placeholder="Tell others something about you."
-                                    ></textarea>
-                                    <div className="update-bio">
-                                        <input
-                                            className="btn-update-bio"
-                                            type="submit"
-                                            value="Update"
-                                        ></input>
-                                    </div>
-                                </div> */}
                                 <div className="profile-section">
                                     <h1>Created Recipes</h1>
                                     <div className="results-section">

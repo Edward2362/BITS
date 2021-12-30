@@ -364,7 +364,7 @@ header .border:hover {
 /* Sign in - up */
 
 .body {
-    height: 79vh;
+    height: 77vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -605,7 +605,7 @@ header .border:hover {
     width: 100%;
     justify-items: center;
     text-align: center;
-    font-size: 40px;
+    font-size: 45px;
 }
 
 .feature-body p {
@@ -1009,7 +1009,7 @@ header .border:hover {
 /* Forgot Password */
 
 .body-forgot {
-    height: 59vh;
+    height: 57vh;
     display: flex;
     justify-content: center;
     padding-top: 20vh;
