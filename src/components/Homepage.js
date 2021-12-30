@@ -96,51 +96,42 @@ const HomepageBody = () => {
                             <div className="grid-25">
                                 <div className="feature-body">
                                     <h2>1</h2>
-                                    <p>something</p>
+                                    <div className="feature-content">
+                                        <p>
+                                            Find various of recipes with
+                                            available ingredients
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="feature-body">
                                     <h2>2</h2>
-                                    <p>
-                                        something something something something
-                                    </p>
+                                    <div className="feature-content">
+                                        <p>
+                                            Provide diversity of choices for
+                                            eat-clean
+                                        </p>
+                                    </div>
                                 </div>
+
                                 <div className="feature-body">
                                     <h2>3</h2>
-                                    <p>something</p>
+                                    <div className="feature-content">
+                                        <p>
+                                            Help control the amount of calories
+                                            consumed
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="feature-body">
                                     <h2>4</h2>
-                                    <p>something</p>
+                                    <div className="feature-content">
+                                        <p>
+                                            Create a community for sharing and
+                                            learning new cooking experiences
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            {/* <div className="sn-body-equal-half">
-                                <div className="img-holder">
-                                    <img src={img1}></img>
-                                </div>
-                            </div> */}
-                            {/* <div className="sn-body-equal-half">
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
-                                    </div>
-                                </div> */}
                         </div>
                     </div>
                 </section>

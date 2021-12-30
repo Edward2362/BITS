@@ -32,7 +32,7 @@ export const Filter = ({ findByCourse }) => {
                 </div>
                 <div id="diets" className="filter-section">
                     <div className="diet-choice">
-                        <label>Diets</label>
+                        <label>Diet</label>
                         <div className="grid-25" onChange={choose}>
                             <label className="checkbox-label">
                                 Vegetarian

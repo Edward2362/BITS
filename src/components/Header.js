@@ -1,13 +1,36 @@
-import logo from "../img/Restcipe.svg";
+import logo1 from "../img/Restcipe-1.svg";
+import logo2 from "../img/Restcipe-2.svg";
 import searchIcon from "../img/searchIcon.svg";
 import NavBar from "./NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { choose } from "../functionsJS/checkbox";
 
-
 const Header = () => {
     const [background, setBackground] = useState("grid-transparent container");
+    const [findInCommunity, setFindInCommunity] = useState(false);
+
+    if (sessionStorage.getItem("findInCommunity")) {
+        if (findInCommunity === false) {
+            setFindInCommunity(true);
+        }
+    }
+
+    useEffect(choose);
+
+    const handleFindInCom = (e) => {
+        if (sessionStorage.getItem("findInCommunity")) {
+            sessionStorage.removeItem("findInCommunity");
+            e.target.parentElement.classList.remove("checked");
+            setFindInCommunity(false);
+        } else {
+            sessionStorage.setItem("findInCommunity", true);
+            e.target.parentElement.classList.add("checked");
+            setFindInCommunity(true);
+        }
+    };
+
+    // sessionStorage.getItem("findInCommunity") ?
 
     document.addEventListener("scroll", () => {
         const show = window.scrollY;
@@ -25,7 +48,7 @@ const Header = () => {
                     <FiSearch />
                 </div>
                 <div className="input-holder">
-                    <form onChange={choose} method="get">
+                    <form method="get">
                         <div>
                             <input type="text" placeholder="Search" />
                         </div>
@@ -35,6 +58,9 @@ const Header = () => {
                             <input
                                 type="checkbox"
                                 id="search-community"
+                                checked={findInCommunity}
+                                onClick={(e) => handleFindInCom(e)}
+                                onChange={choose}
                             ></input>
                         </label>
                     </form>
@@ -42,7 +68,15 @@ const Header = () => {
             </div>
             <div className="logo-holder">
                 <a href="/">
-                    <img id="logo" src={logo} alt="hello" />
+                    <img
+                        id="logo"
+                        src={
+                            background === "grid-transparent container"
+                                ? logo2
+                                : logo1
+                        }
+                        alt="hello"
+                    />
                 </a>
             </div>
             <NavBar />

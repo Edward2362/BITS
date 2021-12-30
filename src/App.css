@@ -174,7 +174,7 @@ header {
     padding: 5px;
 }
 
-/* .grid-transparent a:hover {
+.grid-transparent a:hover {
     color: #e09f3e;
 }
 
@@ -188,15 +188,15 @@ header {
 
 .grid-non-transparent .border:hover {
     border-color: #9e2a2b;
-} */
+}
 
-header a:hover {
+/* header a:hover {
     color: #9e2a2b;
 }
 
 header .border:hover {
     border-color: #9e2a2b;
-}
+} */
 
 .grid-transparent .border {
     border-style: solid;
@@ -254,18 +254,8 @@ header .border:hover {
     height: 100%;
 }
 
-.searchContainer {
-    display: inline-flex;
-    flex: 1 1 300px;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    height: 35%;
-    width: 90%;
-    right: 5%;
-}
-
-.grid-non-transparent .searchContainer {
+.grid-non-transparent .searchContainer,
+.grid-transparent .searchContainer {
     display: inline-flex;
     flex: 1 1 300px;
     border-radius: 10px;
@@ -318,14 +308,34 @@ header .border:hover {
     visibility: hidden;
 }
 
+.grid-transparent .input-holder .vl {
+    margin: 0 1px;
+    border-left: 2px solid #e09f3e;
+    height: 14px;
+}
+
 .input-holder .vl {
     margin: 0 1px;
     border-left: 2px solid #9e2a2b;
     height: 14px;
 }
 
-.searchContainer div svg {
+.grid-transparent .searchContainer svg {
+    color: #e09f3e;
+}
+
+.searchContainer svg {
     color: #9e2a2b;
+}
+
+.grid-transparent .checkbox-label.checked {
+    background-color: #e09f3e;
+    border-color: #e09f3e;
+    color: white;
+}
+
+.grid-non-transparent .checkbox-label.checked {
+    color: #fff3b0;
 }
 
 .searchContainer div img {
@@ -597,6 +607,7 @@ header .border:hover {
 
 .feature-body p {
     text-align: center;
+    width: 80%;
 }
 
 .feature-icon {
@@ -605,8 +616,8 @@ header .border:hover {
 }
 
 .feature-content {
-    display: inline-block;
-    width: 80%;
+    display: flex;
+    justify-content: center;
 }
 
 .feature-body svg {
