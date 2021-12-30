@@ -24,8 +24,8 @@ const ForgotPassword = () => {
         <div id="content" className="container">
             <div className="body-forgot">
                 <div className="ForgotZone">
-                    <h1>Forgot Password</h1>
-                    <div className="test1">
+                    <p>Forgot Password</p>
+                    <div className="width-forgot-input">
                         <div>
                             <input
                                 className="forgotInput"
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
                     <input
                         type="submit"
                         value="Reset"
-                        className="forgotBtn"
+                        className="btn btn-forgot"
                         onClick={resetpw}
                     />
                 </div>

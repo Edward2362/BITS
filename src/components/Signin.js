@@ -56,14 +56,10 @@ const Signin = (prop) => {
     return (
         <div id="content" className="container">
             <div className="body">
-                <div className="login-border grid-login container">
-                    <div className="block-65-login">
-                        <h1>placeholder</h1>
-                    </div>
-
-                    <div className="block-35-login">
+                <div className="container">
+                    <div className="login-block">
                         <p>Account Login</p>
-                        <div>
+                        <div className="login-block-content">
                             <div className="form-control">
                                 <input
                                     className="inputZone"
