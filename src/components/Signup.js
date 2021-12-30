@@ -37,16 +37,8 @@ const Signup = (prop) => {
     return (
         <div id="content" className="container">
             <div className="body">
-                <div className="login-border grid-login container">
-                    <div className="block-65-login">
-                        <h1>placeholder</h1>
-                        <h1>placeholder</h1>
-                        <h1>placeholder</h1>
-                        <h1>placeholder</h1>
-                        <h1>placeholder</h1>
-                    </div>
-
-                    <div className="block-35-signup">
+                <div className="container">
+                    <div className="sign-up-block">
                         <p>Register</p>
                         <div>
                             <div className="form-control">
