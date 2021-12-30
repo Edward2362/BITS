@@ -23,22 +23,16 @@ const Course = ({ recipes }) => {
 
     return (
         <div className="course">
-            <button
-                className="carousel-button prev"
-                onClick={previousElement}
-            >
+            <button className="carousel-button prev" onClick={previousElement}>
                 &#8606;
             </button>
-            <button
-                className="carousel-button next"
-                onClick={nextElement}
-            >
+            <button className="carousel-button next" onClick={nextElement}>
                 &#8608;
             </button>
             <div className="course-content">
                 {recipes.map((recipe, index) => (
                     <div
-                        className={classNames("recipe-holder", {
+                        className={classNames("recipe-holder absolute", {
                             "current-recipe": index === current,
                             "next-recipe": index === next,
                             "prev-recipe": index === prev,

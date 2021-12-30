@@ -8,7 +8,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Ad from "./components/Ad";
 import Results from "./components/Results";
-import HomepageBody from "./components/HomepageBody";
+import Homepage from "./components/Homepage";
 import ForgotPassword from "./components/ForgotPassword";
 import { useState } from "react";
 import RecipeCRUD from "./components/RecipeCRUD";
@@ -40,7 +40,7 @@ function App() {
                         element={
                             <>
                                 <Ad />
-                                <HomepageBody />
+                                <Homepage />
                             </>
                         }
                     />

@@ -28,7 +28,7 @@ const Results = () => {
                             <hr></hr>
                             <div className="results-section">
                                 {findByCourse === true ? (
-                                    <div className="results-section-course">
+                                    <div className="grid-50">
                                         {courses.map((course, index) => (
                                             <Course
                                                 key={index}
@@ -37,7 +37,7 @@ const Results = () => {
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="results-section-recipe">
+                                    <div className="grid-25">
                                         {recipes.map((recipe) => (
                                             <Recipe
                                                 key={recipe.id}

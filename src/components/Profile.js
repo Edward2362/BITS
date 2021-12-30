@@ -4,7 +4,7 @@ import { recipes } from "./fakedata";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GrUpdate } from "react-icons/gr";
+import { BiEdit } from "react-icons/bi";
 
 const Profile = (prop) => {
     let navigate = useNavigate();
@@ -65,13 +65,12 @@ const Profile = (prop) => {
                                         ></input>
                                     </div>
                                 </div> */}
-                                <div className="profile-created-recipe">
+                                <div className="profile-section">
                                     <h1>Created Recipes</h1>
-                                    <div className="recipes-section">
-                                        <div className="created-recipe-section-grid">
+                                    <div className="results-section">
+                                        <div className="grid-25">
                                             {createdRecipeList.map((recipe) => (
-                                                <div className="">
-                                                    <Recipe />
+                                                <div className="created-recipe">
                                                     <div
                                                         className="icon-holder"
                                                         onClick={() => {
@@ -82,18 +81,19 @@ const Profile = (prop) => {
                                                         }}
                                                     >
                                                         <a href="/AlterRecipe">
-                                                            <GrUpdate />
+                                                            <BiEdit />
                                                         </a>
                                                     </div>
+                                                    <Recipe />
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="profile-created-recipe">
-                                    <h1>Liked Recipes</h1>
-                                    <div className="recipes-section">
-                                        <div className="liked-recipe-section-grid">
+                                <div className="profile-section">
+                                    <h1>Favorite Recipes</h1>
+                                    <div className="results-section">
+                                        <div className="grid-25">
                                             {recipes.map((recipe) => (
                                                 <Recipe
                                                     key={recipe.id}
@@ -103,7 +103,6 @@ const Profile = (prop) => {
                                         </div>
                                     </div>
                                 </div>
-                                <hr></hr>
                             </div>
                         </div>
                     </div>

@@ -93,26 +93,32 @@ const HomepageBody = () => {
                             </div>
                         </div>
                         <div className="section-body">
-                            <div className="sn-body-equal-half">
+                            <div className="grid-25">
+                                <div className="feature-body">
+                                    <h2>1</h2>
+                                    <p>something</p>
+                                </div>
+                                <div className="feature-body">
+                                    <h2>2</h2>
+                                    <p>
+                                        something something something something
+                                    </p>
+                                </div>
+                                <div className="feature-body">
+                                    <h2>3</h2>
+                                    <p>something</p>
+                                </div>
+                                <div className="feature-body">
+                                    <h2>4</h2>
+                                    <p>something</p>
+                                </div>
+                            </div>
+                            {/* <div className="sn-body-equal-half">
                                 <div className="img-holder">
                                     <img src={img1}></img>
                                 </div>
-                            </div>
-                            <div className="sn-body-equal-half">
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                            hello my Name Is Nguyen Vinh Quang
-                                            hello my Name Is Nguyen Vinh Quang
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
-                                    </div>
-                                </div>
+                            </div> */}
+                            {/* <div className="sn-body-equal-half">
                                 <div className="feature-body">
                                     <div className="feature-icon">
                                         <FiHexagon />
@@ -134,8 +140,7 @@ const HomepageBody = () => {
                                             hello my Name Is Nguyen Vinh Quang
                                         </p>
                                     </div>
-                                </div>
-                            </div>
+                                </div> */}
                         </div>
                     </div>
                 </section>
