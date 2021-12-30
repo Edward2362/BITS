@@ -499,14 +499,14 @@ header .border:hover {
     height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
     padding: 0; /* No padding */
     margin: 0; /* No margins */
-    background: linear-gradient(to bottom right, #fff3b0, #ffdaaa00);
+    /* background: linear-gradient(to bottom right, #fff3b0, #ffdaaa00); */
     /* Shorthand: image, repeat, X align, Y align. */
     background-size: cover; /* Cover all available space*/
     background-image: url(./img/ad-bg2.png);
 }
 
 .overlay {
-    background: linear-gradient(to bottom right, #9e2a2c8f, #ffd8a600);
+    background: linear-gradient(to bottom right, #9e2a2c, #ffd8a600);
 }
 
 .ad-body {
