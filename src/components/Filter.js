@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import classNames from "classnames";
 import { choose } from "../functionsJS/checkbox";
 
-export const Filter = ({ findByCourse }) => {
+export const Filter = ({ onChange }) => {
+    const [findByCourse, setFindByCourse] = useState(false);
+
+    if (sessionStorage.getItem("findByCourse")) {
+        if (findByCourse === false) {
+            setFindByCourse(true);
+        }
+    }
+
+    useEffect(choose);
+
+    const findCourses = (e) => {
+        if (sessionStorage.getItem("findByCourse")) {
+            sessionStorage.removeItem("findByCourse");
+            e.target.parentElement.classList.remove("checked");
+            setFindByCourse(false);
+            console.log(e.target);
+        } else {
+            sessionStorage.setItem("findByCourse", true);
+            e.target.parentElement.classList.add("checked");
+            setFindByCourse(true);
+            console.log(e.target);
+        }
+    };
+
+    console.log(findByCourse);
+
     return (
         <div className="filter">
             <div className="filter-header">
                 <h2>Filter</h2>
-                <label className="checkbox-label" onChange={choose}>
+                <label className="checkbox-label">
                     By Courses
                     <input
                         type="checkbox"
-                        id="vegetarian"
-                        onClick={findByCourse}
+                        id="find-course"
+                        checked={findByCourse}
+                        onClick={(e) => findCourses(e)}
+                        onChange={onChange}
                     ></input>
                 </label>
             </div>

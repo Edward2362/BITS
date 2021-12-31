@@ -374,7 +374,7 @@ header .border:hover {
 }
 
 .body-background {
-    background: #e9b789;
+    background: #e09f3e;
 }
 
 .login-block {
@@ -506,7 +506,7 @@ header .border:hover {
 }
 
 .overlay {
-    background: linear-gradient(to bottom right, #9e2a2c, #ffd8a600);
+    background: linear-gradient(to bottom right, #9e2a2c59, #ffd8a600);
 }
 
 .ad-body {
@@ -517,12 +517,18 @@ header .border:hover {
 
 .ad-body h1 {
     font-family: "Marck Script", cursive;
-    font-size: 100px;
-    color: white;
+    font-size: 140px;
+    color: #e9b789;
+    text-shadow: 1px 5px 1px rgba(0, 0, 0, 0.6);
 }
 
 .ad-text {
-    opacity: 0.8;
+    top: -10px;
+}
+
+.ad-text p {
+    color: white;
+    font-size: 22px;
 }
 
 /* Ad end */
@@ -560,7 +566,7 @@ header .border:hover {
 .hooker-overlay {
     width: 100%;
     height: 100%;
-    background: #703f005b;
+    background: #361e0091;
 }
 
 .hooker-content {
@@ -581,14 +587,14 @@ header .border:hover {
 }
 
 .hooker h1 {
-    color: white;
+    color: #e09f3e;
     font-family: "Marck Script", cursive;
     font-weight: 100;
 }
 
 .counter {
     text-align: right;
-    font-size: 100px;
+    font-size: 70px;
 }
 
 .feature-body {
@@ -606,11 +612,13 @@ header .border:hover {
     justify-items: center;
     text-align: center;
     font-size: 45px;
+    color: #e09f3e;
 }
 
 .feature-body p {
     text-align: center;
-    width: 80%;
+    width: 100%;
+    font-weight: 500;
 }
 
 .feature-icon {

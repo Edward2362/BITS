@@ -37,6 +37,7 @@ const Course = ({ recipes }) => {
                             "next-recipe": index === next,
                             "prev-recipe": index === prev,
                         })}
+                        key={index}
                     >
                         <Recipe key={index} recipe={recipe} />
                     </div>

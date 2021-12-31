@@ -42,7 +42,6 @@ const HomepageBody = () => {
                 }
                 count--;
                 result += arr[i];
-                console.log(result);
             }
         }
         return result;
@@ -61,7 +60,7 @@ const HomepageBody = () => {
 
                 if (count < data) {
                     counter.innerText = count_converter(count + inc);
-                    setTimeout(updateCount, 5);
+                    setTimeout(updateCount, 12);
                 } else {
                     counter.innerText = count_converter(data);
                 }
@@ -95,7 +94,7 @@ const HomepageBody = () => {
                         <div className="section-body">
                             <div className="grid-25">
                                 <div className="feature-body">
-                                    <h2>1</h2>
+                                    <h2>1.</h2>
                                     <div className="feature-content">
                                         <p>
                                             Find various of recipes with
@@ -104,7 +103,7 @@ const HomepageBody = () => {
                                     </div>
                                 </div>
                                 <div className="feature-body">
-                                    <h2>2</h2>
+                                    <h2>2.</h2>
                                     <div className="feature-content">
                                         <p>
                                             Provide diversity of choices for eat
@@ -114,7 +113,7 @@ const HomepageBody = () => {
                                 </div>
 
                                 <div className="feature-body">
-                                    <h2>3</h2>
+                                    <h2>3.</h2>
                                     <div className="feature-content">
                                         <p>
                                             Help control the amount of calories
@@ -123,7 +122,7 @@ const HomepageBody = () => {
                                     </div>
                                 </div>
                                 <div className="feature-body">
-                                    <h2>4</h2>
+                                    <h2>4.</h2>
                                     <div className="feature-content">
                                         <p>
                                             Create a community for sharing and
@@ -140,8 +139,11 @@ const HomepageBody = () => {
                         <div className="hooker-body">
                             <div>
                                 <h1>UP TO</h1>
-                                <div className="counter" data="2300000">
-                                    0
+                                <div className="hooker-content">
+                                    <div className="counter" data="2300000">
+                                        0
+                                    </div>
+                                    <p>Recipes</p>
                                 </div>
                             </div>
                         </div>

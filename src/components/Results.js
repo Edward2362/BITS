@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Filter } from "./Filter";
 import Recipe from "./Recipe";
 import Course from "./Course";
 import { recipes, courses } from "./fakedata";
+import { choose } from "../functionsJS/checkbox";
 
 const Results = () => {
-    const [findByCourse, setFindByCourse] = useState(false);
+    const [findByCourse, setFindByCourse] = useState(
+        sessionStorage.getItem("findByCourse")
+    );
 
     const findCourses = () => {
-        setFindByCourse(!findByCourse ? true : false);
+        sessionStorage.getItem("findByCourse") === "true"
+            ? setFindByCourse("true")
+            : setFindByCourse("");
     };
 
     return (
@@ -24,10 +29,10 @@ const Results = () => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <Filter findByCourse={findCourses} />
+                            <Filter onChange={findCourses} />
                             <hr></hr>
                             <div className="results-section">
-                                {findByCourse === true ? (
+                                {findByCourse === "true" ? (
                                     <div className="grid-50">
                                         {courses.map((course, index) => (
                                             <Course
