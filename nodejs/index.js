@@ -153,192 +153,12 @@ function tokenVerified(req, response, next) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function isPlaceIncluded(value) {
     var place = value.trim();
     var arr = place.split("");
     var result = false;
     for (let i = 0; i < arr.length; ++i) {
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         if (" " != arr[i]) {
-
         } else {
             result = true;
         }
@@ -346,150 +166,18 @@ function isPlaceIncluded(value) {
     return result;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function foodIndex(arr, foodId) {
     var result = 0;
 
-
-
-
-
-
-
     for (let i = 0; i < arr.length; ++i) {
-        
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-
         if (foodId != arr[i].foodId) {
-
         } else {
             result = i;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     }
 
-
-
-
-
-
-
-
-
-
-
     return result;
-
 }
-
 
 app.get("/customers", function (req, res) {
     Customer.find({}, function (err, customers) {
@@ -782,65 +470,32 @@ app.get(
     }
 );
 
+app.post(
+    "/customer/customerFoodInArray",
+    tokenVerified,
+    function (req, response) {
+        Customer.find(
+            { customerId: req.body.customerId },
+            function (err, customers) {
+                var food = req.body;
+                var result = [];
+                delete food.customerId;
 
+                result = result.concat(customers[0].food);
+                result.push(food);
 
-
-
-
-
-
-
-
-app.post("/customer/customerFoodInArray", tokenVerified, function (req, response) {
-    Customer.find({customerId: req.body.customerId}, function(err, customers) {
-        
-        
-
-
-
-        
-        var food = req.body;
-        var result = [];
-        delete food.customerId;
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-        result = result.concat(customers[0].food);
-        result.push(food);
-
-
-
-
-
-
-
-
-
-
-        Customer.findOneAndUpdate({customerId: customers[0].customerId}, {$set: result}, {new: true}, function(error, placeCustomers) {
-            response.send([{result: "Customers"}]);
-        });
-
-
-
-
-    });
-});
+                Customer.findOneAndUpdate(
+                    { customerId: customers[0].customerId },
+                    { $set: result },
+                    { new: true },
+                    function (error, placeCustomers) {
+                        response.send([{ result: "Customers" }]);
+                    }
+                );
+            }
+        );
+    }
+);
 
 app.get("/food", function (req, response) {
     Food.find({}, function (err, food) {
@@ -860,31 +515,11 @@ app.get("/customerFood/:customerId", tokenVerified, function (req, response) {
     });
 });
 
-
-
-
-
-app.get("/placeFood/:avoid", function(req, response) {
-    Food.find({}, async function(err, food) {
-        
-
-
-
-
-
-    
-
-
+app.get("/placeFood/:avoid", function (req, response) {
+    Food.find({}, async function (err, food) {
         var avoidNeeded = req.params.avoid;
         var avoid = avoidNeeded.trim();
         var foodAdded = [];
-
-        
-        
-
-
-
-
 
         if (isPlaceIncluded(avoid)) {
             var arr = avoid.split(" ");
@@ -892,285 +527,85 @@ app.get("/placeFood/:avoid", function(req, response) {
                 var count = 0;
                 for (let index = 0; index < arr.length; ++index) {
                     var place = false;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                    await Food.find({foodId: food[i].foodId, foodIngredients: {$elemMatch: {ingredientName: {$regex: arr[index]}}}}, function(error, placeFood) {
-                        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                        if (0 == placeFood.length) {
-    
-                        } else {
-                            place = true;
+
+                    await Food.find(
+                        {
+                            foodId: food[i].foodId,
+                            foodIngredients: {
+                                $elemMatch: {
+                                    ingredientName: { $regex: arr[index] },
+                                },
+                            },
+                        },
+                        function (error, placeFood) {
+                            if (0 == placeFood.length) {
+                            } else {
+                                place = true;
+                            }
                         }
-                    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                    
-                    
-                    await Food.find({foodId: food[i].foodId, foodName: {$regex: arr[index]}}, function(error, placeFood) {
-                        
-                        if (0 == placeFood.length) {
-    
-                        } else {
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                            place = true;
+                    );
+
+                    await Food.find(
+                        {
+                            foodId: food[i].foodId,
+                            foodName: { $regex: arr[index] },
+                        },
+                        function (error, placeFood) {
+                            if (0 == placeFood.length) {
+                            } else {
+                                place = true;
+                            }
                         }
-                    });
+                    );
                     if (!place) {
-    
                     } else {
                         count = count + 1;
                     }
                 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
                 if (arr.length != count) {
-    
                 } else {
                     foodAdded.push(food[i]);
                 }
             }
-    
-            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-            response.send([{result: foodAdded}]);
+
+            response.send([{ result: foodAdded }]);
         } else {
             for (let i = 0; i < food.length; ++i) {
                 var place = false;
-                await Food.find({foodId: food[i].foodId, foodIngredients: {$elemMatch: {ingredientName: {$regex: avoid}}}}, function(error, placeFood) {
-                    if (0 == placeFood.length) {
-
-                    } else {
-                        place= true;
+                await Food.find(
+                    {
+                        foodId: food[i].foodId,
+                        foodIngredients: {
+                            $elemMatch: { ingredientName: { $regex: avoid } },
+                        },
+                    },
+                    function (error, placeFood) {
+                        if (0 == placeFood.length) {
+                        } else {
+                            place = true;
+                        }
                     }
-                });
-                await Food.find({foodId: food[i].foodId, foodName: {$regex: avoid}}, function(error, placeFood) {
-                    if (0 == placeFood.length) {
-
-                    } else {
-                        place= true;
+                );
+                await Food.find(
+                    { foodId: food[i].foodId, foodName: { $regex: avoid } },
+                    function (error, placeFood) {
+                        if (0 == placeFood.length) {
+                        } else {
+                            place = true;
+                        }
                     }
-                });
+                );
                 if (!place) {
-
                 } else {
                     foodAdded.push(food[i]);
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            response.send([{result: foodAdded}]);
+            response.send([{ result: foodAdded }]);
         }
-
-
-
     });
 });
-
-
-
-
-
-
-
-
-
-
 
 app.post("/food", tokenVerified, function (req, response) {
     var count = 0;
@@ -1216,37 +651,28 @@ app.post("/foodUpdate", tokenVerified, function (req, response) {
 });
 
 app.delete("/food", tokenVerified, function (req, response) {
-    Customer.find({food: {$elemMatch: {foodId: req.body.foodId}}}, async function(err, customers) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        for (let i = 0; i < customers.length; ++i) {
-            var place = [];
-            place.concat(customers[i].food);
-            place.splice(foodIndex(place, req.body.foodId), 1);
-            await Customer.findOneAndUpdate({customerId: customers[i].customerId}, {$set: {food: place}}, {new: true}, function(error, placeCustomer) {
-
-            });
+    Customer.find(
+        { food: { $elemMatch: { foodId: req.body.foodId } } },
+        async function (err, customers) {
+            for (let i = 0; i < customers.length; ++i) {
+                var place = [];
+                place.concat(customers[i].food);
+                place.splice(foodIndex(place, req.body.foodId), 1);
+                await Customer.findOneAndUpdate(
+                    { customerId: customers[i].customerId },
+                    { $set: { food: place } },
+                    { new: true },
+                    function (error, placeCustomer) {}
+                );
+            }
+            Food.deleteOne(
+                { foodId: req.body.foodId },
+                function (placeError, food) {
+                    response.send([{ result: "Food" }]);
+                }
+            );
         }
-        Food.deleteOne({ foodId: req.body.foodId }, function (placeError, food) {
-            response.send([{ result: "Food" }]);
-        });
-
-    });
+    );
 });
 
 app.listen(9000);
