@@ -33,7 +33,7 @@ const Header = () => {
 
     const load = () => {
         window.sessionStorage.setItem("place", value);
-        window.sessionStorage.removeItem("foodIndex");
+        window.sessionStorage.removeItem("recipesIndex");
     };
 
     // sessionStorage.getItem("findInCommunity") ?

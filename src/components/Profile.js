@@ -72,7 +72,11 @@ const Profile = (prop) => {
                                                             <BiEdit />
                                                         </a>
                                                     </div>
-                                                    <Recipe url="Recipe-Restcipe" />
+                                                    <Recipe
+                                                        key={recipe.foodId}
+                                                        recipe={recipe}
+                                                        url="Recipe-Restcipe"
+                                                    />
                                                 </div>
                                             ))}
                                         </div>

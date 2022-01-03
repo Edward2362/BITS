@@ -9,17 +9,17 @@ const Results = () => {
     const [findByCourse, setFindByCourse] = useState(
         sessionStorage.getItem("findByCourse")
     );
-    const [recipe, setRecipe] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [place, setPlace] = useState(false);
-    const [recipePrevious, setRecipePrevious] = useState({
+    const [recipesPrevious, setRecipesPrevious] = useState({
         previousIncluded: false,
         previousIndex: "0",
     });
-    const [recipeNext, setRecipeNext] = useState({
+    const [recipesNext, setRecipesNext] = useState({
         nextIncluded: false,
         nextIndex: "0",
     });
-    const [recipeIndex, setRecipeIndex] = useState({
+    const [recipesIndex, setRecipesIndex] = useState({
         indexIncluded: false,
         indexStart: "0",
     });
@@ -39,15 +39,15 @@ const Results = () => {
     var previousAvoid = <div></div>;
     var nextAvoid = <div></div>;
 
-    if (!recipePrevious.previousIncluded) {
+    if (!recipesPrevious.previousIncluded) {
     } else {
         previousAvoid = (
             <button
                 className="prev-page"
                 onClick={() => {
-                    setRecipeIndex({
+                    setRecipesIndex({
                         indexIncluded: true,
-                        indexStart: recipePrevious.previousIndex,
+                        indexStart: recipesPrevious.previousIndex,
                     });
                 }}
             >
@@ -56,15 +56,15 @@ const Results = () => {
         );
     }
 
-    if (!recipeNext.nextIncluded) {
+    if (!recipesNext.nextIncluded) {
     } else {
         nextAvoid = (
             <button
                 className="next-page"
                 onClick={() => {
-                    setRecipeIndex({
+                    setRecipesIndex({
                         indexIncluded: true,
-                        indexStart: recipeNext.nextIndex,
+                        indexStart: recipesNext.nextIndex,
                     });
                 }}
             >
@@ -88,20 +88,20 @@ const Results = () => {
                         <div className="white-bg">
                             <Filter
                                 onChange={findCourses}
-                                recipeIn={(recipeArray, previous, next) => {
-                                    setRecipe(recipeArray);
+                                recipesIn={(recipesArray, previous, next) => {
+                                    setRecipes(recipesArray);
                                     setPlace(true);
-                                    setRecipePrevious(previous);
-                                    setRecipeNext(next);
+                                    setRecipesPrevious(previous);
+                                    setRecipesNext(next);
                                 }}
-                                recipeIndexPlace={(recipePlaceIndex) => {
-                                    setRecipeIndex(recipePlaceIndex);
+                                recipesIndexPlace={(recipesPlaceIndex) => {
+                                    setRecipesIndex(recipesPlaceIndex);
                                 }}
                                 placeValue={place}
-                                placeRecipeIndex={recipeIndex}
+                                placeRecipesIndex={recipesIndex}
                             />
                             <hr></hr>
-                            {recipe.length === 0 ? (
+                            {recipes.length === 0 ? (
                                 <div className="results-section">
                                     <p>No Results</p>
                                 </div>
@@ -119,7 +119,7 @@ const Results = () => {
                                         </div>
                                     ) : (
                                         <div className="grid-25">
-                                            {recipe.map((recipe) => (
+                                            {recipes.map((recipe) => (
                                                 <Recipe
                                                     key={recipe.foodId}
                                                     recipe={recipe}

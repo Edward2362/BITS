@@ -16,7 +16,7 @@ const Recipe = ({ recipe, foodId, url }) => {
                 </div>
                 <div className="recipe-card-body">
                     <div className="recipe-information">
-                        <p>test1</p>
+                        <p>{recipe.foodName}</p>
                     </div>
                 </div>
             </div>

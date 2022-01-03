@@ -5,10 +5,10 @@ import { choose } from "../functionsJS/checkbox";
 
 export const Filter = ({
     onChange,
-    recipeIn,
-    recipeIndexPlace,
+    recipesIn,
+    recipesIndexPlace,
     placeValue,
-    placeRecipeIndex,
+    placeRecipesIndex,
 }) => {
     var endPoint = "http://localhost:9000/placeFood";
 
@@ -56,27 +56,27 @@ export const Filter = ({
         }
     };
 
-    const load = (recipeIndex) => {
+    const load = (recipesIndex) => {
         if (null === window.sessionStorage.getItem("findInCommunity")) {
         } else {
-            var recipePrevious = {};
-            var recipeNext = {};
+            var recipesPrevious = {};
+            var recipesNext = {};
 
             if (null === window.sessionStorage.getItem("place")) {
-                recipePrevious = {
+                recipesPrevious = {
                     previousIncluded: false,
                     previousIndex: "0",
                 };
-                recipeNext = { nextIncluded: false, nextIndex: "0" };
-                recipeIn([], recipePrevious, recipeNext);
+                recipesNext = { nextIncluded: false, nextIndex: "0" };
+                recipesIn([], recipesPrevious, recipesNext);
             } else {
                 if ("" == window.sessionStorage.getItem("place")) {
-                    recipePrevious = {
+                    recipesPrevious = {
                         previousIncluded: false,
                         previousIndex: "0",
                     };
-                    recipeNext = { nextIncluded: false, nextIndex: "0" };
-                    recipeIn([], recipePrevious, recipeNext);
+                    recipesNext = { nextIncluded: false, nextIndex: "0" };
+                    recipesIn([], recipesPrevious, recipesNext);
                 } else {
                     var caloriesFromMix = "";
 
@@ -129,50 +129,50 @@ export const Filter = ({
                             "/" +
                             ingredientUpToMix +
                             "/" +
-                            recipeIndex
+                            recipesIndex
                     )
                         .then((response) => response.json())
                         .then((data) => {
                             if (undefined !== data[0].foodPrevious) {
                                 if (undefined !== data[0].foodNext) {
-                                    recipePrevious = {
+                                    recipesPrevious = {
                                         previousIncluded: true,
                                         previousIndex:
                                             data[0].foodPrevious.toString(),
                                     };
 
-                                    recipeNext = {
+                                    recipesNext = {
                                         nextIncluded: true,
                                         nextIndex: data[0].foodNext.toString(),
                                     };
                                 } else {
-                                    recipePrevious = {
+                                    recipesPrevious = {
                                         previousIncluded: true,
                                         previousIndex:
                                             data[0].foodPrevious.toString(),
                                     };
-                                    recipeNext = {
+                                    recipesNext = {
                                         nextIncluded: false,
                                         nextIndex: "0",
                                     };
                                 }
                             } else {
                                 if (undefined !== data[0].foodNext) {
-                                    recipePrevious = {
+                                    recipesPrevious = {
                                         previousIncluded: false,
                                         previousIndex: "0",
                                     };
 
-                                    recipeNext = {
+                                    recipesNext = {
                                         nextIncluded: true,
                                         nextIndex: data[0].foodNext.toString(),
                                     };
                                 } else {
-                                    recipePrevious = {
+                                    recipesPrevious = {
                                         previousIncluded: false,
                                         previousIndex: "0",
                                     };
-                                    recipeNext = {
+                                    recipesNext = {
                                         nextIncluded: false,
                                         nextIndex: "0",
                                     };
@@ -180,35 +180,35 @@ export const Filter = ({
                             }
 
                             window.sessionStorage.setItem(
-                                "recipeIndex",
-                                recipeIndex
+                                "recipesIndex",
+                                recipesIndex
                             );
-                            var recipeIndexMix = {
+                            var recipesIndexMix = {
                                 indexIncluded: false,
-                                indexStart: recipeIndex,
+                                indexStart: recipesIndex,
                             };
-                            recipeIn(
+                            recipesIn(
                                 data[0].result,
-                                recipePrevious,
-                                recipeNext
+                                recipesPrevious,
+                                recipesNext
                             );
-                            recipeIndexPlace(recipeIndexMix);
+                            recipesIndexPlace(recipesIndexMix);
                         });
                 }
             }
         }
     };
 
-    if (!placeRecipeIndex.indexIncluded) {
+    if (!placeRecipesIndex.indexIncluded) {
     } else {
-        load(placeRecipeIndex.indexStart);
+        load(placeRecipesIndex.indexStart);
     }
 
     const placeLoad = () => {
         window.sessionStorage.setItem("caloriesFrom", calories.from);
         window.sessionStorage.setItem("caloriesTo", calories.to);
         window.sessionStorage.setItem("ingredientUpTo", ingredientUpTo);
-        window.sessionStorage.removeItem("recipeIndex");
+        window.sessionStorage.removeItem("recipesIndex");
         load("0");
     };
 
@@ -218,14 +218,14 @@ export const Filter = ({
 
         if (placeValue) {
         } else {
-            var recipeIndex = "";
+            var recipesIndex = "";
 
-            if (null !== window.sessionStorage.getItem("recipeIndex")) {
-                recipeIndex = window.sessionStorage.getItem("recipeIndex");
+            if (null !== window.sessionStorage.getItem("recipesIndex")) {
+                recipesIndex = window.sessionStorage.getItem("recipesIndex");
             } else {
-                recipeIndex = "0";
+                recipesIndex = "0";
             }
-            load(recipeIndex);
+            load(recipesIndex);
         }
     });
 
