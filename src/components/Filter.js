@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { choose } from "../functionsJS/checkbox";
+// import { set } from "mongoose";
 
 export const Filter = ({
     onChange,
-    foodIn,
-    foodIndexPlace,
+    recipeIn,
+    recipeIndexPlace,
     placeValue,
-    placeFoodIndex,
+    placeRecipeIndex,
 }) => {
     var endPoint = "http://localhost:9000/placeFood";
 
     const [findByCourse, setFindByCourse] = useState(false);
     const [calories, setCalories] = useState({ from: "", to: "" });
     const [ingredientUpTo, setIngredientUpTo] = useState("");
+    const [diets, setDiets] = useState([]);
 
     if (sessionStorage.getItem("findByCourse")) {
         if (findByCourse === false) {
@@ -35,24 +37,46 @@ export const Filter = ({
         }
     };
 
-    const load = (foodIndex) => {
+    const handleChoose = (e) => {
+        if (e.target.checked) {
+            e.target.parentElement.classList.add("checked");
+            setDiets([...diets, e.target.value]);
+        } else {
+            e.target.parentElement.classList.remove("checked");
+            setDiets(diets.filter((diet) => diet !== e.target.value));
+        }
+    };
+
+    const handleCheckedDiet = () => {
+        var checkboxs = document.querySelectorAll("input[type=checkbox]");
+        for (let i = 0; i < checkboxs.length; i++) {
+            if (diets.includes(checkboxs[i].value)) {
+                checkboxs[i].checked = true;
+            }
+        }
+    };
+
+    const load = (recipeIndex) => {
         if (null === window.sessionStorage.getItem("findInCommunity")) {
         } else {
-            var foodPrevious = {};
-            var foodNext = {};
+            var recipePrevious = {};
+            var recipeNext = {};
 
             if (null === window.sessionStorage.getItem("place")) {
-                foodPrevious = { previousIncluded: false, previousIndex: "0" };
-                foodNext = { nextIncluded: false, nextIndex: "0" };
-                foodIn([], foodPrevious, foodNext);
+                recipePrevious = {
+                    previousIncluded: false,
+                    previousIndex: "0",
+                };
+                recipeNext = { nextIncluded: false, nextIndex: "0" };
+                recipeIn([], recipePrevious, recipeNext);
             } else {
                 if ("" == window.sessionStorage.getItem("place")) {
-                    foodPrevious = {
+                    recipePrevious = {
                         previousIncluded: false,
                         previousIndex: "0",
                     };
-                    foodNext = { nextIncluded: false, nextIndex: "0" };
-                    foodIn([], foodPrevious, foodNext);
+                    recipeNext = { nextIncluded: false, nextIndex: "0" };
+                    recipeIn([], recipePrevious, recipeNext);
                 } else {
                     var caloriesFromMix = "";
 
@@ -105,50 +129,50 @@ export const Filter = ({
                             "/" +
                             ingredientUpToMix +
                             "/" +
-                            foodIndex
+                            recipeIndex
                     )
                         .then((response) => response.json())
                         .then((data) => {
                             if (undefined !== data[0].foodPrevious) {
                                 if (undefined !== data[0].foodNext) {
-                                    foodPrevious = {
+                                    recipePrevious = {
                                         previousIncluded: true,
                                         previousIndex:
                                             data[0].foodPrevious.toString(),
                                     };
 
-                                    foodNext = {
+                                    recipeNext = {
                                         nextIncluded: true,
                                         nextIndex: data[0].foodNext.toString(),
                                     };
                                 } else {
-                                    foodPrevious = {
+                                    recipePrevious = {
                                         previousIncluded: true,
                                         previousIndex:
                                             data[0].foodPrevious.toString(),
                                     };
-                                    foodNext = {
+                                    recipeNext = {
                                         nextIncluded: false,
                                         nextIndex: "0",
                                     };
                                 }
                             } else {
                                 if (undefined !== data[0].foodNext) {
-                                    foodPrevious = {
+                                    recipePrevious = {
                                         previousIncluded: false,
                                         previousIndex: "0",
                                     };
 
-                                    foodNext = {
+                                    recipeNext = {
                                         nextIncluded: true,
                                         nextIndex: data[0].foodNext.toString(),
                                     };
                                 } else {
-                                    foodPrevious = {
+                                    recipePrevious = {
                                         previousIncluded: false,
                                         previousIndex: "0",
                                     };
-                                    foodNext = {
+                                    recipeNext = {
                                         nextIncluded: false,
                                         nextIndex: "0",
                                     };
@@ -156,47 +180,52 @@ export const Filter = ({
                             }
 
                             window.sessionStorage.setItem(
-                                "foodIndex",
-                                foodIndex
+                                "recipeIndex",
+                                recipeIndex
                             );
-                            var foodIndexMix = {
+                            var recipeIndexMix = {
                                 indexIncluded: false,
-                                indexStart: foodIndex,
+                                indexStart: recipeIndex,
                             };
-                            foodIn(data[0].result, foodPrevious, foodNext);
-                            foodIndexPlace(foodIndexMix);
+                            recipeIn(
+                                data[0].result,
+                                recipePrevious,
+                                recipeNext
+                            );
+                            recipeIndexPlace(recipeIndexMix);
                         });
                 }
             }
         }
     };
 
-    if (!placeFoodIndex.indexIncluded) {
+    if (!placeRecipeIndex.indexIncluded) {
     } else {
-        load(placeFoodIndex.indexStart);
+        load(placeRecipeIndex.indexStart);
     }
 
     const placeLoad = () => {
         window.sessionStorage.setItem("caloriesFrom", calories.from);
         window.sessionStorage.setItem("caloriesTo", calories.to);
         window.sessionStorage.setItem("ingredientUpTo", ingredientUpTo);
-        window.sessionStorage.removeItem("foodIndex");
+        window.sessionStorage.removeItem("recipeIndex");
         load("0");
     };
 
     useEffect(() => {
+        handleCheckedDiet();
         choose();
 
         if (placeValue) {
         } else {
-            var foodIndex = "";
+            var recipeIndex = "";
 
-            if (null !== window.sessionStorage.getItem("foodIndex")) {
-                foodIndex = window.sessionStorage.getItem("foodIndex");
+            if (null !== window.sessionStorage.getItem("recipeIndex")) {
+                recipeIndex = window.sessionStorage.getItem("recipeIndex");
             } else {
-                foodIndex = "0";
+                recipeIndex = "0";
             }
-            load(foodIndex);
+            load(recipeIndex);
         }
     });
 
@@ -259,56 +288,116 @@ export const Filter = ({
             <div id="diets" className="filter-section">
                 <div className="diet-choice">
                     <label>Diet</label>
-                    <div className="grid-25" onChange={choose}>
+                    <div className="grid-25">
                         <label className="checkbox-label">
                             Vegetarian
-                            <input type="checkbox" id="vegetarian"></input>
+                            <input
+                                type="checkbox"
+                                id="vegetarian"
+                                value="vegetarian"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Vegan
-                            <input type="checkbox" id="vegan"></input>
+                            <input
+                                type="checkbox"
+                                id="vegan"
+                                value="vegan"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Paleo
-                            <input type="checkbox" id="paleo"></input>
+                            <input
+                                type="checkbox"
+                                id="paleo"
+                                value="paleo"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             High-Fiber
-                            <input type="checkbox" id="high-fiber"></input>
+                            <input
+                                type="checkbox"
+                                id="high-fiber"
+                                value="high-fiber"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
 
                         <label className="checkbox-label">
                             High-Protein
-                            <input type="checkbox" id="high-protein"></input>
+                            <input
+                                type="checkbox"
+                                id="high-protein"
+                                value="high-protein"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Low-Carb
-                            <input type="checkbox" id="low-carb"></input>
+                            <input
+                                type="checkbox"
+                                id="low-carb"
+                                value="low-carb"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Low-Fat
-                            <input type="checkbox" id="low-fat"></input>
+                            <input
+                                type="checkbox"
+                                id="low-fat"
+                                value="low-fat"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Low-Sodium
-                            <input type="checkbox" id="low-sodium"></input>
+                            <input
+                                type="checkbox"
+                                id="low-sodium"
+                                value="low-sodium"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
 
                         <label className="checkbox-label">
                             Low-Sugar
-                            <input type="checkbox" id="low-sugar"></input>
+                            <input
+                                type="checkbox"
+                                id="low-sugar"
+                                value="low-sugar"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Alcohol-Free
-                            <input type="checkbox" id="alcohol-free"></input>
+                            <input
+                                type="checkbox"
+                                id="alcohol-free"
+                                value="alcohol-free"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Balanced
-                            <input type="checkbox" id="balanced"></input>
+                            <input
+                                type="checkbox"
+                                id="balanced"
+                                value="balanced"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                         <label className="checkbox-label">
                             Immunity
-                            <input type="checkbox" id="immunity"></input>
+                            <input
+                                type="checkbox"
+                                id="immunity"
+                                value="immunity"
+                                onChange={(e) => handleChoose(e)}
+                            ></input>
                         </label>
                     </div>
                 </div>

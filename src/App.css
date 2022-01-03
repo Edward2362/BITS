@@ -1151,6 +1151,37 @@ header .border:hover {
     margin-bottom: 10px;
 }
 
+.new-res-body .checkbox-label {
+    margin: 2%;
+    border: solid;
+    border-radius: 10px;
+    border-color: #9e2a2b;
+    color: #9e2a2b;
+    width: 70%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.new-res-body .checkbox-label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.new-res-body .checkbox-label.checked {
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+    color: white;
+}
+
+.new-res-body input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
 #Calories {
     width: 75px;
 }

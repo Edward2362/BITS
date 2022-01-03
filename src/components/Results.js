@@ -9,17 +9,17 @@ const Results = () => {
     const [findByCourse, setFindByCourse] = useState(
         sessionStorage.getItem("findByCourse")
     );
-    const [food, setFood] = useState([]);
+    const [recipe, setRecipe] = useState([]);
     const [place, setPlace] = useState(false);
-    const [foodPrevious, setFoodPrevious] = useState({
+    const [recipePrevious, setRecipePrevious] = useState({
         previousIncluded: false,
         previousIndex: "0",
     });
-    const [foodNext, setFoodNext] = useState({
+    const [recipeNext, setRecipeNext] = useState({
         nextIncluded: false,
         nextIndex: "0",
     });
-    const [foodIndex, setFoodIndex] = useState({
+    const [recipeIndex, setRecipeIndex] = useState({
         indexIncluded: false,
         indexStart: "0",
     });
@@ -39,15 +39,15 @@ const Results = () => {
     var previousAvoid = <div></div>;
     var nextAvoid = <div></div>;
 
-    if (!foodPrevious.previousIncluded) {
+    if (!recipePrevious.previousIncluded) {
     } else {
         previousAvoid = (
             <button
                 className="prev-page"
                 onClick={() => {
-                    setFoodIndex({
+                    setRecipeIndex({
                         indexIncluded: true,
-                        indexStart: foodPrevious.previousIndex,
+                        indexStart: recipePrevious.previousIndex,
                     });
                 }}
             >
@@ -56,15 +56,15 @@ const Results = () => {
         );
     }
 
-    if (!foodNext.nextIncluded) {
+    if (!recipeNext.nextIncluded) {
     } else {
         nextAvoid = (
             <button
                 className="next-page"
                 onClick={() => {
-                    setFoodIndex({
+                    setRecipeIndex({
                         indexIncluded: true,
-                        indexStart: foodNext.nextIndex,
+                        indexStart: recipeNext.nextIndex,
                     });
                 }}
             >
@@ -88,20 +88,20 @@ const Results = () => {
                         <div className="white-bg">
                             <Filter
                                 onChange={findCourses}
-                                foodIn={(foodArray, previous, next) => {
-                                    setFood(foodArray);
+                                recipeIn={(recipeArray, previous, next) => {
+                                    setRecipe(recipeArray);
                                     setPlace(true);
-                                    setFoodPrevious(previous);
-                                    setFoodNext(next);
+                                    setRecipePrevious(previous);
+                                    setRecipeNext(next);
                                 }}
-                                foodIndexPlace={(foodPlaceIndex) => {
-                                    setFoodIndex(foodPlaceIndex);
+                                recipeIndexPlace={(recipePlaceIndex) => {
+                                    setRecipeIndex(recipePlaceIndex);
                                 }}
                                 placeValue={place}
-                                placeFoodIndex={foodIndex}
+                                placeRecipeIndex={recipeIndex}
                             />
                             <hr></hr>
-                            {food.length === 0 ? (
+                            {recipe.length === 0 ? (
                                 <div className="results-section">
                                     <p>No Results</p>
                                 </div>
@@ -119,10 +119,10 @@ const Results = () => {
                                         </div>
                                     ) : (
                                         <div className="grid-25">
-                                            {food.map((placeFood) => (
+                                            {recipe.map((recipe) => (
                                                 <Recipe
-                                                    key={placeFood.foodId}
-                                                    placeFood={placeFood}
+                                                    key={recipe.foodId}
+                                                    recipe={recipe}
                                                     url={findInCommunity}
                                                 />
                                             ))}
