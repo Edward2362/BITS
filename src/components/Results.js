@@ -10,11 +10,145 @@ const Results = () => {
         sessionStorage.getItem("findByCourse")
     );
 
+
+    const [food, setFood] = useState([]);
+    const [place, setPlace] = useState(false);
+    
+    
+
+
+
+
+
+
+
+
+
+
+    const [foodPrevious, setFoodPrevious] = useState({previousIncluded: false, previousIndex: "0"});
+    const [foodNext, setFoodNext] = useState({nextIncluded: false, nextIndex: "0"});
+    const [foodIndex, setFoodIndex] = useState({indexIncluded: false, indexStart: "0"});
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
     const findCourses = () => {
         sessionStorage.getItem("findByCourse") === "true"
             ? setFindByCourse("true")
             : setFindByCourse("");
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var previousAvoid = <div></div>;
+    var nextAvoid = <div></div>;
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    if (!foodPrevious.previousIncluded) {
+
+    } else {
+        previousAvoid = <input type="submit" value="APPLY" formMethod="" onClick={() => {setFoodIndex({indexIncluded: true, indexStart: foodPrevious.previousIndex})}}></input>;
+    }
+
+    if (!foodNext.nextIncluded) {
+
+    } else {
+        nextAvoid = <input type="submit" value="APPLY" formMethod="" onClick={() => {setFoodIndex({indexIncluded: true, indexStart: foodNext.nextIndex})}}></input>;
+    }
+    
+    
 
     return (
         <>
@@ -29,28 +163,255 @@ const Results = () => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <Filter onChange={findCourses} />
+                            <Filter onChange={findCourses} foodIn={(foodArray, previous, next) => {setFood(foodArray); setPlace(true); setFoodPrevious(previous); setFoodNext(next);}} foodIndexPlace={(foodPlaceIndex) => {setFoodIndex(foodPlaceIndex)}} placeValue={place} placeFoodIndex={foodIndex} />
                             <hr></hr>
+                            
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <div className="results-section">
-                                {findByCourse === "true" ? (
-                                    <div className="grid-50">
-                                        {courses.map((course, index) => (
-                                            <Course
-                                                key={index}
-                                                recipes={course.recipes}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="grid-25">
-                                        {recipes.map((recipe) => (
-                                            <Recipe
-                                                key={recipe.id}
-                                                recipe={recipe}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
+                                
+
+                                
+                                
+
+
+
+
+
+
+                                <div className="grid-25">
+                                        
+                                            
+                                    {food.map((placeFood) => (
+                                        <Recipe 
+                                            key={placeFood.foodId}
+                                            placeFood={placeFood}
+                                        />
+                                    ))} 
+                                </div>
+                            </div>
+
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div className="results-section">
+                                
+
+
+                            
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+                <div className="submit">
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {previousAvoid}
+                </div>
+                <div className="submit">
+
+                    
+
+
+                    {nextAvoid}
+                </div>
                             </div>
                         </div>
                     </div>

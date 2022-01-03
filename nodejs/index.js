@@ -515,11 +515,11 @@ app.get("/customerFood/:customerId", tokenVerified, function (req, response) {
     });
 });
 
-app.get("/placeFood/:avoid", function (req, response) {
-    Food.find({}, async function (err, food) {
+app.get("/placeFood/:avoid/:caloriesFrom/:caloriesTo/:ingredientUpTo/:foodIndex", function (req, response) {
+    Food.find({}, null, {sort: {foodCalories: 1}}, function (err, food) {
         var avoidNeeded = req.params.avoid;
         var avoid = avoidNeeded.trim();
-        var foodAdded = [];
+        var foodArray = [];
 
         if (isPlaceIncluded(avoid)) {
             var arr = avoid.split(" ");
@@ -528,35 +528,110 @@ app.get("/placeFood/:avoid", function (req, response) {
                 for (let index = 0; index < arr.length; ++index) {
                     var place = false;
 
-                    await Food.find(
-                        {
-                            foodId: food[i].foodId,
-                            foodIngredients: {
-                                $elemMatch: {
-                                    ingredientName: { $regex: arr[index] },
-                                },
-                            },
-                        },
-                        function (error, placeFood) {
-                            if (0 == placeFood.length) {
-                            } else {
-                                place = true;
-                            }
-                        }
-                    );
+                    
 
-                    await Food.find(
-                        {
-                            foodId: food[i].foodId,
-                            foodName: { $regex: arr[index] },
-                        },
-                        function (error, placeFood) {
-                            if (0 == placeFood.length) {
-                            } else {
-                                place = true;
-                            }
+
+
+
+
+
+
+
+
+
+                    var regex = new RegExp(arr[index]);
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    for (let placeIndex = 0; placeIndex < food[i].foodIngredients.length; ++placeIndex) {
+                        if (!regex.test(food[i].foodIngredients[placeIndex].ingredientName)) {
+                            
+                        } else {
+                            place = true;
                         }
-                    );
+                    }
+
+
+                    
+
+
+
+
+
+
+
+
+                    if (!regex.test(food[i].foodName)) {
+                        
+                    } else {
+                        place =true;
+                    }
+
                     if (!place) {
                     } else {
                         count = count + 1;
@@ -565,45 +640,504 @@ app.get("/placeFood/:avoid", function (req, response) {
 
                 if (arr.length != count) {
                 } else {
-                    foodAdded.push(food[i]);
+                    foodArray.push(food[i]);
                 }
             }
 
-            response.send([{ result: foodAdded }]);
+            
         } else {
             for (let i = 0; i < food.length; ++i) {
                 var place = false;
-                await Food.find(
-                    {
-                        foodId: food[i].foodId,
-                        foodIngredients: {
-                            $elemMatch: { ingredientName: { $regex: avoid } },
-                        },
-                    },
-                    function (error, placeFood) {
-                        if (0 == placeFood.length) {
-                        } else {
-                            place = true;
-                        }
+                
+                
+                
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                var regex = new RegExp(avoid);
+                for (let index = 0; index < food[i].foodIngredients.length; ++index) {
+                    if (!regex.test(food[i].foodIngredients[index].ingredientName)) {
+
+                    } else {
+                        place = true;
                     }
-                );
-                await Food.find(
-                    { foodId: food[i].foodId, foodName: { $regex: avoid } },
-                    function (error, placeFood) {
-                        if (0 == placeFood.length) {
-                        } else {
-                            place = true;
-                        }
-                    }
-                );
+                }
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                if (!regex.test(food[i].foodName)) {
+
+                } else {
+                    place = true;
+                }
+
+
                 if (!place) {
                 } else {
-                    foodAdded.push(food[i]);
+                    foodArray.push(food[i]);
                 }
             }
 
-            response.send([{ result: foodAdded }]);
+            
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var foodFinal = [];
+        var foodFinalByIndex = [];
+        var foodFinalMove = [];
+        var foodMix = {};
+        var caloriesFrom = parseFloat(req.params.caloriesFrom);
+        var caloriesTo = parseFloat(req.params.caloriesTo);
+        var ingredientUpTo = parseInt(req.params.ingredientUpTo);
+        
+
+
+
+
+        var foodIndex = parseInt(req.params.foodIndex);
+        for (let i = 0; i < foodArray.length; ++i) {
+            
+
+
+
+            
+            
+
+
+
+
+
+
+
+            var count = 0;
+            if (0.0 == caloriesFrom) {
+                count = count + 1;
+            } else {
+                if (caloriesFrom > parseFloat(foodArray[i].foodCalories)) {
+
+                } else {
+                    count = count + 1;
+                }
+            }
+
+            if (0.0 == caloriesTo) {
+                count = count + 1;
+            } else {
+                if (caloriesTo < parseFloat(foodArray[i].foodCalories)) {
+
+                } else {
+                    count = count + 1;
+                }
+            }
+
+            if (0 == ingredientUpTo) {
+                count = count + 1;
+            } else {
+                if (ingredientUpTo < foodArray[i].foodIngredients.length) {
+
+                } else {
+                    count = count + 1;
+                }
+            }
+
+            if (3 != count) {
+
+            } else {
+                foodFinal.push(foodArray[i]);
+            }
+        }
+
+
+
+
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        if (0 != foodFinal.length) {
+            foodFinalByIndex = foodFinal.slice(foodIndex, foodFinal.length);
+            if (20 < foodFinalByIndex.length) {
+                
+    
+    
+    
+    
+    
+                foodFinalMove = foodFinal.slice(foodIndex, foodIndex + 20);
+                
+    
+                if (0 != foodIndex) {
+                    foodMix = {result: foodFinalMove, foodPrevious: foodIndex - 20, foodNext: foodIndex + 20};
+                } else {
+                    foodMix = {result: foodFinalMove, foodNext: foodIndex + 20};
+                }
+            } else {
+                
+    
+    
+    
+    
+    
+                
+                foodFinalMove = foodFinalByIndex;
+                if (0 != foodIndex) {
+                    foodMix = {result: foodFinalMove, foodPrevious: foodIndex - 20};
+                } else {
+                    foodMix = {result: foodFinalMove};
+                }
+            }
+        } else {
+            
+            foodMix = {result: []};
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        response.send([foodMix]);
     });
 });
 
