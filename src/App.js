@@ -13,6 +13,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import { useState } from "react";
 import RecipeCRUD from "./components/RecipeCRUD";
 import Profile from "./components/Profile";
+import RecipeInformationAPI from "./components/RecipeInformationAPI";
+import RecipeInformationDB from "./components/RecipeInformationDB";
 import Copyrights from "./components/Copyrights";
 import Privacy from "./components/Privacy";
 import TermsOfService from "./components/Tos";
@@ -83,6 +85,14 @@ function App() {
                                 }}
                             />
                         }
+                    />
+                    <Route
+                        path="/Recipe-Edamam"
+                        element={<RecipeInformationAPI />}
+                    />
+                    <Route
+                        path="/Recipe-Restcipe"
+                        element={<RecipeInformationDB />}
                     />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />

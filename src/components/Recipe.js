@@ -1,12 +1,15 @@
 import React from "react";
 import test from "../img/bg.jpg";
 
-const Recipe = ({ recipe, foodId }) => {
+const Recipe = ({ recipe, foodId, url }) => {
     const update = () => {
-        sessionStorage.setItem("Existed", foodId)
+        sessionStorage.setItem("Existed", foodId);
     };
+
+    console.log("findInCom", url);
+
     return (
-        <a href="/" className="recipe-href" onClick={update}>
+        <a href={"/" + url + "/#"} className="recipe-href" onClick={update}>
             <div className="recipe-card">
                 <div className="recipe-img">
                     <img src={test}></img>

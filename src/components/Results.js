@@ -10,6 +10,12 @@ const Results = () => {
         sessionStorage.getItem("findByCourse")
     );
 
+    const [findInCommunity, setFindByCommunity] = useState(
+        sessionStorage.getItem("findInCommunity")
+            ? "Recipe-Restcipe"
+            : "Recipe-Edamam"
+    );
+
     const findCourses = () => {
         sessionStorage.getItem("findByCourse") === "true"
             ? setFindByCourse("true")
@@ -38,6 +44,7 @@ const Results = () => {
                                             <Course
                                                 key={index}
                                                 recipes={course.recipes}
+                                                url={findInCommunity}
                                             />
                                         ))}
                                     </div>
@@ -47,10 +54,19 @@ const Results = () => {
                                             <Recipe
                                                 key={recipe.id}
                                                 recipe={recipe}
+                                                url={findInCommunity}
                                             />
                                         ))}
                                     </div>
                                 )}
+                                <div className="results-buttons">
+                                    <button className="prev-page">
+                                        &#8606;
+                                    </button>
+                                    <button className="next-page">
+                                        &#8608;
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

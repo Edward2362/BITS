@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import Recipe from "./Recipe";
 
-const Course = ({ recipes }) => {
+const Course = ({ recipes, url }) => {
     const [current, setCurrent] = useState(0);
     const [next, setNext] = useState(1);
     const [prev, setPrev] = useState(recipes.length - 1);
@@ -39,7 +39,7 @@ const Course = ({ recipes }) => {
                         })}
                         key={index}
                     >
-                        <Recipe key={index} recipe={recipe} />
+                        <Recipe key={index} recipe={recipe} url={url} />
                     </div>
                 ))}
             </div>

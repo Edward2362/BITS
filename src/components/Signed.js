@@ -8,12 +8,12 @@ const Signed = (prop) => {
     return (
         <ul className="flex-center">
             <li>
+                <a href="/Profile">{prop.userName}</a>
+            </li>
+            <li>
                 <a href="/Signin" onClick={load}>
                     Sign out
                 </a>
-            </li>
-            <li>
-                <a href="/Profile">{prop.userName}</a>
             </li>
         </ul>
     );

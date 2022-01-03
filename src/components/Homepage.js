@@ -26,7 +26,7 @@ const HomepageBody = () => {
         var result = "";
 
         if (typeof counter == "string") {
-            var arr = counter.split(" ");
+            var arr = counter.split(".");
             for (let i = 0; i < arr.length; i++) {
                 result += arr[i];
             }
@@ -37,7 +37,7 @@ const HomepageBody = () => {
             for (let i = 0; i < arr.length; i++) {
                 if (arr.length >= 4) {
                     if (count % 3 == 0) {
-                        result += " ";
+                        result += ".";
                     }
                 }
                 count--;
@@ -60,7 +60,7 @@ const HomepageBody = () => {
 
                 if (count < data) {
                     counter.innerText = count_converter(count + inc);
-                    setTimeout(updateCount, 12);
+                    setTimeout(updateCount, 9);
                 } else {
                     counter.innerText = count_converter(data);
                 }

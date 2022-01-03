@@ -11,6 +11,7 @@ const Profile = (prop) => {
     var endPoint = "http://localhost:9000/customerFood/";
 
     const [createdRecipeList, setCreatedRecipeList] = useState([]);
+
     if (null !== sessionStorage.getItem("userID")) {
     } else {
         navigate("/Signin");
@@ -71,7 +72,7 @@ const Profile = (prop) => {
                                                             <BiEdit />
                                                         </a>
                                                     </div>
-                                                    <Recipe />
+                                                    <Recipe url="Recipe-Restcipe" />
                                                 </div>
                                             ))}
                                         </div>
