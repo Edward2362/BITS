@@ -9,6 +9,7 @@ import { choose } from "../functionsJS/checkbox";
 const Header = () => {
     const [background, setBackground] = useState("grid-transparent container");
     const [findInCommunity, setFindInCommunity] = useState(false);
+    const [value, setValue] = useState("");
 
     if (sessionStorage.getItem("findInCommunity")) {
         if (findInCommunity === false) {
@@ -30,6 +31,11 @@ const Header = () => {
         }
     };
 
+    const load = () => {
+        window.sessionStorage.setItem("place", value);
+        window.sessionStorage.removeItem("foodIndex");
+    };
+
     // sessionStorage.getItem("findInCommunity") ?
 
     document.addEventListener("scroll", () => {
@@ -48,9 +54,16 @@ const Header = () => {
                     <FiSearch />
                 </div>
                 <div className="input-holder">
-                    <form method="get">
+                    <form method="get" action="/Test" onSubmit={load}>
                         <div>
-                            <input type="text" placeholder="Search" />
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                value={value}
+                                onChange={(e) => {
+                                    setValue(e.target.value);
+                                }}
+                            />
                         </div>
                         <div className="vl"></div>
                         <label className="checkbox-label">

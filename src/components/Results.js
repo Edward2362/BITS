@@ -9,6 +9,20 @@ const Results = () => {
     const [findByCourse, setFindByCourse] = useState(
         sessionStorage.getItem("findByCourse")
     );
+    const [food, setFood] = useState([]);
+    const [place, setPlace] = useState(false);
+    const [foodPrevious, setFoodPrevious] = useState({
+        previousIncluded: false,
+        previousIndex: "0",
+    });
+    const [foodNext, setFoodNext] = useState({
+        nextIncluded: false,
+        nextIndex: "0",
+    });
+    const [foodIndex, setFoodIndex] = useState({
+        indexIncluded: false,
+        indexStart: "0",
+    });
 
     const [findInCommunity, setFindByCommunity] = useState(
         sessionStorage.getItem("findInCommunity")
@@ -21,6 +35,43 @@ const Results = () => {
             ? setFindByCourse("true")
             : setFindByCourse("");
     };
+
+    var previousAvoid = <div></div>;
+    var nextAvoid = <div></div>;
+
+    if (!foodPrevious.previousIncluded) {
+    } else {
+        previousAvoid = (
+            <button
+                className="prev-page"
+                onClick={() => {
+                    setFoodIndex({
+                        indexIncluded: true,
+                        indexStart: foodPrevious.previousIndex,
+                    });
+                }}
+            >
+                &#8606;
+            </button>
+        );
+    }
+
+    if (!foodNext.nextIncluded) {
+    } else {
+        nextAvoid = (
+            <button
+                className="next-page"
+                onClick={() => {
+                    setFoodIndex({
+                        indexIncluded: true,
+                        indexStart: foodNext.nextIndex,
+                    });
+                }}
+            >
+                &#8608;
+            </button>
+        );
+    }
 
     return (
         <>
@@ -35,39 +86,54 @@ const Results = () => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <Filter onChange={findCourses} />
+                            <Filter
+                                onChange={findCourses}
+                                foodIn={(foodArray, previous, next) => {
+                                    setFood(foodArray);
+                                    setPlace(true);
+                                    setFoodPrevious(previous);
+                                    setFoodNext(next);
+                                }}
+                                foodIndexPlace={(foodPlaceIndex) => {
+                                    setFoodIndex(foodPlaceIndex);
+                                }}
+                                placeValue={place}
+                                placeFoodIndex={foodIndex}
+                            />
                             <hr></hr>
-                            <div className="results-section">
-                                {findByCourse === "true" ? (
-                                    <div className="grid-50">
-                                        {courses.map((course, index) => (
-                                            <Course
-                                                key={index}
-                                                recipes={course.recipes}
-                                                url={findInCommunity}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="grid-25">
-                                        {recipes.map((recipe) => (
-                                            <Recipe
-                                                key={recipe.id}
-                                                recipe={recipe}
-                                                url={findInCommunity}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                                <div className="results-buttons">
-                                    <button className="prev-page">
-                                        &#8606;
-                                    </button>
-                                    <button className="next-page">
-                                        &#8608;
-                                    </button>
+                            {food.length === 0 ? (
+                                <div className="results-section">
+                                    <p>No Results</p>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="results-section">
+                                    {findByCourse === "true" ? (
+                                        <div className="grid-50">
+                                            {courses.map((course, index) => (
+                                                <Course
+                                                    key={index}
+                                                    recipes={course.recipes}
+                                                    url={findInCommunity}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="grid-25">
+                                            {food.map((placeFood) => (
+                                                <Recipe
+                                                    key={placeFood.foodId}
+                                                    placeFood={placeFood}
+                                                    url={findInCommunity}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div className="results-buttons">
+                                        {previousAvoid}
+                                        {nextAvoid}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

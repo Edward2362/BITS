@@ -1151,28 +1151,6 @@ header .border:hover {
     margin-bottom: 10px;
 }
 
-.new-res-body input {
-    margin-left: 2%;
-    border: none;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    padding-left: 10px;
-    background-color: #fff3b0;
-    transition: background-color 0.25s;
-}
-
-.new-res-body input:focus {
-    margin-left: 2%;
-    border: none;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    padding-left: 10px;
-    background-color: #fff3b0;
-    color: white;
-}
-
 #Calories {
     width: 75px;
 }
@@ -1234,7 +1212,7 @@ header .border:hover {
     border-radius: 10px;
     padding-left: 10px;
     background-color: #fff3b0;
-    color: white;
+    color: #9e2a2b;
 }
 
 .btn-box {
@@ -1429,6 +1407,7 @@ header .border:hover {
     height: 220px;
     position: relative;
     transition: transform 0.2s ease-in-out;
+    margin: 10%;
 }
 
 .created-recipe .recipe-href {
