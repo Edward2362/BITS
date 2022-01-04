@@ -23,6 +23,10 @@ export const RecipeForm = (prop) => {
 
     const [existedRecipe, setExistedRecipe] = useState(false);
 
+
+
+    const [placeMix, setPlaceMix] = useState(false);
+
     if (null !== window.sessionStorage.getItem("userID")) {
     } else {
         navigate("/signin");
@@ -86,6 +90,221 @@ export const RecipeForm = (prop) => {
     };
 
     const addOrUpdatedRecipe = () => {
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var dietList = [];
+
+
+
+
+        for (let i = 0; i < diets.length; ++i) {
+            dietList.push({dietName: diets[i]});
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (null === window.sessionStorage.getItem("Existed")) {
             fetch(endPoint, {
                 method: "POST",
@@ -99,6 +318,7 @@ export const RecipeForm = (prop) => {
                     foodName: name,
                     foodSteps: stepList,
                     foodIngredients: ingredientList,
+                    foodDiets: dietList,
                     customerId: window.sessionStorage.getItem("userID"),
                 }),
             })
@@ -124,6 +344,7 @@ export const RecipeForm = (prop) => {
                     foodName: name,
                     foodSteps: stepList,
                     foodIngredients: ingredientList,
+                    foodDiets: dietList,
                     customerId: customerId,
                 }),
             })
@@ -144,6 +365,86 @@ export const RecipeForm = (prop) => {
             fetch(endPoint4 + "/" + sessionStorage.getItem("Existed"))
                 .then((response) => response.json())
                 .then((data) => {
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    var placeDiets = [];
+
+                    
+                    for (let i = 0; i < data[0].result.foodDiets.length; ++i) {
+                        placeDiets.push(data[0].result.foodDiets[i].dietName);
+                    }
+
+
                     setFoodId(data[0].result.foodId);
 
                     setCalories(data[0].result.foodCalories);
@@ -152,22 +453,25 @@ export const RecipeForm = (prop) => {
                     setStepList(data[0].result.foodSteps);
 
                     setIngredientList(data[0].result.foodIngredients);
+                    setDiets(placeDiets);
                     setCustomerId(data[0].result.customerId);
+                    sessionStorage.getItem("Existed") === null
+            ? setExistedRecipe(false)
+            : setExistedRecipe(true);
+                    setPlaceMix(true);
                 });
         }
     };
 
-    const checkExisted = () => {
-        sessionStorage.getItem("Existed") === null
-            ? setExistedRecipe(false)
-            : setExistedRecipe(true);
-    };
+    
 
     const handleEffect = () => {
-        handleCheckedDiet();
-        choose();
-        checkExisted();
-        load();
+        if (placeMix) {
+            handleCheckedDiet();
+            choose();
+        } else {
+            load();
+        }
     };
 
     const deleteRecipe = () => {
@@ -190,7 +494,7 @@ export const RecipeForm = (prop) => {
                 }
             });
     };
-    useEffect(handleEffect, []);
+    useEffect(handleEffect);
 
     return (
         <div className="new-res">

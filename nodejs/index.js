@@ -15,6 +15,131 @@ require("dotenv").config();
 // import all the things we need
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //create a connection to database
 mongoose.connect(
     "mongodb+srv://testuser001:123asd@cluster0.23h33.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -44,6 +169,7 @@ var FoodSchema = new mongoose.Schema({
     foodCalories: String,
     foodIngredients: [{ ingredientName: String, ingredientAmount: String }],
     foodSteps: [{ stepDescription: String }],
+    foodDiets: [{dietName: String}],
     customerId: String,
 });
 
@@ -516,7 +642,7 @@ app.get("/customerFood/:customerId", tokenVerified, function (req, response) {
 });
 
 app.get(
-    "/placeFood/:avoid/:caloriesFrom/:caloriesTo/:ingredientUpTo/:foodIndex",
+    "/placeFood/:avoid/:caloriesFrom/:caloriesTo/:ingredientUpTo/:diets/:foodIndex",
     function (req, response) {
         Food.find(
             {},
@@ -608,6 +734,7 @@ app.get(
                 var caloriesFrom = parseFloat(req.params.caloriesFrom);
                 var caloriesTo = parseFloat(req.params.caloriesTo);
                 var ingredientUpTo = parseInt(req.params.ingredientUpTo);
+                var diets = req.params.diets;
 
                 var foodIndex = parseInt(req.params.foodIndex);
                 for (let i = 0; i < foodArray.length; ++i) {
@@ -645,7 +772,68 @@ app.get(
                         }
                     }
 
-                    if (3 != count) {
+                    if ("place" == diets) {
+
+                    } else {
+                        var dietCount = 0;
+                        var dietArray = [];
+                        dietArray = diets.split("-");
+                        for (let index = 0; index < dietArray.length; ++index) {
+                            
+                            
+                            for (let placeIndex = 0; placeIndex < foodArray[i].foodDiets.length; ++placeIndex) {
+                                if (dietArray[index] != foodArray[i].foodDiets[placeIndex]) {
+
+                                } else {
+                                    dietCount = dietCount + 1;
+                                }
+                            }
+                        }
+
+                        
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        if (dietCount != dietArray.length) {
+
+                        } else {
+                            count = count + 1;
+                        }
+                    }
+
+                    if (4 != count) {
                     } else {
                         foodFinal.push(foodArray[i]);
                     }
@@ -714,6 +902,7 @@ app.post("/food", tokenVerified, function (req, response) {
             foodName: req.body.foodName,
             foodSteps: req.body.foodSteps,
             foodIngredients: req.body.foodIngredients,
+            foodDiets: req.body.foodDiets,
             customerId: req.body.customerId,
         };
 
