@@ -5,6 +5,7 @@ import Step from "./Step";
 import edamam from "../img/edamam-logo.png";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import Comment from "./Comment";
 
 const RecipeInformationAPI = () => {
     // test
@@ -79,7 +80,8 @@ const RecipeInformationAPI = () => {
             {
                 userName: "Hao",
                 date: "1/1/2021",
-                information: "Look good!",
+                information:
+                    "Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good!",
             },
             {
                 userName: "Quang",
@@ -179,7 +181,7 @@ const RecipeInformationAPI = () => {
                                                         key={index}
                                                         step={step}
                                                         position={index + 1}
-                                                    ></Step>
+                                                    />
                                                 )
                                             )}
                                         </div>
@@ -201,6 +203,16 @@ const RecipeInformationAPI = () => {
                                             {recipeData.comments.length +
                                                 " Comments "}
                                         </h2>
+                                        <div className="recipe-comments-content">
+                                            {recipeData.comments.map(
+                                                (comment, index) => (
+                                                    <Comment
+                                                        key={index}
+                                                        comment={comment}
+                                                    />
+                                                )
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
