@@ -10,6 +10,9 @@ const Results = () => {
         sessionStorage.getItem("findByCourse")
     );
     const [recipes, setRecipes] = useState([]);
+
+    const [nextEndPoint, setNextEndPoint] = useState([]);
+    
     const [place, setPlace] = useState(false);
     const [recipesPrevious, setRecipesPrevious] = useState({
         previousIncluded: false,
@@ -24,6 +27,13 @@ const Results = () => {
         indexStart: "0",
     });
 
+    const [recipesAPINextEndPoint, setRecipesAPINextEndPoint] = useState({recipesAPINextEndPointIncluded: false, recipesAPINextEndPointStart: ""});
+
+    
+    
+
+    const [previousNext, setPreviousNext] = useState("next");
+
     const [findInCommunity, setFindByCommunity] = useState(
         sessionStorage.getItem("findInCommunity")
             ? "Recipe-Restcipe"
@@ -36,42 +46,99 @@ const Results = () => {
             : setFindByCourse("");
     };
 
+    const handleIncomingEndPoint = (endPoint) => {
+        setNextEndPoint([...nextEndPoint, endPoint]);
+    }
+
+    const handleIncomingFirstEndPoint = (firstEndPoint, secondEndPoint) => {
+        setNextEndPoint([...nextEndPoint, firstEndPoint, secondEndPoint]);
+    }
+
+    const handleDeletingEndPoint = (deleteEndPoint) => {
+        setNextEndPoint(nextEndPoint.filter((endPoint, index) => index < nextEndPoint.length - 1  ));
+    }
+
     var previousAvoid = <div></div>;
     var nextAvoid = <div></div>;
 
-    if (!recipesPrevious.previousIncluded) {
-    } else {
-        previousAvoid = (
-            <button
-                className="prev-page"
-                onClick={() => {
-                    setRecipesIndex({
-                        indexIncluded: true,
-                        indexStart: recipesPrevious.previousIndex,
-                    });
-                }}
-            >
-                &#8606;
-            </button>
-        );
-    }
 
-    if (!recipesNext.nextIncluded) {
-    } else {
+
+    if (null === sessionStorage.getItem("findInCommunity")) {
+        if (2 >= nextEndPoint.length) {
+        } else {
+            previousAvoid = (
+                <button
+                    className="prev-page"
+                    onClick={() => {
+                        setPreviousNext("previous");
+                        
+                        setRecipesAPINextEndPoint({recipesAPINextEndPointIncluded: true, recipesAPINextEndPointStart: nextEndPoint[nextEndPoint.length - 3]});
+                        
+                    }}
+                >
+                    &#8606;
+                </button>
+            );
+        }
+    
         nextAvoid = (
             <button
                 className="next-page"
                 onClick={() => {
-                    setRecipesIndex({
-                        indexIncluded: true,
-                        indexStart: recipesNext.nextIndex,
-                    });
+                    setPreviousNext("next");
+                    setRecipesAPINextEndPoint({recipesAPINextEndPointIncluded: true, recipesAPINextEndPointStart: nextEndPoint[nextEndPoint.length - 1]});
                 }}
             >
                 &#8608;
             </button>
         );
+
+
+
+
+
+
+
+
+    } else {
+        if (!recipesPrevious.previousIncluded) {
+        } else {
+            previousAvoid = (
+                <button
+                    className="prev-page"
+                    onClick={() => {
+                        setRecipesIndex({
+                            indexIncluded: true,
+                            indexStart: recipesPrevious.previousIndex,
+                        });
+                    }}
+                >
+                    &#8606;
+                </button>
+            );
+        }
+    
+        if (!recipesNext.nextIncluded) {
+        } else {
+            nextAvoid = (
+                <button
+                    className="next-page"
+                    onClick={() => {
+                        setRecipesIndex({
+                            indexIncluded: true,
+                            indexStart: recipesNext.nextIndex,
+                        });
+
+                    }}
+                >
+                    &#8608;
+                </button>
+            );
+        }
     }
+    console.log(nextEndPoint);
+    
+    
 
     return (
         <>
@@ -94,11 +161,24 @@ const Results = () => {
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
                                 }}
+                                
+                                recipesAPINextEndPointPlace = {(recipesAvoidPlaceIndex) => {setRecipesAPINextEndPoint(recipesAvoidPlaceIndex)}}
                                 recipesIndexPlace={(recipesPlaceIndex) => {
                                     setRecipesIndex(recipesPlaceIndex);
                                 }}
+                                
+                                previousNext = {previousNext}
                                 placeValue={place}
+                                recipesAPINextEndPoint = {recipesAPINextEndPoint}
                                 placeRecipesIndex={recipesIndex}
+                                handleIncomingEndPoint = {handleIncomingEndPoint}
+                                handleIncomingFirstEndPoint = {handleIncomingFirstEndPoint}
+                                handleDeletingEndPoint = {handleDeletingEndPoint}
+                                
+                                
+                                
+
+
                             />
                             <hr></hr>
                             {recipes.length === 0 ? (
@@ -124,6 +204,7 @@ const Results = () => {
                                                     key={recipe.foodId}
                                                     recipe={recipe}
                                                     url={findInCommunity}
+                                                    
                                                 />
                                             ))}
                                         </div>
