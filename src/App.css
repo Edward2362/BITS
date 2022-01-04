@@ -1616,6 +1616,7 @@ header .border:hover {
     border-radius: 10px;
     color: #9e2a2b;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    user-select: none;
 }
 
 .recipe-detail-favourite-button svg {
@@ -1703,26 +1704,49 @@ header .border:hover {
 
 .recipe-detail-comments {
     padding: 0 15%;
+    width: 70%;
 }
 
 .recipe-detail-comments h2 {
     color: #e09f3e;
 }
 
+.user-comment {
+    position: relative;
+    width: 100%;
+}
+
 .user-comment textarea {
     outline: none;
     resize: none;
-    width: 90%;
+    width: 96%;
     height: 70px;
-    background-color: #e09f3e;
+    background-color: #fff3b0;
     padding: 2%;
+    border: 0;
+    border-radius: 10px;
 }
 
-.user-comment {
-    position: relative;
+.user-comment button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #e09f3e;
+    color: white;
+    width: 30%;
+    height: 40px;
     background-color: #e09f3e;
-    width: 100%;
-    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    margin-bottom: 3%;
+}
+
+.user-comment button:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
 }
 
 /* RecipeInformation end */

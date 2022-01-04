@@ -115,7 +115,7 @@ export const Filter = ({
                             if (diets.length - 1 == i) {
                                 dietsMix = dietsMix + diets[i];
                             } else {
-                                dietsMix = dietsMix + diets[i] + "-";
+                                dietsMix = dietsMix + diets[i] + ",";
                             }
                         }
                     } else {

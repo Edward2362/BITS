@@ -652,7 +652,7 @@ app.get(
                     } else {
                         var dietCount = 0;
                         var dietArray = [];
-                        dietArray = diets.split("-");
+                        dietArray = diets.split(",");
                         for (let index = 0; index < dietArray.length; ++index) {
                             for (
                                 let placeIndex = 0;
@@ -661,7 +661,7 @@ app.get(
                             ) {
                                 if (
                                     dietArray[index] !=
-                                    foodArray[i].foodDiets[placeIndex]
+                                    foodArray[i].foodDiets[placeIndex].dietName
                                 ) {
                                 } else {
                                     dietCount = dietCount + 1;

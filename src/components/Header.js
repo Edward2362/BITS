@@ -10,14 +10,24 @@ const Header = () => {
     const [background, setBackground] = useState("grid-transparent container");
     const [findInCommunity, setFindInCommunity] = useState(false);
     const [value, setValue] = useState("");
+    const [previous, setPrevious] = useState(sessionStorage.getItem("place"));
 
-    if (sessionStorage.getItem("findInCommunity")) {
-        if (findInCommunity === false) {
-            setFindInCommunity(true);
+    const checkSessionStorage = () => {
+        sessionStorage.getItem("place")
+            ? setPrevious("Search: " + sessionStorage.getItem("place"))
+            : setPrevious("Search");
+
+        if (sessionStorage.getItem("findInCommunity")) {
+            if (findInCommunity === false) {
+                setFindInCommunity(true);
+            }
         }
-    }
+    };
 
-    useEffect(choose);
+    useEffect(() => {
+        checkSessionStorage();
+        choose();
+    });
 
     const handleFindInCom = (e) => {
         if (sessionStorage.getItem("findInCommunity")) {
@@ -35,8 +45,6 @@ const Header = () => {
         window.sessionStorage.setItem("place", value);
         window.sessionStorage.removeItem("recipesIndex");
     };
-
-    // sessionStorage.getItem("findInCommunity") ?
 
     document.addEventListener("scroll", () => {
         const show = window.scrollY;
@@ -58,7 +66,7 @@ const Header = () => {
                         <div>
                             <input
                                 type="text"
-                                placeholder="Search"
+                                placeholder={previous}
                                 value={value}
                                 onChange={(e) => {
                                     setValue(e.target.value);
