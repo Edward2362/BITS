@@ -4,18 +4,36 @@ import { choose } from "../functionsJS/checkbox";
 // import { set } from "mongoose";
 
 export const Filter = ({
+    handleIncomingEndPoint,
+    handleIncomingFirstEndPoint,
+    handleDeletingEndPoint,
     onChange,
     recipesIn,
+    recipesAPINextEndPointPlace,
     recipesIndexPlace,
+    previousNext,
     placeValue,
+    recipesAPINextEndPoint,
     placeRecipesIndex,
 }) => {
-    var endPoint = "http://localhost:9000/placeFood";
+    var endPoint =
+        "https://api.edamam.com/api/recipes/v2?type=public&q=" +
+        window.sessionStorage.getItem("place") +
+        "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
+    var endPoint2 = "http://localhost:9000/placeFood";
 
     const [findByCourse, setFindByCourse] = useState(false);
     const [calories, setCalories] = useState({ from: "", to: "" });
     const [ingredientUpTo, setIngredientUpTo] = useState("");
     const [diets, setDiets] = useState([]);
+    const [health, setHealth] = useState([
+        "vegetarian",
+        "vegan",
+        "paleo",
+        "low-sugar",
+        "alcohol-free",
+        "immunity",
+    ]);
 
     if (sessionStorage.getItem("findByCourse")) {
         if (findByCourse === false) {
@@ -58,6 +76,120 @@ export const Filter = ({
 
     const load = (recipesIndex) => {
         if (null === window.sessionStorage.getItem("findInCommunity")) {
+            var caloriesFromMix = "";
+
+            var caloriesToMix = "";
+            var caloriesFromToMix = "";
+            var ingredientUpToMix = "";
+
+            var dietsMix = "";
+            var healthMix = "";
+
+            if (null !== window.sessionStorage.getItem("caloriesFrom")) {
+                caloriesFromMix = window.sessionStorage.getItem("caloriesFrom");
+            } else {
+                caloriesFromMix = calories.from;
+            }
+
+            if (null !== window.sessionStorage.getItem("caloriesTo")) {
+                caloriesToMix = window.sessionStorage.getItem("caloriesTo");
+            } else {
+                caloriesToMix = calories.to;
+            }
+
+            if (null !== window.sessionStorage.getItem("ingredientUpTo")) {
+                ingredientUpToMix =
+                    window.sessionStorage.getItem("ingredientUpTo");
+            } else {
+                ingredientUpToMix = ingredientUpTo;
+            }
+
+            if (caloriesFromMix != "" && caloriesToMix == "") {
+                caloriesFromToMix = "&calories=" + caloriesFromMix + "%2B";
+            } else if (caloriesFromMix != "" && caloriesToMix != "") {
+                caloriesFromToMix =
+                    "&calories=" + caloriesFromMix + "-" + caloriesToMix;
+            } else if (caloriesFromMix == "" && caloriesToMix != "") {
+                caloriesFromToMix = "&calories=" + caloriesToMix;
+            } else {
+                caloriesFromToMix = "";
+            }
+
+            ingredientUpToMix === ""
+                ? (ingredientUpToMix = "")
+                : (ingredientUpToMix = "&ingr=" + ingredientUpToMix);
+            for (let i = 0; i < diets.length; ++i) {
+                if (health.includes(diets[i].toLowerCase())) {
+                    healthMix = healthMix + "&health=" + diets[i].toLowerCase();
+                } else {
+                    dietsMix = dietsMix + "&diet=" + diets[i].toLowerCase();
+                }
+            }
+
+            if (!recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
+                endPoint =
+                    endPoint +
+                    caloriesFromToMix +
+                    ingredientUpToMix +
+                    healthMix +
+                    dietsMix;
+            } else {
+                endPoint = recipesIndex;
+            }
+
+            fetch(endPoint)
+                .then((response) => response.json())
+                .then((fetchResult) => {
+                    let fetched = fetchResult.hits;
+                    console.log(fetched);
+
+                    if (0 == fetched.length) {
+                        recipesPrevious = {
+                            previousIncluded: false,
+                            previousIndex: "0",
+                        };
+                        recipesNext = { nextIncluded: false, nextIndex: "0" };
+                        recipesIn([], recipesPrevious, recipesNext);
+
+                        var recipesAPINextEndPointMix = {
+                            recipesAPINextEndPointIncluded: false,
+                            recipesAPINextEndPointStart: recipesIndex,
+                        };
+
+                        recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
+                    } else {
+                        recipesPrevious = {
+                            previousIncluded: false,
+                            previousIndex: "0",
+                        };
+                        recipesNext = { nextIncluded: false, nextIndex: "0" };
+                        recipesIn(fetched, recipesPrevious, recipesNext);
+
+                        if (
+                            !recipesAPINextEndPoint.recipesAPINextEndPointIncluded
+                        ) {
+                            handleIncomingFirstEndPoint(
+                                endPoint,
+                                fetchResult._links.next.href
+                            );
+                        } else {
+                            if ("next" != previousNext) {
+                                handleDeletingEndPoint();
+                            } else {
+                                handleIncomingEndPoint(
+                                    fetchResult._links.next.href
+                                );
+                            }
+                        }
+
+                        var recipesAPINextEndPointMix = {
+                            recipesAPINextEndPointIncluded: false,
+                            recipesAPINextEndPointStart: recipesIndex,
+                        };
+
+                        recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
+                    }
+                });
         } else {
             var recipesPrevious = {};
             var recipesNext = {};
@@ -133,7 +265,7 @@ export const Filter = ({
                         : (ingredientUpToMix = ingredientUpToMix);
 
                     fetch(
-                        endPoint +
+                        endPoint2 +
                             "/" +
                             window.sessionStorage.getItem("place") +
                             "/" +
@@ -214,6 +346,11 @@ export const Filter = ({
             }
         }
     };
+
+    if (!recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
+    } else {
+        load(recipesAPINextEndPoint.recipesAPINextEndPointStart);
+    }
 
     if (!placeRecipesIndex.indexIncluded) {
     } else {

@@ -44,6 +44,9 @@ const Header = () => {
     const load = () => {
         window.sessionStorage.setItem("place", value);
         window.sessionStorage.removeItem("recipesIndex");
+        window.sessionStorage.removeItem("caloriesFrom");
+        window.sessionStorage.removeItem("caloriesTo");
+        window.sessionStorage.removeItem("ingredientUpTo");
     };
 
     document.addEventListener("scroll", () => {

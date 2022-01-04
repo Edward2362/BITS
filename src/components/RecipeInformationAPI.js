@@ -6,6 +6,7 @@ import edamam from "../img/edamam-logo.png";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const RecipeInformationAPI = () => {
     // test
@@ -41,6 +42,8 @@ const RecipeInformationAPI = () => {
     // useEffect(load3, []);
 
     const [favourite, setFavourite] = useState(false);
+    let { id } = useParams();
+    console.log(id);
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
