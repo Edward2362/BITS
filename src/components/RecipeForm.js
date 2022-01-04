@@ -23,8 +23,6 @@ export const RecipeForm = (prop) => {
 
     const [existedRecipe, setExistedRecipe] = useState(false);
 
-
-
     const [placeMix, setPlaceMix] = useState(false);
 
     if (null !== window.sessionStorage.getItem("userID")) {
@@ -90,220 +88,11 @@ export const RecipeForm = (prop) => {
     };
 
     const addOrUpdatedRecipe = () => {
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         var dietList = [];
 
-
-
-
         for (let i = 0; i < diets.length; ++i) {
-            dietList.push({dietName: diets[i]});
+            dietList.push({ dietName: diets[i] });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         if (null === window.sessionStorage.getItem("Existed")) {
             fetch(endPoint, {
@@ -365,85 +154,11 @@ export const RecipeForm = (prop) => {
             fetch(endPoint4 + "/" + sessionStorage.getItem("Existed"))
                 .then((response) => response.json())
                 .then((data) => {
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     var placeDiets = [];
 
-                    
                     for (let i = 0; i < data[0].result.foodDiets.length; ++i) {
                         placeDiets.push(data[0].result.foodDiets[i].dietName);
                     }
-
 
                     setFoodId(data[0].result.foodId);
 
@@ -456,14 +171,12 @@ export const RecipeForm = (prop) => {
                     setDiets(placeDiets);
                     setCustomerId(data[0].result.customerId);
                     sessionStorage.getItem("Existed") === null
-            ? setExistedRecipe(false)
-            : setExistedRecipe(true);
+                        ? setExistedRecipe(false)
+                        : setExistedRecipe(true);
                     setPlaceMix(true);
                 });
         }
     };
-
-    
 
     const handleEffect = () => {
         if (placeMix) {

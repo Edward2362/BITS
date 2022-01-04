@@ -15,131 +15,6 @@ require("dotenv").config();
 // import all the things we need
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //create a connection to database
 mongoose.connect(
     "mongodb+srv://testuser001:123asd@cluster0.23h33.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -169,7 +44,7 @@ var FoodSchema = new mongoose.Schema({
     foodCalories: String,
     foodIngredients: [{ ingredientName: String, ingredientAmount: String }],
     foodSteps: [{ stepDescription: String }],
-    foodDiets: [{dietName: String}],
+    foodDiets: [{ dietName: String }],
     customerId: String,
 });
 
@@ -773,61 +648,28 @@ app.get(
                     }
 
                     if ("place" == diets) {
-
+                        count = count + 1;
                     } else {
                         var dietCount = 0;
                         var dietArray = [];
                         dietArray = diets.split("-");
                         for (let index = 0; index < dietArray.length; ++index) {
-                            
-                            
-                            for (let placeIndex = 0; placeIndex < foodArray[i].foodDiets.length; ++placeIndex) {
-                                if (dietArray[index] != foodArray[i].foodDiets[placeIndex]) {
-
+                            for (
+                                let placeIndex = 0;
+                                placeIndex < foodArray[i].foodDiets.length;
+                                ++placeIndex
+                            ) {
+                                if (
+                                    dietArray[index] !=
+                                    foodArray[i].foodDiets[placeIndex]
+                                ) {
                                 } else {
                                     dietCount = dietCount + 1;
                                 }
                             }
                         }
 
-                        
-
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         if (dietCount != dietArray.length) {
-
                         } else {
                             count = count + 1;
                         }
