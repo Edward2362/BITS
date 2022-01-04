@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import test from "../img/bg.jpg";
 import Ingredient from "./Ingredient";
 import Step from "./Step";
-import Heart from "react-heart";
+import edamam from "../img/edamam-logo.png";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const RecipeInformationAPI = () => {
     // test
@@ -37,9 +39,26 @@ const RecipeInformationAPI = () => {
     // };
     // useEffect(load3, []);
 
-    const [active, setActive] = useState(false);
+    const [favourite, setFavourite] = useState(false);
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
+        diets: [
+            "Vegan",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+            "Vegetarian",
+        ],
         ingredients: [
             "1/2 cup olive oil",
             "5 cloves garlic, peeled",
@@ -63,9 +82,9 @@ const RecipeInformationAPI = () => {
                 information: "Look good!",
             },
             {
-                userName: "Hao",
-                date: "1/1/2021",
-                information: "Look good!",
+                userName: "Quang",
+                date: "2/1/2021",
+                information: "Look great!",
             },
         ],
     });
@@ -84,7 +103,22 @@ const RecipeInformationAPI = () => {
                     <div className="page-body">
                         <div className="white-bg">
                             <div className="recipe-detail-body">
-                                <h1>{recipeData.name}</h1>
+                                <div className="recipe-detail-section">
+                                    <h1>{recipeData.name}</h1>
+                                    <div className="diets">
+                                        {recipeData.diets.map((diet, index) => (
+                                            <p key={index}>{diet}</p>
+                                        ))}
+                                    </div>
+                                    <div className="creator">
+                                        <div className="creator-avatar">
+                                            <img src={edamam}></img>
+                                        </div>
+                                        <div className="creator-name">
+                                            <p>Edamam</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <hr></hr>
                                 <div className="recipe-detail-section">
                                     <div className="recipe-detail-content">
@@ -117,22 +151,18 @@ const RecipeInformationAPI = () => {
                                                         )}
                                                     </div>
                                                 </div>
-                                                <div className="recipe-detail-favourite-button">
-                                                    <div className="favorite-icon-area">
-                                                        {/* <div className="heart-icon">
-                                                            <Heart
-                                                                isActive={
-                                                                    active
-                                                                }
-                                                                onClick={() =>
-                                                                    setActive(
-                                                                        !active
-                                                                    )
-                                                                }
-                                                            />
-                                                        </div> */}
-                                                        <p> Love it!</p>
-                                                    </div>
+                                                <div
+                                                    className="recipe-detail-favourite-button"
+                                                    onClick={() =>
+                                                        setFavourite(!favourite)
+                                                    }
+                                                >
+                                                    {favourite ? (
+                                                        <FaHeart />
+                                                    ) : (
+                                                        <FaRegHeart />
+                                                    )}
+                                                    <p>Love it!</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,6 +186,23 @@ const RecipeInformationAPI = () => {
                                     </div>
                                 </div>
                                 <hr></hr>
+                                <div className="recipe-detail-section">
+                                    <div className="recipe-detail-comments">
+                                        <div className="user-comment">
+                                            {/* <div className="creator-avatar">
+                                                <img src={edamam}></img>
+                                            </div> */}
+                                            <textarea></textarea>
+                                            <button className="btn-cmt">
+                                                Post your comment
+                                            </button>
+                                        </div>
+                                        <h2>
+                                            {recipeData.comments.length +
+                                                " Comments "}
+                                        </h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

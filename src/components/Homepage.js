@@ -94,7 +94,7 @@ const HomepageBody = () => {
                         <div className="section-body">
                             <div className="grid-25">
                                 <div className="feature-body">
-                                    <h2>1.</h2>
+                                    <h2>#1</h2>
                                     <div className="feature-content">
                                         <p>
                                             Find various of recipes with
@@ -103,7 +103,7 @@ const HomepageBody = () => {
                                     </div>
                                 </div>
                                 <div className="feature-body">
-                                    <h2>2.</h2>
+                                    <h2>#2</h2>
                                     <div className="feature-content">
                                         <p>
                                             Provide diversity of choices for eat
@@ -113,7 +113,7 @@ const HomepageBody = () => {
                                 </div>
 
                                 <div className="feature-body">
-                                    <h2>3.</h2>
+                                    <h2>#3</h2>
                                     <div className="feature-content">
                                         <p>
                                             Help control the amount of calories
@@ -122,7 +122,7 @@ const HomepageBody = () => {
                                     </div>
                                 </div>
                                 <div className="feature-body">
-                                    <h2>4.</h2>
+                                    <h2>#4</h2>
                                     <div className="feature-content">
                                         <p>
                                             Create a community for sharing and

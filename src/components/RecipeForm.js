@@ -266,6 +266,9 @@ export const RecipeForm = (prop) => {
                             </div>
                         );
                     })}
+                </div>
+
+                <div className="new-res-body">
                     <div className="diet-choice">
                         <label>Diet</label>
                         <div className="grid-25">
@@ -274,7 +277,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="vegetarian"
-                                    value="vegetarian"
+                                    value="Vegetarian"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -283,7 +286,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="vegan"
-                                    value="vegan"
+                                    value="Vegan"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -292,7 +295,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="paleo"
-                                    value="paleo"
+                                    value="Paleo"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -301,7 +304,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="high-fiber"
-                                    value="high-fiber"
+                                    value="High-Fiber"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -311,7 +314,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="high-protein"
-                                    value="high-protein"
+                                    value="High-Protein"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -320,7 +323,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="low-carb"
-                                    value="low-carb"
+                                    value="Low-Carb"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -329,7 +332,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="low-fat"
-                                    value="low-fat"
+                                    value="Low-Fat"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -338,7 +341,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="low-sodium"
-                                    value="low-sodium"
+                                    value="Low-Sodium"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -348,7 +351,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="low-sugar"
-                                    value="low-sugar"
+                                    value="Low-Sugar"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -357,7 +360,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="alcohol-free"
-                                    value="alcohol-free"
+                                    value="Alcohol-Free"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -366,7 +369,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="balanced"
-                                    value="balanced"
+                                    value="Balanced"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
@@ -375,7 +378,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="immunity"
-                                    value="immunity"
+                                    value="Immunity"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>

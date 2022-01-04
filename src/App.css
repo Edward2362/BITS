@@ -1216,6 +1216,7 @@ header .border:hover {
 #bio-desc {
     resize: none;
     border: none;
+    outline: none;
     width: 30vw;
     height: 8vh;
     border-radius: 10px;
@@ -1497,6 +1498,45 @@ header .border:hover {
     padding-bottom: 1%;
 }
 
+.recipe-detail-section {
+    width: 100%;
+    margin: 2% 0;
+}
+
+.diets {
+    width: 100%;
+}
+
+.diets p {
+    display: inline-block;
+    padding: 0.5% 2%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: #e09f3e;
+}
+
+.creator {
+    display: flex;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.creator-avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 1%;
+}
+
+.creator-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .recipe-detail-content {
     display: flex;
     width: 100%;
@@ -1547,6 +1587,8 @@ header .border:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* Ingredient */
+
 .ingredient hr {
     width: 100%;
     height: 0.01rem;
@@ -1561,10 +1603,58 @@ header .border:hover {
     padding-right: 10px;
 }
 
+/* Ingredient end */
+
 .recipe-detail-favourite-button {
+    padding: 2.1%;
     display: flex;
-    height: 10%;
+    justify-content: center;
+    height: 4%;
+    width: 20%;
     align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #9e2a2b;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.recipe-detail-favourite-button svg {
+    height: 23px;
+    width: 23px;
+}
+
+.recipe-detail-favourite-button:hover svg {
+    animation: 0.5s heart-beat 0.3s ease-in-out;
+}
+
+.recipe-detail-favourite-button.checked {
+    color: #fff3b0;
+    background-color: #9e2a2b;
+}
+
+@keyframes heart-beat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.recipe-detail-favourite-button p {
+    padding-left: 7%;
+    font-size: 20px;
+    font-family: "Dancing Script", cursive;
+    font-weight: bold;
 }
 
 .recipe-detail-steps {
@@ -1580,6 +1670,59 @@ header .border:hover {
 .recipe-steps-content p {
     font-size: 14px;
     text-align: justify;
+}
+
+/* Step */
+
+.step-header {
+    display: flex;
+    align-items: center;
+}
+
+.step-header h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1%;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    border-radius: 50%;
+    font-family: "Dancing Script", cursive;
+    color: #9e2a2b;
+}
+
+.step-header hr {
+    width: 10%;
+    height: 3px;
+    margin: 0;
+    background-color: #9e2a2b;
+}
+
+/* Step end */
+
+.recipe-detail-comments {
+    padding: 0 15%;
+}
+
+.recipe-detail-comments h2 {
+    color: #e09f3e;
+}
+
+.user-comment textarea {
+    outline: none;
+    resize: none;
+    width: 90%;
+    height: 70px;
+    background-color: #e09f3e;
+    padding: 2%;
+}
+
+.user-comment {
+    position: relative;
+    background-color: #e09f3e;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* RecipeInformation end */
