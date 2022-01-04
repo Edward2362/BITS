@@ -4,19 +4,17 @@ import NavBar from "./NavBar";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { choose } from "../functionsJS/checkbox";
-
+import SearchAPI from "../functionsJS/searchAPI"
 
 const Header = () => {
     const [background, setBackground] = useState("grid-transparent container");
-
-    document.addEventListener("scroll", () => {
-        const show = window.scrollY;
-        if (show > 120) {
-            setBackground("grid-non-transparent container");
-        } else {
-            setBackground("grid-transparent container");
-        }
-    });
+    const [valueReturn,setValueReturn] = useState(sessionStorage.getItem("value"))
+    console.log(valueReturn)
+    const load = () =>{
+        window.sessionStorage.setItem("value", valueReturn);
+        window.sessionStorage.setItem("currentPage", 0);
+        SearchAPI(valueReturn)
+    }
 
     return (
         <header className={background}>
@@ -25,9 +23,9 @@ const Header = () => {
                     <FiSearch />
                 </div>
                 <div className="input-holder">
-                    <form onChange={choose} method="get">
+                    <form>
                         <div>
-                            <input type="text" placeholder="Search" />
+                            <input type="text" placeholder="Search" onChange={(e) => { setValueReturn(e.target.value) }} value={valueReturn} />
                         </div>
                         <div className="vl"></div>
                         <label className="checkbox-label">
@@ -37,6 +35,7 @@ const Header = () => {
                                 id="search-community"
                             ></input>
                         </label>
+                        <button className="btn btn-outline-primary" onClick={load()}>Submit</button>
                     </form>
                 </div>
             </div>

@@ -6,11 +6,11 @@ const Recipe = ({ recipe }) => {
         <a href="#" className="recipe-href">
             <div className="recipe-card">
                 <div className="recipe-img">
-                    <img src={test}></img>
+                    <img src={recipe.recipe.image}></img>
                 </div>
                 <div className="recipe-card-body">
                     <div className="recipe-information">
-                        <p>{recipe.name}</p>
+                        <p>{recipe.recipe.label}</p>
                     </div>
                 </div>
             </div>
