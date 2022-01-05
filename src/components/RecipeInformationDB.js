@@ -187,8 +187,8 @@ const RecipeInformationDB = (prop) => {
                                                             ) => (
                                                                 <Ingredient
                                                                     key={index}
-                                                                    ingredient={
-                                                                        ingredient
+                                                                    ingredientName={
+                                                                        ingredient.ingredientName
                                                                     }
                                                                     position={
                                                                         index +

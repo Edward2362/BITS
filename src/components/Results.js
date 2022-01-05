@@ -4,6 +4,7 @@ import Recipe from "./Recipe";
 import Course from "./Course";
 import { recipes, courses } from "./fakedata";
 import { choose } from "../functionsJS/checkbox";
+import test from "../img/bg.jpg";
 
 const Results = () => {
     const [done, setDone] = useState(false);
@@ -89,22 +90,24 @@ const Results = () => {
             );
         }
 
-        nextSetOfRecipe = (
-            <button
-                className="next-page"
-                onClick={() => {
-                    setDone(false);
-                    setPreviousNext("next");
-                    setRecipesAPINextEndPoint({
-                        recipesAPINextEndPointIncluded: true,
-                        recipesAPINextEndPointStart:
-                            nextEndPoint[nextEndPoint.length - 1],
-                    });
-                }}
-            >
-                &#8608;
-            </button>
-        );
+        if (!(recipes.length < 20)) {
+            nextSetOfRecipe = (
+                <button
+                    className="next-page"
+                    onClick={() => {
+                        setDone(false);
+                        setPreviousNext("next");
+                        setRecipesAPINextEndPoint({
+                            recipesAPINextEndPointIncluded: true,
+                            recipesAPINextEndPointStart:
+                                nextEndPoint[nextEndPoint.length - 1],
+                        });
+                    }}
+                >
+                    &#8608;
+                </button>
+            );
+        }
     } else {
         if (!recipesPrevious.previousIncluded) {
         } else {
@@ -112,11 +115,11 @@ const Results = () => {
                 <button
                     className="prev-page"
                     onClick={() => {
+                        setDone(false);
                         setRecipesIndex({
                             indexIncluded: true,
                             indexStart: recipesPrevious.previousIndex,
                         });
-                        setDone(false);
                     }}
                 >
                     &#8606;
@@ -159,11 +162,13 @@ const Results = () => {
                             <Filter
                                 onChange={findCourses}
                                 recipesIn={(recipesArray, previous, next) => {
-                                    setTimeout(setDone(true), 10000);
+                                    console.log("tui nè mấy bạn");
+
                                     setRecipes(recipesArray);
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
                                 }}
+                                setDone={setDone}
                                 recipesAPINextEndPointPlace={(
                                     recipesAvoidPlaceIndex
                                 ) => {
@@ -184,7 +189,9 @@ const Results = () => {
                                 handleDeletingEndPoint={handleDeletingEndPoint}
                             />
                             <hr></hr>
-                            {recipes.length === 0 ? (
+                            {!done ? (
+                                "hi"
+                            ) : recipes.length === 0 ? (
                                 <div className="results-section">
                                     <p className="notification">No Results</p>
                                 </div>
@@ -202,13 +209,43 @@ const Results = () => {
                                         </div>
                                     ) : (
                                         <div className="grid-25">
-                                            {recipes.map((recipe) => (
-                                                <Recipe
-                                                    key={recipe.foodId}
-                                                    recipe={recipe}
-                                                    url={findInCommunity}
-                                                />
-                                            ))}
+                                            {recipes.map((recipe) => {
+                                                var recipeName = "";
+                                                var recipeImage = "";
+                                                var recipeId = "";
+                                                if (
+                                                    null ===
+                                                    sessionStorage.getItem(
+                                                        "findInCommunity"
+                                                    )
+                                                ) {
+                                                    recipeName =
+                                                        recipe.recipe.label;
+                                                    recipeImage =
+                                                        recipe.recipe.image;
+                                                    recipeId =
+                                                        recipe._links.self.href.split(
+                                                            "v2/"
+                                                        )[1];
+                                                } else {
+                                                    recipeName =
+                                                        recipe.foodName;
+                                                    recipeImage = test;
+                                                    recipeId = recipe.foodId;
+                                                }
+
+                                                return (
+                                                    <Recipe
+                                                        key={recipe.foodId}
+                                                        recipeName={recipeName}
+                                                        recipeImage={
+                                                            recipeImage
+                                                        }
+                                                        recipeId={recipeId}
+                                                        url={findInCommunity}
+                                                    />
+                                                );
+                                            })}
                                         </div>
                                     )}
                                     <div className="results-buttons">

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
+import test from "../img/bg.jpg";
 
 const Profile = (prop) => {
     let navigate = useNavigate();
@@ -74,7 +75,11 @@ const Profile = (prop) => {
                                                     </div>
                                                     <Recipe
                                                         key={recipe.foodId}
-                                                        recipe={recipe}
+                                                        recipeName={
+                                                            recipe.foodName
+                                                        }
+                                                        recipeImage={test}
+                                                        recipeId={recipe.foodId}
                                                         url="Recipe-Restcipe"
                                                     />
                                                 </div>

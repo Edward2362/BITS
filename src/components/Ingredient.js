@@ -1,11 +1,11 @@
 import React from "react";
 
-const Ingredient = ({ ingredient, position }) => {
+const Ingredient = ({ ingredientName, position }) => {
     return (
         <div className="ingredient">
             <div className="ingredient-content">
                 <p>{position + "."}</p>
-                <p>{ingredient.ingredientName}</p>
+                <p>{ingredientName}</p>
             </div>
             <hr></hr>
         </div>

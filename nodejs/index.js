@@ -526,6 +526,7 @@ app.get(
             function (err, food) {
                 var avoidNeeded = req.params.avoid;
                 var avoid = avoidNeeded.trim();
+                avoid = avoid.toLowerCase();
                 var foodArray = [];
 
                 if (isPlaceIncluded(avoid)) {
@@ -544,8 +545,9 @@ app.get(
                             ) {
                                 if (
                                     !regex.test(
-                                        food[i].foodIngredients[placeIndex]
-                                            .ingredientName
+                                        food[i].foodIngredients[
+                                            placeIndex
+                                        ].ingredientName.toLowerCase()
                                     )
                                 ) {
                                 } else {
@@ -553,7 +555,7 @@ app.get(
                                 }
                             }
 
-                            if (!regex.test(food[i].foodName)) {
+                            if (!regex.test(food[i].foodName.toLowerCase())) {
                             } else {
                                 place = true;
                             }
@@ -581,8 +583,9 @@ app.get(
                         ) {
                             if (
                                 !regex.test(
-                                    food[i].foodIngredients[index]
-                                        .ingredientName
+                                    food[i].foodIngredients[
+                                        index
+                                    ].ingredientName.toLowerCase()
                                 )
                             ) {
                             } else {
@@ -590,7 +593,7 @@ app.get(
                             }
                         }
 
-                        if (!regex.test(food[i].foodName)) {
+                        if (!regex.test(food[i].foodName.toLowerCase())) {
                         } else {
                             place = true;
                         }

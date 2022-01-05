@@ -46,7 +46,7 @@ const RecipeInformationAPI = () => {
     let { id } = useParams();
     const [name, setName] = useState("");
     const [img, setImg] = useState("");
-    const [ingredient, setIngredient] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
     const [labels, setLabels] = useState([]);
     console.log(id);
     var endPoint =
@@ -64,8 +64,8 @@ const RecipeInformationAPI = () => {
                 console.log("name", name);
                 setImg(fetched.image);
                 console.log("image", img);
-                setIngredient(fetched.ingredientLines);
-                console.log("ingredient", ingredient);
+                setIngredients(fetched.ingredientLines);
+                console.log("ingredient", ingredients);
                 let labelsArr = fetched.dietLabels.concat(fetched.healthLabels);
                 setLabels(labelsArr);
             });
@@ -164,14 +164,14 @@ const RecipeInformationAPI = () => {
                                                 <div className="recipe-detail-ingredients">
                                                     <h2>Ingredients</h2>
                                                     <div className="recipe-ingredients-content">
-                                                        {ingredient.map(
+                                                        {ingredients.map(
                                                             (
                                                                 ingredient,
                                                                 index
                                                             ) => (
                                                                 <Ingredient
                                                                     key={index}
-                                                                    ingredient={
+                                                                    ingredientName={
                                                                         ingredient
                                                                     }
                                                                     position={
@@ -205,6 +205,7 @@ const RecipeInformationAPI = () => {
                                     <div className="recipe-detail-steps">
                                         <h2>Steps</h2>
                                         <div className="recipe-steps-content">
+                                            {/* Step no need in API should replace to Link and Nutrition */}
                                             {recipeData.steps.map(
                                                 (step, index) => (
                                                     <Step
