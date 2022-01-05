@@ -42,495 +42,96 @@ const RecipeInformationDB = (prop) => {
     // };
     // useEffect(load3, []);
 
-    let {id} = useParams();
+    let { id } = useParams();
     let navigate = useNavigate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
 
-
     const [favourite, setFavourite] = useState(false);
-    
+
     const [recipeData, setRecipeData] = useState({
         foodName: "Chicken Nugget",
         foodDiets: [
-            
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"},
-            {dietName: "Vegetarian"}
-            
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
+            { dietName: "Vegetarian" },
         ],
         foodIngredients: [
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
-            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"}
-            
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
+            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
         ],
         foodSteps: [
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."},
-            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."},
-            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."}
-            
-        ]
+            {
+                stepDescription:
+                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
+            },
+            {
+                stepDescription:
+                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
+            },
+            {
+                stepDescription:
+                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
+            },
+        ],
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     const [avoid, setAvoid] = useState([]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
     const load = () => {
-       
         fetch(endPoint + id)
-        .then(response=>response.json())
-        .then(data => {
-            
-            
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            
-
-
-
-
-
-
-
-
-            
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if (null !== window.sessionStorage.getItem("userID")) {
-
-
-
-
-
-
-                fetch(endPoint2 + window.sessionStorage.getItem("userID") + "/" + id, {
-                    method: "GET",
-                    headers: {
-                        "x-access-token": window.sessionStorage.getItem("userToken")
-                    }
-                }).then(response=>response.json())
-                .then(placeData => {
-                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                    
-                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                    if (undefined !== placeData[0].invalid) {
-    
-                        navigate("/");
-                        prop.renew();
-                    } else {
-                        
-                        
-                        if (undefined === placeData[0].customer) {
-                            setFavourite(true);
-                        } else {
-                            setFavourite(false);
+            .then((response) => response.json())
+            .then((data) => {
+                if (null !== window.sessionStorage.getItem("userID")) {
+                    fetch(
+                        endPoint2 +
+                            window.sessionStorage.getItem("userID") +
+                            "/" +
+                            id,
+                        {
+                            method: "GET",
+                            headers: {
+                                "x-access-token":
+                                    window.sessionStorage.getItem("userToken"),
+                            },
                         }
-                        setRecipeData(data[0].result);
-                    }
-                });
-            } else {
-                
-                
-
-
-
-                setRecipeData(data[0].result);
-            }
-        });
+                    )
+                        .then((response) => response.json())
+                        .then((placeData) => {
+                            if (undefined !== placeData[0].invalid) {
+                                navigate("/");
+                                prop.renew();
+                            } else {
+                                if (undefined === placeData[0].customer) {
+                                    setFavourite(true);
+                                } else {
+                                    setFavourite(false);
+                                }
+                                setRecipeData(data[0].result);
+                            }
+                        });
+                } else {
+                    setRecipeData(data[0].result);
+                }
+            });
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-    useEffect(
-        load
-    , []);
+    useEffect(load, []);
 
     return (
         <>
@@ -549,9 +150,13 @@ const RecipeInformationDB = (prop) => {
                                 <div className="recipe-detail-section">
                                     <h1>{recipeData.foodName}</h1>
                                     <div className="diets">
-                                        {recipeData.foodDiets.map((diet, index) => (
-                                            <p key={index}>{diet.dietName}</p>
-                                        ))}
+                                        {recipeData.foodDiets.map(
+                                            (diet, index) => (
+                                                <p key={index}>
+                                                    {diet.dietName}
+                                                </p>
+                                            )
+                                        )}
                                     </div>
                                     <div className="creator">
                                         <div className="creator-avatar">
@@ -640,19 +245,14 @@ const RecipeInformationDB = (prop) => {
                                                 Post your comment
                                             </button>
                                         </div>
-                                        <h2>
-                                            {avoid.length +
-                                                " Comments "}
-                                        </h2>
+                                        <h2>{avoid.length + " Comments "}</h2>
                                         <div className="recipe-comments-content">
-                                            {avoid.map(
-                                                (avoidPlace, index) => (
-                                                    <Comment
-                                                        key={index}
-                                                        comment={avoidPlace}
-                                                    />
-                                                )
-                                            )}
+                                            {avoid.map((avoidPlace, index) => (
+                                                <Comment
+                                                    key={index}
+                                                    comment={avoidPlace}
+                                                />
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
