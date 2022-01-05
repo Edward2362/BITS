@@ -190,7 +190,10 @@ const Results = () => {
                             />
                             <hr></hr>
                             {!done ? (
-                                "hi"
+                                <div className="loading-holder">
+                                    <div className="loading"></div>
+                                    {/* <img src */}
+                                </div>
                             ) : recipes.length === 0 ? (
                                 <div className="results-section">
                                     <p className="notification">No Results</p>
