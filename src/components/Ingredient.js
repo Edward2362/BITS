@@ -5,7 +5,7 @@ const Ingredient = ({ ingredient, position }) => {
         <div className="ingredient">
             <div className="ingredient-content">
                 <p>{position + "."}</p>
-                <p>{ingredient}</p>
+                <p>{ingredient.ingredientName}</p>
             </div>
             <hr></hr>
         </div>

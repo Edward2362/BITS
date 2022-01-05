@@ -6,8 +6,10 @@ import edamam from "../img/edamam-logo.png";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const RecipeInformationDB = () => {
+const RecipeInformationDB = (prop) => {
     // test
     // var endPoint =
     //     "https://api.edamam.com/api/recipes/v2/b79327d05b8e5b838ad6cfd9576b30b6?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
@@ -40,56 +42,495 @@ const RecipeInformationDB = () => {
     // };
     // useEffect(load3, []);
 
+    let {id} = useParams();
+    let navigate = useNavigate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var endPoint = "http://localhost:9000/foodPlace/";
+    var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
+
+
     const [favourite, setFavourite] = useState(false);
+    
     const [recipeData, setRecipeData] = useState({
-        name: "Chicken Nugget",
-        diets: [
-            "Vegan",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
-            "Vegetarian",
+        foodName: "Chicken Nugget",
+        foodDiets: [
+            
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"},
+            {dietName: "Vegetarian"}
+            
         ],
-        ingredients: [
-            "1/2 cup olive oil",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
-            "5 cloves garlic, peeled",
+        foodIngredients: [
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"},
+            {ingredientName: "olive oil", ingredientAmount: "1/2 cup"}
+            
         ],
-        steps: [
-            "Clean the bones and meat: To a large stock pot, add bones and boneless shanks (do not include the Vietnamese ham!) and 2 teaspoons salt. Cover with water and heat on high. When pot reaches a rolling boil and impurities float to the top, turn off heat. Place a colander in the sink and drain the contents of the pot into the colander. Thoroughly rinse bones/meat under cold running water and drain dry. If using boneless pork shank, wrap up meat into a tight bundle with twine. This will make it easier to slice when it's finished cooking. Wash the pot thoroughly and return it to the stove. Transfer parboiled bones/meat to pot and fill with water (4 liters). Add lemongrass bundle, white/yellow onions, ginger, and pineapple. Heat on medium-high/low simmer for 2 to 2-1/2 hours. Occasionally skim surface of the stock to keep it clear.",
-            "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
-            "Back to the stock pot: After one and a half hour of cooking, check the boneless shank for doneness by piercing it with a chopstick. It's done when chopstick pierces easily and water runs clear. Remove and discard all bones, but if you are using knuckles and hocks, do not discard. They are commonly used as a meaty topping. Transfer all knuckles, hocks to an iced bath to cool. Leave the other aromatics in the stock pot for now. When knuckles, hocks and boneless shanks are cooled completely, remove them from the iced bath. For boneless shanks, cut them into thin circular slices and set aside. For any large hocks and knuckles that are too big, cut them into bite-size pieces and set aside. Continue to cook the stock with the aromatics for another 30-45 minutes on a low simmer.",
-        ],
-        comments: [
-            {
-                userName: "Hao",
-                date: "1/1/2021",
-                information:
-                    "Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good! Look good!",
-            },
-            {
-                userName: "Quang",
-                date: "2/1/2021",
-                information: "Look great!",
-            },
-        ],
+        foodSteps: [
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."},
+            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."},
+            {stepDescription: "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside."}
+            
+        ]
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    const [avoid, setAvoid] = useState([]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    const load = () => {
+       
+        fetch(endPoint + id)
+        .then(response=>response.json())
+        .then(data => {
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+
+
+
+
+
+            
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (null !== window.sessionStorage.getItem("userID")) {
+
+
+
+
+
+
+                fetch(endPoint2 + window.sessionStorage.getItem("userID") + "/" + id, {
+                    method: "GET",
+                    headers: {
+                        "x-access-token": window.sessionStorage.getItem("userToken")
+                    }
+                }).then(response=>response.json())
+                .then(placeData => {
+                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                    
+                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                    if (undefined !== placeData[0].invalid) {
+    
+                        navigate("/");
+                        prop.renew();
+                    } else {
+                        
+                        
+                        if (undefined === placeData[0].customer) {
+                            setFavourite(true);
+                        } else {
+                            setFavourite(false);
+                        }
+                        setRecipeData(data[0].result);
+                    }
+                });
+            } else {
+                
+                
+
+
+
+                setRecipeData(data[0].result);
+            }
+        });
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+    useEffect(
+        load
+    , []);
 
     return (
         <>
@@ -106,10 +547,10 @@ const RecipeInformationDB = () => {
                         <div className="white-bg">
                             <div className="recipe-detail-body">
                                 <div className="recipe-detail-section">
-                                    <h1>{recipeData.name}</h1>
+                                    <h1>{recipeData.foodName}</h1>
                                     <div className="diets">
-                                        {recipeData.diets.map((diet, index) => (
-                                            <p key={index}>{diet}</p>
+                                        {recipeData.foodDiets.map((diet, index) => (
+                                            <p key={index}>{diet.dietName}</p>
                                         ))}
                                     </div>
                                     <div className="creator">
@@ -134,7 +575,7 @@ const RecipeInformationDB = () => {
                                                 <div className="recipe-detail-ingredients">
                                                     <h2>Ingredients</h2>
                                                     <div className="recipe-ingredients-content">
-                                                        {recipeData.ingredients.map(
+                                                        {recipeData.foodIngredients.map(
                                                             (
                                                                 ingredient,
                                                                 index
@@ -175,7 +616,7 @@ const RecipeInformationDB = () => {
                                     <div className="recipe-detail-steps">
                                         <h2>Steps</h2>
                                         <div className="recipe-steps-content">
-                                            {recipeData.steps.map(
+                                            {recipeData.foodSteps.map(
                                                 (step, index) => (
                                                     <Step
                                                         key={index}
@@ -200,15 +641,15 @@ const RecipeInformationDB = () => {
                                             </button>
                                         </div>
                                         <h2>
-                                            {recipeData.comments.length +
+                                            {avoid.length +
                                                 " Comments "}
                                         </h2>
                                         <div className="recipe-comments-content">
-                                            {recipeData.comments.map(
-                                                (comment, index) => (
+                                            {avoid.map(
+                                                (avoidPlace, index) => (
                                                     <Comment
                                                         key={index}
-                                                        comment={comment}
+                                                        comment={avoidPlace}
                                                     />
                                                 )
                                             )}

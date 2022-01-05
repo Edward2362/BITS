@@ -5,18 +5,18 @@ import { recipes } from "./fakedata";
 const Recipe = ({ recipe, url }) => {
     var recipeName = "";
     var recipeImage = "";
-    var apiURL = "";
+    var placeId = "";
     if (null === sessionStorage.getItem("findInCommunity")) {
         recipeName = recipe.recipe.label;
         recipeImage = recipe.recipe.image;
-        apiURL = recipe._links.self.href.split("v2/")[1];
-        console.log(recipe._links.self.href.split("v2/")[1]);
+        placeId = recipe._links.self.href.split("v2/")[1];
     } else {
         recipeName = recipe.foodName;
         recipeImage = test;
+        placeId = recipe.foodId;
     }
     return (
-        <a href={"/" + url + "/" + apiURL} className="recipe-href">
+        <a href={"/" + url + "/" + placeId} className="recipe-href">
             <div className="recipe-card">
                 <div className="recipe-img">
                     <img src={recipeImage}></img>

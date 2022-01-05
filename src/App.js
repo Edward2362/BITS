@@ -91,8 +91,8 @@ function App() {
                         element={<RecipeInformationAPI />}
                     />
                     <Route
-                        path="/Recipe-Restcipe"
-                        element={<RecipeInformationDB />}
+                        path="/Recipe-Restcipe/:id"
+                        element={<RecipeInformationDB renew={() => {load()}} />}
                     />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
