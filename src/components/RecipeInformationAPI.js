@@ -6,9 +6,10 @@ import edamam from "../img/edamam-logo.png";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
+import { useNavigate } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 
-const RecipeInformationAPI = () => {
+const RecipeInformationAPI = (prop) => {
     // test
     // var endPoint =
     //     "https://api.edamam.com/api/recipes/v2/b79327d05b8e5b838ad6cfd9576b30b6?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
@@ -44,6 +45,8 @@ const RecipeInformationAPI = () => {
     const [favourite, setFavourite] = useState(false);
 
     let { id } = useParams();
+    let navigate = useNavigate();
+
     const [name, setName] = useState("");
     const [img, setImg] = useState("");
     const [ingredients, setIngredients] = useState([]);
@@ -53,6 +56,8 @@ const RecipeInformationAPI = () => {
         "https://api.edamam.com/api/recipes/v2/" +
         id +
         "?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
+
+    var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
     const load = () => {
         fetch(endPoint)
             .then((response) => response.json())
@@ -121,6 +126,38 @@ const RecipeInformationAPI = () => {
         ],
     });
 
+    const isFavourite = () => {
+        if (null === window.sessionStorage.getItem("userID")) {
+            navigate("/");
+            prop.renew();
+        } else {
+            if (favourite) {
+            } else {
+                fetch(endPoint2, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: id,
+                        customerId: window.sessionStorage.getItem("userID"),
+                        foodName: name,
+                        provider: "edamam",
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(true);
+                        }
+                    });
+            }
+        }
+    };
+
     return (
         <>
             <div className="page-header">
@@ -185,9 +222,7 @@ const RecipeInformationAPI = () => {
                                                 </div>
                                                 <div
                                                     className="recipe-detail-favourite-button"
-                                                    onClick={() =>
-                                                        setFavourite(!favourite)
-                                                    }
+                                                    onClick={isFavourite}
                                                 >
                                                     {favourite ? (
                                                         <FaHeart />

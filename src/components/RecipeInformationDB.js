@@ -47,11 +47,13 @@ const RecipeInformationDB = (prop) => {
 
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
+    var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
 
     const [favourite, setFavourite] = useState(false);
 
     const [recipeData, setRecipeData] = useState({
         foodName: "Chicken Nugget",
+        foodId: "FOOD-5",
         foodDiets: [
             { dietName: "Vegetarian" },
             { dietName: "Vegetarian" },
@@ -111,7 +113,7 @@ const RecipeInformationDB = (prop) => {
                             },
                         }
                     )
-                        .then((response) => response.json())
+                        .then((response2) => response2.json())
                         .then((placeData) => {
                             if (undefined !== placeData[0].invalid) {
                                 navigate("/");
@@ -129,6 +131,38 @@ const RecipeInformationDB = (prop) => {
                     setRecipeData(data[0].result);
                 }
             });
+    };
+
+    const isFavourite = () => {
+        if (null === window.sessionStorage.getItem("userID")) {
+            navigate("/");
+            prop.renew();
+        } else {
+            if (favourite) {
+            } else {
+                fetch(endPoint3, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: recipeData.foodId,
+                        customerId: window.sessionStorage.getItem("userID"),
+                        foodName: recipeData.foodName,
+                        provider: "customers",
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(true);
+                        }
+                    });
+            }
+        }
     };
 
     useEffect(load, []);
@@ -201,9 +235,7 @@ const RecipeInformationDB = (prop) => {
                                                 </div>
                                                 <div
                                                     className="recipe-detail-favourite-button"
-                                                    onClick={() =>
-                                                        setFavourite(!favourite)
-                                                    }
+                                                    onClick={isFavourite}
                                                 >
                                                     {favourite ? (
                                                         <FaHeart />

@@ -11,7 +11,16 @@ const Profile = (prop) => {
     let navigate = useNavigate();
     var endPoint = "http://localhost:9000/customerFood/";
 
+    var endPoint2 = "http://localhost:9000/customer/";
+
     const [createdRecipeList, setCreatedRecipeList] = useState([]);
+    const [customer, setCustomer] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+    });
 
     if (null !== sessionStorage.getItem("userID")) {
     } else {
@@ -20,15 +29,26 @@ const Profile = (prop) => {
     }
 
     const load = () => {
-        fetch(endPoint + sessionStorage.getItem("userID"), {
-            method: "GET",
-            headers: {
-                "x-access-token": window.sessionStorage.getItem("userToken"),
-            },
-        })
+        fetch(endPoint2 + window.sessionStorage.getItem("userID"))
             .then((response) => response.json())
             .then((data) => {
-                setCreatedRecipeList(data[0].result);
+                fetch(endPoint + sessionStorage.getItem("userID"), {
+                    method: "GET",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                    },
+                })
+                    .then((response2) => response2.json())
+                    .then((placeData) => {
+                        if (undefined !== placeData[0].invalid) {
+                            navigate("/");
+                            prop.renew();
+                        } else {
+                            setCreatedRecipeList(placeData[0].result);
+                            setCustomer(data[0]);
+                        }
+                    });
             });
     };
     useEffect(load, []);
@@ -44,7 +64,9 @@ const Profile = (prop) => {
                                     alt="default avatar"
                                 ></img>
                             </div>
-                            <div className="name-bar">Quang Nguyen</div>
+                            <div className="name-bar">
+                                {customer.firstName + " " + customer.lastName}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,7 +113,7 @@ const Profile = (prop) => {
                                     <h1>Favorite Recipes</h1>
                                     <div className="results-section">
                                         <div className="grid-25">
-                                            {recipes.map((recipe) => (
+                                            {customer.food.map((recipe) => (
                                                 <Recipe
                                                     key={recipe.id}
                                                     recipe={recipe}

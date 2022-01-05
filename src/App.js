@@ -88,11 +88,23 @@ function App() {
                     />
                     <Route
                         path="/Recipe-Edamam/:id"
-                        element={<RecipeInformationAPI />}
+                        element={
+                            <RecipeInformationAPI
+                                renew={() => {
+                                    load();
+                                }}
+                            />
+                        }
                     />
                     <Route
                         path="/Recipe-Restcipe/:id"
-                        element={<RecipeInformationDB renew={() => {load()}} />}
+                        element={
+                            <RecipeInformationDB
+                                renew={() => {
+                                    load();
+                                }}
+                            />
+                        }
                     />
                     <Route path="/Test" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
