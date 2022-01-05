@@ -12,7 +12,6 @@ export const Filter = ({
     recipesAPINextEndPointPlace,
     recipesIndexPlace,
     previousNext,
-    placeValue,
     recipesAPINextEndPoint,
     placeRecipesIndex,
 }) => {
@@ -26,6 +25,7 @@ export const Filter = ({
     const [calories, setCalories] = useState({ from: "", to: "" });
     const [ingredientUpTo, setIngredientUpTo] = useState("");
     const [diets, setDiets] = useState([]);
+    const [checkLoaded, setCheckLoaded] = useState(false);
     const [health, setHealth] = useState([
         "vegetarian",
         "vegan",
@@ -46,12 +46,10 @@ export const Filter = ({
             sessionStorage.removeItem("findByCourse");
             e.target.parentElement.classList.remove("checked");
             setFindByCourse(false);
-            console.log(e.target);
         } else {
             sessionStorage.setItem("findByCourse", true);
             e.target.parentElement.classList.add("checked");
             setFindByCourse(true);
-            console.log(e.target);
         }
     };
 
@@ -74,7 +72,7 @@ export const Filter = ({
         }
     };
 
-    const load = (recipesIndex) => {
+    const load = async (recipesIndex) => {
         if (null === window.sessionStorage.getItem("findInCommunity")) {
             var caloriesFromMix = "";
 
@@ -84,6 +82,9 @@ export const Filter = ({
 
             var dietsMix = "";
             var healthMix = "";
+
+            var recipesPrevious = {};
+            var recipesNext = {};
 
             if (null !== window.sessionStorage.getItem("caloriesFrom")) {
                 caloriesFromMix = window.sessionStorage.getItem("caloriesFrom");
@@ -136,12 +137,11 @@ export const Filter = ({
             } else {
                 endPoint = recipesIndex;
             }
-
-            fetch(endPoint)
+            await fetch(endPoint)
                 .then((response) => response.json())
                 .then((fetchResult) => {
                     let fetched = fetchResult.hits;
-                    console.log(fetched);
+                    setCheckLoaded(true);
 
                     if (0 == fetched.length) {
                         recipesPrevious = {
@@ -149,22 +149,27 @@ export const Filter = ({
                             previousIndex: "0",
                         };
                         recipesNext = { nextIncluded: false, nextIndex: "0" };
-                        recipesIn([], recipesPrevious, recipesNext);
 
                         var recipesAPINextEndPointMix = {
                             recipesAPINextEndPointIncluded: false,
                             recipesAPINextEndPointStart: recipesIndex,
                         };
-
                         recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
+
+                        recipesIn([], recipesPrevious, recipesNext);
                     } else {
                         recipesPrevious = {
                             previousIncluded: false,
                             previousIndex: "0",
                         };
                         recipesNext = { nextIncluded: false, nextIndex: "0" };
-                        recipesIn(fetched, recipesPrevious, recipesNext);
+                        var recipesAPINextEndPointMix = {
+                            recipesAPINextEndPointIncluded: false,
+                            recipesAPINextEndPointStart: recipesIndex,
+                        };
+                        recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
 
+                        recipesIn(fetched, recipesPrevious, recipesNext);
                         if (
                             !recipesAPINextEndPoint.recipesAPINextEndPointIncluded
                         ) {
@@ -181,13 +186,6 @@ export const Filter = ({
                                 );
                             }
                         }
-
-                        var recipesAPINextEndPointMix = {
-                            recipesAPINextEndPointIncluded: false,
-                            recipesAPINextEndPointStart: recipesIndex,
-                        };
-
-                        recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
                     }
                 });
         } else {
@@ -200,6 +198,7 @@ export const Filter = ({
                     previousIndex: "0",
                 };
                 recipesNext = { nextIncluded: false, nextIndex: "0" };
+                setCheckLoaded(true);
                 recipesIn([], recipesPrevious, recipesNext);
             } else {
                 if ("" == window.sessionStorage.getItem("place")) {
@@ -208,6 +207,7 @@ export const Filter = ({
                         previousIndex: "0",
                     };
                     recipesNext = { nextIncluded: false, nextIndex: "0" };
+                    setCheckLoaded(true);
                     recipesIn([], recipesPrevious, recipesNext);
                 } else {
                     var caloriesFromMix = "";
@@ -264,7 +264,7 @@ export const Filter = ({
                         ? (ingredientUpToMix = "0")
                         : (ingredientUpToMix = ingredientUpToMix);
 
-                    fetch(
+                    await fetch(
                         endPoint2 +
                             "/" +
                             window.sessionStorage.getItem("place") +
@@ -281,6 +281,7 @@ export const Filter = ({
                     )
                         .then((response) => response.json())
                         .then((data) => {
+                            setCheckLoaded(true);
                             if (undefined !== data[0].foodPrevious) {
                                 if (undefined !== data[0].foodNext) {
                                     recipesPrevious = {
@@ -335,27 +336,17 @@ export const Filter = ({
                                 indexIncluded: false,
                                 indexStart: recipesIndex,
                             };
+                            recipesIndexPlace(recipesIndexMix);
                             recipesIn(
                                 data[0].result,
                                 recipesPrevious,
                                 recipesNext
                             );
-                            recipesIndexPlace(recipesIndexMix);
                         });
                 }
             }
         }
     };
-
-    if (!recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
-    } else {
-        load(recipesAPINextEndPoint.recipesAPINextEndPointStart);
-    }
-
-    if (!placeRecipesIndex.indexIncluded) {
-    } else {
-        load(placeRecipesIndex.indexStart);
-    }
 
     const placeLoad = () => {
         window.sessionStorage.setItem("caloriesFrom", calories.from);
@@ -365,11 +356,19 @@ export const Filter = ({
         load("0");
     };
 
+    if (recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
+        load(recipesAPINextEndPoint.recipesAPINextEndPointStart);
+    }
+
+    if (placeRecipesIndex.indexIncluded) {
+        load(placeRecipesIndex.indexStart);
+    }
+
     useEffect(() => {
         handleCheckedDiet();
         choose();
 
-        if (placeValue) {
+        if (checkLoaded) {
         } else {
             var recipesIndex = "";
 
@@ -381,8 +380,6 @@ export const Filter = ({
             load(recipesIndex);
         }
     });
-
-    console.log(findByCourse);
 
     return (
         <div className="filter">

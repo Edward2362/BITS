@@ -6,6 +6,8 @@ import { recipes, courses } from "./fakedata";
 import { choose } from "../functionsJS/checkbox";
 
 const Results = () => {
+    const [done, setDone] = useState(false);
+
     const [findByCourse, setFindByCourse] = useState(
         sessionStorage.getItem("findByCourse")
     );
@@ -62,13 +64,13 @@ const Results = () => {
         );
     };
 
-    var previousAvoid = <div></div>;
-    var nextAvoid = <div></div>;
+    var previousSetOfRecipe = <div></div>;
+    var nextSetOfRecipe = <div></div>;
 
     if (null === sessionStorage.getItem("findInCommunity")) {
         if (2 >= nextEndPoint.length) {
         } else {
-            previousAvoid = (
+            previousSetOfRecipe = (
                 <button
                     className="prev-page"
                     onClick={() => {
@@ -79,6 +81,7 @@ const Results = () => {
                             recipesAPINextEndPointStart:
                                 nextEndPoint[nextEndPoint.length - 3],
                         });
+                        setDone(false);
                     }}
                 >
                     &#8606;
@@ -86,10 +89,11 @@ const Results = () => {
             );
         }
 
-        nextAvoid = (
+        nextSetOfRecipe = (
             <button
                 className="next-page"
                 onClick={() => {
+                    setDone(false);
                     setPreviousNext("next");
                     setRecipesAPINextEndPoint({
                         recipesAPINextEndPointIncluded: true,
@@ -104,7 +108,7 @@ const Results = () => {
     } else {
         if (!recipesPrevious.previousIncluded) {
         } else {
-            previousAvoid = (
+            previousSetOfRecipe = (
                 <button
                     className="prev-page"
                     onClick={() => {
@@ -112,6 +116,7 @@ const Results = () => {
                             indexIncluded: true,
                             indexStart: recipesPrevious.previousIndex,
                         });
+                        setDone(false);
                     }}
                 >
                     &#8606;
@@ -121,7 +126,7 @@ const Results = () => {
 
         if (!recipesNext.nextIncluded) {
         } else {
-            nextAvoid = (
+            nextSetOfRecipe = (
                 <button
                     className="next-page"
                     onClick={() => {
@@ -129,6 +134,7 @@ const Results = () => {
                             indexIncluded: true,
                             indexStart: recipesNext.nextIndex,
                         });
+                        setDone(false);
                     }}
                 >
                     &#8608;
@@ -136,7 +142,6 @@ const Results = () => {
             );
         }
     }
-    console.log(nextEndPoint);
 
     return (
         <>
@@ -154,8 +159,8 @@ const Results = () => {
                             <Filter
                                 onChange={findCourses}
                                 recipesIn={(recipesArray, previous, next) => {
+                                    setTimeout(setDone(true), 10000);
                                     setRecipes(recipesArray);
-                                    setPlace(true);
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
                                 }}
@@ -170,7 +175,6 @@ const Results = () => {
                                     setRecipesIndex(recipesPlaceIndex);
                                 }}
                                 previousNext={previousNext}
-                                placeValue={place}
                                 recipesAPINextEndPoint={recipesAPINextEndPoint}
                                 placeRecipesIndex={recipesIndex}
                                 handleIncomingEndPoint={handleIncomingEndPoint}
@@ -182,7 +186,7 @@ const Results = () => {
                             <hr></hr>
                             {recipes.length === 0 ? (
                                 <div className="results-section">
-                                    <p>No Results</p>
+                                    <p className="notification">No Results</p>
                                 </div>
                             ) : (
                                 <div className="results-section">
@@ -208,8 +212,8 @@ const Results = () => {
                                         </div>
                                     )}
                                     <div className="results-buttons">
-                                        {previousAvoid}
-                                        {nextAvoid}
+                                        {previousSetOfRecipe}
+                                        {nextSetOfRecipe}
                                     </div>
                                 </div>
                             )}

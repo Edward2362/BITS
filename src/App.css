@@ -154,6 +154,14 @@ ul {
     list-style-type: none;
 }
 
+.notification {
+    margin: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Header */
 
 header {
@@ -309,10 +317,13 @@ header .border:hover {
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .input-holder .checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     margin-right: 2px;
     color: gray;
