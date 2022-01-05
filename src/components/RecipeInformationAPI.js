@@ -42,7 +42,30 @@ const RecipeInformationAPI = () => {
 
     const [favourite, setFavourite] = useState(false);
     let {id}  = useParams();
+    const [name, setName] = useState("");
+    const [img, setImg] = useState("");
+    const [ingredient, setIngredient] = useState([]);
+    const [labels, setLabels] = useState([]);
     console.log(id)
+    var endPoint = "https://api.edamam.com/api/recipes/v2/"+ id +"?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
+    const load = () => {
+            fetch(endPoint)
+                .then((response) => response.json())
+                .then((fetchResult) => {
+                    console.log(fetchResult.recipe)
+                    let fetched = fetchResult.recipe;
+                    console.log(fetched);
+                    setName(fetched.label);
+                    console.log("name", name);
+                    setImg(fetched.image);
+                    console.log("image", img);
+                    setIngredient(fetched.ingredientLines);
+                    console.log("ingredient", ingredient);
+                    let labelsArr = fetched.dietLabels.concat(fetched.healthLabels)
+                    setLabels(labelsArr)
+                });
+        };
+useEffect(load,[])
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
@@ -107,9 +130,9 @@ const RecipeInformationAPI = () => {
                         <div className="white-bg">
                             <div className="recipe-detail-body">
                                 <div className="recipe-detail-section">
-                                    <h1>{recipeData.name}</h1>
+                                    <h1>{name}</h1>
                                     <div className="diets">
-                                        {recipeData.diets.map((diet, index) => (
+                                        {labels.map((diet, index) => (
                                             <p key={index}>{diet}</p>
                                         ))}
                                     </div>
@@ -127,7 +150,7 @@ const RecipeInformationAPI = () => {
                                     <div className="recipe-detail-content">
                                         <div className="sn-body-equal-half">
                                             <div className="recipe-detail-img">
-                                                <img src={test}></img>
+                                                <img src={img}></img>
                                             </div>
                                         </div>
                                         <div className="sn-body-equal-half">
@@ -135,7 +158,7 @@ const RecipeInformationAPI = () => {
                                                 <div className="recipe-detail-ingredients">
                                                     <h2>Ingredients</h2>
                                                     <div className="recipe-ingredients-content">
-                                                        {recipeData.ingredients.map(
+                                                        {ingredient.map(
                                                             (
                                                                 ingredient,
                                                                 index
