@@ -11,7 +11,25 @@ const Profile = (prop) => {
     let navigate = useNavigate();
     var endPoint = "http://localhost:9000/customerFood/";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var endPoint2 = "http://localhost:9000/customer/";
+
     const [createdRecipeList, setCreatedRecipeList] = useState([]);
+    const [customer, setCustomer] = useState({customerId: "", fullName: "", food: [], lastName: ""});
 
     if (null !== sessionStorage.getItem("userID")) {
     } else {
@@ -20,16 +38,115 @@ const Profile = (prop) => {
     }
 
     const load = () => {
-        fetch(endPoint + sessionStorage.getItem("userID"), {
-            method: "GET",
-            headers: {
-                "x-access-token": window.sessionStorage.getItem("userToken"),
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setCreatedRecipeList(data[0].result);
-            });
+        
+
+        fetch(endPoint2 + window.sessionStorage.getItem("userID"))
+        .then(response=>response.json())
+        .then(data => {
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            fetch(endPoint + sessionStorage.getItem("userID"), {
+                method: "GET",
+                headers: {
+                    "x-access-token": window.sessionStorage.getItem("userToken"),
+                },
+            })
+                .then((response2) => response2.json())
+                .then((placeData) => {
+                    
+
+                    if (undefined !== placeData[0].invalid) {
+
+                        navigate("/");
+                        prop.renew();
+                    } else {
+                        setCreatedRecipeList(placeData[0].result);
+                    setCustomer(data);
+                    }
+                });
+        });
     };
     useEffect(load, []);
     return (
