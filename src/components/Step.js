@@ -6,7 +6,7 @@ const Step = ({ step, position }) => {
             <div className="step-header">
                 <h3>{"#" + position}</h3>
             </div>
-            <p>{step}</p>
+            <p>{step.stepDescription}</p>
         </div>
     );
 };

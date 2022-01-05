@@ -452,7 +452,7 @@ app.post("/api/auth/reset/:getToken", function (req, response) {
 });
 
 app.get(
-    "/customer/customerFoodIn/:foodId/:customerId",
+    "/customer/customerFoodIn/:customerId/:foodId",
     tokenVerified,
     function (req, response) {
         Customer.find(
