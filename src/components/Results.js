@@ -5,6 +5,7 @@ import Course from "./Course";
 import { recipes, courses } from "./fakedata";
 import { choose } from "../functionsJS/checkbox";
 import test from "../img/bg.jpg";
+import logo from "../img/Restcipe-4.svg";
 
 const Results = () => {
     const [done, setDone] = useState(false);
@@ -191,8 +192,8 @@ const Results = () => {
                             <hr></hr>
                             {!done ? (
                                 <div className="loading-holder">
+                                    <img src={logo}></img>
                                     <div className="loading"></div>
-                                    {/* <img src */}
                                 </div>
                             ) : recipes.length === 0 ? (
                                 <div className="results-section">

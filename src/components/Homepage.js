@@ -126,7 +126,7 @@ const HomepageBody = () => {
                                     <div className="feature-content">
                                         <p>
                                             Create a community for sharing and
-                                            learning new cooking experiences
+                                            learning cooking experiences
                                         </p>
                                     </div>
                                 </div>

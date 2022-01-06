@@ -8,6 +8,7 @@ import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import logo from "../img/Restcipe-4.svg";
 
 const RecipeInformationDB = (prop) => {
     // test
@@ -44,6 +45,7 @@ const RecipeInformationDB = (prop) => {
 
     let { id } = useParams();
     let navigate = useNavigate();
+    const [done, setDone] = useState(false);
 
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
@@ -130,6 +132,7 @@ const RecipeInformationDB = (prop) => {
                 } else {
                     setRecipeData(data[0].result);
                 }
+                setTimeout(setDone(true), 3000);
             });
     };
 
@@ -180,115 +183,128 @@ const RecipeInformationDB = (prop) => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <div className="recipe-detail-body">
-                                <div className="recipe-detail-section">
-                                    <h1>{recipeData.foodName}</h1>
-                                    <div className="diets">
-                                        {recipeData.foodDiets.map(
-                                            (diet, index) => (
-                                                <p key={index}>
-                                                    {diet.dietName}
-                                                </p>
-                                            )
-                                        )}
-                                    </div>
-                                    <div className="creator">
-                                        <div className="creator-avatar">
-                                            <img src={edamam}></img>
-                                        </div>
-                                        <div className="creator-name">
-                                            <p>Edamam</p>
-                                        </div>
-                                    </div>
+                            {!done ? (
+                                <div className="loading-holder">
+                                    <img src={logo}></img>
+                                    <div className="loading"></div>
                                 </div>
-                                <hr></hr>
-                                <div className="recipe-detail-section">
-                                    <div className="recipe-detail-content">
-                                        <div className="sn-body-equal-half">
-                                            <div className="recipe-detail-img">
-                                                <img src={test}></img>
-                                            </div>
-                                        </div>
-                                        <div className="sn-body-equal-half">
-                                            <div className="recipe-detail-holder">
-                                                <div className="recipe-detail-ingredients">
-                                                    <h2>Ingredients</h2>
-                                                    <div className="recipe-ingredients-content">
-                                                        {recipeData.foodIngredients.map(
-                                                            (
-                                                                ingredient,
-                                                                index
-                                                            ) => (
-                                                                <Ingredient
-                                                                    key={index}
-                                                                    ingredientName={
-                                                                        ingredient.ingredientName
-                                                                    }
-                                                                    position={
-                                                                        index +
-                                                                        1
-                                                                    }
-                                                                />
-                                                            )
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    className="recipe-detail-favourite-button"
-                                                    onClick={isFavourite}
-                                                >
-                                                    {favourite ? (
-                                                        <FaHeart />
-                                                    ) : (
-                                                        <FaRegHeart />
-                                                    )}
-                                                    <p>Love it!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr></hr>
-                                <div className="recipe-detail-section">
-                                    <div className="recipe-detail-steps">
-                                        <h2>Steps</h2>
-                                        <div className="recipe-steps-content">
-                                            {recipeData.foodSteps.map(
-                                                (step, index) => (
-                                                    <Step
-                                                        key={index}
-                                                        step={step}
-                                                        position={index + 1}
-                                                    />
+                            ) : (
+                                <div className="recipe-detail-body">
+                                    <div className="recipe-detail-section">
+                                        <h1>{recipeData.foodName}</h1>
+                                        <div className="diets">
+                                            {recipeData.foodDiets.map(
+                                                (diet, index) => (
+                                                    <p key={index}>
+                                                        {diet.dietName}
+                                                    </p>
                                                 )
                                             )}
                                         </div>
-                                    </div>
-                                </div>
-                                <hr></hr>
-                                <div className="recipe-detail-section">
-                                    <div className="recipe-detail-comments">
-                                        <div className="user-comment">
-                                            {/* <div className="creator-avatar">
+                                        <div className="creator">
+                                            <div className="creator-avatar">
                                                 <img src={edamam}></img>
-                                            </div> */}
-                                            <textarea></textarea>
-                                            <button className="btn-cmt">
-                                                Post your comment
-                                            </button>
+                                            </div>
+                                            <div className="creator-name">
+                                                <p>Edamam</p>
+                                            </div>
                                         </div>
-                                        <h2>{avoid.length + " Comments "}</h2>
-                                        <div className="recipe-comments-content">
-                                            {avoid.map((avoidPlace, index) => (
-                                                <Comment
-                                                    key={index}
-                                                    comment={avoidPlace}
-                                                />
-                                            ))}
+                                    </div>
+                                    <hr></hr>
+                                    <div className="recipe-detail-section">
+                                        <div className="recipe-detail-content">
+                                            <div className="sn-body-equal-half">
+                                                <div className="recipe-detail-img">
+                                                    <img src={test}></img>
+                                                </div>
+                                            </div>
+                                            <div className="sn-body-equal-half">
+                                                <div className="recipe-detail-holder">
+                                                    <div className="recipe-detail-ingredients">
+                                                        <h2>Ingredients</h2>
+                                                        <div className="recipe-ingredients-content">
+                                                            {recipeData.foodIngredients.map(
+                                                                (
+                                                                    ingredient,
+                                                                    index
+                                                                ) => (
+                                                                    <Ingredient
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                        ingredientName={
+                                                                            ingredient.ingredientName
+                                                                        }
+                                                                        position={
+                                                                            index +
+                                                                            1
+                                                                        }
+                                                                    />
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="recipe-detail-favourite-button"
+                                                        onClick={isFavourite}
+                                                    >
+                                                        {favourite ? (
+                                                            <FaHeart />
+                                                        ) : (
+                                                            <FaRegHeart />
+                                                        )}
+                                                        <p>Love it!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div className="recipe-detail-section">
+                                        <div className="recipe-detail-steps">
+                                            <h2>Steps</h2>
+                                            <div className="recipe-steps-content">
+                                                {recipeData.foodSteps.map(
+                                                    (step, index) => (
+                                                        <Step
+                                                            key={index}
+                                                            step={step}
+                                                            position={index + 1}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div className="recipe-detail-section">
+                                        <div className="recipe-detail-comments">
+                                            <div className="user-comment">
+                                                {/* <div className="creator-avatar">
+                                            <img src={edamam}></img>
+                                        </div> */}
+                                                <textarea></textarea>
+                                                <button className="btn-cmt">
+                                                    Post your comment
+                                                </button>
+                                            </div>
+                                            <h2>
+                                                {avoid.length + " Comments "}
+                                            </h2>
+                                            <div className="recipe-comments-content">
+                                                {avoid.map(
+                                                    (avoidPlace, index) => (
+                                                        <Comment
+                                                            key={index}
+                                                            comment={avoidPlace}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

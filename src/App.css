@@ -165,6 +165,7 @@ ul {
 /* Loading icon */
 
 .loading-holder {
+    position: relative;
     margin: 5%;
     width: 90%;
     display: flex;
@@ -185,6 +186,12 @@ ul {
     to {
         transform: rotate(360deg);
     }
+}
+
+.loading-holder img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
 }
 
 /* Loading icon end */
@@ -358,7 +365,7 @@ header .border:hover {
     text-align: center;
     padding: 1%;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
