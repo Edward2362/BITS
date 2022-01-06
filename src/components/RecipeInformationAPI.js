@@ -60,24 +60,71 @@ const RecipeInformationAPI = (prop) => {
         "?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
 
     var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint5 = "http://localhost:9000/customer/removeFavoriteRecipe";
+    var endPoint6 = "http://localhost:9000/customer/customerFoodIn/";
+
     const load = () => {
-        fetch(endPoint)
-            .then((response) => response.json())
-            .then((fetchResult) => {
-                console.log(fetchResult.recipe);
-                let fetched = fetchResult.recipe;
-                console.log(fetched);
-                setName(fetched.label);
-                console.log("name", name);
-                setImg(fetched.image);
-                console.log("image", img);
-                setIngredients(fetched.ingredientLines);
-                console.log("ingredient", ingredients);
-                let labelsArr = fetched.dietLabels.concat(fetched.healthLabels);
-                setLabels(labelsArr);
-                setTimeout(setDone(true), 3000);
-            });
-    };
+		fetch(endPoint)
+			.then((response) => response.json())
+			.then((fetchResult) => {
+				if (null !== window.sessionStorage.getItem("userID")) {
+					fetch(
+						endPoint6 +
+							window.sessionStorage.getItem("userID") +
+							"/" +
+							id,
+						{
+							method: "GET",
+							headers: {
+								"x-access-token":
+									window.sessionStorage.getItem("userToken"),
+							},
+						}
+					)
+						.then((response2) => response2.json())
+						.then((placeData) => {
+							if (undefined !== placeData[0].invalid) {
+								navigate("/");
+								prop.renew();
+							} else {
+								if (undefined === placeData[0].customer) {
+									setFavourite(true);
+								} else {
+									setFavourite(false);
+								}
+								console.log(fetchResult.recipe);
+								let fetched = fetchResult.recipe;
+								console.log(fetched);
+								setName(fetched.label);
+								console.log("name", name);
+								setImg(fetched.image);
+								console.log("image", img);
+								setIngredients(fetched.ingredientLines);
+								console.log("ingredient", ingredients);
+								let labelsArr = fetched.dietLabels.concat(
+									fetched.healthLabels
+								);
+								setLabels(labelsArr);
+							}
+						});
+				} else {
+					console.log(fetchResult.recipe);
+					let fetched = fetchResult.recipe;
+					console.log(fetched);
+					setName(fetched.label);
+					console.log("name", name);
+					setImg(fetched.image);
+					console.log("image", img);
+					setIngredients(fetched.ingredientLines);
+					console.log("ingredient", ingredients);
+					let labelsArr = fetched.dietLabels.concat(
+						fetched.healthLabels
+					);
+					setLabels(labelsArr);
+				}
+				setTimeout(setDone(true), 3000);
+			});
+	};
     useEffect(load, []);
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
@@ -145,6 +192,25 @@ const RecipeInformationAPI = (prop) => {
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint5, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: id,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint2, {
                     method: "POST",

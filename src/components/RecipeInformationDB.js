@@ -50,6 +50,7 @@ const RecipeInformationDB = (prop) => {
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
     var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint7 = "http://localhost:9000/customer/removeFavoriteRecipe";
 
     const [favourite, setFavourite] = useState(false);
 
@@ -142,6 +143,25 @@ const RecipeInformationDB = (prop) => {
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint7, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: recipeData.foodId,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint3, {
                     method: "POST",

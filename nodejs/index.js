@@ -180,6 +180,22 @@ function foodIndex(arr, foodId) {
     return result;
 }
 
+var findIndexElement = (array, value) => {
+	var result = -1;
+	if (0 != array.length) {
+		for (let i = 0; i < array.length; ++i) {
+			if (value.foodId == array[i].foodId) {
+				if (value.provider == array[i].provider) {
+					result = i;
+				}
+			}
+		}
+	} else {
+		result = -1;
+	}
+	return result;
+};
+
 app.get("/customers", function (req, res) {
     Customer.find({}, function (err, customers) {
         res.send(customers);
@@ -487,7 +503,7 @@ app.post(
 
                 Customer.findOneAndUpdate(
                     { customerId: customers[0].customerId },
-                    { $set: result },
+                    { $set: { food: result } },
                     { new: true },
                     function (error, placeCustomers) {
                         response.send([{ result: "Customers" }]);
@@ -497,6 +513,26 @@ app.post(
         );
         
     }
+);
+
+app.post(
+	"/customer/removeFavoriteRecipe",
+	tokenVerified,
+	function (req, response) {
+		Customer.find({ customerId: req.body.customerId }, function (err, customers) {
+			var customerfood = customers[0].food;
+			var findIndex = findIndexElement(customerfood, req.body.foodId);
+			customerfood.splice(findIndex, 1);
+			Customer.findOneAndUpdate(
+				{ customerId: req.body.customerId },
+				{ $set: { food: customerfood } },
+				{ new: true },
+				function (ok, customerfood) {
+					response.send([{ result: "Customers" }]);
+				}
+			);
+		});
+	}
 );
 
 app.get("/food", function (req, response) {
