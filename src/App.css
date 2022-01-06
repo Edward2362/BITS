@@ -1811,6 +1811,13 @@ header .border:hover {
     border-color: #9e2a2b;
 }
 
+.btn-cmt:disabled,
+.btn-cmt:disabled:hover {
+    background-color: gray;
+    border-color: gray;
+    cursor: default;
+}
+
 /* Comment */
 
 .comment {

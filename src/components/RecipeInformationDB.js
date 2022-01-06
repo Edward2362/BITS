@@ -50,6 +50,7 @@ const RecipeInformationDB = (prop) => {
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
     var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint6 = "http://localhost:9000/customer/removeFavoriteRecipe";
 
     var endPoint4 = "http://localhost:9000/commentsAvoid/";
 
@@ -173,6 +174,25 @@ const RecipeInformationDB = (prop) => {
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint6, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: recipeData.foodId,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint3, {
                     method: "POST",
@@ -227,6 +247,7 @@ const RecipeInformationDB = (prop) => {
                     if (undefined !== data[0].invalid) {
                     } else {
                         setAvoid(data[0].result);
+                        setCommentDescription("");
                     }
                 });
         }
@@ -362,6 +383,12 @@ const RecipeInformationDB = (prop) => {
                                                 <button
                                                     className="btn-cmt"
                                                     onClick={commentPost}
+                                                    disabled={
+                                                        commentDescription ===
+                                                        ""
+                                                            ? true
+                                                            : false
+                                                    }
                                                 >
                                                     Post your comment
                                                 </button>

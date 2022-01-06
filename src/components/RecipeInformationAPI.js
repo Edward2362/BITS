@@ -70,21 +70,68 @@ const RecipeInformationAPI = (prop) => {
     var endPoint3 = "http://localhost:9000/commentsAvoid/";
     var endPoint4 = "http://localhost:9000/avoidComment";
     var endPoint7 = "http://localhost:9000/customer/";
+    var endPoint5 = "http://localhost:9000/customer/removeFavoriteRecipe";
+    var endPoint6 = "http://localhost:9000/customer/customerFoodIn/";
+
     const load = () => {
         fetch(endPoint)
             .then((response) => response.json())
             .then((fetchResult) => {
-                console.log(fetchResult.recipe);
-                let fetched = fetchResult.recipe;
-                console.log(fetched);
-                setName(fetched.label);
-                console.log("name", name);
-                setImg(fetched.image);
-                console.log("image", img);
-                setIngredients(fetched.ingredientLines);
-                console.log("ingredient", ingredients);
-                let labelsArr = fetched.dietLabels.concat(fetched.healthLabels);
-                setLabels(labelsArr);
+                if (null !== window.sessionStorage.getItem("userID")) {
+                    fetch(
+                        endPoint6 +
+                            window.sessionStorage.getItem("userID") +
+                            "/" +
+                            id,
+                        {
+                            method: "GET",
+                            headers: {
+                                "x-access-token":
+                                    window.sessionStorage.getItem("userToken"),
+                            },
+                        }
+                    )
+                        .then((response2) => response2.json())
+                        .then((placeData) => {
+                            if (undefined !== placeData[0].invalid) {
+                                navigate("/");
+                                prop.renew();
+                            } else {
+                                if (undefined === placeData[0].customer) {
+                                    setFavourite(true);
+                                } else {
+                                    setFavourite(false);
+                                }
+                                console.log(fetchResult.recipe);
+                                let fetched = fetchResult.recipe;
+                                console.log(fetched);
+                                setName(fetched.label);
+                                console.log("name", name);
+                                setImg(fetched.image);
+                                console.log("image", img);
+                                setIngredients(fetched.ingredientLines);
+                                console.log("ingredient", ingredients);
+                                let labelsArr = fetched.dietLabels.concat(
+                                    fetched.healthLabels
+                                );
+                                setLabels(labelsArr);
+                            }
+                        });
+                } else {
+                    console.log(fetchResult.recipe);
+                    let fetched = fetchResult.recipe;
+                    console.log(fetched);
+                    setName(fetched.label);
+                    console.log("name", name);
+                    setImg(fetched.image);
+                    console.log("image", img);
+                    setIngredients(fetched.ingredientLines);
+                    console.log("ingredient", ingredients);
+                    let labelsArr = fetched.dietLabels.concat(
+                        fetched.healthLabels
+                    );
+                    setLabels(labelsArr);
+                }
                 setTimeout(setDone(true), 3000);
             });
     };
@@ -132,6 +179,7 @@ const RecipeInformationAPI = (prop) => {
                     if (undefined !== data[0].invalid) {
                     } else {
                         setAvoid(data[0].result);
+                        setCommentDescription("");
                     }
                 });
         }
@@ -142,6 +190,7 @@ const RecipeInformationAPI = (prop) => {
         placeLoad();
         customerLoad();
     }, []);
+
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
@@ -212,6 +261,25 @@ const RecipeInformationAPI = (prop) => {
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint5, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: id,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint2, {
                     method: "POST",
@@ -362,6 +430,12 @@ const RecipeInformationAPI = (prop) => {
                                                 <button
                                                     className="btn-cmt"
                                                     onClick={commentPost}
+                                                    disabled={
+                                                        commentDescription ===
+                                                        ""
+                                                            ? true
+                                                            : false
+                                                    }
                                                 >
                                                     Post your comment
                                                 </button>
