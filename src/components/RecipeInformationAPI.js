@@ -87,6 +87,8 @@ const RecipeInformationAPI = () => {
 
 
         var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
+        var endPoint3 = "";
+        var endPoint4 = "";
     const load = () => {
         fetch(endPoint)
             .then((response) => response.json())
@@ -104,7 +106,100 @@ const RecipeInformationAPI = () => {
                 setLabels(labelsArr);
             });
     };
-    useEffect(load, []);
+
+
+
+
+
+
+
+    const placeLoad = () => {
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        fetch(endPoint3)
+        .then(response=>response.json())
+        .then(data => {
+            setAvoid(data[0].result);
+        });
+    };
+
+    const commentPost = () => {
+
+        var commentDate = new Date();
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (null === window.sessionStorage.getItem("userID")) {
+
+            navigate("/");
+            prop.renew();
+        } else {
+
+            fetch(endPoint4, {
+                method: "POST",
+                headers: {
+                    "x-access-token": window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({commentDescription: commentDescription, customerId: window.sessionStorage.getItem("userID"), foodId: id})
+            }).then(response=>response.json())
+            .then(data => {
+                
+                if (undefined !== data[0].invalid) {
+    
+                } else {
+                    setAvoid(data[0].result);
+                }
+            });
+        }
+    };
+
+    useEffect(() => {
+        load();
+        placeLoad();
+    }, []);
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
@@ -154,6 +249,116 @@ const RecipeInformationAPI = () => {
             },
         ],
     });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [avoid, setAvoid] = useState([]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [commentDescription, setCommentDescription] = useState("");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 
@@ -925,7 +1130,7 @@ const RecipeInformationAPI = () => {
                                             {/* <div className="creator-avatar">
                                                 <img src={edamam}></img>
                                             </div> */}
-                                            <textarea></textarea>
+                                            <textarea value={commentDescription} onChange={(e) => {e.target.value}} ></textarea>
                                             <button className="btn-cmt">
                                                 Post your comment
                                             </button>

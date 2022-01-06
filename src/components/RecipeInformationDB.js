@@ -48,6 +48,94 @@ const RecipeInformationDB = (prop) => {
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
     var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var endPoint4 = "http://localhost:9000/commentsAvoid/";
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var endPoint5 = "http://localhost:9000/avoidComment";
 
     const [favourite, setFavourite] = useState(false);
 
@@ -94,6 +182,211 @@ const RecipeInformationDB = (prop) => {
     });
 
     const [avoid, setAvoid] = useState([]);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [commentDescription, setCommentDescription] = useState("");
 
     const load = () => {
         fetch(endPoint + id)
@@ -173,6 +466,136 @@ const RecipeInformationDB = (prop) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const placeLoad = () => {
+        fetch(endPoint4 + recipeData.foodId)
+        .then(response => response.json())
+        .then(data => {
+            setAvoid(data[0].result);
+        });
+    };
 
 
 
@@ -448,7 +871,155 @@ const RecipeInformationDB = (prop) => {
         }
     };
 
-    useEffect(load, []);
+
+    const commentPost = () => {
+
+
+        var commentDate = new Date();
+        
+
+        if (null === window.sessionStorage.getItem("userID")) {
+
+            navigate("/");
+            prop.renew();
+        } else {
+
+            fetch(endPoint5, {
+                method: "POST",
+                headers: {
+                    "x-access-token": window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({commentDescription: commentDescription, customerId: window.sessionStorage.getItem("userID"), foodId: recipeData.foodId, commentDate: commentDate})
+            }).then(response=>response.json())
+            .then(data => {
+    
+                
+    
+    
+                if (undefined !== data[0].invalid) {
+    
+                } else {
+                    setAvoid(data[0].result);
+                }
+            });
+        }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+        load();
+        placeLoad();
+    }, []);
 
     return (
         <>
@@ -564,8 +1135,8 @@ const RecipeInformationDB = (prop) => {
                                             {/* <div className="creator-avatar">
                                                 <img src={edamam}></img>
                                             </div> */}
-                                            <textarea></textarea>
-                                            <button className="btn-cmt">
+                                            <textarea value={commentDescription} onChange={(e) => {setCommentDescription(e.target.value)}} ></textarea>
+                                            <button className="btn-cmt" onClick={commentPost}>
                                                 Post your comment
                                             </button>
                                         </div>

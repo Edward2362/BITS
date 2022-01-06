@@ -50,6 +50,16 @@ var FoodSchema = new mongoose.Schema({
 
 var Food = mongoose.model("Food", FoodSchema);
 
+var CommentSchema = new mongoose.Schema({
+    commentId: String,
+    commentDescription: String,
+    commentDate: Date,
+    customerId: String,
+    foodId: String
+});
+
+var Comment = mongoose.model("Comment", CommentSchema);
+
 function signInGoogle(passport) {
     passport.use(
         new GoogleStrategy(
@@ -512,9 +522,11 @@ app.post(
     "/customer/customerFoodInArray",
     tokenVerified,
     function (req, response) {
+        var customerId = req.body.customerId;
         Customer.find(
-            { customerId: req.body.customerId },
+            { customerId: customerId },
             function (err, customers) {
+                
                 var food = req.body;
                 var result = [];
                 delete food.customerId;
@@ -523,8 +535,8 @@ app.post(
                 result.push(food);
 
                 Customer.findOneAndUpdate(
-                    { customerId: customers[0].customerId },
-                    { $set: result },
+                    { customerId: customerId },
+                    { $set: {food: result} },
                     { new: true },
                     function (error, placeCustomers) {
                         response.send([{ result: "Customers" }]);
@@ -832,6 +844,741 @@ app.delete("/food", tokenVerified, function (req, response) {
             );
         }
     );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/comments", function(req, response) {
+    Comment.find({}, function(err, comments) {
+        response.send(comments);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("commentsAvoid/:id", function(req, response) {
+    Comment.find({foodId: req.params.id}, async function(err, comments) {
+        
+
+
+        var result = [];
+        for (let i = 0; i < comments.length; ++i) {
+            var commentAvoid = {};
+            
+            
+            await Customer.find({customerId: comments[i].customerId}, function(error, customers) {
+                commentAvoid = comments[i];
+                commentAvoid.customerLastName = customers[0].lastName;
+                result.push(commentAvoid);
+            });
+        }
+        response.send([{result: result}]);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/comment", function(req, response) {
+    Comment.create(req.body, function(err, comment) {
+        response.send(comment);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/avoidComment", tokenVerified, function(req, response) {
+    Comment.find({}, function(err, comments) {
+        var count = 0;
+        
+        for (let i = 0; i < comments.length; ++i) {
+            if (count < parseInt(comments[i].commentId.split("-")[1])) {
+                
+
+
+
+
+
+
+
+                count = parseInt(comments[i].commentId.split("-")[1]);
+            }
+        }
+
+        count = count + 1;
+
+        var commentId = "COMMENT-";
+        commentId = commentId + count;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Comment.create({commentId: commentId, commentDescription: req.body.commentDescription, commentDate: req.body.commentDate, customerId: req.body.customerId, foodId: req.body.foodId}, function(error, avoidComment) {
+            response.send([{result: "Avoid"}]);
+            Comment.find({foodId: req.body.foodId}, async function(avoidError, avoidComments) {
+        
+
+
+                var result = [];
+                for (let i = 0; i < avoidComments.length; ++i) {
+                    var commentAvoid = {};
+                    
+                    
+                    await Customer.find({customerId: avoidComments[i].customerId}, function(placeError, customers) {
+                        commentAvoid = avoidComments[i];
+                        commentAvoid.customerLastName = customers[0].lastName;
+                        result.push(commentAvoid);
+                    });
+                }
+                response.send([{result: result}]);
+            });
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.delete("/comment/:id", function(req, response) {
+    Comment.deleteOne({commentId: req.params.id}, function(err, customer) {
+        
+        response.send(comment);
+    });
 });
 
 app.listen(9000);

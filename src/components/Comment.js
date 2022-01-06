@@ -11,10 +11,10 @@ const Comment = ({ comment }) => {
             </div>
             <div className="comment-information">
                 <div className="comment-owner-with-date">
-                    <p>{comment.userName}</p>
-                    <p>{comment.date}</p>
+                    <p>{comment.customerLastName}</p>
+                    <p>{comment.commentDate.toString()}</p>
                 </div>
-                <p>{comment.information}</p>
+                <p>{comment.commentDescription}</p>
             </div>
         </div>
     );
