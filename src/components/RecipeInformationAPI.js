@@ -53,6 +53,13 @@ const RecipeInformationAPI = (prop) => {
     const [img, setImg] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [labels, setLabels] = useState([]);
+    const [customer, setCustomer] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+    });
     console.log(id);
     var endPoint =
         "https://api.edamam.com/api/recipes/v2/" +
@@ -60,6 +67,9 @@ const RecipeInformationAPI = (prop) => {
         "?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
 
     var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint3 = "http://localhost:9000/commentsAvoid/";
+    var endPoint4 = "http://localhost:9000/avoidComment";
+    var endPoint7 = "http://localhost:9000/customer/";
     const load = () => {
         fetch(endPoint)
             .then((response) => response.json())
@@ -78,7 +88,60 @@ const RecipeInformationAPI = (prop) => {
                 setTimeout(setDone(true), 3000);
             });
     };
-    useEffect(load, []);
+
+    const placeLoad = () => {
+        fetch(endPoint3 + id)
+            .then((response) => response.json())
+            .then((data) => {
+                setAvoid(data[0].result);
+            });
+    };
+    const customerLoad = () => {
+        fetch(endPoint7 + window.sessionStorage.getItem("userID"))
+            .then((response) => response.json())
+            .then((data) => {
+                setCustomer(data[0]);
+            });
+    };
+
+    const commentPost = () => {
+        var commentDate = new Date();
+
+        if (null === window.sessionStorage.getItem("userID")) {
+            navigate("/");
+            prop.renew();
+        } else {
+            fetch(endPoint4, {
+                method: "POST",
+                headers: {
+                    "x-access-token":
+                        window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    commentDescription: commentDescription,
+                    customerId: window.sessionStorage.getItem("userID"),
+                    foodId: id,
+                    customerLastName: customer.lastName,
+                    customerFirstName: customer.firstName,
+                    commentDate: commentDate,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (undefined !== data[0].invalid) {
+                    } else {
+                        setAvoid(data[0].result);
+                    }
+                });
+        }
+    };
+
+    useEffect(() => {
+        load();
+        placeLoad();
+        customerLoad();
+    }, []);
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
@@ -138,6 +201,10 @@ const RecipeInformationAPI = (prop) => {
             },
         ],
     });
+
+    const [avoid, setAvoid] = useState([]);
+
+    const [commentDescription, setCommentDescription] = useState("");
 
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
@@ -284,8 +351,18 @@ const RecipeInformationAPI = (prop) => {
                                                 {/* <div className="creator-avatar">
                                                 <img src={edamam}></img>
                                             </div> */}
-                                                <textarea></textarea>
-                                                <button className="btn-cmt">
+                                                <textarea
+                                                    value={commentDescription}
+                                                    onChange={(e) => {
+                                                        setCommentDescription(
+                                                            e.target.value
+                                                        );
+                                                    }}
+                                                ></textarea>
+                                                <button
+                                                    className="btn-cmt"
+                                                    onClick={commentPost}
+                                                >
                                                     Post your comment
                                                 </button>
                                             </div>
@@ -294,14 +371,12 @@ const RecipeInformationAPI = (prop) => {
                                                     " Comments "}
                                             </h2>
                                             <div className="recipe-comments-content">
-                                                {recipeData.comments.map(
-                                                    (comment, index) => (
-                                                        <Comment
-                                                            key={index}
-                                                            comment={comment}
-                                                        />
-                                                    )
-                                                )}
+                                                {avoid.map((comment, index) => (
+                                                    <Comment
+                                                        key={index}
+                                                        comment={comment}
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
                                     </div>

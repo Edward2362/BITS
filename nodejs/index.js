@@ -50,6 +50,18 @@ var FoodSchema = new mongoose.Schema({
 
 var Food = mongoose.model("Food", FoodSchema);
 
+var CommentSchema = new mongoose.Schema({
+    commentId: String,
+    commentDescription: String,
+    commentDate: Date,
+    customerId: String,
+    customerLastName: String,
+    customerFirstName: String,
+    foodId: String,
+});
+
+var Comment = mongoose.model("Comment", CommentSchema);
+
 function signInGoogle(passport) {
     passport.use(
         new GoogleStrategy(
@@ -475,27 +487,24 @@ app.post(
     "/customer/customerFoodInArray",
     tokenVerified,
     function (req, response) {
-        Customer.find(
-            { customerId: req.body.customerId },
-            function (err, customers) {
-                var food = req.body;
-                var result = [];
-                delete food.customerId;
+        var customerId = req.body.customerId;
+        Customer.find({ customerId: customerId }, function (err, customers) {
+            var food = req.body;
+            var result = [];
+            delete food.customerId;
 
-                result = result.concat(customers[0].food);
-                result.push(food);
+            result = result.concat(customers[0].food);
+            result.push(food);
 
-                Customer.findOneAndUpdate(
-                    { customerId: customers[0].customerId },
-                    { $set: result },
-                    { new: true },
-                    function (error, placeCustomers) {
-                        response.send([{ result: "Customers" }]);
-                    }
-                );
-            }
-        );
-        
+            Customer.findOneAndUpdate(
+                { customerId: customerId },
+                { $set: { food: result } },
+                { new: true },
+                function (error, placeCustomers) {
+                    response.send([{ result: "Customers" }]);
+                }
+            );
+        });
     }
 );
 
@@ -796,6 +805,74 @@ app.delete("/food", tokenVerified, function (req, response) {
             );
         }
     );
+});
+
+app.get("/comments", function (req, response) {
+    Comment.find({}, function (err, comments) {
+        response.send(comments);
+    });
+});
+
+app.get("/commentsAvoid/:id", function (req, response) {
+    Comment.find(
+        { foodId: req.params.id },
+        null,
+        { sort: { commentDate: -1 } },
+        function (err, comments) {
+            response.send([{ result: comments }]);
+        }
+    );
+});
+
+app.post("/comment", function (req, response) {
+    Comment.create(req.body, function (err, comment) {
+        response.send(comment);
+    });
+});
+
+app.post("/avoidComment", tokenVerified, function (req, response) {
+    Comment.find({}, function (err, comments) {
+        var count = 0;
+
+        for (let i = 0; i < comments.length; ++i) {
+            if (count < parseInt(comments[i].commentId.split("-")[1])) {
+                count = parseInt(comments[i].commentId.split("-")[1]);
+            }
+        }
+
+        count = count + 1;
+
+        var commentId = "COMMENT-";
+        commentId = commentId + count;
+
+        Comment.create(
+            {
+                commentId: commentId,
+                commentDescription: req.body.commentDescription,
+                customerLastName: req.body.customerLastName,
+                customerFirstName: req.body.customerFirstName,
+                commentDate: req.body.commentDate,
+                customerId: req.body.customerId,
+                foodId: req.body.foodId,
+            },
+            function (error, avoidComment) {
+                Comment.find(
+                    { foodId: req.body.foodId },
+                    null,
+                    { sort: { commentDate: -1 } },
+                    function (avoidError, avoidComments) {
+                        response.send([{ result: avoidComments }]);
+                    }
+                );
+            }
+        );
+    });
+});
+
+app.delete("/comment/:id", function (req, response) {
+    Comment.deleteOne({ commentId: req.params.id }, function (err, customer) {
+        response.send(comment);
+    });
 });
 
 app.listen(9000);

@@ -1,6 +1,12 @@
 import React from "react";
 
 const Comment = ({ comment }) => {
+    var options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    };
     return (
         <div className="comment">
             <div className="comment-owner-avatar">
@@ -11,10 +17,19 @@ const Comment = ({ comment }) => {
             </div>
             <div className="comment-information">
                 <div className="comment-owner-with-date">
-                    <p>{comment.userName}</p>
-                    <p>{comment.date}</p>
+                    <p>
+                        {comment.customerFirstName +
+                            " " +
+                            comment.customerLastName}
+                    </p>
+                    <p>
+                        {new Date(comment.commentDate).toLocaleDateString(
+                            "en-US",
+                            options
+                        )}
+                    </p>
                 </div>
-                <p>{comment.information}</p>
+                <p>{comment.commentDescription}</p>
             </div>
         </div>
     );
