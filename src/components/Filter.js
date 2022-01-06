@@ -22,6 +22,10 @@ export const Filter = ({
         "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
     var endPoint2 = "http://localhost:9000/placeFood";
 
+    const [findInCommunity, setFindByCommunity] = useState(
+        sessionStorage.getItem("findInCommunity") ? true : false
+    );
+
     const [findByCourse, setFindByCourse] = useState(false);
     const [calories, setCalories] = useState({ from: "", to: "" });
     const [ingredientUpTo, setIngredientUpTo] = useState("");
@@ -400,16 +404,20 @@ export const Filter = ({
         <div className="filter">
             <div className="filter-header">
                 <h2>Filter</h2>
-                <label className="checkbox-label">
-                    By Courses
-                    <input
-                        type="checkbox"
-                        id="find-course"
-                        checked={findByCourse}
-                        onClick={(e) => findCourses(e)}
-                        onChange={onChange}
-                    ></input>
-                </label>
+                {findInCommunity ? (
+                    <></>
+                ) : (
+                    <label className="checkbox-label">
+                        By Courses
+                        <input
+                            type="checkbox"
+                            id="find-course"
+                            checked={findByCourse}
+                            onClick={(e) => findCourses(e)}
+                            onChange={onChange}
+                        ></input>
+                    </label>
+                )}
             </div>
 
             <div className="filter-section">

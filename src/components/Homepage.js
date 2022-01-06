@@ -154,7 +154,7 @@ const HomepageBody = () => {
                         <div className="section-header">
                             <div className="sn-header-body">
                                 <BiDish />
-                                <h1>Restcipe</h1>
+                                <h1>Availability</h1>
                                 <hr />
                             </div>
                         </div>
