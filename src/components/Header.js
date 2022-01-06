@@ -36,6 +36,7 @@ const Header = () => {
             setFindInCommunity(false);
         } else {
             sessionStorage.setItem("findInCommunity", true);
+            sessionStorage.removeItem("findByCourse");
             e.target.parentElement.classList.add("checked");
             setFindInCommunity(true);
         }

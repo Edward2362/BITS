@@ -1,7 +1,7 @@
 import React from "react";
 import { FiHexagon } from "react-icons/fi";
 import { BiDish } from "react-icons/bi";
-import img1 from "../img/bg.jpg";
+import img1 from "../img/Laptop.png";
 
 const HomepageBody = () => {
     const reveal = () => {
@@ -154,7 +154,7 @@ const HomepageBody = () => {
                         <div className="section-header">
                             <div className="sn-header-body">
                                 <BiDish />
-                                <h1>Availability</h1>
+                                <h1>Available on PC</h1>
                                 <hr />
                             </div>
                         </div>
@@ -165,27 +165,13 @@ const HomepageBody = () => {
                                 </div>
                             </div>
                             <div className="sn-body-equal-half">
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
-                                    </div>
+                                <div className="available-body">
+                                    <h2>User feedback</h2>
+                                    <p>
+                                        Hello random shit is hererandom shit is
+                                        hererandom shit is hererandom shit is
+                                        here
+                                    </p>
                                 </div>
                             </div>
                         </div>

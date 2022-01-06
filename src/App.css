@@ -109,7 +109,8 @@ section {
     width: 100%;
     padding-top: 2%;
     height: 100%;
-    align-items: center;
+    /* align-items: center; */
+    display: flex;
 }
 
 .sn-body-equal-half {
@@ -712,6 +713,18 @@ header .border:hover {
     color: red;
 }
 
+.available-body {
+    padding: 0 20%;
+    width: 60%;
+}
+
+.available-body h2 {
+    color: #e09f3e;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
 /* Homepage end */
 
 /* Other pages form */
@@ -953,7 +966,8 @@ header .border:hover {
     height: 220px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
     cursor: pointer;
     top: 0;
     transition: top 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -962,8 +976,10 @@ header .border:hover {
 
 .recipe-card:hover {
     top: -15px;
-    box-shadow: 0 20px 8px 5px rgba(0, 0, 0, 0.25),
-        0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 30px -10px;
+
+    /* box-shadow: 0 20px 8px 5px rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .recipe-card-body {
