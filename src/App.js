@@ -1,8 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import img1 from "./img/bg.jpg";
-import img2 from "./img/searchIcon.svg";
-import img3 from "./img/logormit.png";
 import Header from "./components/Header";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";

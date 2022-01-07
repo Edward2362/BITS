@@ -1,6 +1,5 @@
 import logo1 from "../img/Restcipe-1.svg";
 import logo2 from "../img/Restcipe-2.svg";
-import searchIcon from "../img/searchIcon.svg";
 import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";

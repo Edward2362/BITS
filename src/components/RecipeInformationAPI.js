@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import test from "../img/bg.jpg";
 import Ingredient from "./Ingredient";
 import Step from "./Step";
 import edamam from "../img/edamam-logo.png";
@@ -7,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import logo from "../img/Restcipe-4.svg";
 
 const RecipeInformationAPI = (prop) => {

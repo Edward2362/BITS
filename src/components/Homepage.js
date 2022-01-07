@@ -1,7 +1,6 @@
 import React from "react";
 import { HiOutlinePresentationChartLine } from "react-icons/hi";
 import { BiDish } from "react-icons/bi";
-import { AiOutlineAreaChart } from "react-icons/ai";
 import { RiDoubleQuotesR } from "react-icons/ri";
 import wife from "../img/wife.jpg";
 import img1 from "../img/Laptop.png";
@@ -27,19 +26,20 @@ const HomepageBody = () => {
 
     const count_converter = (counter) => {
         var result = "";
+        var arr = [];
 
         if (typeof counter == "string") {
-            var arr = counter.split(".");
+            arr = counter.split(".");
             for (let i = 0; i < arr.length; i++) {
                 result += arr[i];
             }
         } else {
             var string_counter = counter.toString();
-            var arr = string_counter.split("");
+            arr = string_counter.split("");
             let count = arr.length;
             for (let i = 0; i < arr.length; i++) {
                 if (arr.length >= 4) {
-                    if (count % 3 == 0) {
+                    if (count % 3 === 0) {
                         result += ".";
                     }
                 }
@@ -81,6 +81,12 @@ const HomepageBody = () => {
             }
         });
     });
+
+    // var a = "test";
+
+    // a = a === "test" && "a Hao";
+
+    // console.log("test nef", a);
 
     return (
         <>
@@ -164,7 +170,7 @@ const HomepageBody = () => {
                         <div className="section-body">
                             <div className="sn-body-equal-half">
                                 <div className="img-holder">
-                                    <img src={img1}></img>
+                                    <img src={img1} alt="PC-demo"></img>
                                 </div>
                             </div>
                             <div className="sn-body-equal-half">

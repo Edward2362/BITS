@@ -1,6 +1,5 @@
 import React from "react";
 import Recipe from "./Recipe";
-import { recipes } from "./fakedata";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +53,9 @@ const Profile = (prop) => {
                     });
             });
     };
+
     useEffect(load, []);
+
     return (
         <>
             <div className="page-header">
@@ -80,7 +81,7 @@ const Profile = (prop) => {
                         <div className="white-bg">
                             {!done ? (
                                 <div className="loading-holder">
-                                    <img src={logo}></img>
+                                    <img src={logo} alt="loading-gif"></img>
                                     <div className="loading"></div>
                                 </div>
                             ) : (

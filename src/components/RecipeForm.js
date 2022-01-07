@@ -395,7 +395,7 @@ export const RecipeForm = (prop) => {
                                 <input
                                     type="checkbox"
                                     id="immunity"
-                                    value="Immunity"
+                                    value="Immuno-supportive"
                                     onChange={(e) => handleChoose(e)}
                                 ></input>
                             </label>
