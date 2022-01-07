@@ -163,7 +163,7 @@ const HomepageBody = () => {
                         <div className="section-header">
                             <div className="sn-header-body">
                                 <HiOutlinePresentationChartLine />
-                                <h1>User About Messenger</h1>
+                                <h1>User Feedback</h1>
                                 <hr />
                             </div>
                         </div>
