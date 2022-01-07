@@ -435,6 +435,41 @@ header .border:hover {
 
 /* Header end */
 
+/* About Starts */
+
+.personal-info {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 3% 5%;
+}
+
+.avatar-about {
+    display: inline-block;
+    height: 120px;
+}
+
+.avatar-about img {
+    display: inline-block;
+    align-content: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: 3px solid #9e2a2b;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.personal-desc {
+    width: inherit;
+    margin-left: 2%;
+    padding-left: 2%;
+    text-align: justify;
+    border-left: 1px solid black;
+}
+
+/* About Ends */
+
 /* Sign in - up */
 
 .body {
@@ -454,11 +489,11 @@ header .border:hover {
 .login-block {
     display: inline-block;
     width: inherit;
+    height: 300px;
     position: relative;
     border: 2px solid transparent;
     border-radius: 10px;
     text-align: center;
-    height: 300px;
     align-self: center;
     background-color: white;
     box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
@@ -475,11 +510,10 @@ header .border:hover {
 }
 
 .login-block-content {
-    padding: 10px;
 }
 
 .form-control {
-    margin: 10px 0;
+    margin: 10px 0 5px;
     font-size: larger;
 }
 
@@ -489,7 +523,8 @@ header .border:hover {
     width: inherit;
 }
 
-.btn {
+.btn,
+.btn-disabled {
     display: inline-block;
     background: #e09f3e;
     color: #fff;
@@ -510,6 +545,11 @@ header .border:hover {
     cursor: pointer;
     background-color: #9e2a2b;
     border-color: #9e2a2b;
+}
+.btn:disabled:hover {
+    background: grey;
+    color: #fff;
+    cursor: default;
 }
 
 .btn input {
@@ -547,7 +587,7 @@ header .border:hover {
     border: 2px solid transparent;
     border-radius: 10px;
     text-align: center;
-    height: 335px;
+    padding-bottom: 10px;
     align-self: center;
     background-color: white;
     box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
@@ -560,6 +600,27 @@ header .border:hover {
     float: center;
 }
 
+.login-error-msg {
+    display: flex;
+    font-size: 12px;
+    color: red;
+    padding-top: 5px;
+    width: inherit;
+    margin: 0 23.25px;
+    justify-content: center;
+    text-align: justify;
+}
+
+.error-msg {
+    display: flex;
+    font-size: 12px;
+    color: red;
+    padding-top: 3px;
+    width: inherit;
+    margin: 0 23.25px;
+    justify-content: center;
+    text-align: justify;
+}
 /* Sign in - up end */
 
 /* Ad */
@@ -1198,8 +1259,8 @@ header .border:hover {
 
 .ForgotZone {
     display: flex;
-    height: 225px;
-    width: 40%;
+    height: 175px;
+    width: 30%;
     font-size: larger;
     justify-content: center;
     flex-direction: column;

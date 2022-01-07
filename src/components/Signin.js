@@ -6,6 +6,8 @@ const Signin = (prop) => {
     let navigate = useNavigate();
     const [customerUsername, setCustomerUsername] = useState("");
     const [customerPassword, setCustomerPassword] = useState("");
+    const [checkLogin, setCheckLogin] = useState(false);
+    const [loginErrorMsg, setLoginErrorMsg] = useState("");
     var endPoint = "http://localhost:9000/customer/signin";
 
     if (sessionStorage.getItem("userID")) {
@@ -27,7 +29,13 @@ const Signin = (prop) => {
             .then((response) => response.json())
             .then((data) => {
                 if (undefined !== data[0].invalid) {
+                    setCheckLogin(false);
+                    validateLogin();
+                    console.log(checkLogin);
                 } else {
+                    setCheckLogin(true);
+                    validateLogin();
+                    console.log(checkLogin);
                     window.sessionStorage.setItem("userID", data[0].customerId);
                     window.sessionStorage.setItem("userToken", data[0].token);
                     navigate("/");
@@ -53,12 +61,25 @@ const Signin = (prop) => {
         // store returned user somehow
     };
 
+    const validateLogin = (e) => {
+        if (checkLogin === false) {
+            setLoginErrorMsg("Wrong username or password!");
+        } else {
+            setLoginErrorMsg("");
+        }
+    };
+
+    const loginFunction = (e) => {
+        signin(e);
+    };
+
     return (
         <div id="content" className="container">
             <div className="body">
                 <div className="container">
                     <div className="login-block">
                         <p>Account Login</p>
+                        <div className="login-error-msg">{loginErrorMsg}</div>
                         <div className="login-block-content">
                             <div className="form-control">
                                 <input
@@ -88,7 +109,7 @@ const Signin = (prop) => {
                                 type="submit"
                                 value="Login"
                                 className="btn"
-                                onClick={signin}
+                                onClick={loginFunction}
                             />
                             <a className="btn" href="/ForgotPassword">
                                 Forgot Password
