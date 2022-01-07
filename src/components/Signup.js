@@ -14,7 +14,6 @@ const Signup = (prop) => {
     var endPoint = "http://localhost:9000/customer/register";
 
     if (selectedFile === null) {
-
     } else {
         source = selectedFile.profileImg;
     }
@@ -22,10 +21,10 @@ const Signup = (prop) => {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setSelectedFile({ profileImg: reader.result })
+                setSelectedFile({ profileImg: reader.result });
             }
-        }
-        reader.readAsDataURL(e.target.files[0])
+        };
+        reader.readAsDataURL(e.target.files[0]);
     };
 
     if (sessionStorage.getItem("userID")) {
@@ -199,7 +198,19 @@ const Signup = (prop) => {
 
                             <div className="form-control">
                                 <img src={source} width="400px" />
-                                <input type="file" className="" onChange={imageHandler}></input>
+                                <div className="input-avatar-holder">
+                                    <div className="input-avatar">
+                                        <input
+                                            type="file"
+                                            onChange={imageHandler}
+                                            title=" "
+                                        ></input>
+                                    </div>
+
+                                    {/* <label for="file-input">
+                                        Hello test nha
+                                    </label> */}
+                                </div>
                             </div>
 
                             <button

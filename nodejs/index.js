@@ -21,17 +21,17 @@ mongoose.connect(
 );
 
 app.use(
-	bodyParser.json({
-		limit: "50mb",
-	})
+    bodyParser.json({
+        limit: "50mb",
+    })
 );
 
 app.use(
-	bodyParser.urlencoded({
-		limit: "50mb",
-		parameterLimit: 100000,
-		extended: true,
-	})
+    bodyParser.urlencoded({
+        limit: "50mb",
+        parameterLimit: 100000,
+        extended: true,
+    })
 );
 
 //define a "table" structure
@@ -44,7 +44,14 @@ var CustomerSchema = new mongoose.Schema({
     firstName: String,
     customerImage: String,
     address: String,
-    food: [{ foodId: String, foodImage: String, foodName: String, provider: String }],
+    food: [
+        {
+            foodId: String,
+            foodImage: String,
+            foodName: String,
+            provider: String,
+        },
+    ],
     token: String,
     verificationCode: Number,
 });
@@ -855,7 +862,7 @@ app.delete("/food", tokenVerified, function (req, response) {
                     { $set: { food: place } },
                     { new: true },
                     function (error, placeCustomer) {}
-                );
+                ).clone();
             }
             Food.deleteOne(
                 { foodId: req.body.foodId },

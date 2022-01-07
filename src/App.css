@@ -520,6 +520,44 @@ header .border:hover {
     width: inherit;
 }
 
+.form-control * {
+    width: 100%;
+}
+
+.form-control img {
+    display: none;
+}
+
+.input-avatar-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-avatar {
+    width: 75%;
+    height: 30px;
+    border: 2px solid #e09f3e;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .input-avatar input {
+    width: 100%;
+    height: 100%;
+} */
+
+input::-webkit-file-upload-button {
+    border: none;
+    display: none;
+}
+
+.input-avatar input::-webkit-file-upload-button {
+}
+
 .btn,
 .btn-disabled {
     display: inline-block;
@@ -1316,6 +1354,10 @@ header .border:hover {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.new-res-body img {
+    display: none;
 }
 
 .new-res-body .checkbox-label {

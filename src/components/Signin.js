@@ -79,7 +79,6 @@ const Signin = (prop) => {
                 <div className="container">
                     <div className="login-block">
                         <p>Account Login</p>
-                        <div className="login-error-msg">{loginErrorMsg}</div>
                         <div className="login-block-content">
                             <div className="form-control">
                                 <input
@@ -103,6 +102,9 @@ const Signin = (prop) => {
                                         setCustomerPassword(e.target.value);
                                     }}
                                 />
+                            </div>
+                            <div className="login-error-msg">
+                                {loginErrorMsg}
                             </div>
 
                             <input
