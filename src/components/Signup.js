@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import anonymous from "../img/anonymous-avatar.png";
 
 const Signup = (prop) => {
     let navigate = useNavigate();
@@ -10,7 +11,7 @@ const Signup = (prop) => {
     const [customerFirstName, setCustomerFirstName] = useState("");
     const [customerLastName, setCustomerLastName] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
-    var source = "";
+    var source = anonymous;
     var endPoint = "http://localhost:9000/customer/register";
 
     if (selectedFile === null) {
@@ -199,17 +200,13 @@ const Signup = (prop) => {
                             <div className="form-control">
                                 <img src={source} width="400px" />
                                 <div className="input-avatar-holder">
-                                    <div className="input-avatar">
-                                        <input
-                                            type="file"
-                                            onChange={imageHandler}
-                                            title=" "
-                                        ></input>
-                                    </div>
-
-                                    {/* <label for="file-input">
-                                        Hello test nha
-                                    </label> */}
+                                    <input
+                                        type="file"
+                                        onChange={imageHandler}
+                                        title=" "
+                                        id="file"
+                                    ></input>
+                                    <label for="file">Choose Your Avatar</label>
                                 </div>
                             </div>
 

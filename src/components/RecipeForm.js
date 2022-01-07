@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { choose } from "../functionsJS/checkbox";
+import { BiImageAdd } from "react-icons/bi";
 
 export const RecipeForm = (prop) => {
     let navigate = useNavigate();
@@ -28,9 +29,8 @@ export const RecipeForm = (prop) => {
     const [existedRecipe, setExistedRecipe] = useState(false);
 
     const [placeMix, setPlaceMix] = useState(false);
-    
-    if (selectedFile === null) {
 
+    if (selectedFile === null) {
     } else {
         source = selectedFile.profileImg;
     }
@@ -38,10 +38,10 @@ export const RecipeForm = (prop) => {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setSelectedFile({ profileImg: reader.result })
+                setSelectedFile({ profileImg: reader.result });
             }
-        }
-        reader.readAsDataURL(e.target.files[0])
+        };
+        reader.readAsDataURL(e.target.files[0]);
     };
 
     if (null !== window.sessionStorage.getItem("userID")) {
@@ -185,7 +185,7 @@ export const RecipeForm = (prop) => {
 
                     setCalories(data[0].result.foodCalories);
                     setName(data[0].result.foodName);
-                    setSelectedFile({profileImg: data[0].result.foodImage});
+                    setSelectedFile({ profileImg: data[0].result.foodImage });
                     setStepList(data[0].result.foodSteps);
                     setIngredientList(data[0].result.foodIngredients);
                     setDiets(placeDiets);
@@ -244,10 +244,29 @@ export const RecipeForm = (prop) => {
                         }}
                     ></input>
                 </div>
-                <div className="new-res-body">
-                        <img src={source} width="400px" />
-                        <input type="file" className="" onChange={imageHandler}></input>
+                <div className="new-res-body flex-body">
+                    <label>Image</label>
+                    <div className="recipe-img-input">
+                        <label for="recipe-img" className="add-recipe-img">
+                            <BiImageAdd />
+                            <p>Choose one</p>
+                        </label>
+                        <input
+                            type="file"
+                            className=""
+                            onChange={imageHandler}
+                            id="recipe-img"
+                        ></input>
+                    </div>
                 </div>
+                {source === "" ? (
+                    <></>
+                ) : (
+                    <div className="recipe-img-holder">
+                        <img src={source} width="400px" />
+                    </div>
+                )}
+
                 <div className="new-res-body">
                     <label>Calories</label>
                     <input

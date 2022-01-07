@@ -3,7 +3,6 @@ import Recipe from "./Recipe";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import test from "../img/bg.jpg";
 import logo from "../img/Restcipe-4.svg";
 
 const Profile = (prop) => {

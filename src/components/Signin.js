@@ -75,8 +75,8 @@ const Signin = (prop) => {
 
     return (
         <div id="content" className="container">
-            <div className="body">
-                <div className="container">
+            <div className="body-forgot">
+                <div className="container custom-margin">
                     <div className="login-block">
                         <p>Account Login</p>
                         <div className="login-block-content">
