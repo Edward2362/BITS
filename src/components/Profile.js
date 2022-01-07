@@ -20,6 +20,7 @@ const Profile = (prop) => {
         food: [],
         lastName: "",
         firstName: "",
+        customerImage: "",
     });
     const [done, setDone] = useState(false);
 
@@ -64,7 +65,7 @@ const Profile = (prop) => {
                         <div className="avatar-section">
                             <div className="ava-border">
                                 <img
-                                    src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                                    src={customer.customerImage}
                                     alt="default avatar"
                                 ></img>
                             </div>
@@ -120,7 +121,7 @@ const Profile = (prop) => {
                                                                         recipe.foodName
                                                                     }
                                                                     recipeImage={
-                                                                        test
+                                                                        recipe.foodImage
                                                                     }
                                                                     recipeId={
                                                                         recipe.foodId
@@ -149,7 +150,7 @@ const Profile = (prop) => {
                                                             var recipeName =
                                                                 recipe.foodName;
                                                             var recipeImage =
-                                                                "";
+                                                                recipe.foodImage;
                                                             var recipeId =
                                                                 recipe.foodId;
                                                             var recipeURL = "";

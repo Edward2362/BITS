@@ -10,7 +10,7 @@ const Comment = ({ comment }) => {
         <div className="comment">
             <div className="comment-owner-avatar">
                 <img
-                    src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                    src={comment.customerImage}
                     alt="avatar"
                 ></img>
             </div>

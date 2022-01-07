@@ -11,6 +11,7 @@ const NavBar = () => {
         firstName: "",
         lastName: "",
         fullName: "",
+        customerImage: "",
         customerPassword: "",
         food: [],
     });

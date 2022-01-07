@@ -8,7 +8,24 @@ const Signup = (prop) => {
     const [confirmCustomerPassword, setConfirmCustomerPassword] = useState("");
     const [customerFirstName, setCustomerFirstName] = useState("");
     const [customerLastName, setCustomerLastName] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+    var source = "";
     var endPoint = "http://localhost:9000/customer/register";
+
+    if (selectedFile === null) {
+
+    } else {
+        source = selectedFile.profileImg;
+    }
+    var imageHandler = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setSelectedFile({ profileImg: reader.result })
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    };
 
     if (sessionStorage.getItem("userID")) {
         navigate("/Profile");
@@ -26,6 +43,7 @@ const Signup = (prop) => {
                 customerPassword: customerPassword,
                 customerFirstName: customerFirstName,
                 customerLastName: customerLastName,
+                customerImage: source,
             }),
         })
             .then((response) => response.json())
@@ -101,6 +119,11 @@ const Signup = (prop) => {
                                         setCustomerLastName(e.target.value);
                                     }}
                                 />
+                            </div>
+
+                            <div className="form-control">
+                                <img src={source} width="400px" />
+                                <input type="file" className="" onChange={imageHandler}></input>
                             </div>
 
                             <input

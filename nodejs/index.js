@@ -20,6 +20,20 @@ mongoose.connect(
     "mongodb+srv://testuser001:123asd@cluster0.23h33.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 );
 
+app.use(
+	bodyParser.json({
+		limit: "50mb",
+	})
+);
+
+app.use(
+	bodyParser.urlencoded({
+		limit: "50mb",
+		parameterLimit: 100000,
+		extended: true,
+	})
+);
+
 //define a "table" structure
 var CustomerSchema = new mongoose.Schema({
     customerId: String,
@@ -28,8 +42,9 @@ var CustomerSchema = new mongoose.Schema({
     fullName: String,
     lastName: String,
     firstName: String,
+    customerImage: String,
     address: String,
-    food: [{ foodId: String, foodName: String, provider: String }],
+    food: [{ foodId: String, foodImage: String, foodName: String, provider: String }],
     token: String,
     verificationCode: Number,
 });
@@ -42,6 +57,7 @@ var FoodSchema = new mongoose.Schema({
     foodId: String,
     foodName: String,
     foodCalories: String,
+    foodImage: String,
     foodIngredients: [{ ingredientName: String, ingredientAmount: String }],
     foodSteps: [{ stepDescription: String }],
     foodDiets: [{ dietName: String }],
@@ -57,6 +73,7 @@ var CommentSchema = new mongoose.Schema({
     customerId: String,
     customerLastName: String,
     customerFirstName: String,
+    customerImage: String,
     foodId: String,
 });
 
@@ -81,6 +98,7 @@ function signInGoogle(passport) {
                                 customerPassword: "NULL",
                                 lastName: profile.name.familyName,
                                 firstName: profile.name.givenName,
+                                customerImage: "NULL",
                                 address: "NULL",
                                 food: [],
                                 token: "",
@@ -298,6 +316,7 @@ app.post("/customer/register", function (req, response) {
                         fullName: "NULL",
                         lastName: req.body.customerLastName,
                         firstName: req.body.customerFirstName,
+                        customerImage: req.body.customerImage,
                         address: "NULL",
                         food: [],
                         token: "",
@@ -340,6 +359,7 @@ app.post("/api/v1/auth/google", async (req, response) => {
         fullName: name,
         lastName: "NULL",
         firstName: "NULL",
+        customerImage: picture,
         address: "NULL",
         food: [],
         token: "",
@@ -794,6 +814,7 @@ app.post("/food", tokenVerified, function (req, response) {
             foodId: foodId,
             foodCalories: req.body.foodCalories,
             foodName: req.body.foodName,
+            foodImage: req.body.foodImage,
             foodSteps: req.body.foodSteps,
             foodIngredients: req.body.foodIngredients,
             foodDiets: req.body.foodDiets,
@@ -892,6 +913,7 @@ app.post("/avoidComment", tokenVerified, function (req, response) {
                 customerFirstName: req.body.customerFirstName,
                 commentDate: req.body.commentDate,
                 customerId: req.body.customerId,
+                customerImage: req.body.customerImage,
                 foodId: req.body.foodId,
             },
             function (error, avoidComment) {

@@ -56,11 +56,14 @@ const RecipeInformationDB = (prop) => {
 
     var endPoint5 = "http://localhost:9000/avoidComment";
     var endPoint7 = "http://localhost:9000/customer/";
-
+    
     const [favourite, setFavourite] = useState(false);
+
+    const [customerStop, setCustomerStop] = useState(false);
 
     const [recipeData, setRecipeData] = useState({
         foodName: "",
+        foodImage: "",
         foodId: "",
         foodDiets: [{ dietName: "" }],
         foodIngredients: [{ ingredientName: "", ingredientAmount: "" }],
@@ -69,6 +72,7 @@ const RecipeInformationDB = (prop) => {
                 stepDescription: "",
             },
         ],
+        customerId: "",
     });
 
     const [avoid, setAvoid] = useState([]);
@@ -81,6 +85,16 @@ const RecipeInformationDB = (prop) => {
         food: [],
         lastName: "",
         firstName: "",
+        customerImage: "",
+    });
+
+    const [creator, setCreator] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+        customerImage: "",
     });
 
     const load = () => {
@@ -138,6 +152,23 @@ const RecipeInformationDB = (prop) => {
             });
     };
 
+    const creatorLoad = () => {
+        fetch(endPoint7 + recipeData.customerId)
+        .then((response) => response.json())
+        .then((data) => {
+            setCreator(data[0]);
+            setCustomerStop(true);
+        });
+    }
+
+    if("" !== recipeData.foodId){
+        if(customerStop){
+
+        }else{
+            creatorLoad();
+        }
+    }
+
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
             navigate("/Signin");
@@ -175,6 +206,7 @@ const RecipeInformationDB = (prop) => {
                         foodId: recipeData.foodId,
                         customerId: window.sessionStorage.getItem("userID"),
                         foodName: recipeData.foodName,
+                        foodImage: recipeData.foodImage,
                         provider: "customers",
                     }),
                 })
@@ -210,6 +242,7 @@ const RecipeInformationDB = (prop) => {
                     customerLastName: customer.lastName,
                     customerFirstName: customer.firstName,
                     commentDate: commentDate,
+                    customerImage: customer.customerImage,
                 }),
             })
                 .then((response) => response.json())
@@ -262,11 +295,11 @@ const RecipeInformationDB = (prop) => {
                                         </div>
                                         <div className="creator">
                                             <div className="creator-avatar">
-                                                <img src={edamam}></img>
+                                                <img src={creator.customerImage}></img>
                                             </div>
                                             <div className="creator-name">
                                                 {/* Fix to user name and avatar */}
-                                                <p>Edamam</p>
+                                                <p>{creator.firstName + " " + creator.lastName}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -275,7 +308,7 @@ const RecipeInformationDB = (prop) => {
                                         <div className="recipe-detail-content">
                                             <div className="sn-body-equal-half">
                                                 <div className="recipe-detail-img">
-                                                    <img src={test}></img>
+                                                    <img src={recipeData.foodImage}></img>
                                                 </div>
                                             </div>
                                             <div className="sn-body-equal-half">

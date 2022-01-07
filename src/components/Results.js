@@ -163,8 +163,6 @@ const Results = () => {
                             <Filter
                                 onChange={findCourses}
                                 recipesIn={(recipesArray, previous, next) => {
-                                    console.log("tui nè mấy bạn");
-
                                     setRecipes(recipesArray);
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
@@ -234,7 +232,7 @@ const Results = () => {
                                                 } else {
                                                     recipeName =
                                                         recipe.foodName;
-                                                    recipeImage = test;
+                                                    recipeImage = recipe.foodImage;
                                                     recipeId = recipe.foodId;
                                                 }
 

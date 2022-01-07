@@ -58,6 +58,7 @@ const RecipeInformationAPI = (prop) => {
         food: [],
         lastName: "",
         firstName: "",
+        customerImage: "",
     });
     console.log(id);
     var endPoint =
@@ -171,6 +172,7 @@ const RecipeInformationAPI = (prop) => {
                     customerLastName: customer.lastName,
                     customerFirstName: customer.firstName,
                     commentDate: commentDate,
+                    customerImage: customer.customerImage,
                 }),
             })
                 .then((response) => response.json())
@@ -291,6 +293,7 @@ const RecipeInformationAPI = (prop) => {
                         foodId: id,
                         customerId: window.sessionStorage.getItem("userID"),
                         foodName: name,
+                        foodImage: img,
                         provider: "edamam",
                     }),
                 })
