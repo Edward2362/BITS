@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
+import About from "./components/About";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Ad from "./components/Ad";
@@ -43,6 +44,7 @@ function App() {
                             </>
                         }
                     />
+                    <Route path="/About" element={<About />} />
                     <Route
                         path="/Signin"
                         element={

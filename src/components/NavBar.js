@@ -53,7 +53,7 @@ const NavBar = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="/">About</a>
+                    <a href="/About">About</a>
                 </li>
             </ul>
             <div className="block-35">{controlSign}</div>

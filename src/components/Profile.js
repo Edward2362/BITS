@@ -1,7 +1,6 @@
 import React from "react";
 import Recipe from "./Recipe";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import test from "../img/bg.jpg";
@@ -55,7 +54,7 @@ const Profile = (prop) => {
             });
     };
 
-    useEffect(load, []);
+    useEffect(load, [endPoint, endPoint2, navigate, prop]);
 
     return (
         <>
@@ -98,8 +97,11 @@ const Profile = (prop) => {
                                             ) : (
                                                 <div className="grid-25">
                                                     {createdRecipeList.map(
-                                                        (recipe) => (
-                                                            <div className="created-recipe">
+                                                        (recipe, index) => (
+                                                            <div
+                                                                className="created-recipe"
+                                                                key={index}
+                                                            >
                                                                 <div
                                                                     className="icon-holder"
                                                                     onClick={() => {

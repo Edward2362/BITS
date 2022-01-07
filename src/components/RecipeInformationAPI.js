@@ -402,15 +402,7 @@ const RecipeInformationAPI = (prop) => {
                                             <h2>Steps</h2>
                                             <div className="recipe-steps-content">
                                                 {/* Step no need in API should replace to Link and Nutrition */}
-                                                {recipeData.steps.map(
-                                                    (step, index) => (
-                                                        <Step
-                                                            key={index}
-                                                            step={step}
-                                                            position={index + 1}
-                                                        />
-                                                    )
-                                                )}
+                                                {recipeData.steps.map}
                                             </div>
                                         </div>
                                     </div>
