@@ -60,43 +60,13 @@ const RecipeInformationDB = (prop) => {
     const [favourite, setFavourite] = useState(false);
 
     const [recipeData, setRecipeData] = useState({
-        foodName: "Chicken Nugget",
-        foodId: "FOOD-5",
-        foodDiets: [
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-        ],
-        foodIngredients: [
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-        ],
+        foodName: "",
+        foodId: "",
+        foodDiets: [{ dietName: "" }],
+        foodIngredients: [{ ingredientName: "", ingredientAmount: "" }],
         foodSteps: [
             {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
-            },
-            {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
-            },
-            {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
+                stepDescription: "",
             },
         ],
     });
@@ -170,7 +140,7 @@ const RecipeInformationDB = (prop) => {
 
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             if (favourite) {
@@ -223,7 +193,7 @@ const RecipeInformationDB = (prop) => {
         var commentDate = new Date();
 
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             fetch(endPoint5, {
@@ -295,6 +265,7 @@ const RecipeInformationDB = (prop) => {
                                                 <img src={edamam}></img>
                                             </div>
                                             <div className="creator-name">
+                                                {/* Fix to user name and avatar */}
                                                 <p>Edamam</p>
                                             </div>
                                         </div>

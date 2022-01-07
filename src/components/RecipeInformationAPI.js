@@ -155,7 +155,7 @@ const RecipeInformationAPI = (prop) => {
         var commentDate = new Date();
 
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             fetch(endPoint4, {
@@ -257,7 +257,7 @@ const RecipeInformationAPI = (prop) => {
 
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             if (favourite) {
@@ -441,8 +441,7 @@ const RecipeInformationAPI = (prop) => {
                                                 </button>
                                             </div>
                                             <h2>
-                                                {recipeData.comments.length +
-                                                    " Comments "}
+                                                {avoid.length + " Comments "}
                                             </h2>
                                             <div className="recipe-comments-content">
                                                 {avoid.map((comment, index) => (

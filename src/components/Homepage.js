@@ -1,6 +1,9 @@
 import React from "react";
-import { FiHexagon } from "react-icons/fi";
+import { HiOutlinePresentationChartLine } from "react-icons/hi";
 import { BiDish } from "react-icons/bi";
+import { AiOutlineAreaChart } from "react-icons/ai";
+import { RiDoubleQuotesR } from "react-icons/ri";
+import wife from "../img/wife.jpg";
 import img1 from "../img/Laptop.png";
 
 const HomepageBody = () => {
@@ -153,8 +156,8 @@ const HomepageBody = () => {
                     <div className="section-content">
                         <div className="section-header">
                             <div className="sn-header-body">
-                                <BiDish />
-                                <h1>Available on PC</h1>
+                                <HiOutlinePresentationChartLine />
+                                <h1>User About Messenger</h1>
                                 <hr />
                             </div>
                         </div>
@@ -165,13 +168,25 @@ const HomepageBody = () => {
                                 </div>
                             </div>
                             <div className="sn-body-equal-half">
-                                <div className="available-body">
-                                    <h2>User feedback</h2>
-                                    <p>
-                                        Hello random shit is hererandom shit is
-                                        hererandom shit is hererandom shit is
-                                        here
-                                    </p>
+                                <div className="feedback-body">
+                                    <div className="feedback-img">
+                                        <img src={wife} alt="user-avatar"></img>
+                                    </div>
+                                    <div className="user">
+                                        <h2>Duong Nguyen</h2>
+                                        <p>Angry Housewife</p>
+                                    </div>
+                                    <div className="feedback-content">
+                                        <p>
+                                            Restcipe is an amazing website with
+                                            thousands of dishes from around the
+                                            world. Moreover, it has just saved
+                                            my husband from a flying knife.
+                                        </p>
+                                    </div>
+                                    <div className="quote">
+                                        <RiDoubleQuotesR />
+                                    </div>
                                 </div>
                             </div>
                         </div>

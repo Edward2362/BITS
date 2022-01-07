@@ -2,7 +2,6 @@ import React from "react";
 
 const Comment = ({ comment }) => {
     var options = {
-        weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
