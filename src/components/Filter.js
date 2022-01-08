@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { choose } from "../functionsJS/checkbox";
 // import { set } from "mongoose";
-
+import MakeCourses from "./test";
 export const Filter = ({
     handleIncomingEndPoint,
     handleIncomingFirstEndPoint,
@@ -10,6 +10,7 @@ export const Filter = ({
     onChange,
     setDone,
     recipesIn,
+    coursesIn,
     recipesAPINextEndPointPlace,
     recipesIndexPlace,
     previousNext,
@@ -35,6 +36,71 @@ export const Filter = ({
         "alcohol-free",
         "immunity",
     ]);
+    const [result, setResult] = useState([])
+    const [recipeDataReturn, setRecipeDataReturn] = useState([])
+    const [nextEndPointReturn, setNextEndPointReturn] = useState("")
+    const [userRecipeReturn, setUserRecipeReturn] = useState([])
+    let fetched = []
+    let combination = []
+    let nEndP = ""
+    let caloriesLimit = 4000;
+    const endPointCourse = "https://api.edamam.com/api/recipes/v2?type=public&q=" + window.sessionStorage.getItem("place") + "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe&calories=1000"
+    const getCourses = (e) => {
+        let array = []
+        fetch(endPointCourse)
+        .then(response => response.json())
+        .then(fetchResult => {
+                fetched = fetchResult.hits;
+                console.log(fetched)
+                 while(true){
+                    let preLength = combination.length;
+                    let check = false;
+                    for (let i = 0; i < fetched.length - 2; i++) {
+                      if(check){
+                        break;
+                      }else{
+                        for (let j = i + 1; j < fetched.length - 1; j++) {
+                          if(check){
+                            break;
+                          }else{
+                            for (let k = j + 1; k < fetched.length; k++) {
+                              if(fetched[i].recipe.calories/fetched[i].recipe.yield + fetched[j].recipe.calories/fetched[j].recipe.yield + fetched[k].recipe.calories/fetched[k].recipe.yield <caloriesLimit){
+                                let arr = [fetched[i],fetched[j],fetched[k]]
+                                combination.push(arr)
+                                check = true;
+                                array= combination
+                                console.log("com",combination)
+                              }
+                              if(check){
+                                fetched.splice(i,1)
+                                fetched.splice(j-1,1)
+                                fetched.splice(k-2,1)
+                                break;
+                              }
+                            }
+                          }
+                        }
+                      }
+                      }
+                      if(preLength === combination.length){
+                        break;
+                      }
+    
+                  }
+    
+                if(0 == fetched.length){
+                    setUserRecipeReturn([])
+                    setRecipeDataReturn([])
+                    setNextEndPointReturn("")
+                }else{
+                    nEndP = fetchResult._links.next.href
+                    setNextEndPointReturn(nEndP)
+                }
+                coursesIn(array)
+                console.log("arr:",array)          
+        })
+    } 
+
 
     const handleDone = () => {
         setDone(true);
@@ -367,8 +433,12 @@ export const Filter = ({
         window.sessionStorage.setItem("caloriesTo", calories.to);
         window.sessionStorage.setItem("ingredientUpTo", ingredientUpTo);
         window.sessionStorage.removeItem("recipesIndex");
-        setDone(false);
-        load("0");
+        if(sessionStorage.getItem("findByCourse")){
+            getCourses();
+        }else{
+            setDone(false);
+            load("0");
+        }
     };
 
     if (recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
@@ -395,6 +465,7 @@ export const Filter = ({
             load(recipesIndex);
         }
     });
+    
 
     return (
         <div className="filter">

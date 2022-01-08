@@ -35,11 +35,11 @@ const Course = ({ recipes, url }) => {
                         className={classNames("recipe-holder absolute", {
                             "current-recipe": index === current,
                             "next-recipe": index === next,
-                            "prev-recipe": index === prev,
+                            "prev-recipe": index === prev,  
                         })}
                         key={index}
                     >
-                        <Recipe key={index} recipe={recipe} url={url} />
+                        <Recipe key={index} recipeName={recipe.recipe.label} recipeImage = {recipe.recipe.image} recipeId = {recipe._links.self.href.split("v2/")[1]} url="Recipe-Edamam" />
                     </div>
                 ))}
             </div>
