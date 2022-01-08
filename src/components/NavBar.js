@@ -18,7 +18,7 @@ const NavBar = () => {
 
     var controlSign = <div></div>;
     if (null !== window.sessionStorage.getItem("userID")) {
-        controlSign = <Signed userName={customer.lastName} />;
+        controlSign = <Signed userImage={customer.customerImage} />;
     } else {
         controlSign = <Sign />;
     }

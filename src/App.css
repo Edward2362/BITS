@@ -39,6 +39,12 @@ a {
     text-decoration: none;
 }
 
+a:visited,
+a:hover,
+a:active {
+    color: rgb(63, 63, 63);
+}
+
 p {
     margin: 0;
     color: rgb(63, 63, 63);
@@ -285,6 +291,9 @@ header .border:hover {
 .full-width {
     width: 100%;
     place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .block-65 {
@@ -433,6 +442,24 @@ header .border:hover {
     background-color: white;
 }
 
+#profile {
+    padding: 0;
+    width: 0;
+    height: 0;
+}
+
+#profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#profile a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Header end */
 
 /* About Starts */
@@ -536,6 +563,10 @@ header .border:hover {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.input-avatar-holder label {
+    color: gray !important;
 }
 
 .input-avatar-holder label {
@@ -671,6 +702,11 @@ input::-webkit-file-upload-button {
     justify-content: center;
     text-align: justify;
 }
+
+.login-block-content a {
+    color: white;
+}
+
 /* Sign in - up end */
 
 /* Ad */
@@ -2012,6 +2048,81 @@ input::-webkit-file-upload-button {
 }
 
 /* Step end */
+
+/* Nutrition */
+
+.recipe-detail-nutrition {
+    padding: 1% 15%;
+}
+
+.recipe-detail-nutrition h2 {
+    color: #e09f3e;
+    text-align: center;
+    padding-bottom: 3%;
+}
+
+.recipe-nutrition-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 49.9% 49.9%;
+    grid-column-gap: 0.2%;
+    background-color: #e09f3e;
+}
+
+.nutrition {
+    width: 90%;
+    padding: 0 5%;
+    background-color: white;
+}
+
+.nutrition p {
+    width: fit-content;
+    font-size: 14px;
+}
+
+.nutrition-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+}
+
+.sub-nutrition-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+    margin-left: 10px;
+}
+
+.sub-nutrition-label {
+    display: flex;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#source {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e09f3e;
+    border: 2px solid #e09f3e;
+    padding: 5px 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#source:hover {
+    background-color: #e09f3e;
+    color: white;
+}
+
+/* Nutrition end */
 
 .recipe-detail-comments {
     padding: 0 15%;

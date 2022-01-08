@@ -8,6 +8,7 @@ import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import logo from "../img/Restcipe-4.svg";
+import { BsDot } from "react-icons/bs";
 
 const RecipeInformationAPI = (prop) => {
     // test
@@ -52,6 +53,8 @@ const RecipeInformationAPI = (prop) => {
     const [img, setImg] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [labels, setLabels] = useState([]);
+    const [nutritions, setNutritions] = useState([]);
+    const [links, setLinks] = useState("");
     const [customer, setCustomer] = useState({
         customerId: "",
         fullName: "",
@@ -102,15 +105,18 @@ const RecipeInformationAPI = (prop) => {
                                 } else {
                                     setFavourite(false);
                                 }
-                                console.log(fetchResult.recipe);
+                                //console.log(fetchResult.recipe);
                                 let fetched = fetchResult.recipe;
-                                console.log(fetched);
+                                // console.log(fetched);
                                 setName(fetched.label);
-                                console.log("name", name);
+                                //console.log("name", name);
                                 setImg(fetched.image);
-                                console.log("image", img);
+                                //console.log("image", img);
                                 setIngredients(fetched.ingredientLines);
-                                console.log("ingredient", ingredients);
+                                //console.log("ingredient", ingredients);
+                                setNutritions(fetched.digest);
+                                console.log("nutritions", nutritions);
+                                setLinks(fetched.url);
                                 let labelsArr = fetched.dietLabels.concat(
                                     fetched.healthLabels
                                 );
@@ -127,6 +133,9 @@ const RecipeInformationAPI = (prop) => {
                     console.log("image", img);
                     setIngredients(fetched.ingredientLines);
                     console.log("ingredient", ingredients);
+                    setNutritions(fetched.digest);
+                    console.log("nutritions", nutritions);
+                    setLinks(fetched.url);
                     let labelsArr = fetched.dietLabels.concat(
                         fetched.healthLabels
                     );
@@ -135,6 +144,8 @@ const RecipeInformationAPI = (prop) => {
                 setTimeout(setDone(true), 3000);
             });
     };
+    console.log("nutritions", nutritions);
+    console.log("url", links);
 
     const placeLoad = () => {
         fetch(endPoint3 + id)
@@ -240,14 +251,80 @@ const RecipeInformationAPI = (prop) => {
                 information: "Look great!",
             },
         ],
-        nutrition: [
+        nutritions: [
             {
-                name: "protein",
-                amount: "32g",
+                label: "Protein",
+                total: 702.3718238192,
+                unit: "g",
+                subs: [
+                    {
+                        label: "Saturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Trans",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Polyunsaturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Monounsaturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                ],
             },
             {
-                name: "sodium",
-                amount: "712mg",
+                label: "Sodium",
+                total: 702.3718238192,
+                unit: "g",
+                subs: [
+                    {
+                        label: "Saturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Trans",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Polyunsaturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                    {
+                        label: "Monounsaturated",
+                        total: 101.69895025064645,
+                        unit: "g",
+                    },
+                ],
+            },
+            {
+                label: "Iron",
+                total: 702.3718238192,
+                unit: "g",
+            },
+            {
+                label: "Vitamin A",
+                total: 702.3718238192,
+                unit: "g",
+            },
+            {
+                label: "Vitamin A",
+                total: 702.3718238192,
+                unit: "g",
+            },
+            {
+                label: "Vitamin A",
+                total: 702.3718238192,
+                unit: "g",
             },
         ],
     });
@@ -398,12 +475,91 @@ const RecipeInformationAPI = (prop) => {
                                     </div>
                                     <hr></hr>
                                     <div className="recipe-detail-section">
-                                        <div className="recipe-detail-steps">
-                                            <h2>Steps</h2>
-                                            <div className="recipe-steps-content">
+                                        <div className="recipe-detail-nutrition">
+                                            <h2>Nutritions</h2>
+                                            <div className="recipe-nutrition-content">
                                                 {/* Step no need in API should replace to Link and Nutrition */}
-                                                {/* {recipeData.steps.map} */}
+                                                {nutritions.map(
+                                                    (nutrition, index) =>
+                                                        index < 2 ? (
+                                                            <div
+                                                                className="nutrition"
+                                                                key={index}
+                                                            >
+                                                                <div className="nutrition-content">
+                                                                    <p>
+                                                                        {
+                                                                            nutrition.label
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {Math.round(
+                                                                            nutrition.total
+                                                                        ) +
+                                                                            nutrition.unit}
+                                                                    </p>
+                                                                </div>
+                                                                <div className="sub-nutrition">
+                                                                    {nutrition.sub.map(
+                                                                        (
+                                                                            sub,
+                                                                            index
+                                                                        ) => (
+                                                                            <div
+                                                                                className="sub-nutrition-content"
+                                                                                key={
+                                                                                    index
+                                                                                }
+                                                                            >
+                                                                                <div className="sub-nutrition-label">
+                                                                                    <BsDot />
+                                                                                    <p>
+                                                                                        {
+                                                                                            sub.label
+                                                                                        }
+                                                                                    </p>
+                                                                                </div>
+                                                                                <p>
+                                                                                    {Math.round(
+                                                                                        sub.total
+                                                                                    ) +
+                                                                                        sub.unit}
+                                                                                </p>
+                                                                            </div>
+                                                                        )
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div
+                                                                className="nutrition"
+                                                                key={index}
+                                                            >
+                                                                <div className="nutrition-content">
+                                                                    <p>
+                                                                        {
+                                                                            nutrition.label
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {Math.round(
+                                                                            nutrition.total
+                                                                        ) +
+                                                                            nutrition.unit}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                )}
                                             </div>
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div className="recipe-detail-section">
+                                        <div className="link">
+                                            <a href={links} id="source">
+                                                Source
+                                            </a>
                                         </div>
                                     </div>
                                     <hr></hr>

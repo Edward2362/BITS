@@ -1,3 +1,5 @@
+import test from "../img/edamam-logo.png";
+
 const Signed = (prop) => {
     const load = () => {
         window.sessionStorage.removeItem("userID");
@@ -8,11 +10,13 @@ const Signed = (prop) => {
     return (
         <ul className="flex-center">
             <li>
-                <a href="/Profile">{prop.userName}</a>
-            </li>
-            <li>
                 <a href="/Signin" onClick={load}>
                     Sign out
+                </a>
+            </li>
+            <li>
+                <a href="/Profile" id="profile">
+                    <img htmlFor="profile" src={prop.userImage}></img>
                 </a>
             </li>
         </ul>

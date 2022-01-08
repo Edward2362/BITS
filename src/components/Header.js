@@ -65,7 +65,7 @@ const Header = () => {
                     <FiSearch />
                 </div>
                 <div className="input-holder">
-                    <form method="get" action="/Test" onSubmit={load}>
+                    <form method="get" action="/Result" onSubmit={load}>
                         <div>
                             <input
                                 type="text"

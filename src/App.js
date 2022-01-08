@@ -105,7 +105,7 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/Test" element={<Results />} />
+                    <Route path="/Result" element={<Results />} />
                     <Route path="/Copyrights" element={<Copyrights />} />
                     <Route path="/PrivacyPolicy" element={<Privacy />} />
                     <Route
