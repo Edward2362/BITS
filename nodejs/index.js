@@ -827,7 +827,7 @@ app.delete("/food", tokenVerified, function (req, response) {
         async function (err, customers) {
             for (let i = 0; i < customers.length; ++i) {
                 var place = [];
-                place.concat(customers[i].food);
+                place = place.concat(customers[i].food);
                 place.splice(foodIndex(place, req.body.foodId), 1);
                 await Customer.findOneAndUpdate(
                     { customerId: customers[i].customerId },
@@ -836,12 +836,107 @@ app.delete("/food", tokenVerified, function (req, response) {
                     function (error, placeCustomer) {}
                 );
             }
-            Food.deleteOne(
-                { foodId: req.body.foodId },
-                function (placeError, food) {
-                    response.send([{ result: "Food" }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Comment.find({foodId: req.body.foodId}, async function(error, comments) {
+
+                for (let i = 0; i < comments.length; ++i) {
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    await Comment.deleteOne({commentId: comments[i].commentId}, function(placeError, avoidComments) {
+
+                    });
                 }
-            );
+
+                Food.deleteOne(
+                    { foodId: req.body.foodId },
+                    function (placeError, food) {
+                        response.send([{ result: "Food" }]);
+                    }
+                );
+            });
+            
         }
     );
 });
