@@ -402,7 +402,7 @@ const RecipeInformationAPI = (prop) => {
                                             <h2>Steps</h2>
                                             <div className="recipe-steps-content">
                                                 {/* Step no need in API should replace to Link and Nutrition */}
-                                                {recipeData.steps.map}
+                                                {/* {recipeData.steps.map} */}
                                             </div>
                                         </div>
                                     </div>

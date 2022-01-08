@@ -419,29 +419,48 @@ export const Filter = ({
 
             <div className="filter-section">
                 <div id="calories" className="filter-section-body">
-                    <label>Calories</label>
-                    <input
-                        id="from"
-                        placeholder="From"
-                        value={calories.from}
-                        onChange={(e) => {
-                            setCalories({
-                                from: e.target.value,
-                                to: calories.to,
-                            });
-                        }}
-                    ></input>
-                    <input
-                        id="to"
-                        placeholder="To"
-                        value={calories.to}
-                        onChange={(e) => {
-                            setCalories({
-                                to: e.target.value,
-                                from: calories.from,
-                            });
-                        }}
-                    ></input>
+                    {!findByCourse ? (
+                        <>
+                            <label>Calories</label>
+                            <input
+                                id="from"
+                                placeholder="From"
+                                value={calories.from}
+                                onChange={(e) => {
+                                    setCalories({
+                                        from: e.target.value,
+                                        to: calories.to,
+                                    });
+                                }}
+                            ></input>
+                            <input
+                                id="to"
+                                placeholder="To"
+                                value={calories.to}
+                                onChange={(e) => {
+                                    setCalories({
+                                        to: e.target.value,
+                                        from: calories.from,
+                                    });
+                                }}
+                            ></input>
+                        </>
+                    ) : (
+                        <>
+                            <label>Limit Calories</label>
+                            <input
+                                id="limit"
+                                placeholder="Limit"
+                                // value={calories.from}
+                                // onChange={(e) => {
+                                //     setCalories({
+                                //         from: e.target.value,
+                                //         to: calories.to,
+                                //     });
+                                // }}
+                            ></input>
+                        </>
+                    )}
                 </div>
                 <div id="ingredients" className="filter-section-body">
                     <label>Ingredients</label>

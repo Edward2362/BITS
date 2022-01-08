@@ -232,7 +232,8 @@ const Results = () => {
                                                 } else {
                                                     recipeName =
                                                         recipe.foodName;
-                                                    recipeImage = recipe.foodImage;
+                                                    recipeImage =
+                                                        recipe.foodImage;
                                                     recipeId = recipe.foodId;
                                                 }
 
@@ -250,10 +251,15 @@ const Results = () => {
                                             })}
                                         </div>
                                     )}
-                                    <div className="results-buttons">
-                                        {previousSetOfRecipe}
-                                        {nextSetOfRecipe}
-                                    </div>
+
+                                    {!(findByCourse === "true") ? (
+                                        <div className="results-buttons">
+                                            {previousSetOfRecipe}
+                                            {nextSetOfRecipe}
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             )}
                         </div>
