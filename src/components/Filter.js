@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
 import { choose } from "../functionsJS/checkbox";
-// import { set } from "mongoose";
-import MakeCourses from "./test";
+
 export const Filter = ({
     handleIncomingEndPoint,
     handleIncomingFirstEndPoint,
@@ -23,18 +21,22 @@ export const Filter = ({
         "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
     var endPoint2 = "http://localhost:9000/placeFood";
 
+    const [findInCommunity] = useState(
+        sessionStorage.getItem("findInCommunity") ? true : false
+    );
+
     const [findByCourse, setFindByCourse] = useState(false);
     const [calories, setCalories] = useState({ from: "", to: "" });
     const [ingredientUpTo, setIngredientUpTo] = useState("");
     const [diets, setDiets] = useState([]);
     const [checkLoaded, setCheckLoaded] = useState(false);
-    const [health, setHealth] = useState([
+    const [health] = useState([
         "vegetarian",
         "vegan",
         "paleo",
         "low-sugar",
         "alcohol-free",
-        "immunity",
+        "immuno-supportive",
     ]);
     const [result, setResult] = useState([])
     const [recipeDataReturn, setRecipeDataReturn] = useState([])
@@ -144,19 +146,16 @@ export const Filter = ({
     };
 
     const load = async (recipesIndex) => {
+        var recipesPrevious = {};
+        var recipesNext = {};
+        var caloriesFromMix = "";
+        var caloriesToMix = "";
+        var ingredientUpToMix = "";
+        var dietsMix = "";
+
+        var caloriesFromToMix = "";
+        var healthMix = "";
         if (null === window.sessionStorage.getItem("findInCommunity")) {
-            var caloriesFromMix = "";
-
-            var caloriesToMix = "";
-            var caloriesFromToMix = "";
-            var ingredientUpToMix = "";
-
-            var dietsMix = "";
-            var healthMix = "";
-
-            var recipesPrevious = {};
-            var recipesNext = {};
-
             if (null !== window.sessionStorage.getItem("caloriesFrom")) {
                 caloriesFromMix = window.sessionStorage.getItem("caloriesFrom");
             } else {
@@ -176,12 +175,12 @@ export const Filter = ({
                 ingredientUpToMix = ingredientUpTo;
             }
 
-            if (caloriesFromMix != "" && caloriesToMix == "") {
+            if (caloriesFromMix !== "" && caloriesToMix === "") {
                 caloriesFromToMix = "&calories=" + caloriesFromMix + "%2B";
-            } else if (caloriesFromMix != "" && caloriesToMix != "") {
+            } else if (caloriesFromMix !== "" && caloriesToMix !== "") {
                 caloriesFromToMix =
                     "&calories=" + caloriesFromMix + "-" + caloriesToMix;
-            } else if (caloriesFromMix == "" && caloriesToMix != "") {
+            } else if (caloriesFromMix === "" && caloriesToMix !== "") {
                 caloriesFromToMix = "&calories=" + caloriesToMix;
             } else {
                 caloriesFromToMix = "";
@@ -213,19 +212,23 @@ export const Filter = ({
                 .then((response) => response.json())
                 .then((fetchResult) => {
                     let fetched = fetchResult.hits;
+                    // console.log(fetchResult.hits);
                     setCheckLoaded(true);
-
-                    if (0 == fetched.length) {
+                    var recipesAPINextEndPointMix = {
+                        recipesAPINextEndPointIncluded: false,
+                        recipesAPINextEndPointStart: recipesIndex,
+                    };
+                    if (0 === fetched.length) {
                         recipesPrevious = {
                             previousIncluded: false,
                             previousIndex: "0",
                         };
                         recipesNext = { nextIncluded: false, nextIndex: "0" };
 
-                        var recipesAPINextEndPointMix = {
-                            recipesAPINextEndPointIncluded: false,
-                            recipesAPINextEndPointStart: recipesIndex,
-                        };
+                        // var recipesAPINextEndPointMix = {
+                        //     recipesAPINextEndPointIncluded: false,
+                        //     recipesAPINextEndPointStart: recipesIndex,
+                        // };
                         recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
 
                         recipesIn([], recipesPrevious, recipesNext);
@@ -235,10 +238,10 @@ export const Filter = ({
                             previousIndex: "0",
                         };
                         recipesNext = { nextIncluded: false, nextIndex: "0" };
-                        var recipesAPINextEndPointMix = {
-                            recipesAPINextEndPointIncluded: false,
-                            recipesAPINextEndPointStart: recipesIndex,
-                        };
+                        // var recipesAPINextEndPointMix = {
+                        //     recipesAPINextEndPointIncluded: false,
+                        //     recipesAPINextEndPointStart: recipesIndex,
+                        // };
                         recipesAPINextEndPointPlace(recipesAPINextEndPointMix);
 
                         recipesIn(fetched, recipesPrevious, recipesNext);
@@ -252,7 +255,7 @@ export const Filter = ({
                                 );
                             }
                         } else {
-                            if ("next" != previousNext) {
+                            if ("next" !== previousNext) {
                                 handleDeletingEndPoint();
                             } else {
                                 if (!(fetchResult._links.next === undefined)) {
@@ -266,9 +269,6 @@ export const Filter = ({
                     setTimeout(handleDone, 1000);
                 });
         } else {
-            var recipesPrevious = {};
-            var recipesNext = {};
-
             if (null === window.sessionStorage.getItem("place")) {
                 recipesPrevious = {
                     previousIncluded: false,
@@ -279,7 +279,7 @@ export const Filter = ({
                 recipesIn([], recipesPrevious, recipesNext);
                 setTimeout(handleDone, 1000);
             } else {
-                if ("" == window.sessionStorage.getItem("place")) {
+                if ("" === window.sessionStorage.getItem("place")) {
                     recipesPrevious = {
                         previousIncluded: false,
                         previousIndex: "0",
@@ -289,12 +289,10 @@ export const Filter = ({
                     recipesIn([], recipesPrevious, recipesNext);
                     setTimeout(handleDone, 1000);
                 } else {
-                    var caloriesFromMix = "";
-
-                    var caloriesToMix = "";
-                    var ingredientUpToMix = "";
-
-                    var dietsMix = "";
+                    // var caloriesFromMix = "";
+                    // var caloriesToMix = "";
+                    // var ingredientUpToMix = "";
+                    // var dietsMix = "";
 
                     if (
                         null !== window.sessionStorage.getItem("caloriesFrom")
@@ -321,9 +319,9 @@ export const Filter = ({
                         ingredientUpToMix = ingredientUpTo;
                     }
 
-                    if (0 != diets.length) {
+                    if (0 !== diets.length) {
                         for (let i = 0; i < diets.length; ++i) {
-                            if (diets.length - 1 == i) {
+                            if (diets.length - 1 === i) {
                                 dietsMix = dietsMix + diets[i];
                             } else {
                                 dietsMix = dietsMix + diets[i] + ",";
@@ -333,15 +331,18 @@ export const Filter = ({
                         dietsMix = "place";
                     }
 
-                    caloriesFromMix === ""
-                        ? (caloriesFromMix = "0")
-                        : (caloriesFromMix = caloriesFromMix);
-                    caloriesToMix === ""
-                        ? (caloriesToMix = "0")
-                        : (caloriesToMix = caloriesToMix);
-                    ingredientUpToMix === ""
-                        ? (ingredientUpToMix = "0")
-                        : (ingredientUpToMix = ingredientUpToMix);
+                    caloriesFromMix =
+                        caloriesFromMix === ""
+                            ? (caloriesFromMix = "0")
+                            : caloriesFromMix;
+                    caloriesToMix =
+                        caloriesToMix === ""
+                            ? (caloriesToMix = "0")
+                            : caloriesToMix;
+                    ingredientUpToMix =
+                        ingredientUpToMix === ""
+                            ? (ingredientUpToMix = "0")
+                            : ingredientUpToMix;
 
                     await fetch(
                         endPoint2 +
@@ -471,43 +472,66 @@ export const Filter = ({
         <div className="filter">
             <div className="filter-header">
                 <h2>Filter</h2>
-                <label className="checkbox-label">
-                    By Courses
-                    <input
-                        type="checkbox"
-                        id="find-course"
-                        checked={findByCourse}
-                        onClick={(e) => findCourses(e)}
-                        onChange={onChange}
-                    ></input>
-                </label>
+                {findInCommunity ? (
+                    <></>
+                ) : (
+                    <label className="checkbox-label">
+                        By Courses
+                        <input
+                            type="checkbox"
+                            id="find-course"
+                            checked={findByCourse}
+                            onClick={(e) => findCourses(e)}
+                            onChange={onChange}
+                        ></input>
+                    </label>
+                )}
             </div>
 
             <div className="filter-section">
                 <div id="calories" className="filter-section-body">
-                    <label>Calories</label>
-                    <input
-                        id="from"
-                        placeholder="From"
-                        value={calories.from}
-                        onChange={(e) => {
-                            setCalories({
-                                from: e.target.value,
-                                to: calories.to,
-                            });
-                        }}
-                    ></input>
-                    <input
-                        id="to"
-                        placeholder="To"
-                        value={calories.to}
-                        onChange={(e) => {
-                            setCalories({
-                                to: e.target.value,
-                                from: calories.from,
-                            });
-                        }}
-                    ></input>
+                    {!findByCourse ? (
+                        <>
+                            <label>Calories</label>
+                            <input
+                                id="from"
+                                placeholder="From"
+                                value={calories.from}
+                                onChange={(e) => {
+                                    setCalories({
+                                        from: e.target.value,
+                                        to: calories.to,
+                                    });
+                                }}
+                            ></input>
+                            <input
+                                id="to"
+                                placeholder="To"
+                                value={calories.to}
+                                onChange={(e) => {
+                                    setCalories({
+                                        to: e.target.value,
+                                        from: calories.from,
+                                    });
+                                }}
+                            ></input>
+                        </>
+                    ) : (
+                        <>
+                            <label>Limit Calories</label>
+                            <input
+                                id="limit"
+                                placeholder="Limit"
+                                // value={calories.from}
+                                // onChange={(e) => {
+                                //     setCalories({
+                                //         from: e.target.value,
+                                //         to: calories.to,
+                                //     });
+                                // }}
+                            ></input>
+                        </>
+                    )}
                 </div>
                 <div id="ingredients" className="filter-section-body">
                     <label>Ingredients</label>
@@ -631,20 +655,15 @@ export const Filter = ({
                             <input
                                 type="checkbox"
                                 id="immunity"
-                                value="Immunity"
+                                value="Immuno-supportive"
                                 onChange={(e) => handleChoose(e)}
                             ></input>
                         </label>
                     </div>
                 </div>
             </div>
-            <div className="submit">
-                <input
-                    type="submit"
-                    value="APPLY"
-                    formMethod=""
-                    onClick={placeLoad}
-                ></input>
+            <div className="submit" onClick={placeLoad}>
+                <input type="submit" value="APPLY" formMethod=""></input>
             </div>
         </div>
     );

@@ -50,52 +50,52 @@ const RecipeInformationDB = (prop) => {
     var endPoint = "http://localhost:9000/foodPlace/";
     var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
     var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint6 = "http://localhost:9000/customer/removeFavoriteRecipe";
 
+    var endPoint4 = "http://localhost:9000/commentsAvoid/";
+
+    var endPoint5 = "http://localhost:9000/avoidComment";
+    var endPoint7 = "http://localhost:9000/customer/";
+    
     const [favourite, setFavourite] = useState(false);
 
+    const [customerStop, setCustomerStop] = useState(false);
+
     const [recipeData, setRecipeData] = useState({
-        foodName: "Chicken Nugget",
-        foodId: "FOOD-5",
-        foodDiets: [
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-            { dietName: "Vegetarian" },
-        ],
-        foodIngredients: [
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-            { ingredientName: "olive oil", ingredientAmount: "1/2 cup" },
-        ],
+        foodName: "",
+        foodImage: "",
+        foodId: "",
+        foodDiets: [{ dietName: "" }],
+        foodIngredients: [{ ingredientName: "", ingredientAmount: "" }],
         foodSteps: [
             {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
-            },
-            {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
-            },
-            {
-                stepDescription:
-                    "Remove pork blood from its container by cutting the seal between the pork blood and container with a long knife. Gently tilt container sideway to slide out pork blood into a large bowl then cut into cubes. Fill a small pot with 2-3 inches of water. Add salt, shallot and ginger. Heat pot to a low simmer. Add pork blood and cook for one hour. The low heat will prevent a honeycomb texture. After one hour, drain and rinse pork blood with cold running water. Store cooked pork blood in water and set aside.",
+                stepDescription: "",
             },
         ],
+        customerId: "",
     });
 
     const [avoid, setAvoid] = useState([]);
+
+    const [commentDescription, setCommentDescription] = useState("");
+
+    const [customer, setCustomer] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+        customerImage: "",
+    });
+
+    const [creator, setCreator] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+        customerImage: "",
+    });
 
     const load = () => {
         fetch(endPoint + id)
@@ -136,12 +136,64 @@ const RecipeInformationDB = (prop) => {
             });
     };
 
+    const placeLoad = () => {
+        fetch(endPoint4 + id)
+            .then((response) => response.json())
+            .then((data) => {
+                setAvoid(data[0].result);
+            });
+    };
+
+    const customerLoad = () => {
+        fetch(endPoint7 + window.sessionStorage.getItem("userID"))
+            .then((response) => response.json())
+            .then((data) => {
+                setCustomer(data[0]);
+            });
+    };
+
+    const creatorLoad = () => {
+        fetch(endPoint7 + recipeData.customerId)
+        .then((response) => response.json())
+        .then((data) => {
+            setCreator(data[0]);
+            setCustomerStop(true);
+        });
+    }
+
+    if("" !== recipeData.foodId){
+        if(customerStop){
+
+        }else{
+            creatorLoad();
+        }
+    }
+
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint6, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: recipeData.foodId,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint3, {
                     method: "POST",
@@ -154,6 +206,7 @@ const RecipeInformationDB = (prop) => {
                         foodId: recipeData.foodId,
                         customerId: window.sessionStorage.getItem("userID"),
                         foodName: recipeData.foodName,
+                        foodImage: recipeData.foodImage,
                         provider: "customers",
                     }),
                 })
@@ -168,7 +221,46 @@ const RecipeInformationDB = (prop) => {
         }
     };
 
-    useEffect(load, []);
+    const commentPost = () => {
+        var commentDate = new Date();
+
+        if (null === window.sessionStorage.getItem("userID")) {
+            navigate("/Signin");
+            prop.renew();
+        } else {
+            fetch(endPoint5, {
+                method: "POST",
+                headers: {
+                    "x-access-token":
+                        window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    commentDescription: commentDescription,
+                    customerId: window.sessionStorage.getItem("userID"),
+                    foodId: recipeData.foodId,
+                    customerLastName: customer.lastName,
+                    customerFirstName: customer.firstName,
+                    commentDate: commentDate,
+                    customerImage: customer.customerImage,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (undefined !== data[0].invalid) {
+                    } else {
+                        setAvoid(data[0].result);
+                        setCommentDescription("");
+                    }
+                });
+        }
+    };
+
+    useEffect(() => {
+        load();
+        placeLoad();
+        customerLoad();
+    }, []);
 
     return (
         <>
@@ -203,10 +295,11 @@ const RecipeInformationDB = (prop) => {
                                         </div>
                                         <div className="creator">
                                             <div className="creator-avatar">
-                                                <img src={edamam}></img>
+                                                <img src={creator.customerImage}></img>
                                             </div>
                                             <div className="creator-name">
-                                                <p>Edamam</p>
+                                                {/* Fix to user name and avatar */}
+                                                <p>{creator.firstName + " " + creator.lastName}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +308,7 @@ const RecipeInformationDB = (prop) => {
                                         <div className="recipe-detail-content">
                                             <div className="sn-body-equal-half">
                                                 <div className="recipe-detail-img">
-                                                    <img src={test}></img>
+                                                    <img src={recipeData.foodImage}></img>
                                                 </div>
                                             </div>
                                             <div className="sn-body-equal-half">
@@ -283,8 +376,24 @@ const RecipeInformationDB = (prop) => {
                                                 {/* <div className="creator-avatar">
                                             <img src={edamam}></img>
                                         </div> */}
-                                                <textarea></textarea>
-                                                <button className="btn-cmt">
+                                                <textarea
+                                                    value={commentDescription}
+                                                    onChange={(e) => {
+                                                        setCommentDescription(
+                                                            e.target.value
+                                                        );
+                                                    }}
+                                                ></textarea>
+                                                <button
+                                                    className="btn-cmt"
+                                                    onClick={commentPost}
+                                                    disabled={
+                                                        commentDescription ===
+                                                        ""
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
                                                     Post your comment
                                                 </button>
                                             </div>

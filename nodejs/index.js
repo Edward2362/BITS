@@ -20,6 +20,20 @@ mongoose.connect(
     "mongodb+srv://testuser001:123asd@cluster0.23h33.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 );
 
+app.use(
+    bodyParser.json({
+        limit: "50mb",
+    })
+);
+
+app.use(
+    bodyParser.urlencoded({
+        limit: "50mb",
+        parameterLimit: 100000,
+        extended: true,
+    })
+);
+
 //define a "table" structure
 var CustomerSchema = new mongoose.Schema({
     customerId: String,
@@ -28,8 +42,16 @@ var CustomerSchema = new mongoose.Schema({
     fullName: String,
     lastName: String,
     firstName: String,
+    customerImage: String,
     address: String,
-    food: [{ foodId: String, foodName: String, provider: String }],
+    food: [
+        {
+            foodId: String,
+            foodImage: String,
+            foodName: String,
+            provider: String,
+        },
+    ],
     token: String,
     verificationCode: Number,
 });
@@ -42,6 +64,7 @@ var FoodSchema = new mongoose.Schema({
     foodId: String,
     foodName: String,
     foodCalories: String,
+    foodImage: String,
     foodIngredients: [{ ingredientName: String, ingredientAmount: String }],
     foodSteps: [{ stepDescription: String }],
     foodDiets: [{ dietName: String }],
@@ -49,6 +72,19 @@ var FoodSchema = new mongoose.Schema({
 });
 
 var Food = mongoose.model("Food", FoodSchema);
+
+var CommentSchema = new mongoose.Schema({
+    commentId: String,
+    commentDescription: String,
+    commentDate: Date,
+    customerId: String,
+    customerLastName: String,
+    customerFirstName: String,
+    customerImage: String,
+    foodId: String,
+});
+
+var Comment = mongoose.model("Comment", CommentSchema);
 
 function signInGoogle(passport) {
     passport.use(
@@ -69,6 +105,7 @@ function signInGoogle(passport) {
                                 customerPassword: "NULL",
                                 lastName: profile.name.familyName,
                                 firstName: profile.name.givenName,
+                                customerImage: "NULL",
                                 address: "NULL",
                                 food: [],
                                 token: "",
@@ -180,6 +217,22 @@ function foodIndex(arr, foodId) {
     return result;
 }
 
+var findIndexElement = (array, value) => {
+    var result = -1;
+    if (0 != array.length) {
+        for (let i = 0; i < array.length; ++i) {
+            if (value.foodId == array[i].foodId) {
+                if (value.provider == array[i].provider) {
+                    result = i;
+                }
+            }
+        }
+    } else {
+        result = -1;
+    }
+    return result;
+};
+
 app.get("/customers", function (req, res) {
     Customer.find({}, function (err, customers) {
         res.send(customers);
@@ -270,6 +323,7 @@ app.post("/customer/register", function (req, response) {
                         fullName: "NULL",
                         lastName: req.body.customerLastName,
                         firstName: req.body.customerFirstName,
+                        customerImage: req.body.customerImage,
                         address: "NULL",
                         food: [],
                         token: "",
@@ -312,6 +366,7 @@ app.post("/api/v1/auth/google", async (req, response) => {
         fullName: name,
         lastName: "NULL",
         firstName: "NULL",
+        customerImage: picture,
         address: "NULL",
         food: [],
         token: "",
@@ -475,27 +530,47 @@ app.post(
     "/customer/customerFoodInArray",
     tokenVerified,
     function (req, response) {
+        var customerId = req.body.customerId;
+        Customer.find({ customerId: customerId }, function (err, customers) {
+            var food = req.body;
+            var result = [];
+            delete food.customerId;
+
+            result = result.concat(customers[0].food);
+            result.push(food);
+
+            Customer.findOneAndUpdate(
+                { customerId: customerId },
+                { $set: { food: result } },
+                { new: true },
+                function (error, placeCustomers) {
+                    response.send([{ result: "Customers" }]);
+                }
+            );
+        });
+    }
+);
+
+app.post(
+    "/customer/removeFavoriteRecipe",
+    tokenVerified,
+    function (req, response) {
         Customer.find(
             { customerId: req.body.customerId },
             function (err, customers) {
-                var food = req.body;
-                var result = [];
-                delete food.customerId;
-
-                result = result.concat(customers[0].food);
-                result.push(food);
-
+                var customerfood = customers[0].food;
+                var findIndex = findIndexElement(customerfood, req.body.foodId);
+                customerfood.splice(findIndex, 1);
                 Customer.findOneAndUpdate(
-                    { customerId: customers[0].customerId },
-                    { $set: result },
+                    { customerId: req.body.customerId },
+                    { $set: { food: customerfood } },
                     { new: true },
-                    function (error, placeCustomers) {
+                    function (ok, customerfood) {
                         response.send([{ result: "Customers" }]);
                     }
                 );
             }
         );
-        
     }
 );
 
@@ -746,6 +821,7 @@ app.post("/food", tokenVerified, function (req, response) {
             foodId: foodId,
             foodCalories: req.body.foodCalories,
             foodName: req.body.foodName,
+            foodImage: req.body.foodImage,
             foodSteps: req.body.foodSteps,
             foodIngredients: req.body.foodIngredients,
             foodDiets: req.body.foodDiets,
@@ -779,23 +855,105 @@ app.delete("/food", tokenVerified, function (req, response) {
         async function (err, customers) {
             for (let i = 0; i < customers.length; ++i) {
                 var place = [];
-                place.concat(customers[i].food);
+                place = place.concat(customers[i].food);
                 place.splice(foodIndex(place, req.body.foodId), 1);
                 await Customer.findOneAndUpdate(
                     { customerId: customers[i].customerId },
                     { $set: { food: place } },
                     { new: true },
                     function (error, placeCustomer) {}
-                );
+                ).clone();
             }
-            Food.deleteOne(
+
+            Comment.find(
                 { foodId: req.body.foodId },
-                function (placeError, food) {
-                    response.send([{ result: "Food" }]);
+                async function (error, comments) {
+                    for (let i = 0; i < comments.length; ++i) {
+                        await Comment.deleteOne(
+                            { commentId: comments[i].commentId },
+                            function (placeError, avoidComments) {}
+                        ).clone();
+                    }
+
+                    Food.deleteOne(
+                        { foodId: req.body.foodId },
+                        function (placeError, food) {
+                            response.send([{ result: "Food" }]);
+                        }
+                    );
                 }
             );
         }
     );
+});
+
+app.get("/comments", function (req, response) {
+    Comment.find({}, function (err, comments) {
+        response.send(comments);
+    });
+});
+
+app.get("/commentsAvoid/:id", function (req, response) {
+    Comment.find(
+        { foodId: req.params.id },
+        null,
+        { sort: { commentDate: -1 } },
+        function (err, comments) {
+            response.send([{ result: comments }]);
+        }
+    );
+});
+
+app.post("/comment", function (req, response) {
+    Comment.create(req.body, function (err, comment) {
+        response.send(comment);
+    });
+});
+
+app.post("/avoidComment", tokenVerified, function (req, response) {
+    Comment.find({}, function (err, comments) {
+        var count = 0;
+
+        for (let i = 0; i < comments.length; ++i) {
+            if (count < parseInt(comments[i].commentId.split("-")[1])) {
+                count = parseInt(comments[i].commentId.split("-")[1]);
+            }
+        }
+
+        count = count + 1;
+
+        var commentId = "COMMENT-";
+        commentId = commentId + count;
+
+        Comment.create(
+            {
+                commentId: commentId,
+                commentDescription: req.body.commentDescription,
+                customerLastName: req.body.customerLastName,
+                customerFirstName: req.body.customerFirstName,
+                commentDate: req.body.commentDate,
+                customerId: req.body.customerId,
+                customerImage: req.body.customerImage,
+                foodId: req.body.foodId,
+            },
+            function (error, avoidComment) {
+                Comment.find(
+                    { foodId: req.body.foodId },
+                    null,
+                    { sort: { commentDate: -1 } },
+                    function (avoidError, avoidComments) {
+                        response.send([{ result: avoidComments }]);
+                    }
+                );
+            }
+        );
+    });
+});
+
+app.delete("/comment/:id", function (req, response) {
+    Comment.deleteOne({ commentId: req.params.id }, function (err, customer) {
+        response.send(comment);
+    });
 });
 
 app.listen(9000);

@@ -1,7 +1,9 @@
 import React from "react";
-import { FiHexagon } from "react-icons/fi";
+import { HiOutlinePresentationChartLine } from "react-icons/hi";
 import { BiDish } from "react-icons/bi";
-import img1 from "../img/bg.jpg";
+import { RiDoubleQuotesR } from "react-icons/ri";
+import wife from "../img/wife.jpg";
+import img1 from "../img/Laptop.png";
 
 const HomepageBody = () => {
     const reveal = () => {
@@ -24,19 +26,20 @@ const HomepageBody = () => {
 
     const count_converter = (counter) => {
         var result = "";
+        var arr = [];
 
         if (typeof counter == "string") {
-            var arr = counter.split(".");
+            arr = counter.split(".");
             for (let i = 0; i < arr.length; i++) {
                 result += arr[i];
             }
         } else {
             var string_counter = counter.toString();
-            var arr = string_counter.split("");
+            arr = string_counter.split("");
             let count = arr.length;
             for (let i = 0; i < arr.length; i++) {
                 if (arr.length >= 4) {
-                    if (count % 3 == 0) {
+                    if (count % 3 === 0) {
                         result += ".";
                     }
                 }
@@ -78,6 +81,12 @@ const HomepageBody = () => {
             }
         });
     });
+
+    // var a = "test";
+
+    // a = a === "test" && "a Hao";
+
+    // console.log("test nef", a);
 
     return (
         <>
@@ -153,38 +162,36 @@ const HomepageBody = () => {
                     <div className="section-content">
                         <div className="section-header">
                             <div className="sn-header-body">
-                                <BiDish />
-                                <h1>Restcipe</h1>
+                                <HiOutlinePresentationChartLine />
+                                <h1>User Feedback</h1>
                                 <hr />
                             </div>
                         </div>
                         <div className="section-body">
                             <div className="sn-body-equal-half">
                                 <div className="img-holder">
-                                    <img src={img1}></img>
+                                    <img src={img1} alt="PC-demo"></img>
                                 </div>
                             </div>
                             <div className="sn-body-equal-half">
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
+                                <div className="feedback-body">
+                                    <div className="feedback-img">
+                                        <img src={wife} alt="user-avatar"></img>
                                     </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
+                                    <div className="user">
+                                        <h2>Duong Nguyen</h2>
+                                        <p>Angry Housewife</p>
+                                    </div>
+                                    <div className="feedback-content">
                                         <p>
-                                            hello my Name Is Nguyen Vinh Quang
+                                            Restcipe is an amazing website with
+                                            thousands of dishes from around the
+                                            world. Moreover, it has just saved
+                                            my husband from a flying knife.
                                         </p>
                                     </div>
-                                </div>
-                                <div className="feature-body">
-                                    <div className="feature-icon">
-                                        <FiHexagon />
-                                    </div>
-                                    <div className="feature-content">
-                                        <p>content</p>
-                                        <p>
-                                            hello my Name Is Nguyen Vinh Quang
-                                        </p>
+                                    <div className="quote">
+                                        <RiDoubleQuotesR />
                                     </div>
                                 </div>
                             </div>

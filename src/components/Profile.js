@@ -1,11 +1,9 @@
 import React from "react";
 import Recipe from "./Recipe";
-import { recipes } from "./fakedata";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import test from "../img/bg.jpg";
+import logo from "../img/Restcipe-4.svg";
 
 const Profile = (prop) => {
     let navigate = useNavigate();
@@ -20,7 +18,9 @@ const Profile = (prop) => {
         food: [],
         lastName: "",
         firstName: "",
+        customerImage: "",
     });
+    const [done, setDone] = useState(false);
 
     if (null !== sessionStorage.getItem("userID")) {
     } else {
@@ -48,10 +48,13 @@ const Profile = (prop) => {
                             setCreatedRecipeList(placeData[0].result);
                             setCustomer(data[0]);
                         }
+                        setTimeout(setDone(true), 3000);
                     });
             });
     };
-    useEffect(load, []);
+
+    useEffect(load, [endPoint, endPoint2, navigate, prop]);
+
     return (
         <>
             <div className="page-header">
@@ -60,9 +63,15 @@ const Profile = (prop) => {
                         <div className="avatar-section">
                             <div className="ava-border">
                                 <img
-                                    src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                                    src={customer.customerImage}
                                     alt="default avatar"
                                 ></img>
+                                <div className="change-avatar">
+                                    <input type="file" id="new-avatar"></input>
+                                    <label htmlFor="new-avatar">
+                                        <BiEdit />
+                                    </label>
+                                </div>
                             </div>
                             <div className="name-bar">
                                 {customer.firstName + " " + customer.lastName}
@@ -75,54 +84,121 @@ const Profile = (prop) => {
                 <div className="container">
                     <div className="page-body">
                         <div className="white-bg">
-                            <div className="profile-body">
-                                <div className="profile-section">
-                                    <h1>Created Recipes</h1>
-                                    <div className="results-section">
-                                        <div className="grid-25">
-                                            {createdRecipeList.map((recipe) => (
-                                                <div className="created-recipe">
-                                                    <div
-                                                        className="icon-holder"
-                                                        onClick={() => {
-                                                            sessionStorage.setItem(
-                                                                "Existed",
-                                                                recipe.foodId
-                                                            );
-                                                        }}
-                                                    >
-                                                        <a href="/AlterRecipe">
-                                                            <BiEdit />
-                                                        </a>
-                                                    </div>
-                                                    <Recipe
-                                                        key={recipe.foodId}
-                                                        recipeName={
-                                                            recipe.foodName
-                                                        }
-                                                        recipeImage={test}
-                                                        recipeId={recipe.foodId}
-                                                        url="Recipe-Restcipe"
-                                                    />
+                            {!done ? (
+                                <div className="loading-holder">
+                                    <img src={logo} alt="loading-gif"></img>
+                                    <div className="loading"></div>
+                                </div>
+                            ) : (
+                                <div className="profile-body">
+                                    <div className="profile-section">
+                                        <h1>Created Recipes</h1>
+                                        <div className="results-section">
+                                            {createdRecipeList.length === 0 ? (
+                                                <div className="notification">
+                                                    You have not created any
+                                                    recipe yet!
                                                 </div>
-                                            ))}
+                                            ) : (
+                                                <div className="grid-25">
+                                                    {createdRecipeList.map(
+                                                        (recipe, index) => (
+                                                            <div
+                                                                className="created-recipe"
+                                                                key={index}
+                                                            >
+                                                                <div
+                                                                    className="icon-holder"
+                                                                    onClick={() => {
+                                                                        sessionStorage.setItem(
+                                                                            "Existed",
+                                                                            recipe.foodId
+                                                                        );
+                                                                    }}
+                                                                >
+                                                                    <a href="/AlterRecipe">
+                                                                        <BiEdit />
+                                                                    </a>
+                                                                </div>
+                                                                <Recipe
+                                                                    key={
+                                                                        recipe.foodId
+                                                                    }
+                                                                    recipeName={
+                                                                        recipe.foodName
+                                                                    }
+                                                                    recipeImage={
+                                                                        recipe.foodImage
+                                                                    }
+                                                                    recipeId={
+                                                                        recipe.foodId
+                                                                    }
+                                                                    url="Recipe-Restcipe"
+                                                                />
+                                                            </div>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="profile-section">
+                                        <h1>Favorite Recipes</h1>
+                                        <div className="results-section">
+                                            {customer.food.length === 0 ? (
+                                                <div className="notification">
+                                                    Your favourite list is
+                                                    empty!
+                                                </div>
+                                            ) : (
+                                                <div className="grid-25">
+                                                    {customer.food.map(
+                                                        (recipe) => {
+                                                            var recipeName =
+                                                                recipe.foodName;
+                                                            var recipeImage =
+                                                                recipe.foodImage;
+                                                            var recipeId =
+                                                                recipe.foodId;
+                                                            var recipeURL = "";
+                                                            if (
+                                                                recipe.provider ===
+                                                                "edamam"
+                                                            ) {
+                                                                recipeURL =
+                                                                    "Recipe-Edamam";
+                                                            } else {
+                                                                recipeURL =
+                                                                    "Recipe-Restcipe";
+                                                            }
+
+                                                            return (
+                                                                <Recipe
+                                                                    key={
+                                                                        recipe.foodId
+                                                                    }
+                                                                    recipeName={
+                                                                        recipeName
+                                                                    }
+                                                                    recipeImage={
+                                                                        recipeImage
+                                                                    }
+                                                                    recipeId={
+                                                                        recipeId
+                                                                    }
+                                                                    url={
+                                                                        recipeURL
+                                                                    }
+                                                                />
+                                                            );
+                                                        }
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="profile-section">
-                                    <h1>Favorite Recipes</h1>
-                                    <div className="results-section">
-                                        <div className="grid-25">
-                                            {customer.food.map((recipe) => (
-                                                <Recipe
-                                                    key={recipe.id}
-                                                    recipe={recipe}
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

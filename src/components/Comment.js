@@ -1,20 +1,34 @@
 import React from "react";
 
 const Comment = ({ comment }) => {
+    var options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    };
     return (
         <div className="comment">
             <div className="comment-owner-avatar">
                 <img
-                    src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                    src={comment.customerImage}
                     alt="avatar"
                 ></img>
             </div>
             <div className="comment-information">
                 <div className="comment-owner-with-date">
-                    <p>{comment.userName}</p>
-                    <p>{comment.date}</p>
+                    <p>
+                        {comment.customerFirstName +
+                            " " +
+                            comment.customerLastName}
+                    </p>
+                    <p>
+                        {new Date(comment.commentDate).toLocaleDateString(
+                            "en-US",
+                            options
+                        )}
+                    </p>
                 </div>
-                <p>{comment.information}</p>
+                <p>{comment.commentDescription}</p>
             </div>
         </div>
     );

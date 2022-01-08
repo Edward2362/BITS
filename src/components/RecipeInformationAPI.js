@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import test from "../img/bg.jpg";
 import Ingredient from "./Ingredient";
 import Step from "./Step";
 import edamam from "../img/edamam-logo.png";
@@ -7,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import logo from "../img/Restcipe-4.svg";
 
 const RecipeInformationAPI = (prop) => {
@@ -53,6 +52,14 @@ const RecipeInformationAPI = (prop) => {
     const [img, setImg] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [labels, setLabels] = useState([]);
+    const [customer, setCustomer] = useState({
+        customerId: "",
+        fullName: "",
+        food: [],
+        lastName: "",
+        firstName: "",
+        customerImage: "",
+    });
     console.log(id);
     var endPoint =
         "https://api.edamam.com/api/recipes/v2/" +
@@ -60,25 +67,131 @@ const RecipeInformationAPI = (prop) => {
         "?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
 
     var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
+    var endPoint3 = "http://localhost:9000/commentsAvoid/";
+    var endPoint4 = "http://localhost:9000/avoidComment";
+    var endPoint7 = "http://localhost:9000/customer/";
+    var endPoint5 = "http://localhost:9000/customer/removeFavoriteRecipe";
+    var endPoint6 = "http://localhost:9000/customer/customerFoodIn/";
+
     const load = () => {
         fetch(endPoint)
             .then((response) => response.json())
             .then((fetchResult) => {
-                console.log(fetchResult.recipe);
-                let fetched = fetchResult.recipe;
-                console.log(fetched);
-                setName(fetched.label);
-                console.log("name", name);
-                setImg(fetched.image);
-                console.log("image", img);
-                setIngredients(fetched.ingredientLines);
-                console.log("ingredient", ingredients);
-                let labelsArr = fetched.dietLabels.concat(fetched.healthLabels);
-                setLabels(labelsArr);
+                if (null !== window.sessionStorage.getItem("userID")) {
+                    fetch(
+                        endPoint6 +
+                            window.sessionStorage.getItem("userID") +
+                            "/" +
+                            id,
+                        {
+                            method: "GET",
+                            headers: {
+                                "x-access-token":
+                                    window.sessionStorage.getItem("userToken"),
+                            },
+                        }
+                    )
+                        .then((response2) => response2.json())
+                        .then((placeData) => {
+                            if (undefined !== placeData[0].invalid) {
+                                navigate("/");
+                                prop.renew();
+                            } else {
+                                if (undefined === placeData[0].customer) {
+                                    setFavourite(true);
+                                } else {
+                                    setFavourite(false);
+                                }
+                                console.log(fetchResult.recipe);
+                                let fetched = fetchResult.recipe;
+                                console.log(fetched);
+                                setName(fetched.label);
+                                console.log("name", name);
+                                setImg(fetched.image);
+                                console.log("image", img);
+                                setIngredients(fetched.ingredientLines);
+                                console.log("ingredient", ingredients);
+                                let labelsArr = fetched.dietLabels.concat(
+                                    fetched.healthLabels
+                                );
+                                setLabels(labelsArr);
+                            }
+                        });
+                } else {
+                    console.log(fetchResult.recipe);
+                    let fetched = fetchResult.recipe;
+                    console.log(fetched);
+                    setName(fetched.label);
+                    console.log("name", name);
+                    setImg(fetched.image);
+                    console.log("image", img);
+                    setIngredients(fetched.ingredientLines);
+                    console.log("ingredient", ingredients);
+                    let labelsArr = fetched.dietLabels.concat(
+                        fetched.healthLabels
+                    );
+                    setLabels(labelsArr);
+                }
                 setTimeout(setDone(true), 3000);
             });
     };
-    useEffect(load, []);
+
+    const placeLoad = () => {
+        fetch(endPoint3 + id)
+            .then((response) => response.json())
+            .then((data) => {
+                setAvoid(data[0].result);
+            });
+    };
+    const customerLoad = () => {
+        fetch(endPoint7 + window.sessionStorage.getItem("userID"))
+            .then((response) => response.json())
+            .then((data) => {
+                setCustomer(data[0]);
+            });
+    };
+
+    const commentPost = () => {
+        var commentDate = new Date();
+
+        if (null === window.sessionStorage.getItem("userID")) {
+            navigate("/Signin");
+            prop.renew();
+        } else {
+            fetch(endPoint4, {
+                method: "POST",
+                headers: {
+                    "x-access-token":
+                        window.sessionStorage.getItem("userToken"),
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    commentDescription: commentDescription,
+                    customerId: window.sessionStorage.getItem("userID"),
+                    foodId: id,
+                    customerLastName: customer.lastName,
+                    customerFirstName: customer.firstName,
+                    commentDate: commentDate,
+                    customerImage: customer.customerImage,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (undefined !== data[0].invalid) {
+                    } else {
+                        setAvoid(data[0].result);
+                        setCommentDescription("");
+                    }
+                });
+        }
+    };
+
+    useEffect(() => {
+        load();
+        placeLoad();
+        customerLoad();
+    }, []);
+
     const [recipeData, setRecipeData] = useState({
         name: "Chicken Nugget",
         diets: [
@@ -139,12 +252,35 @@ const RecipeInformationAPI = (prop) => {
         ],
     });
 
+    const [avoid, setAvoid] = useState([]);
+
+    const [commentDescription, setCommentDescription] = useState("");
+
     const isFavourite = () => {
         if (null === window.sessionStorage.getItem("userID")) {
-            navigate("/");
+            navigate("/Signin");
             prop.renew();
         } else {
             if (favourite) {
+                fetch(endPoint5, {
+                    method: "POST",
+                    headers: {
+                        "x-access-token":
+                            window.sessionStorage.getItem("userToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        foodId: id,
+                        customerId: window.sessionStorage.getItem("userID"),
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (undefined !== data[0].invalid) {
+                        } else {
+                            setFavourite(false);
+                        }
+                    });
             } else {
                 fetch(endPoint2, {
                     method: "POST",
@@ -157,6 +293,7 @@ const RecipeInformationAPI = (prop) => {
                         foodId: id,
                         customerId: window.sessionStorage.getItem("userID"),
                         foodName: name,
+                        foodImage: img,
                         provider: "edamam",
                     }),
                 })
@@ -265,15 +402,7 @@ const RecipeInformationAPI = (prop) => {
                                             <h2>Steps</h2>
                                             <div className="recipe-steps-content">
                                                 {/* Step no need in API should replace to Link and Nutrition */}
-                                                {recipeData.steps.map(
-                                                    (step, index) => (
-                                                        <Step
-                                                            key={index}
-                                                            step={step}
-                                                            position={index + 1}
-                                                        />
-                                                    )
-                                                )}
+                                                {/* {recipeData.steps.map} */}
                                             </div>
                                         </div>
                                     </div>
@@ -284,24 +413,37 @@ const RecipeInformationAPI = (prop) => {
                                                 {/* <div className="creator-avatar">
                                                 <img src={edamam}></img>
                                             </div> */}
-                                                <textarea></textarea>
-                                                <button className="btn-cmt">
+                                                <textarea
+                                                    value={commentDescription}
+                                                    onChange={(e) => {
+                                                        setCommentDescription(
+                                                            e.target.value
+                                                        );
+                                                    }}
+                                                ></textarea>
+                                                <button
+                                                    className="btn-cmt"
+                                                    onClick={commentPost}
+                                                    disabled={
+                                                        commentDescription ===
+                                                        ""
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
                                                     Post your comment
                                                 </button>
                                             </div>
                                             <h2>
-                                                {recipeData.comments.length +
-                                                    " Comments "}
+                                                {avoid.length + " Comments "}
                                             </h2>
                                             <div className="recipe-comments-content">
-                                                {recipeData.comments.map(
-                                                    (comment, index) => (
-                                                        <Comment
-                                                            key={index}
-                                                            comment={comment}
-                                                        />
-                                                    )
-                                                )}
+                                                {avoid.map((comment, index) => (
+                                                    <Comment
+                                                        key={index}
+                                                        comment={comment}
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
                                     </div>

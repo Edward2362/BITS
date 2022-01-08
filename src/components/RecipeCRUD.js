@@ -1,7 +1,6 @@
 import React from "react";
 import { RecipeForm } from "./RecipeForm";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const CreateRecipe = (prop) => {
     const [existedRecipe, setExistedRecipe] = useState(false);
