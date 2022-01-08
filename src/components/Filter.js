@@ -8,6 +8,7 @@ export const Filter = ({
     onChange,
     setDone,
     recipesIn,
+    coursesIn,
     recipesAPINextEndPointPlace,
     recipesIndexPlace,
     previousNext,
@@ -37,7 +38,121 @@ export const Filter = ({
         "alcohol-free",
         "immuno-supportive",
     ]);
-
+    const [result, setResult] = useState([])
+    const [recipeDataReturn, setRecipeDataReturn] = useState([])
+    const [nextEndPointReturn, setNextEndPointReturn] = useState("")
+    const [userRecipeReturn, setUserRecipeReturn] = useState([])
+    let fetched = []
+    let combination = []
+    let nEndP = ""
+    let caloriesLimit = 4000;
+    let array = []
+    const endPointCourse = "https://api.edamam.com/api/recipes/v2?type=public&q=" + window.sessionStorage.getItem("place") + "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe&calories=1000"
+    const getCourses = (e) => {
+        fetch(endPointCourse)
+        .then(response => response.json())
+        .then(async fetchResult => {
+                fetched = fetchResult.hits;
+                nEndP = fetchResult._links.next.href
+                 while(true){
+                    let preLength = combination.length;
+                    let check = false;
+                    for (let i = 0; i < fetched.length - 2; i++) {
+                      if(check){
+                        break;
+                      }else{
+                        for (let j = i + 1; j < fetched.length - 1; j++) {
+                          if(check){
+                            break;
+                          }else{
+                            for (let k = j + 1; k < fetched.length; k++) {
+                              if((fetched[i].recipe.calories/fetched[i].recipe.yield + fetched[j].recipe.calories/fetched[j].recipe.yield + fetched[k].recipe.calories/fetched[k].recipe.yield <caloriesLimit)){
+                                let arr = [fetched[i],fetched[j],fetched[k]]
+                                combination.push(arr)
+                                check = true;
+                                setRecipeDataReturn(array);
+                              }
+                              if(check){
+                                fetched.splice(i,1)
+                                fetched.splice(j-1,1)
+                                fetched.splice(k-2,1)
+                                break;
+                              }
+                            }
+                          }
+                        }
+                      }
+                      }
+                      if(preLength === combination.length){
+                        break;
+                      }
+    
+                  }
+        let count = 0;
+        while(count<10  ){
+            let ep2= fetchResult._links.next.href
+            await fetch(nEndP)
+            .then(response1 => response1.json())
+            .then(fetchResult1 => {
+                let fetched1 = fetchResult1.hits;
+                 while(true){
+                    let preLength = combination.length;
+                    let check = false;
+                    for (let i = 0; i < fetched1.length - 2; i++) {
+                      if(check){
+                        break;
+                      }else{
+                        for (let j = i + 1; j < fetched1.length - 1; j++) {
+                          if(check){
+                            break;
+                          }else{
+                            for (let k = j + 1; k < fetched1.length; k++) {
+                              if(fetched1[i].recipe.calories/fetched1[i].recipe.yield + fetched1[j].recipe.calories/fetched1[j].recipe.yield + fetched1[k].recipe.calories/fetched1[k].recipe.yield <caloriesLimit){
+                                let arr = [fetched1[i],fetched1[j],fetched1[k]]
+                                combination.push(arr)
+                                check = true;
+                                setRecipeDataReturn(combination)
+                              }
+                              if(check){
+                                fetched1.splice(i,1)
+                                fetched1.splice(j-1,1)
+                                fetched1.splice(k-2,1)
+                                break;
+                              }
+                            }
+                          }
+                        }
+                      }
+                      }
+                      if(preLength === combination.length){
+                        break;
+                      }
+                  }
+    
+                if(0 == fetched.length){
+                    setUserRecipeReturn([])
+                    setRecipeDataReturn([])
+                    setNextEndPointReturn("")
+                }else{
+                    nEndP = fetchResult1._links.next.href
+                    ep2 = nEndP
+                    setNextEndPointReturn(nEndP)
+                } 
+        })
+        count ++;   
+        }console.log(combination)
+        coursesIn(combination)
+                if(0 == fetched.length){
+                    setUserRecipeReturn([])
+                    setRecipeDataReturn([])
+                    setNextEndPointReturn("")
+                }else{
+                    nEndP = fetchResult._links.next.href
+                    setNextEndPointReturn(nEndP)
+                }     
+        }
+        )
+    }
     const handleDone = () => {
         setDone(true);
     };
@@ -146,7 +261,6 @@ export const Filter = ({
                 .then((response) => response.json())
                 .then((fetchResult) => {
                     let fetched = fetchResult.hits;
-                    // console.log(fetchResult.hits);
                     setCheckLoaded(true);
                     var recipesAPINextEndPointMix = {
                         recipesAPINextEndPointIncluded: false,
@@ -368,8 +482,12 @@ export const Filter = ({
         window.sessionStorage.setItem("caloriesTo", calories.to);
         window.sessionStorage.setItem("ingredientUpTo", ingredientUpTo);
         window.sessionStorage.removeItem("recipesIndex");
-        setDone(false);
-        load("0");
+        if(sessionStorage.getItem("findByCourse")){
+            getCourses();
+        }else{
+            setDone(false);
+            load("0");
+        }
     };
 
     if (recipesAPINextEndPoint.recipesAPINextEndPointIncluded) {
@@ -396,6 +514,7 @@ export const Filter = ({
             load(recipesIndex);
         }
     });
+    
 
     return (
         <div className="filter">

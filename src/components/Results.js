@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Filter } from "./Filter";
 import Recipe from "./Recipe";
 import Course from "./Course";
-import { recipes, courses } from "./fakedata";
+import { recipes } from "./fakedata";
 import { choose } from "../functionsJS/checkbox";
 import test from "../img/bg.jpg";
 import logo from "../img/Restcipe-4.svg";
@@ -14,6 +14,8 @@ const Results = () => {
         sessionStorage.getItem("findByCourse")
     );
     const [recipes, setRecipes] = useState([]);
+
+    const [coursesResult, setCourses] = useState([]);
 
     const [nextEndPoint, setNextEndPoint] = useState([]);
 
@@ -167,6 +169,10 @@ const Results = () => {
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
                                 }}
+                                coursesIn={(courseArray)=>{
+                                    setCourses(courseArray)
+                                
+                                }}
                                 setDone={setDone}
                                 recipesAPINextEndPointPlace={(
                                     recipesAvoidPlaceIndex
@@ -201,11 +207,11 @@ const Results = () => {
                                 <div className="results-section">
                                     {findByCourse === "true" ? (
                                         <div className="grid-50">
-                                            {courses.map((course, index) => (
+                                            {coursesResult.map((course, index) => (
                                                 <Course
                                                     key={index}
-                                                    recipes={course.recipes}
-                                                    url={findInCommunity}
+                                                    recipes={course}
+                                                    url="Recipe-Edamam"
                                                 />
                                             ))}
                                         </div>
