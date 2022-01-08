@@ -18,16 +18,13 @@ export const RecipeForm = (prop) => {
     var source = "";
 
     const [diets, setDiets] = useState([]);
-
     const [calories, setCalories] = useState("");
     const [name, setName] = useState("");
     const [stepList, setStepList] = useState([{ stepDescription: "" }]);
 
     const [foodId, setFoodId] = useState("");
     const [customerId, setCustomerId] = useState("");
-
     const [existedRecipe, setExistedRecipe] = useState(false);
-
     const [placeMix, setPlaceMix] = useState(false);
 
     if (selectedFile === null) {

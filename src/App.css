@@ -371,13 +371,18 @@ header .border:hover {
     justify-content: center;
     border-radius: 10px;
     margin-right: 2px;
-    color: gray;
+    background-color: gray;
+    color: white;
     width: 60%;
     text-align: center;
     padding: 1%;
     cursor: pointer;
     font-size: 13px;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.grid-non-transparent .input-holder .checkbox-label {
+    color: #fff3b0;
 }
 
 .input-holder .checkbox-label::selection {
@@ -449,15 +454,21 @@ header .border:hover {
 }
 
 #profile img {
-    width: 40px;
-    height: 40px;
+    width: 37px;
+    height: 37px;
     border-radius: 50%;
+    border: 2px solid #e09f3e;
+    transition: border 0.3s ease-in-out;
 }
 
 #profile a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.grid-non-transparent #profile img {
+    border: 2px solid #9e2a2b;
 }
 
 /* Header end */
