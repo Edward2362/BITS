@@ -1685,7 +1685,7 @@ input::-webkit-file-upload-button {
 
 .change-avatar label:hover {
     overflow: overlay;
-    background-color: rgba(0, 0, 0, 0.308);
+    background-color: rgba(0, 0, 0, 0.103);
 }
 
 .change-avatar label svg {
