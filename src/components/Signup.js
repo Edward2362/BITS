@@ -203,10 +203,11 @@ const Signup = (prop) => {
                                     <input
                                         type="file"
                                         onChange={imageHandler}
-                                        title=" "
                                         id="file"
                                     ></input>
-                                    <label for="file">Choose Your Avatar</label>
+                                    <label htmlFor="file">
+                                        Choose Your Avatar
+                                    </label>
                                 </div>
                             </div>
 

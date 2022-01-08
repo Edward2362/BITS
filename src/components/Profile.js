@@ -66,6 +66,12 @@ const Profile = (prop) => {
                                     src={customer.customerImage}
                                     alt="default avatar"
                                 ></img>
+                                <div className="change-avatar">
+                                    <input type="file" id="new-avatar"></input>
+                                    <label htmlFor="new-avatar">
+                                        <BiEdit />
+                                    </label>
+                                </div>
                             </div>
                             <div className="name-bar">
                                 {customer.firstName + " " + customer.lastName}

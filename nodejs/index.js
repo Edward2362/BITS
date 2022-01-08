@@ -865,106 +865,24 @@ app.delete("/food", tokenVerified, function (req, response) {
                 ).clone();
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            Comment.find({foodId: req.body.foodId}, async function(error, comments) {
-
-                for (let i = 0; i < comments.length; ++i) {
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    await Comment.deleteOne({commentId: comments[i].commentId}, function(placeError, avoidComments) {
-
-                    });
-                }
-
-                Food.deleteOne(
-                    { foodId: req.body.foodId },
-                    function (placeError, food) {
-                        response.send([{ result: "Food" }]);
+            Comment.find(
+                { foodId: req.body.foodId },
+                async function (error, comments) {
+                    for (let i = 0; i < comments.length; ++i) {
+                        await Comment.deleteOne(
+                            { commentId: comments[i].commentId },
+                            function (placeError, avoidComments) {}
+                        ).clone();
                     }
-                );
-            });
-            
+
+                    Food.deleteOne(
+                        { foodId: req.body.foodId },
+                        function (placeError, food) {
+                            response.send([{ result: "Food" }]);
+                        }
+                    );
+                }
+            );
         }
     );
 });

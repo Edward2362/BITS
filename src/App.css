@@ -573,9 +573,6 @@ input::-webkit-file-upload-button {
     display: none;
 }
 
-.input-avatar input::-webkit-file-upload-button {
-}
-
 .btn,
 .btn-disabled {
     display: inline-block;
@@ -899,7 +896,6 @@ input::-webkit-file-upload-button {
 
 .page-header {
     position: relative;
-    z-index: -1;
     display: block; /*Not necessary, but we do want it this way*/
     box-sizing: border-box; /*Not necessary in this situation*/
     width: 100%; /*Not necessary, but we do want it this way*/
@@ -1645,6 +1641,7 @@ input::-webkit-file-upload-button {
 }
 
 .ava-border {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1664,6 +1661,44 @@ input::-webkit-file-upload-button {
     height: inherit;
     border: solid transparent;
     border-radius: 50%;
+    z-index: 300;
+}
+
+.change-avatar {
+    position: absolute;
+    z-index: 1000;
+}
+
+.change-avatar input {
+    display: none;
+}
+
+.change-avatar label {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.change-avatar label:hover {
+    overflow: overlay;
+    background-color: rgba(0, 0, 0, 0.308);
+}
+
+.change-avatar label svg {
+    padding: 5px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: transparent;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.change-avatar label:hover svg {
+    background-color: #e09f3e;
+    color: #9e2a2b;
 }
 
 .name-bar {
