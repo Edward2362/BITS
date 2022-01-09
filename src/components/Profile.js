@@ -9,7 +9,27 @@ const Profile = (prop) => {
     let navigate = useNavigate();
     var endPoint = "http://localhost:9000/customerFood/";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var endPoint2 = "http://localhost:9000/customer/";
+    var endPoint3 = "http://localhost:9000/customer/customerUpdate";
+    
+
 
     const [createdRecipeList, setCreatedRecipeList] = useState([]);
     const [customer, setCustomer] = useState({
@@ -23,17 +43,230 @@ const Profile = (prop) => {
     const [done, setDone] = useState(false);
 
     const [selectedFile, setSelectedFile] = useState(null);
-    var source = "";
+
+
+    const [place, setPlace] = useState(true);
+    var source = customer.customerImage;
+
+    const customerAvoid = () => {
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        fetch(endPoint3, {
+            method: "POST",
+            headers: {
+                "x-access-token": window.sessionStorage.getItem("userToken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({customerImage: source, customerId: customer.customerId})
+        }).then(response=>response.json())
+        .then(data => {
+
+            
+            setPlace(true);
+            setCustomer(data[0].result);
+            window.location.reload();
+        });
+    };
 
     if (selectedFile === null) {
     } else {
-        source = selectedFile.profileImg;
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (place) {
+
+        } else {
+            source = selectedFile.profileImg;
+            customerAvoid();
+        }
     }
     var imageHandler = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
                 setSelectedFile({ profileImg: reader.result });
+                setPlace(false);
             }
         };
         reader.readAsDataURL(e.target.files[0]);
@@ -70,6 +303,283 @@ const Profile = (prop) => {
             });
     };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     useEffect(load, [endPoint, endPoint2, navigate, prop]);
 
     return (
@@ -80,11 +590,11 @@ const Profile = (prop) => {
                         <div className="avatar-section">
                             <div className="ava-border">
                                 <img
-                                    src={customer.customerImage}
+                                    src={source}
                                     alt="default avatar"
                                 ></img>
                                 <div className="change-avatar">
-                                    <input type="file" id="new-avatar"></input>
+                                    <input type="file" id="new-avatar" onChange={imageHandler}></input>
                                     <label htmlFor="new-avatar">
                                         <BiEdit />
                                     </label>

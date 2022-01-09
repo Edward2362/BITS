@@ -31,11 +31,9 @@ const Signin = (prop) => {
                 if (undefined !== data[0].invalid) {
                     setCheckLogin(false);
                     validateLogin();
-                    console.log(checkLogin);
                 } else {
                     setCheckLogin(true);
                     validateLogin();
-                    console.log(checkLogin);
                     window.sessionStorage.setItem("userID", data[0].customerId);
                     window.sessionStorage.setItem("userToken", data[0].token);
                     navigate("/");
@@ -56,7 +54,10 @@ const Signin = (prop) => {
         });
         const data = await res.json();
         console.log(data);
-        navigate("/");
+        window.sessionStorage.setItem("userID", data[0].customerId);
+                    window.sessionStorage.setItem("userToken", data[0].token);
+                    navigate("/");
+                    prop.renew();
 
         // store returned user somehow
     };
