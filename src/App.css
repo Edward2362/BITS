@@ -516,6 +516,7 @@ header .border:hover {
     align-items: center;
     justify-content: center;
     padding: 7.2% 10vh 3.4% 10vh;
+    height: 74.2vh;
     font-family: "Rajdhani", sans-serif;
 }
 
@@ -1354,7 +1355,7 @@ input::-webkit-file-upload-button {
 /* Forgot Password */
 
 .body-forgot {
-    height: 57vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     padding-top: 20vh;
@@ -1618,79 +1619,58 @@ input::-webkit-file-upload-button {
 .btn-submit {
     margin: 0 5%;
     display: flex;
-    float: center;
     bottom: 0;
     justify-content: center;
+    align-items: center;
     border: solid;
     border-radius: 5px;
+    background-color: white;
     border-color: #9e2a2b;
+    color: #9e2a2b;
     width: 10%;
     height: 40px;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-        box-shadow 0.3s ease-in-out;
+        box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .btn-submit:hover {
     cursor: pointer;
     background-color: #9e2a2b;
     border-color: #9e2a2b;
+    color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
-.btn-submit button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-weight: 500;
-    color: #9e2a2b;
-    transition: color 0.3s ease-in-out;
-}
-
-.btn-submit:hover button {
-    color: white;
-}
-
-.btn-submit button:disabled,
-.btn-submit button:disabled:hover {
+.btn-submit:disabled,
+.btn-submit:disabled:hover {
     background-color: gray;
     border-color: gray;
     cursor: default;
+    color: white;
 }
 
 .btn-delete {
     margin: 0 5%;
     display: flex;
-    float: center;
-    bottom: 0;
     justify-content: center;
+    align-items: center;
     border: solid;
     border-radius: 5px;
     border-color: #e09f3e;
+    background-color: white;
+    color: #e09f3e;
     width: 10%;
     height: 40px;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-        box-shadow 0.3s ease-in-out;
+        box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .btn-delete:hover {
     cursor: pointer;
     background-color: #9e2a2b;
+    color: white;
     border-color: #9e2a2b#9e2a2b;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-.btn-delete input {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-weight: 500;
-    color: #e09f3e;
-}
-
-.btn-delete input:hover {
-    color: white;
 }
 
 /* Create new recipe end */
@@ -2269,8 +2249,14 @@ input::-webkit-file-upload-button {
 
 /* Footer Starts */
 
+footer {
+    background-color: #9e2a2b;
+    margin: 0;
+    color: #fff3b0;
+}
+
 .footer-custom {
-    border-top: solid gray 3px;
+    border-top: solid #9e2a2b 3px;
 }
 
 .grid-footer {
@@ -2281,7 +2267,7 @@ input::-webkit-file-upload-button {
 }
 
 .footer-content {
-    margin: 2% 0;
+    padding: 2% 0;
 }
 
 .block-35-footer {
@@ -2293,7 +2279,6 @@ input::-webkit-file-upload-button {
     grid-area: auto;
     height: inherit;
     font-family: "Rajdhani", sans-serif;
-    font-weight: 600;
 }
 
 .block-65-footer {
@@ -2312,12 +2297,11 @@ input::-webkit-file-upload-button {
     float: right;
     justify-content: center;
     font-family: "Rajdhani", sans-serif;
-    font-weight: 600;
 }
 
 .block-65-footer li a {
     text-decoration: none;
-    color: black;
+    color: #fff3b0;
 }
 
 .block-65-footer li a:after {
@@ -2328,14 +2312,14 @@ input::-webkit-file-upload-button {
     height: 2.5px;
     left: 50%;
     position: absolute;
-    background: #9e2a2b;
+    background: #fff3b0;
     transition: width 0.5s ease 0s, left 0.5s ease 0s;
     width: 0;
 }
 .block-65-footer li a:hover:after {
     width: 100%;
     left: 0;
-    color: #9e2a2b;
+    color: #fff3b0;
 }
 
 /* Footer Ends */

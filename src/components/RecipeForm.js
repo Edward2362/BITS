@@ -496,37 +496,33 @@ export const RecipeForm = (prop) => {
 
             {existedRecipe ? (
                 <div className="btns">
-                    <div className="btn-submit">
-                        <button
-                            type="submit"
-                            value="Update"
-                            disabled={checkInput()}
-                            onClick={addOrUpdatedRecipe}
-                        >
-                            Update
-                        </button>
-                    </div>
+                    <button
+                        className="btn-submit"
+                        type="submit"
+                        disabled={checkInput()}
+                        onClick={addOrUpdatedRecipe}
+                    >
+                        Update
+                    </button>
 
-                    <div className="btn-delete">
-                        <input
-                            type="submit"
-                            value="Delete"
-                            onClick={deleteRecipe}
-                        ></input>
-                    </div>
+                    <button
+                        className="btn-delete"
+                        type="submit"
+                        onClick={deleteRecipe}
+                    >
+                        Delete
+                    </button>
                 </div>
             ) : (
                 <div className="btns">
-                    <div className="btn-submit">
-                        <button
-                            type="submit"
-                            value="Create"
-                            disabled={true}
-                            onClick={addOrUpdatedRecipe}
-                        >
-                            Create
-                        </button>
-                    </div>
+                    <button
+                        className="btn-submit"
+                        type="submit"
+                        disabled={checkInput()}
+                        onClick={addOrUpdatedRecipe}
+                    >
+                        Create
+                    </button>
                 </div>
             )}
         </div>
