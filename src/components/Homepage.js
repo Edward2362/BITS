@@ -163,7 +163,7 @@ const HomepageBody = () => {
                         <div className="section-header">
                             <div className="sn-header-body">
                                 <HiOutlinePresentationChartLine />
-                                <h1>User Feedback</h1>
+                                <h1>Feedback</h1>
                                 <hr />
                             </div>
                         </div>
@@ -186,8 +186,8 @@ const HomepageBody = () => {
                                         <p>
                                             Restcipe is an amazing website with
                                             thousands of dishes from around the
-                                            world. Moreover, it has just saved
-                                            my husband from a flying knife.
+                                            world and it has just saved my
+                                            husband from a flying knife.
                                         </p>
                                     </div>
                                     <div className="quote">

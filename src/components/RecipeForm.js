@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { choose } from "../functionsJS/checkbox";
 import { BiImageAdd } from "react-icons/bi";
+import defaultImg from "../img/Default Restcipe img.png";
 
 export const RecipeForm = (prop) => {
     let navigate = useNavigate();
@@ -10,17 +11,17 @@ export const RecipeForm = (prop) => {
     var endPoint2 = "http://localhost:9000/foodUpdate";
     var endPoint3 = "http://localhost:9000/food";
     var endPoint4 = "http://localhost:9000/foodPlace";
+
+    const [name, setName] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [calories, setCalories] = useState("");
     const [ingredientList, setIngredientList] = useState([
         { ingredientName: "", ingredientAmount: "" },
     ]);
-
-    const [selectedFile, setSelectedFile] = useState(null);
-    var source = "";
-
     const [diets, setDiets] = useState([]);
-    const [calories, setCalories] = useState("");
-    const [name, setName] = useState("");
     const [stepList, setStepList] = useState([{ stepDescription: "" }]);
+
+    var source = defaultImg;
 
     const [foodId, setFoodId] = useState("");
     const [customerId, setCustomerId] = useState("");
@@ -195,6 +196,20 @@ export const RecipeForm = (prop) => {
         }
     };
 
+    const checkInput = () => {
+        if (
+            name !== "" &&
+            calories !== "" &&
+            ingredientList[0].ingredientName !== "" &&
+            ingredientList[0].ingredientAmount !== "" &&
+            diets.length !== 0 &&
+            stepList[0].stepDescription !== ""
+        ) {
+            return false;
+        }
+        return true;
+    };
+
     const handleEffect = () => {
         if (placeMix) {
             handleCheckedDiet();
@@ -256,13 +271,9 @@ export const RecipeForm = (prop) => {
                         ></input>
                     </div>
                 </div>
-                {source === "" ? (
-                    <></>
-                ) : (
-                    <div className="recipe-img-holder">
-                        <img src={source} width="400px" />
-                    </div>
-                )}
+                <div className="recipe-img-holder">
+                    <img src={source} width="400px" />
+                </div>
 
                 <div className="new-res-body">
                     <label>Calories</label>
@@ -486,11 +497,14 @@ export const RecipeForm = (prop) => {
             {existedRecipe ? (
                 <div className="btns">
                     <div className="btn-submit">
-                        <input
+                        <button
                             type="submit"
                             value="Update"
+                            disabled={checkInput()}
                             onClick={addOrUpdatedRecipe}
-                        ></input>
+                        >
+                            Update
+                        </button>
                     </div>
 
                     <div className="btn-delete">
@@ -504,11 +518,14 @@ export const RecipeForm = (prop) => {
             ) : (
                 <div className="btns">
                     <div className="btn-submit">
-                        <input
+                        <button
                             type="submit"
                             value="Create"
+                            disabled={true}
                             onClick={addOrUpdatedRecipe}
-                        ></input>
+                        >
+                            Create
+                        </button>
                     </div>
                 </div>
             )}

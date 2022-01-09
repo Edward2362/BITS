@@ -22,6 +22,23 @@ const Profile = (prop) => {
     });
     const [done, setDone] = useState(false);
 
+    const [selectedFile, setSelectedFile] = useState(null);
+    var source = "";
+
+    if (selectedFile === null) {
+    } else {
+        source = selectedFile.profileImg;
+    }
+    var imageHandler = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setSelectedFile({ profileImg: reader.result });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
     if (null !== sessionStorage.getItem("userID")) {
     } else {
         navigate("/Signin");
