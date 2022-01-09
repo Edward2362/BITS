@@ -27,6 +27,7 @@ const Profile = (prop) => {
 
 
     var endPoint2 = "http://localhost:9000/customer/";
+    var endPoint3 = "";
 
     const [createdRecipeList, setCreatedRecipeList] = useState([]);
     const [customer, setCustomer] = useState({customerId: "", fullName: "", food: [], lastName: ""});
@@ -148,6 +149,205 @@ const Profile = (prop) => {
                 });
         });
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const customerAvoid = () => {
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        fetch(endPoint3, {
+            method: "POST",
+            headers: {
+                "x-access-token": window.sessionStorage.getItem("userToken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({customerImage: "", customerId: customer.customerId})
+        }).then(response=>response.json())
+        .then(data => {
+            setCustomer(data[0].result);
+        });
+    };
+
     useEffect(load, []);
     return (
         <>
