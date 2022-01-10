@@ -125,6 +125,7 @@ const Signin = (prop) => {
                                     buttonText="Log in with Google"
                                     onSuccess={handleLogin}
                                     onFailure={handleLogin}
+                                    // redirectUri="https://localhost:5000/auth/google"
                                     cookiePolicy={"single_host_origin"}
                                 />
                             </div>

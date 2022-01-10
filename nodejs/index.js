@@ -352,21 +352,27 @@ app.post("/customer/register", function (req, response) {
 
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+console.log("khach toi ne", process.env.GOOGLE_CLIENT_ID);
+
 app.post("/api/v1/auth/google", async (req, response) => {
     const { token } = req.body;
+    console.log("hello e ne a", token);
+
     const ticket = await client.verifyIdToken({
         idToken: token,
         audience: process.env.GOOGLE_CLIENT_ID,
     });
     const { sub, name, email, picture } = ticket.getPayload();
 
+    var elementInName = name.split(" ");
+
     var result = {
         customerId: sub,
         customerEmail: email,
         customerPassword: "NULL",
         fullName: name,
-        lastName: "NULL",
-        firstName: "NULL",
+        lastName: elementInName[0],
+        firstName: elementInName[1],
         customerImage: picture,
         address: "NULL",
         food: [],
