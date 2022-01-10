@@ -23,6 +23,8 @@ const NavBar = () => {
         controlSign = <Sign />;
     }
 
+    console.log("customer", customer);
+
     const load = () => {
         if ("" !== customer.lastName) {
         } else {

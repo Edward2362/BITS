@@ -359,6 +359,7 @@ app.post("/api/v1/auth/google", async (req, response) => {
         audience: process.env.GOOGLE_CLIENT_ID,
     });
     const { sub, name, email, picture } = ticket.getPayload();
+
     var result = {
         customerId: sub,
         customerEmail: email,
@@ -372,11 +373,24 @@ app.post("/api/v1/auth/google", async (req, response) => {
         token: "",
         verificationCode: 0,
     };
+
+    const customerName = result.customerEmail;
+
+    const customerToken = jwt.sign(
+        { user_id: result.customerId, customerName },
+        process.env.TOKEN_KEY,
+        {
+            expiresIn: "2h",
+        }
+    );
+
+    result.token = customerToken;
+
     Customer.create(result, function (errors, placeResult) {
         var resultGoogle = [
             {
                 customerId: result.customerId,
-                token: token,
+                token: customerToken,
             },
         ];
         response.send(resultGoogle);
@@ -786,22 +800,22 @@ app.get(
                         foodIndex,
                         foodFinal.length
                     );
-                    if (4 /* 20 */ < foodFinalByIndex.length) {
+                    if (20 < foodFinalByIndex.length) {
                         foodFinalMove = foodFinal.slice(
                             foodIndex,
-                            foodIndex + 4 /* 20 */
+                            foodIndex + 20
                         );
 
                         if (0 != foodIndex) {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodPrevious: foodIndex - 4 /* 20 */,
-                                foodNext: foodIndex + 4 /* 20 */,
+                                foodPrevious: foodIndex - 20,
+                                foodNext: foodIndex + 20,
                             };
                         } else {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodNext: foodIndex + 4 /* 20 */,
+                                foodNext: foodIndex + 20,
                             };
                         }
                     } else {
@@ -809,7 +823,7 @@ app.get(
                         if (0 != foodIndex) {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodPrevious: foodIndex - 4 /* 20 */,
+                                foodPrevious: foodIndex - 20,
                             };
                         } else {
                             foodMix = { result: foodFinalMove };
@@ -972,7 +986,7 @@ app.post("/avoidComment", tokenVerified, function (req, response) {
 });
 
 app.delete("/comment/:id", function (req, response) {
-    Comment.deleteOne({ commentId: req.params.id }, function (err, customer) {
+    Comment.deleteOne({ commentId: req.params.id }, function (err, comment) {
         response.send(comment);
     });
 });
