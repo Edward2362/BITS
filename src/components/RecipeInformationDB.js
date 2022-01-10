@@ -47,15 +47,15 @@ const RecipeInformationDB = (prop) => {
     let navigate = useNavigate();
     const [done, setDone] = useState(false);
 
-    var endPoint = "http://localhost:9000/foodPlace/";
-    var endPoint2 = "http://localhost:9000/customer/customerFoodIn/";
-    var endPoint3 = "http://localhost:9000/customer/customerFoodInArray";
-    var endPoint6 = "http://localhost:9000/customer/removeFavoriteRecipe";
+    var endPoint = "/foodPlace/";
+    var endPoint2 = "/customer/customerFoodIn/";
+    var endPoint3 = "/customer/customerFoodInArray";
+    var endPoint6 = "/customer/removeFavoriteRecipe";
 
-    var endPoint4 = "http://localhost:9000/commentsAvoid/";
+    var endPoint4 = "/commentsAvoid/";
 
-    var endPoint5 = "http://localhost:9000/avoidComment";
-    var endPoint7 = "http://localhost:9000/customer/";
+    var endPoint5 = "/avoidComment";
+    var endPoint7 = "/customer/";
     
     const [favourite, setFavourite] = useState(false);
 

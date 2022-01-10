@@ -19,7 +19,7 @@ export const Filter = ({
         "https://api.edamam.com/api/recipes/v2?type=public&q=" +
         window.sessionStorage.getItem("place") +
         "&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
-    var endPoint2 = "http://localhost:9000/placeFood";
+    var endPoint2 = "/placeFood";
 
     const [findInCommunity] = useState(
         sessionStorage.getItem("findInCommunity") ? true : false

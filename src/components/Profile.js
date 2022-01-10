@@ -7,7 +7,7 @@ import logo from "../img/Restcipe-4.svg";
 
 const Profile = (prop) => {
     let navigate = useNavigate();
-    var endPoint = "http://localhost:9000/customerFood/";
+    var endPoint = "/customerFood/";
 
 
 
@@ -26,8 +26,8 @@ const Profile = (prop) => {
 
 
 
-    var endPoint2 = "http://localhost:9000/customer/";
-    var endPoint3 = "http://localhost:9000/customer/customerUpdate";
+    var endPoint2 = "/customer/";
+    var endPoint3 = "/customer/customerUpdate";
     
 
 

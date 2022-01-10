@@ -7,7 +7,7 @@ html
     body(class='forgot-password')
         div(class='forgot-password-body')
             h1 Reset Password
-            form(action='http://localhost:9000/api/auth/reset/#{result}' method='POST' class='forgot-password-form' onChange="checkPassword()" )
+            form(action='/api/auth/reset/#{result}' method='POST' class='forgot-password-form' onChange="checkPassword()" )
                 .form-group
                     label(for='password') New Password
                     input.form-control(type='password' name='password' value='' placeholder='New password', autofocus=true, id='password')

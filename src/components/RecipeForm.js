@@ -7,10 +7,10 @@ import defaultImg from "../img/Default Restcipe img.png";
 
 export const RecipeForm = (prop) => {
     let navigate = useNavigate();
-    var endPoint = "http://localhost:9000/food";
-    var endPoint2 = "http://localhost:9000/foodUpdate";
-    var endPoint3 = "http://localhost:9000/food";
-    var endPoint4 = "http://localhost:9000/foodPlace";
+    var endPoint = "/food";
+    var endPoint2 = "/foodUpdate";
+    var endPoint3 = "/food";
+    var endPoint4 = "/foodPlace";
 
     const [name, setName] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);

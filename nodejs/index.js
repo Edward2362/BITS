@@ -10,8 +10,10 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const path = require('path');
+var proxy = require('express-http-proxy');
 require("dotenv").config();
-
+app.use(express.static(path.resolve(__dirname,'build')));
 // import all the things we need
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
@@ -33,7 +35,7 @@ app.use(
         extended: true,
     })
 );
-
+app.use('/proxy', proxy('http://localhost:'+process.env.PORT));
 //define a "table" structure
 var CustomerSchema = new mongoose.Schema({
     customerId: String,
@@ -360,13 +362,15 @@ app.post("/api/v1/auth/google", async (req, response) => {
     });
     const { sub, name, email, picture } = ticket.getPayload();
 
+    const elementInName = name.split(" ");
+
     var result = {
         customerId: sub,
         customerEmail: email,
         customerPassword: "NULL",
         fullName: name,
-        lastName: "NULL",
-        firstName: "NULL",
+        lastName: elementInName[0],
+        firstName: elementInName[elementInName.length - 1],
         customerImage: picture,
         address: "NULL",
         food: [],
@@ -990,5 +994,9 @@ app.delete("/comment/:id", function (req, response) {
         response.send(comment);
     });
 });
+app.get('*', function (req, res) {
+    const index = path.join(__dirname, 'build', 'index.html');
+    res.sendFile(index);
+  });
 
-app.listen(9000);
+app.listen(process.env.PORT||9000);

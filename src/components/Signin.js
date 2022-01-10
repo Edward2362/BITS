@@ -8,7 +8,7 @@ const Signin = (prop) => {
     const [customerPassword, setCustomerPassword] = useState("");
     const [checkLogin, setCheckLogin] = useState(false);
     const [loginErrorMsg, setLoginErrorMsg] = useState("");
-    var endPoint = "http://localhost:9000/customer/signin";
+    var endPoint = "/customer/signin";
 
     if (sessionStorage.getItem("userID")) {
         navigate("/Profile");
@@ -43,7 +43,7 @@ const Signin = (prop) => {
     };
 
     const handleLogin = async (googleData) => {
-        const res = await fetch("http://localhost:9000/api/v1/auth/google", {
+        const res = await fetch("/api/v1/auth/google", {
             method: "POST",
             body: JSON.stringify({
                 token: googleData.tokenId,
@@ -125,6 +125,7 @@ const Signin = (prop) => {
                                     buttonText="Log in with Google"
                                     onSuccess={handleLogin}
                                     onFailure={handleLogin}
+                                    redirectUri="http://localhost:5000/auth/google"
                                     cookiePolicy={"single_host_origin"}
                                 />
                             </div>

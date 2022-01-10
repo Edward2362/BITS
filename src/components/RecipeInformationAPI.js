@@ -69,12 +69,12 @@ const RecipeInformationAPI = (prop) => {
         id +
         "?type=public&app_id=fe1da2d2&app_key=%2006a4dadc3c947a1b4b7a0e15622cb4fe";
 
-    var endPoint2 = "http://localhost:9000/customer/customerFoodInArray";
-    var endPoint3 = "http://localhost:9000/commentsAvoid/";
-    var endPoint4 = "http://localhost:9000/avoidComment";
-    var endPoint7 = "http://localhost:9000/customer/";
-    var endPoint5 = "http://localhost:9000/customer/removeFavoriteRecipe";
-    var endPoint6 = "http://localhost:9000/customer/customerFoodIn/";
+    var endPoint2 = "/customer/customerFoodInArray";
+    var endPoint3 = "/commentsAvoid/";
+    var endPoint4 = "/avoidComment";
+    var endPoint7 = "/customer/";
+    var endPoint5 = "/customer/removeFavoriteRecipe";
+    var endPoint6 = "/customer/customerFoodIn/";
 
     const load = () => {
         fetch(endPoint)

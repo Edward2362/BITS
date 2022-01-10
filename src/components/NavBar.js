@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Signed from "./Signed";
 
 const NavBar = () => {
-    var endPoint = "http://localhost:9000/customer/";
+    var endPoint = "/customer/";
     const [customer, setCustomer] = useState({
         customerId: "",
         customerEmail: "",

@@ -5,7 +5,7 @@ import { useState } from "react";
 const ForgotPassword = () => {
     let navigate = useNavigate();
     const [customerEmail, setCustomerEmail] = useState("");
-    var endPoint = "http://localhost:9000/customers/reset/email";
+    var endPoint = "/customers/reset/email";
     const resetpw = () => {
         fetch(endPoint, {
             method: "POST",

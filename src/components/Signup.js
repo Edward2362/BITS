@@ -12,7 +12,7 @@ const Signup = (prop) => {
     const [customerLastName, setCustomerLastName] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     var source = anonymous;
-    var endPoint = "http://localhost:9000/customer/register";
+    var endPoint = "/customer/register";
 
     if (selectedFile === null) {
     } else {
