@@ -55,9 +55,9 @@ const Signin = (prop) => {
         const data = await res.json();
         console.log(data);
         window.sessionStorage.setItem("userID", data[0].customerId);
-                    window.sessionStorage.setItem("userToken", data[0].token);
-                    navigate("/");
-                    prop.renew();
+        window.sessionStorage.setItem("userToken", data[0].token);
+        navigate("/");
+        prop.renew();
 
         // store returned user somehow
     };

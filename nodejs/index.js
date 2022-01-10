@@ -359,6 +359,7 @@ app.post("/api/v1/auth/google", async (req, response) => {
         audience: process.env.GOOGLE_CLIENT_ID,
     });
     const { sub, name, email, picture } = ticket.getPayload();
+
     var result = {
         customerId: sub,
         customerEmail: email,
@@ -372,11 +373,24 @@ app.post("/api/v1/auth/google", async (req, response) => {
         token: "",
         verificationCode: 0,
     };
+
+    const customerName = result.customerEmail;
+
+    const customerToken = jwt.sign(
+        { user_id: result.customerId, customerName },
+        process.env.TOKEN_KEY,
+        {
+            expiresIn: "2h",
+        }
+    );
+
+    result.token = customerToken;
+
     Customer.create(result, function (errors, placeResult) {
         var resultGoogle = [
             {
                 customerId: result.customerId,
-                token: token,
+                token: customerToken,
             },
         ];
         response.send(resultGoogle);
