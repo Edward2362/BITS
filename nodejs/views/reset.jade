@@ -2,15 +2,25 @@ doctype html
 html
     head
         title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
-    body
-        form(action='http://localhost:9000/api/auth/reset/' , method='POST')
-            legend Reset Password #{result}
-            .form-group
-                label(for='password') New Password 
-                input.form-control(type='password', name='password', value='', placeholder='New password', autofocus=true)
-            .form-group
-                label(for='confirm') Confirm Password
-                input.form-control(type='password', name='confirmPassword', value='', placeholder='Confirm password')
-            .form-group
-                button.btn.btn-primary(type='submit') Update Password
+        style
+            include ../src/App.css
+    body(class='forgot-password')
+        div(class='forgot-password-body')
+            h1 Reset Password
+            form(action='http://localhost:9000/api/auth/reset/#{result}' method='POST' class='forgot-password-form' onChange="checkPassword()" )
+                .form-group
+                    label(for='password') New Password
+                    input.form-control(type='password' name='password' value='' placeholder='New password', autofocus=true, id='password')
+                div(id="message" class="message")
+                .form-group
+                    label(for='confirm') Confirm Password
+                    input.form-control(type='password' name='confirmPassword' value='' placeholder='Confirm password' id='retype' )
+                div(id="message-retype" class="message")
+                .form-button
+                    button.btn(type='submit' disabled=true id="submit") Update Password
+        script 
+            include script.js
+
+
+
+

@@ -972,7 +972,7 @@ app.post("/avoidComment", tokenVerified, function (req, response) {
 });
 
 app.delete("/comment/:id", function (req, response) {
-    Comment.deleteOne({ commentId: req.params.id }, function (err, customer) {
+    Comment.deleteOne({ commentId: req.params.id }, function (err, comment) {
         response.send(comment);
     });
 });

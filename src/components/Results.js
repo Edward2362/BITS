@@ -169,9 +169,8 @@ const Results = () => {
                                     setRecipesPrevious(previous);
                                     setRecipesNext(next);
                                 }}
-                                coursesIn={(courseArray)=>{
-                                    setCourses(courseArray)
-                                
+                                coursesIn={(courseArray) => {
+                                    setCourses(courseArray);
                                 }}
                                 setDone={setDone}
                                 recipesAPINextEndPointPlace={(
@@ -199,73 +198,95 @@ const Results = () => {
                                     <img src={logo}></img>
                                     <div className="loading"></div>
                                 </div>
-                            ) : recipes.length === 0 ? (
-                                <div className="results-section">
-                                    <p className="notification">No Results</p>
-                                </div>
                             ) : (
                                 <div className="results-section">
                                     {findByCourse === "true" ? (
-                                        <div className="grid-50">
-                                            {coursesResult.map((course, index) => (
-                                                <Course
-                                                    key={index}
-                                                    recipes={course}
-                                                    url="Recipe-Edamam"
-                                                />
-                                            ))}
+                                        coursesResult.length === 0 ? (
+                                            <div className="results-section">
+                                                <p className="notification">
+                                                    No Results
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <div className="grid-50">
+                                                {coursesResult.map(
+                                                    (course, index) => (
+                                                        <Course
+                                                            key={index}
+                                                            recipes={course}
+                                                            url="Recipe-Edamam"
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
+                                        )
+                                    ) : recipes.length === 0 ? (
+                                        <div className="results-section">
+                                            <p className="notification">
+                                                No Results
+                                            </p>
                                         </div>
                                     ) : (
-                                        <div className="grid-25">
-                                            {recipes.map((recipe) => {
-                                                var recipeName = "";
-                                                var recipeImage = "";
-                                                var recipeId = "";
-                                                if (
-                                                    null ===
-                                                    sessionStorage.getItem(
-                                                        "findInCommunity"
-                                                    )
-                                                ) {
-                                                    recipeName =
-                                                        recipe.recipe.label;
-                                                    recipeImage =
-                                                        recipe.recipe.image;
-                                                    recipeId =
-                                                        recipe._links.self.href.split(
-                                                            "v2/"
-                                                        )[1];
-                                                } else {
-                                                    recipeName =
-                                                        recipe.foodName;
-                                                    recipeImage =
-                                                        recipe.foodImage;
-                                                    recipeId = recipe.foodId;
-                                                }
+                                        <>
+                                            <div className="grid-25">
+                                                {recipes.map((recipe) => {
+                                                    var recipeName = "";
+                                                    var recipeImage = "";
+                                                    var recipeId = "";
+                                                    if (
+                                                        null ===
+                                                        sessionStorage.getItem(
+                                                            "findInCommunity"
+                                                        )
+                                                    ) {
+                                                        recipeName =
+                                                            recipe.recipe.label;
+                                                        recipeImage =
+                                                            recipe.recipe.image;
+                                                        recipeId =
+                                                            recipe._links.self.href.split(
+                                                                "v2/"
+                                                            )[1];
+                                                    } else {
+                                                        recipeName =
+                                                            recipe.foodName;
+                                                        recipeImage =
+                                                            recipe.foodImage;
+                                                        recipeId =
+                                                            recipe.foodId;
+                                                    }
 
-                                                return (
-                                                    <Recipe
-                                                        key={recipe.foodId}
-                                                        recipeName={recipeName}
-                                                        recipeImage={
-                                                            recipeImage
-                                                        }
-                                                        recipeId={recipeId}
-                                                        url={findInCommunity}
-                                                    />
-                                                );
-                                            })}
-                                        </div>
+                                                    return (
+                                                        <Recipe
+                                                            key={recipe.foodId}
+                                                            recipeName={
+                                                                recipeName
+                                                            }
+                                                            recipeImage={
+                                                                recipeImage
+                                                            }
+                                                            recipeId={recipeId}
+                                                            url={
+                                                                findInCommunity
+                                                            }
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                            <div className="results-buttons">
+                                                {previousSetOfRecipe}
+                                                {nextSetOfRecipe}
+                                            </div>
+                                        </>
                                     )}
-
-                                    {!(findByCourse === "true") ? (
+                                    {/* {!(findByCourse === "true") ? (
                                         <div className="results-buttons">
                                             {previousSetOfRecipe}
                                             {nextSetOfRecipe}
                                         </div>
                                     ) : (
                                         <></>
-                                    )}
+                                    )} */}
                                 </div>
                             )}
                         </div>
