@@ -459,6 +459,8 @@ header .border:hover {
     border-radius: 50%;
     border: 2px solid #e09f3e;
     transition: border 0.3s ease-in-out;
+    object-fit: cover;
+    object-position: center;
 }
 
 #profile a {
@@ -490,6 +492,8 @@ header .border:hover {
 .avatar-about img {
     display: inline-block;
     align-content: center;
+    object-fit: cover;
+    object-position: center;
     justify-content: center;
     width: 120px;
     height: 120px;
