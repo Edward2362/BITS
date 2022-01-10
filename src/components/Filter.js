@@ -220,7 +220,9 @@ export const Filter = ({
                         count++;
                     }
                     console.log(combination);
-                    coursesIn(combination);
+                    let course8Array = combination.splice(0,10)
+                    console.log(course8Array);
+                    coursesIn(course8Array);
                     if (0 == fetched.length) {
                         setUserRecipeReturn([]);
                         setRecipeDataReturn([]);

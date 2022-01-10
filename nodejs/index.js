@@ -786,22 +786,22 @@ app.get(
                         foodIndex,
                         foodFinal.length
                     );
-                    if (4 /* 20 */ < foodFinalByIndex.length) {
+                    if (20 < foodFinalByIndex.length) {
                         foodFinalMove = foodFinal.slice(
                             foodIndex,
-                            foodIndex + 4 /* 20 */
+                            foodIndex + 20
                         );
 
                         if (0 != foodIndex) {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodPrevious: foodIndex - 4 /* 20 */,
-                                foodNext: foodIndex + 4 /* 20 */,
+                                foodPrevious: foodIndex - 20,
+                                foodNext: foodIndex + 20,
                             };
                         } else {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodNext: foodIndex + 4 /* 20 */,
+                                foodNext: foodIndex + 20,
                             };
                         }
                     } else {
@@ -809,7 +809,7 @@ app.get(
                         if (0 != foodIndex) {
                             foodMix = {
                                 result: foodFinalMove,
-                                foodPrevious: foodIndex - 4 /* 20 */,
+                                foodPrevious: foodIndex - 20,
                             };
                         } else {
                             foodMix = { result: foodFinalMove };
