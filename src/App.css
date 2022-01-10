@@ -454,6 +454,8 @@ header .border:hover {
 }
 
 #profile img {
+    object-fit: cover;
+    object-position: center;
     width: 37px;
     height: 37px;
     border-radius: 50%;
@@ -490,6 +492,8 @@ header .border:hover {
 .avatar-about img {
     display: inline-block;
     align-content: center;
+    object-fit: cover;
+    object-position: center;
     justify-content: center;
     width: 120px;
     height: 120px;
@@ -1698,6 +1702,8 @@ input::-webkit-file-upload-button {
 
 .ava-border img {
     display: flex;
+    object-fit: cover;
+    object-position: center;
     justify-content: center;
     align-items: center;
     width: inherit;
