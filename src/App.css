@@ -207,7 +207,7 @@ ul {
 /* Header */
 
 header {
-    height: 80px;
+    height: 12vh;
     position: fixed;
     transition: 0.15s ease;
     z-index: 999;
@@ -1701,6 +1701,8 @@ input::-webkit-file-upload-button {
 }
 
 .ava-border img {
+    object-fit: cover;
+    object-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
