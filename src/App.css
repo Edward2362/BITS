@@ -426,7 +426,7 @@ header .border:hover {
     color: #fff3b0;
 }
 
-.searchContainer div
+.searchContainer div img {
     height: 20px;
     width: 20px;
 }
