@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.bab3b703.chunk.css",
+    "main.css": "/static/css/main.27e894c5.chunk.css",
     "main.js": "/static/js/main.1c78d00e.chunk.js",
     "main.js.map": "/static/js/main.1c78d00e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6cfa1772.js",
@@ -10,7 +10,7 @@
     "static/js/3.c7fcaa17.chunk.js": "/static/js/3.c7fcaa17.chunk.js",
     "static/js/3.c7fcaa17.chunk.js.map": "/static/js/3.c7fcaa17.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.bab3b703.chunk.css.map": "/static/css/main.bab3b703.chunk.css.map",
+    "static/css/main.27e894c5.chunk.css.map": "/static/css/main.27e894c5.chunk.css.map",
     "static/js/2.4af2ada5.chunk.js.LICENSE.txt": "/static/js/2.4af2ada5.chunk.js.LICENSE.txt",
     "static/media/Dat.18076189.jpg": "/static/media/Dat.18076189.jpg",
     "static/media/Default Restcipe img.5ffb96dc.png": "/static/media/Default Restcipe img.5ffb96dc.png",
@@ -28,7 +28,7 @@
   "entrypoints": [
     "static/js/runtime-main.6cfa1772.js",
     "static/js/2.4af2ada5.chunk.js",
-    "static/css/main.bab3b703.chunk.css",
+    "static/css/main.27e894c5.chunk.css",
     "static/js/main.1c78d00e.chunk.js"
   ]
 }
