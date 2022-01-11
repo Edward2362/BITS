@@ -438,9 +438,7 @@ app.post("/customers/reset/email", function (req, response) {
                         { new: true },
                         async function (ok, customerReplace) {
                             let link =
-                                "http://localhost:" +
-                                process.env.PORT +
-                                "/api/auth/validate/form/" +
+                                "https://restcipe.herokuapp.com/api/auth/validate/form/" +
                                 randomToken;
                             try {
                                 const transporter = nodemailer.createTransport({
