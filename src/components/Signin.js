@@ -43,22 +43,24 @@ const Signin = (prop) => {
     };
 
     const handleLogin = async (googleData) => {
-        const res = await fetch("/api/v1/auth/google", {
-            method: "POST",
-            body: JSON.stringify({
-                token: googleData.tokenId,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const data = await res.json();
-        console.log(data);
-        window.sessionStorage.setItem("userID", data[0].customerId);
-        window.sessionStorage.setItem("userToken", data[0].token);
-        navigate("/");
-        prop.renew();
+        if (googleData.tokenId !== undefined) {
+            const res = await fetch("/api/v1/auth/google", {
+                method: "POST",
+                body: JSON.stringify({
+                    token: googleData.tokenId,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
+            const data = await res.json();
+            console.log(data);
+            window.sessionStorage.setItem("userID", data[0].customerId);
+            window.sessionStorage.setItem("userToken", data[0].token);
+            navigate("/");
+            prop.renew();
+        }
         // store returned user somehow
     };
 
@@ -125,7 +127,7 @@ const Signin = (prop) => {
                                     buttonText="Log in with Google"
                                     onSuccess={handleLogin}
                                     onFailure={handleLogin}
-                                    redirectUri="http://localhost:5000/auth/google"
+                                    // redirectUri="http://localhost:5000/auth/google"
                                     cookiePolicy={"single_host_origin"}
                                 />
                             </div>
