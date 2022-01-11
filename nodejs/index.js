@@ -10,10 +10,10 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-const path = require('path');
-var proxy = require('express-http-proxy');
+const path = require("path");
+var proxy = require("express-http-proxy");
 require("dotenv").config();
-app.use(express.static(path.resolve(__dirname,'build')));
+app.use(express.static(path.resolve(__dirname, "build")));
 // import all the things we need
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
@@ -35,7 +35,7 @@ app.use(
         extended: true,
     })
 );
-app.use('/proxy', proxy('http://localhost:'+process.env.PORT));
+app.use("/proxy", proxy("http://localhost:" + process.env.PORT));
 //define a "table" structure
 var CustomerSchema = new mongoose.Schema({
     customerId: String,
@@ -437,10 +437,7 @@ app.post("/customers/reset/email", function (req, response) {
                         },
                         { new: true },
                         async function (ok, customerReplace) {
-                            let link =
-                                "http://localhost:9000" +
-                                "/api/auth/validate/form/" +
-                                randomToken;
+                            let link = "/api/auth/validate/form/" + randomToken;
                             try {
                                 const transporter = nodemailer.createTransport({
                                     service: "gmail",
@@ -994,9 +991,9 @@ app.delete("/comment/:id", function (req, response) {
         response.send(comment);
     });
 });
-app.get('*', function (req, res) {
-    const index = path.join(__dirname, 'build', 'index.html');
+app.get("*", function (req, res) {
+    const index = path.join(__dirname, "build", "index.html");
     res.sendFile(index);
-  });
+});
 
-app.listen(process.env.PORT||9000);
+app.listen(process.env.PORT || 9000);
