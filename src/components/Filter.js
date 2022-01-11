@@ -617,7 +617,16 @@ export const Filter = ({
                             checked={findByCourse}
                             onClick={(e) => {
                                 findCourses(e);
-                                placeLoad();
+                                window.sessionStorage.removeItem(
+                                    "recipesIndex"
+                                );
+                                if (sessionStorage.getItem("findByCourse")) {
+                                    getCourses();
+                                    setDone(false);
+                                } else {
+                                    setDone(false);
+                                    load("0");
+                                }
                             }}
                             onChange={onChange}
                         ></input>

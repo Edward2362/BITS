@@ -125,7 +125,7 @@ const HomepageBody = () => {
                                     <h2>#3</h2>
                                     <div className="feature-content">
                                         <p>
-                                            Help control the amount of calories
+                                            Help control the number of calories
                                             consumed
                                         </p>
                                     </div>
