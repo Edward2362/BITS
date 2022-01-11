@@ -480,18 +480,19 @@ app.get("/customer/something", function (req, response) {
     response.render("test.jade");
 });
 app.get("/api/auth/validate/form/:getToken", function (req, response) {
-    Customer.find(
-        { resetPasswordToken: req.params.getToken },
-        function (err, customers) {
-            if (customers.length == 0) {
-                response.render("aware.jade");
-            } else {
-                response.render("reset.jade", {
-                    result: customers[0].resetPasswordToken,
-                });
-            }
-        }
-    );
+    // Customer.find(
+    //     { resetPasswordToken: req.params.getToken },
+    //     function (err, customers) {
+    //         if (customers.length == 0) {
+    //             response.render("aware.jade");
+    //         } else {
+    //             response.render("reset.jade", {
+    //                 result: customers[0].resetPasswordToken,
+    //             });
+    //         }
+    //     }
+    // );
+    response.send("Hellooooooo t chay dc ne");
 });
 
 app.post("/api/auth/reset/:getToken", function (req, response) {
