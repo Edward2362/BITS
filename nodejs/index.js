@@ -518,7 +518,7 @@ app.post("/api/auth/reset/:getToken", function (req, response) {
                         },
                         { new: true },
                         function (ok, customerReplace) {
-                            response.redirect("http://localhost:3000/signin");
+                            response.redirect("/Signin");
                         }
                     );
                 }
