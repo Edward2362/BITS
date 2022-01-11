@@ -63,7 +63,7 @@ const HomepageBody = () => {
 
                 if (count < data) {
                     counter.innerText = count_converter(count + inc);
-                    setTimeout(updateCount, 9);
+                    setTimeout(updateCount, 4);
                 } else {
                     counter.innerText = count_converter(data);
                 }
