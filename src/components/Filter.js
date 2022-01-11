@@ -55,6 +55,7 @@ export const Filter = ({
         fetch(endPointCourse)
             .then((response) => response.json())
             .then(async (fetchResult) => {
+                setCheckLoaded(true);
                 fetched = fetchResult.hits;
                 if (fetchResult._links.next === undefined) {
                     coursesIn([]);
@@ -220,7 +221,7 @@ export const Filter = ({
                         count++;
                     }
                     console.log(combination);
-                    let course8Array = combination.splice(0,10)
+                    let course8Array = combination.splice(0, 10);
                     console.log(course8Array);
                     coursesIn(course8Array);
                     if (0 == fetched.length) {
