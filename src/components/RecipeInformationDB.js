@@ -56,7 +56,7 @@ const RecipeInformationDB = (prop) => {
 
     var endPoint5 = "/avoidComment";
     var endPoint7 = "/customer/";
-    
+
     const [favourite, setFavourite] = useState(false);
 
     const [customerStop, setCustomerStop] = useState(false);
@@ -154,17 +154,16 @@ const RecipeInformationDB = (prop) => {
 
     const creatorLoad = () => {
         fetch(endPoint7 + recipeData.customerId)
-        .then((response) => response.json())
-        .then((data) => {
-            setCreator(data[0]);
-            setCustomerStop(true);
-        });
-    }
+            .then((response) => response.json())
+            .then((data) => {
+                setCreator(data[0]);
+                setCustomerStop(true);
+            });
+    };
 
-    if("" !== recipeData.foodId){
-        if(customerStop){
-
-        }else{
+    if ("" !== recipeData.foodId) {
+        if (customerStop) {
+        } else {
             creatorLoad();
         }
     }
@@ -295,11 +294,17 @@ const RecipeInformationDB = (prop) => {
                                         </div>
                                         <div className="creator">
                                             <div className="creator-avatar">
-                                                <img src={creator.customerImage}></img>
+                                                <img
+                                                    src={creator.customerImage}
+                                                ></img>
                                             </div>
                                             <div className="creator-name">
                                                 {/* Fix to user name and avatar */}
-                                                <p>{creator.firstName + " " + creator.lastName}</p>
+                                                <p>
+                                                    {creator.firstName +
+                                                        " " +
+                                                        creator.lastName}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -308,7 +313,11 @@ const RecipeInformationDB = (prop) => {
                                         <div className="recipe-detail-content">
                                             <div className="sn-body-equal-half">
                                                 <div className="recipe-detail-img">
-                                                    <img src={recipeData.foodImage}></img>
+                                                    <img
+                                                        src={
+                                                            recipeData.foodImage
+                                                        }
+                                                    ></img>
                                                 </div>
                                             </div>
                                             <div className="sn-body-equal-half">
@@ -326,6 +335,8 @@ const RecipeInformationDB = (prop) => {
                                                                             index
                                                                         }
                                                                         ingredientName={
+                                                                            ingredient.ingredientAmount +
+                                                                            " " +
                                                                             ingredient.ingredientName
                                                                         }
                                                                         position={

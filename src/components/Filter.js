@@ -207,16 +207,6 @@ export const Filter = ({
                                         break;
                                     }
                                 }
-
-                                if (0 == fetched.length) {
-                                    setUserRecipeReturn([]);
-                                    setRecipeDataReturn([]);
-                                    setNextEndPointReturn("");
-                                } else {
-                                    nEndP = fetchResult1._links.next.href;
-                                    ep2 = nEndP;
-                                    setNextEndPointReturn(nEndP);
-                                }
                             });
                         count++;
                     }
@@ -224,14 +214,6 @@ export const Filter = ({
                     let course8Array = combination.splice(0, 10);
                     console.log(course8Array);
                     coursesIn(course8Array);
-                    if (0 == fetched.length) {
-                        setUserRecipeReturn([]);
-                        setRecipeDataReturn([]);
-                        setNextEndPointReturn("");
-                    } else {
-                        nEndP = fetchResult._links.next.href;
-                        setNextEndPointReturn(nEndP);
-                    }
                     setTimeout(handleDone, 200);
                 }
             });
@@ -597,8 +579,10 @@ export const Filter = ({
                 recipesIndex = "0";
             }
             load(recipesIndex);
-            getCourses();
-            setDone(false);
+            if (!window.sessionStorage.getItem("findInCommunity")) {
+                getCourses();
+                setDone(false);
+            }
         }
     });
 
