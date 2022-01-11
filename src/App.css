@@ -207,7 +207,7 @@ ul {
 /* Header */
 
 header {
-    height: 80px;
+    height: 12vh;
     position: fixed;
     transition: 0.15s ease;
     z-index: 999;
@@ -426,7 +426,7 @@ header .border:hover {
     color: #fff3b0;
 }
 
-.searchContainer div img {
+.searchContainer div
     height: 20px;
     width: 20px;
 }
