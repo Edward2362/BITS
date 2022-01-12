@@ -55,6 +55,8 @@ var CustomerSchema = new mongoose.Schema({
         },
     ],
     token: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     verificationCode: Number,
 });
 
@@ -329,6 +331,8 @@ app.post("/customer/register", function (req, response) {
                         address: "NULL",
                         food: [],
                         token: "",
+                        resetPasswordToken: "",
+                        resetPasswordExpires: new Date(),
                         verificationCode: 0,
                     };
 
@@ -375,6 +379,8 @@ app.post("/api/v1/auth/google", async (req, response) => {
         address: "NULL",
         food: [],
         token: "",
+        resetPasswordToken: "",
+        resetPasswordExpires: new Date(),
         verificationCode: 0,
     };
 
@@ -480,19 +486,18 @@ app.get("/customer/something", function (req, response) {
     response.render("test.jade");
 });
 app.get("/api/auth/validate/form/:getToken", function (req, response) {
-    // Customer.find(
-    //     { resetPasswordToken: req.params.getToken },
-    //     function (err, customers) {
-    //         if (customers.length == 0) {
-    //             response.render("aware.jade");
-    //         } else {
-    //             response.render("reset.jade", {
-    //                 result: customers[0].resetPasswordToken,
-    //             });
-    //         }
-    //     }
-    // );
-    response.send("Hellooooooo t chay dc ne");
+    Customer.find(
+        { resetPasswordToken: req.params.getToken },
+        function (err, customers) {
+            if (customers.length == 0) {
+                response.render("aware.jade");
+            } else {
+                response.render("reset.jade", {
+                    result: customers[0].resetPasswordToken,
+                });
+            }
+        }
+    );
 });
 
 app.post("/api/auth/reset/:getToken", function (req, response) {
@@ -514,8 +519,8 @@ app.post("/api/auth/reset/:getToken", function (req, response) {
                         { resetPasswordToken: customers[0].resetPasswordToken },
                         {
                             $set: {
-                                resetPasswordToken: undefined,
-                                resetPasswordExpires: undefined,
+                                resetPasswordToken: "",
+                                resetPasswordExpires: new Date(),
                                 customerPassword: encryptedPassword,
                             },
                         },

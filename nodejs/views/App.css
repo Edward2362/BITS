@@ -1,0 +1,2400 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Fira+Mono:wght@500;700&family=Lobster+Two:ital,wght@0,400;0,700;1,400&family=Marck+Script&family=Montserrat:wght@200;500;700&family=Rajdhani:wght@700&display=swap");
+
+* {
+    font-family: "Fira Mono", monospace;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #e09f3e;
+    border-radius: 10px;
+    transition: background-color 2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9e2a2b;
+    border-radius: 10px;
+}
+
+body {
+    overflow: overlay;
+}
+
+h1,
+h2 {
+    margin: 0;
+    font-family: "Dancing Script", cursive;
+    color: #9e2a2b;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited,
+a:hover,
+a:active {
+    color: rgb(63, 63, 63);
+}
+
+p {
+    margin: 0;
+    color: rgb(63, 63, 63);
+}
+
+hr {
+    width: 100px;
+    height: 2px;
+    border-width: 0;
+    color: rgb(223, 223, 223);
+    background-color: rgb(223, 223, 223);
+}
+
+input:focus {
+    outline: none;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.grid-25 {
+    margin: 2% 0;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    place-items: center;
+}
+
+.grid-50 {
+    margin: 2% 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    place-items: center;
+}
+
+/* 
+section {
+    padding-bottom: 60px;
+} */
+
+.section-content {
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+.section-header {
+    padding: 4% 0;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #9e2a2b;
+}
+
+.sn-header-body {
+    text-align: center;
+}
+
+.sn-header-body svg {
+    height: 50px;
+    width: 50px;
+}
+
+.section-body {
+    width: 100%;
+    padding-top: 2%;
+    height: 100%;
+    /* align-items: center; */
+    display: flex;
+}
+
+.sn-body-equal-half {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    /* text-align: center; */
+}
+
+.img-holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container {
+    padding: 0 15%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+}
+
+.flex-center li {
+    width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.notification {
+    margin: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Loading icon */
+
+.loading-holder {
+    position: relative;
+    margin: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.loading {
+    content: "";
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-top: 2px solid #9e2a2b;
+    border-right: 2px solid transparent;
+    animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-holder img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+}
+
+/* Loading icon end */
+
+/* Header */
+
+header {
+    height: 12vh;
+    position: fixed;
+    transition: 0.15s ease;
+    z-index: 999;
+    font-size: 18px;
+}
+
+.grid-transparent {
+    background: transparent;
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    place-items: center;
+}
+
+.grid-non-transparent {
+    background: white;
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    place-items: center;
+    /* opacity: 0.9; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.grid-transparent a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    /* font-family: "Dancing Script", cursive; */
+    transition: 0.15s ease;
+    padding: 5px;
+    font-size: 14.5px;
+}
+
+.grid-non-transparent a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    /* font-family: "Dancing Script", cursive; */
+    transition: 0.15s ease;
+    padding: 5px;
+    font-size: 14.5px;
+}
+
+.grid-transparent a:hover {
+    color: #e09f3e;
+}
+
+.grid-transparent .border:hover {
+    border-color: #e09f3e;
+}
+
+.grid-non-transparent a:hover {
+    color: #9e2a2b;
+}
+
+.grid-non-transparent .border:hover {
+    border-color: #9e2a2b;
+}
+
+/* header a:hover {
+    color: #9e2a2b;
+}
+
+header .border:hover {
+    border-color: #9e2a2b;
+} */
+
+.grid-transparent .border {
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+.grid-non-transparent .border {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+.full-width {
+    width: 100%;
+    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-65 {
+    display: inline-block;
+    width: 60%;
+    position: relative;
+    text-align: center;
+}
+
+.block-65 li {
+    display: inline-block;
+    width: 50%;
+}
+
+.block-35 {
+    display: inline-block;
+    width: 40%;
+    position: relative;
+    text-align: center;
+}
+
+.logo-holder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.logo-holder a {
+    padding: 0;
+    padding-top: 2px;
+    height: 80%;
+}
+
+#logo {
+    width: 100%;
+    height: 100%;
+}
+
+.grid-non-transparent .searchContainer,
+.grid-transparent .searchContainer {
+    display: inline-flex;
+    flex: 1 1 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 35%;
+    width: 90%;
+    right: 5%;
+}
+
+.searchContainer div {
+    background: white;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    background-color: #fff3b0;
+}
+
+.searchContainer .input-holder {
+    width: 100%;
+    padding: 0;
+}
+
+.input-holder form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.input-holder .checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-right: 2px;
+    background-color: gray;
+    color: white;
+    width: 60%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.grid-non-transparent .input-holder .checkbox-label {
+    color: #fff3b0;
+}
+
+.input-holder .checkbox-label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.input-holder input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.grid-transparent .input-holder .vl {
+    margin: 0 1px;
+    border-left: 2px solid #e09f3e;
+    height: 14px;
+}
+
+.input-holder .vl {
+    margin: 0 1px;
+    border-left: 2px solid #9e2a2b;
+    height: 14px;
+}
+
+.grid-transparent .searchContainer svg {
+    color: #e09f3e;
+}
+
+.searchContainer svg {
+    color: #9e2a2b;
+}
+
+.grid-transparent .checkbox-label.checked {
+    background-color: #e09f3e;
+    border-color: #e09f3e;
+    color: white;
+}
+
+.grid-non-transparent .checkbox-label.checked {
+    color: #fff3b0;
+}
+
+.searchContainer div img {
+    height: 20px;
+    width: 20px;
+}
+
+.searchContainer input {
+    /* color: #9E2A2B; */
+    border: none;
+    width: 100%;
+    border-radius: 0 5px 5px 0;
+    background-color: #fff3b0;
+}
+
+.grid-transparent .searchContainer input {
+    background-color: white;
+}
+
+.grid-transparent .searchContainer div {
+    background-color: white;
+}
+
+#profile {
+    padding: 0;
+    width: 0;
+    height: 0;
+}
+
+#profile img {
+    object-fit: cover;
+    object-position: center;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    border: 2px solid #e09f3e;
+    transition: border 0.3s ease-in-out;
+}
+
+#profile a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-non-transparent #profile img {
+    border: 2px solid #9e2a2b;
+}
+
+/* Header end */
+
+/* About Starts */
+
+.personal-info {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 3% 5%;
+}
+
+.avatar-about {
+    display: inline-block;
+    height: 120px;
+}
+
+.avatar-about img {
+    display: inline-block;
+    align-content: center;
+    object-fit: cover;
+    object-position: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: 3px solid #9e2a2b;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.personal-desc {
+    width: inherit;
+    margin-left: 2%;
+    padding-left: 2%;
+    text-align: justify;
+    border-left: 2px solid #9e2a2b;
+}
+
+/* About Ends */
+
+/* Sign in - up */
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7.2% 10vh 3.4% 10vh;
+    height: 74.8vh;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.body-background {
+    background: #e09f3e;
+}
+
+.login-block {
+    display: inline-block;
+    width: inherit;
+    height: 300px;
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-align: center;
+    align-self: center;
+    background-color: white;
+    box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
+}
+
+.login-block p,
+.sign-up-block p,
+.ForgotZone p {
+    padding-top: 10px;
+    font-family: "Dancing Script", cursive;
+    font-size: larger;
+    font-weight: 700;
+    color: #9e2a2b;
+}
+
+.form-control {
+    margin: 10px 0 5px;
+    font-size: larger;
+}
+
+.form-control label {
+    position: relative;
+    display: block;
+    width: inherit;
+}
+
+.form-control * {
+    width: 100%;
+}
+
+.form-control img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    /* display: none; */
+}
+
+.input-avatar-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-avatar-holder label {
+    color: gray !important;
+}
+
+.input-avatar-holder label {
+    font-size: 15px;
+    border: 2px solid #e09f3e;
+    width: 75%;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 5px;
+    margin-top: 2px;
+    color: rgb(63, 63, 63);
+}
+
+/* .input-avatar {
+    width: 75%;
+    height: 30px;
+    border: 2px solid #e09f3e;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.input-avatar-holder input {
+    display: none;
+}
+
+input::-webkit-file-upload-button {
+    border: none;
+    display: none;
+}
+
+.btn,
+.btn-disabled {
+    display: inline-block;
+    background: #e09f3e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    width: 50%;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+}
+.btn:disabled:hover {
+    background: grey;
+    color: #fff;
+    cursor: default;
+}
+
+.btn input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+#content {
+    background-image: url(https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-size: cover;
+}
+
+.inputZone {
+    font-family: "Rajdhani", sans-serif;
+    height: 30px;
+    width: 75%;
+    border: solid 2px #e09f3e;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.signup-form {
+    display: inline-block;
+    grid-area: auto;
+}
+
+.sign-up-block {
+    display: inline-block;
+    width: 250px;
+    position: relative;
+    grid-area: auto;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    align-self: center;
+    background-color: white;
+    box-shadow: 1px 6px 12px rgb(0 0 0 / 18%);
+}
+
+.sign-img {
+    display: flex;
+    width: inherit;
+    height: inherit;
+    float: center;
+}
+
+.login-error-msg {
+    display: flex;
+    font-size: 12px;
+    color: red;
+    padding-top: 5px;
+    width: inherit;
+    margin: 0 23.25px;
+    justify-content: center;
+    text-align: justify;
+}
+
+.error-msg {
+    display: flex;
+    font-size: 12px;
+    color: red;
+    padding-top: 3px;
+    width: inherit;
+    margin: 0 23.25px;
+    justify-content: center;
+    text-align: justify;
+}
+
+.login-block-content a {
+    color: white;
+}
+
+/* Sign in - up end */
+
+/* Ad */
+
+.bg {
+    position: relative;
+    z-index: -1;
+    display: block; /*Not necessary, but we do want it this way*/
+    box-sizing: border-box; /*Not necessary in this situation*/
+    width: 100%; /*Not necessary, but we do want it this way*/
+    height: 100vh; /*Necessary.  100vh = 100% of the viewport height*/
+    padding: 0; /* No padding */
+    margin: 0; /* No margins */
+    /* background: linear-gradient(to bottom right, #fff3b0, #ffdaaa00); */
+    /* Shorthand: image, repeat, X align, Y align. */
+    background-size: cover; /* Cover all available space*/
+    background-image: url(./img/ad-bg2.png);
+}
+
+.overlay {
+    background: linear-gradient(to bottom right, #9e2a2c59, #ffd8a600);
+}
+
+.ad-body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.ad-body h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 160px;
+    color: #e9b789;
+    text-shadow: 1px 5px 1px rgba(0, 0, 0, 0.6);
+}
+
+.ad-text {
+    top: -10px;
+}
+
+.ad-text p {
+    color: white;
+    font-size: 22px;
+}
+
+/* Ad end */
+
+/* Homepage */
+
+.reveal {
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.homepage {
+    background-image: url(./img/backgroundBody.png);
+    background-size: cover;
+    height: 100%;
+}
+
+.hooker {
+    background-image: url(./img/counter.jfif);
+    background-size: cover;
+    height: 65vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hooker-overlay {
+    width: 100%;
+    height: 100%;
+    background: #361e0091;
+}
+
+.hooker-content {
+    width: 100%;
+    height: 100%;
+}
+
+.hooker-content p {
+    color: white;
+}
+
+.hooker-body {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    height: 100%;
+    font-size: 70px;
+    color: white;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.hooker h1 {
+    color: #e09f3e;
+    font-family: "Fira Mono", monospace;
+    font-weight: 100;
+}
+
+.counter {
+    text-align: right;
+    font-size: 70px;
+}
+
+.feature-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+    margin: 8% 0;
+    width: 80%;
+    height: 100%;
+}
+
+.feature-body h2 {
+    width: 100%;
+    justify-items: center;
+    text-align: center;
+    font-size: 45px;
+    color: #e09f3e;
+}
+
+.feature-body p {
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+}
+
+.feature-icon {
+    display: inline-block;
+    width: 20%;
+}
+
+.feature-content {
+    display: flex;
+    justify-content: center;
+}
+
+.feature-body svg {
+    height: 50px;
+    width: 50px;
+}
+
+.feature-body svg:hover {
+    color: red;
+}
+
+.feedback-body {
+    padding-left: 10%;
+    width: 90%;
+    align-items: center;
+    transform: translateY(-20px);
+}
+
+.user {
+    padding-bottom: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.user h2 {
+    color: #9e2a2b;
+    padding-bottom: 1%;
+    font-size: 30px;
+}
+
+.user p {
+    font-size: 12px;
+    font-weight: 700;
+    color: #e09f3e;
+}
+
+.feedback-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.feedback-img img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.feedback-content {
+    width: 100%;
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+}
+
+.feedback-content p {
+    width: 70%;
+}
+
+.quote {
+    padding-top: 3%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.quote svg {
+    width: 50px;
+    height: 50px;
+    color: #9e2a2b;
+}
+
+/* Homepage end */
+
+/* Other pages form */
+
+.white-bg {
+    background-color: white;
+    border: solid white;
+    border-radius: 10px;
+}
+
+.page-header {
+    position: relative;
+    display: block; /*Not necessary, but we do want it this way*/
+    box-sizing: border-box; /*Not necessary in this situation*/
+    width: 100%; /*Not necessary, but we do want it this way*/
+    height: 50vh; /*Necessary.  100vh = 100% of the viewport height*/
+    padding: 0; /* No padding */
+    margin: 0; /* No margins */
+    /* Shorthand: image, repeat, X align, Y align. */
+    background-size: cover; /* Cover all available space*/
+    background-image: url(./img/header-page-bg.jpeg);
+}
+
+.page-header-overlay {
+    background: linear-gradient(#ffc06e36, #ff910069);
+}
+
+.page-header-body {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-header-body h1 {
+    font-size: 100px;
+    color: white;
+}
+
+.page-content {
+    position: relative;
+    background-color: #fff3b0;
+}
+
+.page-body {
+    position: relative;
+    top: -10vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.white-bg hr {
+    width: 70%;
+    height: 0.01rem;
+}
+
+/* Other pages form end */
+
+/* Results */
+
+.results-section {
+    padding: 1% 5%;
+}
+
+.results-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin: 2% 0;
+}
+
+.results-buttons button:first-child {
+    margin-right: 2%;
+}
+
+.results-buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #e09f3e;
+    color: white;
+    width: 5%;
+    height: 30px;
+    background-color: #e09f3e;
+    box-shadow: none;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+.results-buttons button:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Results end */
+
+/* Filter */
+
+.filter {
+    padding: 2% 5%;
+}
+
+.filter h2 {
+    color: #9e2a2b;
+}
+
+.filter-section {
+    margin: 2% 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-section-body {
+    width: 50%;
+}
+
+.filter-section-body input {
+    margin-left: 2%;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #fff3b0;
+    transition: background-color 0.25s;
+}
+
+.filter-section-body input:focus {
+    margin-left: 2%;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #e09f3e;
+    color: white;
+}
+
+.filter-section-body input:focus::placeholder {
+    color: white;
+}
+
+.diet-choice {
+    width: 100%;
+}
+
+.filter .checkbox-label {
+    margin: 2%;
+    border: solid;
+    border-radius: 10px;
+    border-color: #9e2a2b;
+    color: #9e2a2b;
+    width: 70%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.filter .checkbox-label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+}
+
+.filter-header .checkbox-label {
+    display: flex;
+    margin: 0;
+    padding: 1% 1%;
+    margin: 0 1%;
+    width: 10%;
+    height: 15px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.checkbox-label.checked {
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+    color: white;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #e09f3e;
+    width: 10%;
+    height: 40px;
+    background-color: #e09f3e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+}
+
+.submit input {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+/* Filter end */
+
+/* Rescipe */
+
+.recipe-href {
+    margin: 10%;
+}
+
+.recipe-card {
+    position: relative;
+    width: 190px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+    cursor: pointer;
+    top: 0;
+    transition: top 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #9e2a2b;
+}
+
+.recipe-card:hover {
+    top: -15px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 30px -10px;
+
+    /* box-shadow: 0 20px 8px 5px rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.2); */
+}
+
+.recipe-card-body {
+    position: relative;
+    background-image: url(./img/card.svg);
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    width: 100%;
+    z-index: 1;
+}
+
+.recipe-img {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+}
+
+.recipe-information {
+    padding: 0 20px;
+    position: relative;
+    bottom: -145px;
+}
+
+.recipe-information p {
+    font-size: 14px;
+    color: white;
+    font-family: "Dancing Script", cursive;
+}
+
+.recipe-holder {
+    width: 190px;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.recipe-holder .recipe-href {
+    margin: 0;
+}
+
+/* Rescipe end */
+
+/* Course */
+
+.course {
+    position: relative;
+    width: 429px;
+    height: 250px;
+    margin: 10% 0;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 242, 235);
+}
+
+.carousel-button {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9e2a2b;
+    font-size: 2rem;
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.carousel-button:hover {
+    background-color: #9e2a2b;
+    color: white;
+}
+
+.next {
+    right: 32px;
+}
+
+.prev {
+    left: 32px;
+}
+
+.course-content {
+    visibility: visible;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 220px;
+}
+
+.course .recipe-card:hover {
+    top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.current-recipe {
+    opacity: 1;
+    z-index: 3;
+    transform: translateX(0) scale(1);
+}
+
+.prev-recipe {
+    transform: translateX(-40%) scale(0.7);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.next-recipe {
+    transform: translateX(40%) scale(0.7);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.recipe-holder.current-recipe {
+    transition: box-shadow 0.2s ease-in-out, opacity 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
+}
+
+.recipe-holder.current-recipe:hover {
+    transform: scale(1.03);
+}
+
+.recipe-holder.prev-recipe .recipe-card,
+.recipe-holder.next-recipe .recipe-card {
+    cursor: default;
+}
+
+/* Course end */
+
+.hexagon {
+    top: 30vh;
+    left: 40%;
+    position: absolute;
+    margin: 0 auto;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    width: 100px;
+    height: 63px;
+    box-sizing: border-box;
+    transition: all 1s;
+    border: 0.4vh solid transparent;
+}
+
+/* Forgot Password */
+
+.body-forgot {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.ForgotZone {
+    display: flex;
+    height: 175px;
+    width: 30%;
+    font-size: larger;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid white;
+    z-index: 1;
+    background-color: white;
+}
+
+.ForgotZone p {
+    margin-bottom: 15px;
+}
+
+.width-forgot-input {
+    display: flex;
+    width: 350px;
+    height: 3vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.width-forgot-input p {
+    width: inherit;
+    padding-left: 25px;
+}
+
+.width-forgot-input .forgotInput {
+    width: 220px;
+    height: 30px;
+    border: solid 1px #e09f3e;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.btn-forgot {
+    margin-top: 15px;
+    width: fit-content;
+}
+
+/* Create new recipe */
+
+.flex-body {
+    display: flex;
+    align-items: center;
+}
+
+.recipe-img-input {
+    padding-left: 2%;
+}
+
+.recipe-img-input input {
+    display: none;
+}
+
+.add-recipe-img {
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #fff3b0;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    cursor: pointer;
+}
+
+.add-recipe-img p {
+    font-size: 12px;
+    padding-left: 5px;
+    color: gray;
+}
+
+.recipe-img-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-img-holder img {
+    width: 434px;
+    height: 360px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    border: 3px solid #fff3b0;
+}
+
+.new-res {
+    padding: 2% 5%;
+}
+
+.new-res-section {
+    margin: 2% 10%;
+    display: inline;
+    justify-content: space-between;
+}
+
+.new-res-body {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.new-res-body .checkbox-label {
+    margin: 2%;
+    border: solid;
+    border-radius: 10px;
+    border-color: #9e2a2b;
+    color: #9e2a2b;
+    width: 70%;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.new-res-body .checkbox-label::selection {
+    color: none;
+    background: none;
+    user-select: none;
+}
+
+.new-res-body .checkbox-label.checked {
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+    color: white;
+}
+
+.new-res-body input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+#Calories {
+    width: 75px;
+}
+
+#from,
+#to {
+    display: inline-flex;
+    width: 3vw;
+}
+
+.ingre-label,
+.step-label {
+    display: block;
+}
+
+#ingredient-name,
+#step-desc {
+    margin-left: 0;
+}
+
+#ingredient-amount {
+    width: 5vw;
+}
+
+#ingredient-name,
+#ingredient-amount,
+#step-desc {
+    margin-top: 5px;
+}
+
+#step-desc,
+#bio-desc {
+    resize: none;
+    border: none;
+    outline: none;
+    width: 30vw;
+    height: 8vh;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #fff3b0;
+    transition: background-color 0.25s;
+}
+
+.new-res-body input {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #fff3b0;
+    transition: background-color 0.25s;
+}
+
+.new-res-body input:focus {
+    margin-left: 2%;
+    border: none;
+    width: 12vw;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #fff3b0;
+    color: #9e2a2b;
+}
+
+.btn-box {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.btn-remove,
+.btn-add {
+    margin-right: 10px;
+    border: solid 2px transparent;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-remove {
+    background: rgba(177, 69, 69, 0.897);
+}
+
+.btn-add {
+    background: rgb(8, 158, 3);
+}
+
+.step,
+.profile-bio-desc {
+    display: flex;
+}
+
+.btn-box-step {
+    display: inline-block;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.new-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-submit {
+    margin: 0 5%;
+    display: flex;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    background-color: white;
+    border-color: #9e2a2b;
+    color: #9e2a2b;
+    width: 10%;
+    height: 40px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:disabled,
+.btn-submit:disabled:hover {
+    background-color: gray;
+    border-color: gray;
+    cursor: default;
+    color: white;
+}
+
+.btn-delete {
+    margin: 0 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #e09f3e;
+    background-color: white;
+    color: #e09f3e;
+    width: 10%;
+    height: 40px;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-delete:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    color: white;
+    border-color: #9e2a2b#9e2a2b;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Create new recipe end */
+
+/* Profile */
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ava-border {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border: solid 5px #9e2a2b;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: #9e2a2b;
+}
+
+.ava-border img {
+    display: flex;
+    object-fit: cover;
+    object-position: center;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    border: solid transparent;
+    border-radius: 50%;
+    z-index: 300;
+}
+
+.change-avatar {
+    position: absolute;
+    z-index: 1000;
+}
+
+.change-avatar input {
+    display: none;
+}
+
+.change-avatar label {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.change-avatar label:hover {
+    overflow: overlay;
+    background-color: rgba(0, 0, 0, 0.103);
+}
+
+.change-avatar label svg {
+    padding: 5px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: transparent;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.change-avatar label:hover svg {
+    background-color: #e09f3e;
+    color: #9e2a2b;
+}
+
+.name-bar {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 35px;
+    line-height: 35px;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #9e2a2b;
+    color: white;
+    font-size: larger;
+}
+
+.profile-body {
+    position: relative;
+    width: 100%;
+    padding-top: 5%;
+    align-items: center;
+}
+
+.profile-section {
+    position: relative;
+    width: 100%;
+}
+
+.profile-section h1 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.profile-section .recipes-section {
+    display: flex;
+    width: 100%;
+}
+
+.created-recipe {
+    width: 190px;
+    height: 220px;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+    margin: 10%;
+}
+
+.created-recipe .recipe-href {
+    margin: 0;
+}
+
+.created-recipe .recipe-card:hover {
+    top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.created-recipe:hover {
+    transform: scale(1.03);
+}
+
+.icon-holder {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    padding: 2px;
+    border-radius: 50%;
+    z-index: 2;
+    bottom: 15px;
+    right: 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.icon-holder svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    color: #e09f3e;
+    transition: ease-in-out;
+    transition: color 0.3s ease-in-out;
+}
+
+.icon-holder:hover {
+    background-color: #e09f3e;
+}
+
+.icon-holder svg:hover {
+    color: #9e2a2b;
+}
+
+/* Profile end */
+
+/* RecipeInformation */
+
+.recipe-detail-body {
+    padding: 0 5%;
+    padding-top: 5%;
+}
+
+.recipe-detail-body h1 {
+    padding-bottom: 1%;
+}
+
+.recipe-detail-section {
+    width: 100%;
+    margin: 2% 0;
+}
+
+.diets {
+    width: 100%;
+}
+
+.diets p {
+    display: inline-block;
+    padding: 0.5% 2%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: #e09f3e;
+}
+
+.creator {
+    display: flex;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.creator-avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 1%;
+}
+
+.creator-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.recipe-detail-content {
+    display: flex;
+    width: 100%;
+    height: 400px;
+}
+
+.recipe-detail-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+.recipe-detail-img img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+.recipe-detail-holder {
+    padding: 5%;
+    height: 90%;
+    width: 90%;
+}
+
+.recipe-detail-ingredients {
+    height: 90%;
+}
+
+.recipe-detail-ingredients h2 {
+    color: #e09f3e;
+    height: 10%;
+}
+
+.recipe-ingredients-content {
+    padding: 5%;
+    height: 70%;
+    overflow-y: scroll;
+    background-color: #fff3b0;
+    border-radius: 10px;
+    margin: 2% 0;
+    font-size: 14px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Ingredient */
+
+.ingredient hr {
+    width: 100%;
+    height: 0.01rem;
+    background-color: #9e2a2b;
+}
+
+.ingredient-content {
+    display: flex;
+}
+
+.ingredient-content p:first-child {
+    padding-right: 10px;
+}
+
+/* Ingredient end */
+
+.recipe-detail-favourite-button {
+    padding: 2.1%;
+    display: flex;
+    justify-content: center;
+    height: 4%;
+    width: 20%;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #9e2a2b;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    user-select: none;
+}
+
+.recipe-detail-favourite-button p {
+    color: #9e2a2b;
+}
+
+.recipe-detail-favourite-button svg {
+    height: 23px;
+    width: 23px;
+}
+
+.recipe-detail-favourite-button:hover svg {
+    animation: 0.5s heart-beat 0.3s ease-in-out;
+}
+
+.recipe-detail-favourite-button.checked {
+    color: #fff3b0;
+    background-color: #9e2a2b;
+}
+
+@keyframes heart-beat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.recipe-detail-favourite-button p {
+    padding-left: 7%;
+    font-size: 20px;
+    font-family: "Dancing Script", cursive;
+    font-weight: bold;
+}
+
+.recipe-detail-steps {
+    padding: 1% 15%;
+}
+
+.recipe-detail-steps h2 {
+    color: #e09f3e;
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+.recipe-steps-content p {
+    font-size: 14px;
+    text-align: justify;
+}
+
+/* Step */
+
+.step-header {
+    display: flex;
+    align-items: center;
+}
+
+.step-header h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1%;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    border-radius: 50%;
+    font-family: "Dancing Script", cursive;
+    color: #9e2a2b;
+}
+
+.step-header hr {
+    width: 10%;
+    height: 3px;
+    margin: 0;
+    background-color: #9e2a2b;
+}
+
+/* Step end */
+
+/* Nutrition */
+
+.recipe-detail-nutrition {
+    padding: 1% 15%;
+}
+
+.recipe-detail-nutrition h2 {
+    color: #e09f3e;
+    text-align: center;
+    padding-bottom: 3%;
+}
+
+.recipe-nutrition-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 49.9% 49.9%;
+    grid-column-gap: 0.2%;
+    background-color: #e09f3e;
+}
+
+.nutrition {
+    width: 90%;
+    padding: 0 5%;
+    background-color: white;
+}
+
+.nutrition p {
+    width: fit-content;
+    font-size: 14px;
+}
+
+.nutrition-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+}
+
+.sub-nutrition-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+    margin-left: 10px;
+}
+
+.sub-nutrition-label {
+    display: flex;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#source {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e09f3e;
+    border: 2px solid #e09f3e;
+    padding: 5px 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#source:hover {
+    background-color: #e09f3e;
+    color: white;
+}
+
+/* Nutrition end */
+
+.recipe-detail-comments {
+    padding: 0 15%;
+    width: 70%;
+}
+
+.recipe-detail-comments h2 {
+    color: #e09f3e;
+}
+
+.user-comment {
+    position: relative;
+    width: 100%;
+}
+
+.user-comment textarea {
+    outline: none;
+    resize: none;
+    width: 96%;
+    height: 70px;
+    background-color: #fff3b0;
+    padding: 2%;
+    padding-bottom: 0;
+    border: 0;
+    border-radius: 10px;
+}
+
+.user-comment button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: #e09f3e;
+    color: white;
+    width: 30%;
+    height: 40px;
+    background-color: #e09f3e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    margin-bottom: 3%;
+}
+
+.user-comment button:hover {
+    cursor: pointer;
+    background-color: #9e2a2b;
+    border-color: #9e2a2b;
+}
+
+.btn-cmt:disabled,
+.btn-cmt:disabled:hover {
+    background-color: gray;
+    border-color: gray;
+    cursor: default;
+}
+
+/* Comment */
+
+.comment {
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+.comment-owner-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 2%;
+}
+
+.comment-owner-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comment-owner-with-date {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.comment-owner-with-date p:first-child {
+    color: #9e2a2b;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 1.5%;
+}
+
+.comment-owner-with-date p:nth-child(2) {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+    font-size: 10px;
+}
+
+.comment-information {
+    width: 634px;
+}
+
+.comment-information > p {
+    text-align: justify;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Comment end */
+
+/* RecipeInformation end */
+
+/* Forgot password */
+
+.forgot-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    overflow: hidden;
+}
+
+.forgot-password-body {
+    padding: 5%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.forgot-password-body h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.forgot-password-form {
+    padding-top: 15px;
+    width: 450px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group .form-control {
+    margin: 0;
+    width: 55%;
+    border: solid 2px #e09f3e;
+    border-radius: 10px;
+    height: 35px;
+    font-size: 18px;
+    padding-left: 7px;
+}
+
+.form-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.message {
+    width: 100%;
+}
+
+.message {
+    display: flex;
+    justify-content: center;
+    padding: 1% 0;
+}
+
+.forgot-password-form p {
+    color: red;
+    font-size: 14px;
+    text-align: justify;
+}
+
+/* Forgot password end */
+
+/* Footer Starts */
+
+footer {
+    background-color: #9e2a2b;
+    margin: 0;
+    color: #fff3b0;
+    height: 10vh;
+}
+
+.footer-custom {
+    border-top: solid #9e2a2b 3px;
+}
+
+.grid-footer {
+    z-index: 1;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 35% 65%;
+}
+
+.footer-content {
+    padding: 2% 0;
+}
+
+.block-35-footer {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: inherit;
+    text-decoration: none;
+    grid-area: auto;
+    height: inherit;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.block-65-footer {
+    display: inline-block;
+    width: inherit;
+    position: relative;
+    text-align: right;
+    grid-area: auto;
+    height: inherit;
+}
+
+.block-65-footer li {
+    display: table-cell;
+    position: relative;
+    padding: 0px 25px 5px 25px;
+    float: right;
+    justify-content: center;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.block-65-footer li a {
+    text-decoration: none;
+    color: #fff3b0;
+}
+
+.block-65-footer li a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: flex;
+    height: 2.5px;
+    left: 50%;
+    position: absolute;
+    background: #fff3b0;
+    transition: width 0.5s ease 0s, left 0.5s ease 0s;
+    width: 0;
+}
+.block-65-footer li a:hover:after {
+    width: 100%;
+    left: 0;
+    color: #fff3b0;
+}
+
+/* Footer Ends */
